@@ -1,0 +1,91 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Packt DS / Introduction" />
+
+# Packt Design System
+
+A token-based design system for Packt products. Built with Style Dictionary, React, and Storybook.
+
+---
+
+## What's inside
+
+| Section | Contents |
+|---------|----------|
+| **Foundation / Colour** | Primitive palette + semantic light & dark tokens |
+| **Foundation / Typography** | Type scale, weights, and font family |
+| **Foundation / Spacing** | T-shirt scale, breakpoints, base units |
+| **Foundation / Border** | Border radius and stroke widths |
+| **Components / Button** | Variants, sizes, states, and theming |
+
+---
+
+## Design tokens
+
+Tokens are defined in `tokens/design-tokens.json` (Tokens Studio format) and built into CSS custom properties via Style Dictionary.
+
+```bash
+npm run tokens   # regenerate src/tokens/tokens.css + tokens.dark.css
+```
+
+Import in your app:
+
+```ts
+import 'packt-ds/tokens';        // light mode (default)
+import 'packt-ds/tokens/dark';   // dark mode overrides
+```
+
+---
+
+## Install
+
+```bash
+npm install packt-ds
+```
+
+```tsx
+import { Button } from 'packt-ds';
+import 'packt-ds/tokens';
+
+<Button variant="primary" label="Get started" />
+```
+
+---
+
+## Breakpoints
+
+The design system uses four breakpoints. All responsive behaviour keys off the **1024px** boundary — Large Desktop and Desktop are identical.
+
+| Name | Token | Width | Targets |
+|------|-------|-------|---------|
+| Mobile | `--packt-breakpoint-mobile` | 393px | Small phones |
+| Tablet | `--packt-breakpoint-tablet` | 768px | Tablets, large phones landscape |
+| Desktop | `--packt-breakpoint-desktop` | 1024px | Laptops, desktops |
+| Large Desktop | `--packt-breakpoint-large-desktop` | 1440px | Wide monitors |
+
+### Usage in CSS
+
+```css
+/* Mobile first */
+.component { font-size: 14px; }
+
+@media (min-width: 768px)  { .component { font-size: 16px; } }  /* Tablet+ */
+@media (min-width: 1024px) { .component { font-size: 18px; } }  /* Desktop+ */
+@media (min-width: 1440px) { .component { font-size: 18px; } }  /* Large Desktop — same as Desktop */
+```
+
+### Typography breakpoint behaviour
+
+Heading sizes step down at `< 1024px` (Tablet and Mobile share the same scale). Text styles are constant across all breakpoints.
+
+---
+
+## Token architecture
+
+```
+Primitive tokens  →  Semantic tokens  →  Component usage
+  Orange.500            bg-brand-selected     Button background
+  #f97141               #f97141               (never raw hex)
+```
+
+Raw primitive values are never used directly in components. Always reference semantic tokens so the system can theme correctly.

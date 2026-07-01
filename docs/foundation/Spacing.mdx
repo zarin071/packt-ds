@@ -1,0 +1,44 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundation / Spacing" />
+
+# Spacing
+
+Named T-shirt scale mapped to `--packt-space-*` tokens. Each bar shows the actual pixel size.
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: 13 }}>
+    {[
+      { name: 'none', token: '--packt-space-none',  value: 0   },
+      { name: '2xs',  token: '--packt-space-2-xs',  value: 2   },
+      { name: 'xs',   token: '--packt-space-xs',    value: 4   },
+      { name: 's',    token: '--packt-space-s',     value: 8   },
+      { name: 'm',    token: '--packt-space-m',     value: 12  },
+      { name: 'l',    token: '--packt-space-l',     value: 16  },
+      { name: 'xl',   token: '--packt-space-xl',    value: 24  },
+      { name: '2xl',  token: '--packt-space-2-xl',  value: 32  },
+      { name: '3xl',  token: '--packt-space-3-xl',  value: 40  },
+      { name: '4xl',  token: '--packt-space-4-xl',  value: 48  },
+      { name: '5xl',  token: '--packt-space-5-xl',  value: 56  },
+      { name: '6xl',  token: '--packt-space-6-xl',  value: 64  },
+      { name: '7xl',  token: '--packt-space-7-xl',  value: 72  },
+      { name: '8xl',  token: '--packt-space-8-xl',  value: 80  },
+      { name: '9xl',  token: '--packt-space-9-xl',  value: 88  },
+      { name: '10xl', token: '--packt-space-10-xl', value: 96  },
+      { name: '11xl', token: '--packt-space-11-xl', value: 104 },
+      { name: '12xl', token: '--packt-space-12-xl', value: 112 },
+    ].map(({ name, token, value }) => (
+      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '7px 12px', borderRadius: 6, marginBottom: 2, background: '#f6f6f6' }}>
+        <code style={{ width: 40, fontSize: 12, color: '#4d4d4d', flexShrink: 0 }}>{name}</code>
+        <div style={{ flex: 1 }}>
+          {value > 0
+            ? <div style={{ height: 8, width: value, background: '#f97141', borderRadius: 2 }} />
+            : <span style={{ fontSize: 11, color: '#a6a6a6' }}>—</span>
+          }
+        </div>
+        <code style={{ width: 160, fontSize: 11, color: '#a6a6a6', flexShrink: 0, textAlign: 'right' }}>{token}</code>
+        <span style={{ width: 40, fontSize: 12, fontWeight: 600, textAlign: 'right', flexShrink: 0 }}>{value}px</span>
+      </div>
+    ))}
+  </div>
+</Unstyled>

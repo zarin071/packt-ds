@@ -1,0 +1,386 @@
+import { Meta, ColorPalette, ColorItem, Unstyled } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundation / Colour" />
+
+# Colour
+
+---
+
+## Primitive Colors
+
+### Orange
+<ColorPalette>
+  <ColorItem
+    title="Brand / Orange"
+    subtitle="--packt-orange-*"
+    colors={{
+      '100': '#fee3d9',
+      '200': '#fdc6b3',
+      '300': '#fbaa8d',
+      '400': '#fa8d67',
+      '500': '#f97141',
+      '600': '#cd603a',
+      '700': '#a15033',
+      '800': '#763f2c',
+      '900': '#4a2f25',
+    }}
+  />
+</ColorPalette>
+
+### Green
+<ColorPalette>
+  <ColorItem
+    title="Success / Green"
+    subtitle="--packt-green-*"
+    colors={{
+      '100': '#d9fee3',
+      '200': '#b3fdc6',
+      '300': '#8dfbaa',
+      '400': '#67fa8d',
+      '500': '#41f971',
+      '600': '#3acd60',
+      '700': '#279544',
+      '800': '#1a642d',
+      '900': '#254a2f',
+    }}
+  />
+</ColorPalette>
+
+### Blue
+<ColorPalette>
+  <ColorItem
+    title="Info / Blue"
+    subtitle="--packt-blue-*"
+    colors={{
+      '100': '#d6e0f5',
+      '200': '#adc2eb',
+      '300': '#85a3e0',
+      '400': '#5c85d6',
+      '500': '#3366cc',
+      '600': '#2f58a9',
+      '700': '#2b4986',
+      '800': '#263b64',
+      '900': '#222c41',
+    }}
+  />
+</ColorPalette>
+
+### Red
+<ColorPalette>
+  <ColorItem
+    title="Error / Red"
+    subtitle="--packt-red-*"
+    colors={{
+      '100': '#f9d2d9',
+      '200': '#f2a4b3',
+      '300': '#ec778d',
+      '400': '#e54967',
+      '500': '#df1c41',
+      '600': '#b81c3a',
+      '700': '#921d33',
+      '800': '#6b1d2c',
+      '900': '#451e25',
+    }}
+  />
+</ColorPalette>
+
+### Yellow
+<ColorPalette>
+  <ColorItem
+    title="Warning / Yellow"
+    subtitle="--packt-yellow-*"
+    colors={{
+      '100': '#fcf6cc',
+      '200': '#f8ed9a',
+      '300': '#f5e467',
+      '400': '#f1db35',
+      '500': '#eed202',
+      '600': '#c4ae08',
+      '700': '#9b8a0d',
+      '800': '#716613',
+      '900': '#484218',
+    }}
+  />
+</ColorPalette>
+
+### Neutral
+<ColorPalette>
+  <ColorItem
+    title="Neutral"
+    subtitle="--packt-neutral-*"
+    colors={{
+      '100': '#f6f6f6',
+      '200': '#e4e4e4',
+      '300': '#d2d2d2',
+      '400': '#a6a6a6',
+      '500': '#797979',
+      '600': '#4d4d4d',
+      '700': '#1a1a1a',
+      '800': '#1f1f1f',
+      '900': '#1e1e1e',
+    }}
+  />
+</ColorPalette>
+
+### Base
+<ColorPalette>
+  <ColorItem
+    title="Base"
+    subtitle="--packt-base-*"
+    colors={{
+      white: '#ffffff',
+      black: '#000000',
+    }}
+  />
+</ColorPalette>
+
+---
+
+## Semantic Colors — Light Mode
+
+<ColorPalette>
+  <ColorItem
+    title="Content"
+    subtitle="--packt-semantic-colors-light-content-*"
+    colors={{
+      primary:   '#000000',
+      secondary: '#4d4d4d',
+      tertiary:  '#797979',
+      disabled:  '#f6f6f6',
+      hover:     '#000000',
+      focus:     '#000000',
+      selected:  '#ffffff',
+    }}
+  />
+  <ColorItem
+    title="Content — Brand"
+    subtitle="--packt-semantic-colors-light-content-brand-*"
+    colors={{
+      default:  '#f97141',
+      hover:    '#f97141',
+      selected: '#ffffff',
+    }}
+  />
+  <ColorItem
+    title="Content — Feedback"
+    subtitle="error / warning / success / info"
+    colors={{
+      'error-hover':     '#b81c3a',
+      'warning-default': '#eed202',
+      'warning-hover':   '#c4ae08',
+      'success-default': '#41f971',
+      'success-hover':   '#3acd60',
+      'info-default':    '#3366cc',
+      'info-hover':      '#2f58a9',
+    }}
+  />
+  <ColorItem
+    title="Background"
+    subtitle="--packt-semantic-colors-light-background-*"
+    colors={{
+      primary:   '#ffffff',
+      secondary: '#e4e4e4',
+      tertiary:  '#d2d2d2',
+      hover:     '#e4e4e4',
+      pressed:   '#e4e4e4',
+      selected:  '#1a1a1a',
+      disabled:  '#f6f6f6',
+    }}
+  />
+  <ColorItem
+    title="Background — Brand"
+    subtitle="--packt-semantic-colors-light-background-brand-*"
+    colors={{
+      default:  '#ffffff',
+      hover:    '#fee3d9',
+      pressed:  '#fdc6b3',
+      selected: '#f97141',
+    }}
+  />
+  <ColorItem
+    title="Background — Feedback"
+    subtitle="error / warning / success / info"
+    colors={{
+      'error-default':   '#f9d2d9',
+      'error-hover':     '#f2a4b3',
+      'error-selected':  '#df1c41',
+      'warning-default': '#fcf6cc',
+      'warning-hover':   '#f8ed9a',
+      'success-default': '#d9fee3',
+      'success-hover':   '#b3fdc6',
+      'info-default':    '#d6e0f5',
+      'info-hover':      '#adc2eb',
+    }}
+  />
+  <ColorItem
+    title="Border"
+    subtitle="--packt-semantic-colors-light-border-*"
+    colors={{
+      primary:        '#000000',
+      secondary:      '#4d4d4d',
+      tertiary:       '#797979',
+      divide:         '#e4e4e4',
+      disabled:       '#a6a6a6',
+      'brand-default':'#f97141',
+      'brand-hover':  '#cd603a',
+      error:          '#df1c41',
+      warning:        '#eed202',
+      success:        '#41f971',
+      info:           '#3366cc',
+    }}
+  />
+  <ColorItem
+    title="Icon"
+    subtitle="--packt-semantic-colors-light-icon-*"
+    colors={{
+      primary:        '#000000',
+      hover:          '#000000',
+      focus:          '#000000',
+      selected:       '#ffffff',
+      disabled:       '#a6a6a6',
+      'brand-default':'#f97141',
+      'brand-hover':  '#cd603a',
+    }}
+  />
+  <ColorItem
+    title="Surface"
+    subtitle="--packt-semantic-colors-light-surface-*"
+    colors={{
+      l0: '#ffffff',
+      l1: '#ffffff',
+      l2: '#ffffff',
+      l3: '#ffffff',
+      l4: '#ffffff',
+      l5: '#ffffff',
+      l6: '#ffffff',
+    }}
+  />
+</ColorPalette>
+
+---
+
+## Semantic Colors — Dark Mode
+
+<Unstyled>
+  <style>{`.dark-semantic-section p, .dark-semantic-section span, .dark-semantic-section div[class] { color: #ffffff !important; }`}</style>
+  <div className="dark-semantic-section" style={{ background: '#1e1e1e', borderRadius: 12, padding: '24px 24px 8px', marginBottom: 16 }}>
+    <ColorPalette>
+      <ColorItem
+        title="Content"
+        subtitle="--packt-semantic-colors-dark-content-*"
+        colors={{
+          primary:   '#ffffff',
+          secondary: '#f6f6f6',
+          tertiary:  '#e4e4e4',
+          disabled:  '#797979',
+          hover:     '#ffffff',
+          focus:     '#ffffff',
+          selected:  '#000000',
+        }}
+      />
+      <ColorItem
+        title="Content — Brand"
+        subtitle="--packt-semantic-colors-dark-content-brand-*"
+        colors={{
+          default:  '#f97141',
+          hover:    '#fee3d9',
+          selected: '#ffffff',
+        }}
+      />
+      <ColorItem
+        title="Content — Feedback"
+        subtitle="error / warning / success / info"
+        colors={{
+          'error-hover':     '#e54967',
+          'warning-default': '#eed202',
+          'warning-hover':   '#f1db35',
+          'success-default': '#41f971',
+          'success-hover':   '#67fa8d',
+          'info-default':    '#3366cc',
+          'info-hover':      '#5c85d6',
+        }}
+      />
+      <ColorItem
+        title="Background"
+        subtitle="--packt-semantic-colors-dark-background-*"
+        colors={{
+          primary:   '#000000',
+          secondary: '#1a1a1a',
+          tertiary:  '#4d4d4d',
+          hover:     '#797979',
+          pressed:   '#797979',
+          selected:  '#e4e4e4',
+          disabled:  '#d2d2d2',
+        }}
+      />
+      <ColorItem
+        title="Background — Brand"
+        subtitle="--packt-semantic-colors-dark-background-brand-*"
+        colors={{
+          default:  '#000000',
+          hover:    '#cd603a',
+          pressed:  '#a15033',
+          selected: '#f97141',
+        }}
+      />
+      <ColorItem
+        title="Background — Feedback"
+        subtitle="error / warning / success / info"
+        colors={{
+          'error-default':   '#921d33',
+          'error-hover':     '#b81c3a',
+          'error-selected':  '#df1c41',
+          'warning-default': '#9b8a0d',
+          'warning-hover':   '#c4ae08',
+          'success-default': '#279544',
+          'success-hover':   '#3acd60',
+          'info-default':    '#2b4986',
+          'info-hover':      '#2f58a9',
+        }}
+      />
+      <ColorItem
+        title="Border"
+        subtitle="--packt-semantic-colors-dark-border-*"
+        colors={{
+          primary:        '#ffffff',
+          secondary:      '#ffffff',
+          tertiary:       '#ffffff',
+          divide:         '#ffffff',
+          disabled:       '#d2d2d2',
+          'brand-default':'#f97141',
+          'brand-hover':  '#a15033',
+          error:          '#df1c41',
+          warning:        '#eed202',
+          success:        '#41f971',
+          info:           '#3366cc',
+        }}
+      />
+      <ColorItem
+        title="Icon"
+        subtitle="--packt-semantic-colors-dark-icon-*"
+        colors={{
+          primary:        '#ffffff',
+          hover:          '#ffffff',
+          focus:          '#ffffff',
+          selected:       '#000000',
+          disabled:       '#4d4d4d',
+          'brand-default':'#f97141',
+          'brand-hover':  '#cd603a',
+        }}
+      />
+      <ColorItem
+        title="Surface"
+        subtitle="--packt-semantic-colors-dark-surface-*"
+        colors={{
+          l0: '#4d4d4d',
+          l1: '#4d4d4d',
+          l2: '#4d4d4d',
+          l3: '#4d4d4d',
+          l4: '#4d4d4d',
+          l5: '#797979',
+          l6: '#a6a6a6',
+        }}
+      />
+    </ColorPalette>
+  </div>
+</Unstyled>

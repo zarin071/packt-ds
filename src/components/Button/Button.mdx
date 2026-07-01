@@ -1,0 +1,162 @@
+import { Meta, Canvas, Controls, Unstyled } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './Button.stories';
+import { Button } from './Button';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+A token-based button component supporting four semantic variants, three sizes, and both light and dark themes.
+
+## Usage
+
+```tsx
+import { Button } from 'packt-ds';
+
+<Button variant="primary" size="md" label="Get started" />
+```
+
+---
+
+## Playground
+
+<Canvas of={ButtonStories.Playground} />
+<Controls of={ButtonStories.Playground} />
+
+---
+
+## All States
+
+<Canvas of={ButtonStories.AllStates} />
+
+---
+
+## Variants
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif' }}>
+    {[
+      { variant: 'primary',   desc: 'Main call-to-action — brand orange' },
+      { variant: 'secondary', desc: 'Secondary action — outlined' },
+      { variant: 'ghost',     desc: 'Tertiary / subtle — no border' },
+      { variant: 'danger',    desc: 'Destructive action — error red' },
+    ].map(({ variant, desc }) => (
+      <div key={variant} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: '1px solid #e4e4e4' }}>
+        <code style={{ width: 72, fontSize: 12, color: '#4d4d4d', flexShrink: 0 }}>{variant}</code>
+        <div style={{ width: 116, flexShrink: 0, background: '#ffffff', border: '1px solid #e4e4e4', borderRadius: 6, padding: '10px', display: 'flex', justifyContent: 'center' }}>
+          <Button variant={variant} size="md" theme="light" label="Label" />
+        </div>
+        <div style={{ width: 116, flexShrink: 0, background: '#1e1e1e', borderRadius: 6, padding: '10px', display: 'flex', justifyContent: 'center' }}>
+          <Button variant={variant} size="md" theme="dark" label="Label" />
+        </div>
+        <span style={{ fontSize: 13, color: '#797979' }}>{desc}</span>
+      </div>
+    ))}
+  </div>
+</Unstyled>
+
+---
+
+## Sizes
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif' }}>
+    {[
+      { size: 'sm', font: '12px', padding: '4px · 8px'   },
+      { size: 'md', font: '14px', padding: '8px · 16px'  },
+      { size: 'lg', font: '16px', padding: '12px · 24px' },
+    ].map(({ size, font, padding }) => (
+      <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: '1px solid #e4e4e4' }}>
+        <code style={{ width: 28, fontSize: 12, color: '#4d4d4d', flexShrink: 0 }}>{size}</code>
+        <div style={{ width: 116, flexShrink: 0, background: '#ffffff', border: '1px solid #e4e4e4', borderRadius: 6, padding: '10px', display: 'flex', justifyContent: 'center' }}>
+          <Button variant="primary" size={size} theme="light" label={size.toUpperCase()} />
+        </div>
+        <div style={{ width: 116, flexShrink: 0, background: '#1e1e1e', borderRadius: 6, padding: '10px', display: 'flex', justifyContent: 'center' }}>
+          <Button variant="primary" size={size} theme="dark" label={size.toUpperCase()} />
+        </div>
+        <div style={{ display: 'flex', gap: 24, fontSize: 12, color: '#797979' }}>
+          <span>Font <strong style={{ color: '#1a1a1a' }}>{font}</strong></span>
+          <span>Padding <strong style={{ color: '#1a1a1a' }}>{padding}</strong></span>
+        </div>
+      </div>
+    ))}
+  </div>
+</Unstyled>
+
+---
+
+## Theming
+
+Pass `theme="dark"` when rendering on a dark surface. The component reads from `--packt-semantic-colors-dark-*` tokens automatically.
+
+```tsx
+<Button variant="primary" theme="dark" label="Button" />
+```
+
+---
+
+## Tokens used
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: 13, border: '1px solid #e4e4e4', borderRadius: 8, overflow: 'hidden' }}>
+    <div style={{ display: 'flex', gap: 8, padding: '10px 16px', background: '#1a1a1a', color: '#ffffff', fontSize: 11, fontWeight: 600 }}>
+      <span style={{ flex: '0 0 140px' }}>Property</span>
+      <span style={{ flex: 1 }}>Light token</span>
+      <span style={{ flex: 1 }}>Dark token</span>
+    </div>
+    {[
+      {
+        property: 'Background · primary',
+        light: { hex: '#f97141', token: '--packt-semantic-colors-light-background-brand-selected' },
+        dark:  { hex: '#f97141', token: '--packt-semantic-colors-dark-background-brand-selected' },
+      },
+      {
+        property: 'Border · primary',
+        light: { hex: '#f97141', token: '--packt-semantic-colors-light-border-brand-default' },
+        dark:  { hex: '#f97141', token: '--packt-semantic-colors-dark-border-brand-default' },
+      },
+      {
+        property: 'Border · hover',
+        light: { hex: '#cd603a', token: '--packt-semantic-colors-light-border-border-hover' },
+        dark:  { hex: '#a15033', token: '--packt-semantic-colors-dark-border-border-hover' },
+      },
+      {
+        property: 'Background · secondary',
+        light: { hex: '#ffffff', token: '--packt-semantic-colors-light-background-primary' },
+        dark:  { hex: '#000000', token: '--packt-semantic-colors-dark-background-primary' },
+      },
+      {
+        property: 'Border · secondary',
+        light: { hex: '#000000', token: '--packt-semantic-colors-light-border-primary' },
+        dark:  { hex: '#ffffff', token: '--packt-semantic-colors-dark-border-primary' },
+      },
+      {
+        property: 'Background · danger',
+        light: { hex: '#df1c41', token: '--packt-semantic-colors-light-background-error-selected' },
+        dark:  { hex: '#df1c41', token: '--packt-semantic-colors-dark-background-error-selected' },
+      },
+      {
+        property: 'Disabled bg',
+        light: { hex: '#f6f6f6', token: '--packt-semantic-colors-light-background-disabled' },
+        dark:  { hex: '#d2d2d2', token: '--packt-semantic-colors-dark-background-disabled' },
+      },
+      {
+        property: 'Disabled text',
+        light: { hex: '#a6a6a6', token: '--packt-semantic-colors-light-border-disabled' },
+        dark:  { hex: '#797979', token: '--packt-semantic-colors-dark-content-disabled' },
+      },
+    ].map(({ property, light, dark }, i, arr) => (
+      <div key={property} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 16px', borderBottom: i < arr.length - 1 ? '1px solid #e4e4e4' : 'none', background: i % 2 === 0 ? '#ffffff' : '#fafafa' }}>
+        <span style={{ flex: '0 0 140px', fontSize: 12, color: '#4d4d4d', fontWeight: 500 }}>{property}</span>
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div style={{ width: 18, height: 18, borderRadius: 4, background: light.hex, border: '1px solid #e4e4e4', flexShrink: 0 }} />
+          <code style={{ fontSize: 11, color: '#797979' }}>{light.token}</code>
+        </div>
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div style={{ width: 18, height: 18, borderRadius: 4, background: dark.hex, border: '1px solid #e4e4e4', flexShrink: 0 }} />
+          <code style={{ fontSize: 11, color: '#797979' }}>{dark.token}</code>
+        </div>
+      </div>
+    ))}
+  </div>
+</Unstyled>

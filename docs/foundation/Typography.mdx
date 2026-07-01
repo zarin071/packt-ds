@@ -1,0 +1,161 @@
+import { Meta, Typeset, Unstyled } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundation / Typography" />
+
+# Typography
+
+Font family: **Outfit** — `--packt-font-family-outfit`
+
+---
+
+## Font Weights
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif' }}>
+    {[
+      { name: 'Regular',  token: '--packt-weight-regular',  weight: 400 },
+      { name: 'Medium',   token: '--packt-weight-medium',   weight: 500 },
+      { name: 'Semibold', token: '--packt-weight-semibold', weight: 600 },
+      { name: 'Bold',     token: '--packt-weight-bold',     weight: 700 },
+    ].map(({ name, token, weight }) => (
+      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '12px 16px', borderRadius: 6, marginBottom: 2, background: '#f6f6f6' }}>
+        <span style={{ fontWeight: weight, fontSize: 22, flex: 1 }}>Outfit {name}</span>
+        <code style={{ fontSize: 11, color: '#a6a6a6', marginRight: 16 }}>{token}</code>
+        <span style={{ width: 28, fontSize: 12, fontWeight: 600, color: '#4d4d4d', textAlign: 'right', flexShrink: 0 }}>{weight}</span>
+      </div>
+    ))}
+  </div>
+</Unstyled>
+
+---
+
+## Letter Spacing
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif' }}>
+    {[
+      { name: 'neg1',  token: '--packt-letter-spacing-neg1',  value: -1,   label: '−1px',   use: 'Large headings (5XL–XL)' },
+      { name: 'neg05', token: '--packt-letter-spacing-neg05', value: -0.5, label: '−0.5px', use: 'Heading L, medium text' },
+      { name: 'none',  token: '--packt-letter-spacing-none',  value: 0,    label: '0px',    use: 'Body text, labels' },
+    ].map(({ name, token, value, label, use }) => (
+      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderRadius: 6, marginBottom: 2, background: '#f6f6f6' }}>
+        <span style={{ letterSpacing: value, fontSize: 20, fontWeight: 600, flex: 1 }}>The quick brown fox</span>
+        <code style={{ fontSize: 11, color: '#a6a6a6', flexShrink: 0, marginRight: 8 }}>{token}</code>
+        <span style={{ width: 48, fontSize: 12, fontWeight: 600, color: '#4d4d4d', flexShrink: 0, textAlign: 'right' }}>{label}</span>
+      </div>
+    ))}
+  </div>
+</Unstyled>
+
+---
+
+## Type Scale Overview
+
+<Typeset
+  fontFamily="Outfit, sans-serif"
+  fontSizes={['10px', '12px', '14px', '16px', '18px', '20px', '24px', '28px', '32px', '40px', '48px', '56px', '64px', '72px']}
+  fontWeight={400}
+  sampleText="The quick brown fox jumps over the lazy dog"
+/>
+
+<Typeset
+  fontFamily="Outfit, sans-serif"
+  fontSizes={['24px', '28px', '32px', '40px', '48px', '56px', '64px', '72px']}
+  fontWeight={700}
+  sampleText="Heading Bold"
+/>
+
+---
+
+## Heading Scale — Desktop & Large Desktop (≥ 1024px)
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif' }}>
+    {[
+      { name: 'Heading 5XL', size: 72, weight: 700, lh: 80,  ls: -1   },
+      { name: 'Heading 4XL', size: 64, weight: 700, lh: 72,  ls: -1   },
+      { name: 'Heading 3XL', size: 56, weight: 700, lh: 64,  ls: -1   },
+      { name: 'Heading 2XL', size: 48, weight: 700, lh: 56,  ls: -1   },
+      { name: 'Heading XL',  size: 40, weight: 700, lh: 48,  ls: -1   },
+      { name: 'Heading L',   size: 32, weight: 600, lh: 40,  ls: -0.5 },
+      { name: 'Heading M',   size: 28, weight: 600, lh: 32,  ls: -1   },
+      { name: 'Heading S',   size: 24, weight: 600, lh: 28,  ls: -1   },
+    ].map(({ name, size, weight, lh, ls }) => (
+      <div key={name} style={{ padding: '16px', borderBottom: '1px solid #e4e4e4', overflow: 'hidden' }}>
+        <div style={{ fontSize: size, fontWeight: weight, lineHeight: `${lh}px`, letterSpacing: `${ls}px`, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {name}
+        </div>
+        <div style={{ marginTop: 6, display: 'flex', gap: 20, fontSize: 11, color: '#a6a6a6' }}>
+          <code style={{ color: '#4d4d4d' }}>{size}px</code>
+          <span>{lh}px line-height</span>
+          <span>{weight === 700 ? 'Bold 700' : 'Semibold 600'}</span>
+          <span>{ls}px tracking</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</Unstyled>
+
+---
+
+## Heading Scale — Tablet & Mobile (< 1024px)
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif' }}>
+    {[
+      { name: 'Heading 5XL', size: 64, weight: 600, lh: 72, ls: -1   },
+      { name: 'Heading 4XL', size: 56, weight: 600, lh: 64, ls: -1   },
+      { name: 'Heading 3XL', size: 48, weight: 600, lh: 56, ls: -1   },
+      { name: 'Heading 2XL', size: 40, weight: 600, lh: 48, ls: -1   },
+      { name: 'Heading XL',  size: 32, weight: 600, lh: 40, ls: -1   },
+      { name: 'Heading L',   size: 28, weight: 500, lh: 32, ls: -0.5 },
+      { name: 'Heading M',   size: 24, weight: 500, lh: 28, ls: -1   },
+      { name: 'Heading S',   size: 20, weight: 500, lh: 24, ls: -1   },
+    ].map(({ name, size, weight, lh, ls }) => (
+      <div key={name} style={{ padding: '16px', borderBottom: '1px solid #e4e4e4', overflow: 'hidden' }}>
+        <div style={{ fontSize: size, fontWeight: weight, lineHeight: `${lh}px`, letterSpacing: `${ls}px`, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {name}
+        </div>
+        <div style={{ marginTop: 6, display: 'flex', gap: 20, fontSize: 11, color: '#a6a6a6' }}>
+          <code style={{ color: '#4d4d4d' }}>{size}px</code>
+          <span>{lh}px line-height</span>
+          <span>{weight === 700 ? 'Bold 700' : weight === 600 ? 'Semibold 600' : 'Medium 500'}</span>
+          <span>{ls}px tracking</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</Unstyled>
+
+---
+
+## Text Scale (all breakpoints)
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif' }}>
+    {[
+      { name: 'Regular XL', size: 20, weight: 400, lh: 28, ls: 0    },
+      { name: 'Regular L',  size: 16, weight: 400, lh: 24, ls: 0    },
+      { name: 'Regular M',  size: 14, weight: 400, lh: 20, ls: 0    },
+      { name: 'Regular S',  size: 12, weight: 400, lh: 16, ls: 0    },
+      { name: 'Regular XS', size: 10, weight: 400, lh: 14, ls: 0    },
+      { name: 'Medium XL',  size: 20, weight: 500, lh: 28, ls: -0.5 },
+      { name: 'Medium L',   size: 16, weight: 500, lh: 24, ls: -0.5 },
+      { name: 'Medium M',   size: 14, weight: 500, lh: 20, ls: -0.5 },
+      { name: 'Medium S',   size: 12, weight: 500, lh: 16, ls: 0    },
+      { name: 'Medium XS',  size: 10, weight: 500, lh: 14, ls: 0    },
+    ].map(({ name, size, weight, lh, ls }) => (
+      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '10px 16px', borderBottom: '1px solid #e4e4e4' }}>
+        <span style={{ fontSize: size, fontWeight: weight, lineHeight: `${lh}px`, letterSpacing: `${ls}px`, flex: 1 }}>
+          The quick brown fox jumps over the lazy dog
+        </span>
+        <div style={{ display: 'flex', gap: 16, fontSize: 11, color: '#a6a6a6', flexShrink: 0, textAlign: 'right' }}>
+          <code style={{ color: '#4d4d4d', width: 56 }}>{name}</code>
+          <span style={{ width: 32 }}>{size}px</span>
+          <span style={{ width: 28 }}>{weight}</span>
+          <span style={{ width: 28 }}>{ls === 0 ? '0' : `${ls}px`}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</Unstyled>

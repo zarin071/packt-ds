@@ -1,0 +1,105 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Packt DS / Developer Guide" />
+
+# Developer Guide
+
+---
+
+## Installation
+
+```bash
+npm install packt-ds
+```
+
+---
+
+## Token setup
+
+Import the CSS tokens in your app entry point:
+
+```ts
+// main.ts / _app.tsx / layout.tsx
+import 'packt-ds/tokens';       // primitives + light semantic tokens
+import 'packt-ds/tokens/dark';  // dark semantic tokens (load conditionally)
+```
+
+### Dark mode toggle
+
+Set `data-theme="dark"` on `<html>` to activate dark tokens:
+
+```ts
+document.documentElement.setAttribute('data-theme', 'dark');
+document.documentElement.removeAttribute('data-theme'); // back to light
+```
+
+---
+
+## Using components
+
+```tsx
+import { Button } from 'packt-ds';
+
+// Light (default)
+<Button variant="primary" size="md" label="Save" />
+
+// Dark surface
+<Button variant="primary" size="md" label="Save" theme="dark" />
+
+// Disabled
+<Button variant="secondary" label="Cancel" disabled />
+```
+
+---
+
+## Using tokens in CSS
+
+```css
+.card {
+  background:    var(--packt-semantic-colors-light-background-primary);
+  border:        calc(var(--packt-width-xs) * 1px) solid var(--packt-semantic-colors-light-border-divide);
+  border-radius: calc(var(--packt-radius-m) * 1px);
+  padding:       calc(var(--packt-space-l) * 1px);
+}
+```
+
+> Dimensional tokens (spacing, radius, width) are unitless numbers — multiply by `1px` with `calc()`.
+
+---
+
+## Rebuilding tokens
+
+After updating `tokens/design-tokens.json`:
+
+```bash
+npm run tokens
+```
+
+This runs Style Dictionary and outputs:
+- `src/tokens/tokens.css` — primitives + light semantic tokens
+- `src/tokens/tokens.dark.css` — dark semantic tokens
+
+---
+
+## Building the package
+
+```bash
+npm run build
+```
+
+Runs `tsup` and outputs to `dist/`:
+- `dist/index.js` — ESM
+- `dist/index.cjs` — CommonJS
+- `dist/index.d.ts` — TypeScript declarations
+
+---
+
+## Troubleshooting
+
+**Tokens not applying** — ensure `tokens.css` is imported before any component styles.
+
+**Dark mode not switching** — check that `data-theme="dark"` is on `<html>`, not a child element.
+
+**Font not loading** — Outfit is loaded via `<link>` in `.storybook/preview-head.html`. For production, add the Google Fonts link to your `<head>`.
+
+**TypeScript errors on `Button`** — import the type: `import type { ButtonProps } from 'packt-ds'`.

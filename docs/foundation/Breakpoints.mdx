@@ -1,0 +1,50 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundation / Breakpoints" />
+
+# Breakpoints
+
+Four breakpoints mapped to `--packt-breakpoint-*` tokens. Bars are scaled relative to the largest breakpoint (1440px). The single responsive step that changes typography and layout is **1024px** — Large Desktop and Desktop share identical styles.
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: 13 }}>
+    {[
+      { name: 'Mobile',        token: '--packt-breakpoint-mobile',        value: 393,  note: '≤ 393px' },
+      { name: 'Tablet',        token: '--packt-breakpoint-tablet',        value: 768,  note: '≥ 768px' },
+      { name: 'Desktop',       token: '--packt-breakpoint-desktop',       value: 1024, note: '≥ 1024px' },
+      { name: 'Large Desktop', token: '--packt-breakpoint-large-desktop', value: 1440, note: '≥ 1440px — same as Desktop' },
+    ].map(({ name, token, value, note }) => (
+      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '12px', borderRadius: 6, marginBottom: 2, background: '#f6f6f6' }}>
+        <div style={{ width: 120, flexShrink: 0 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#1a1a1a' }}>{name}</div>
+          <div style={{ fontSize: 11, color: '#a6a6a6', marginTop: 2 }}>{note}</div>
+        </div>
+        <div style={{ flex: 1, background: '#e4e4e4', borderRadius: 4, height: 12, overflow: 'hidden' }}>
+          <div style={{ height: '100%', width: `${(value / 1440) * 100}%`, background: '#f97141', borderRadius: 4 }} />
+        </div>
+        <code style={{ width: 200, fontSize: 11, color: '#a6a6a6', flexShrink: 0, textAlign: 'right' }}>{token}</code>
+        <span style={{ width: 48, fontSize: 12, fontWeight: 600, textAlign: 'right', flexShrink: 0 }}>{value}px</span>
+      </div>
+    ))}
+  </div>
+</Unstyled>
+
+---
+
+# Base Units
+
+Unitless numeric scale (`--packt-unit-*`). Use `calc(var(--packt-unit-N) * 1px)` in CSS. The unit scale underpins spacing, sizing, and layout decisions.
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: 13 }}>
+    {[2, 4, 8, 10, 12, 14, 16, 18, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120].map((value) => (
+      <div key={value} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '7px 12px', borderRadius: 6, marginBottom: 2, background: '#f6f6f6' }}>
+        <code style={{ width: 32, fontSize: 12, color: '#4d4d4d', fontWeight: 600, flexShrink: 0 }}>{value}</code>
+        <div style={{ flex: 1 }}>
+          <div style={{ height: 8, width: Math.min(value, 120), background: '#f97141', borderRadius: 2 }} />
+        </div>
+        <code style={{ width: 180, fontSize: 11, color: '#a6a6a6', flexShrink: 0, textAlign: 'right' }}>{`--packt-unit-${value}`}</code>
+      </div>
+    ))}
+  </div>
+</Unstyled>
