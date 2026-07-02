@@ -1,0 +1,43 @@
+name: Sync design tokens
+
+on:
+  push:
+    branches:
+      - design-tokens
+    paths:
+      - 'tokens/design-tokens.json'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: design-tokens
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run tokens
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: rebuild design tokens"
+          file_pattern: 'src/tokens/*.css'
+
+      - name: Merge into main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout main
+          git pull origin main
+          git merge --no-ff design-tokens -m "chore: sync design tokens from Figma"
+          git push origin main
