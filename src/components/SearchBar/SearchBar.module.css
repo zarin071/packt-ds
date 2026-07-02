@@ -1,0 +1,92 @@
+/**
+ * SearchBar tokens:
+ *  bg           : --packt-semantic-colors-light-background-primary
+ *  border       : --packt-semantic-colors-light-border-primary
+ *  border focus : --packt-semantic-colors-light-border-brand-default
+ *  icon color   : --packt-semantic-colors-light-icon-primary
+ *  text         : --packt-semantic-colors-light-content-primary
+ *  radius       : --packt-radius-pill
+ *  height       : --packt-size-40
+ *  padding      : --packt-space-m/l
+ *  focus        : --packt-focus-ring
+ */
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--packt-space-xs);
+  background: var(--packt-semantic-colors-light-background-primary);
+  border: var(--packt-width-xs) solid var(--packt-semantic-colors-light-border-primary);
+  border-radius: var(--packt-radius-pill);
+  padding: 0 var(--packt-space-m);
+  height: var(--packt-size-40);
+  transition: border-color 120ms ease;
+  font-family: var(--packt-font-family-outfit);
+}
+
+.wrapper:focus-within {
+  border-color: var(--packt-semantic-colors-light-border-brand-default);
+  box-shadow: var(--packt-focus-ring);
+}
+
+.disabled {
+  background: var(--packt-semantic-colors-light-background-disabled);
+  border-color: var(--packt-semantic-colors-light-border-disabled);
+  cursor: not-allowed;
+}
+
+.leadIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--packt-semantic-colors-light-icon-primary);
+  font-size: var(--packt-size-16);
+}
+
+.spinner {
+  display: inline-flex;
+  animation: searchbar-spin 700ms linear infinite;
+}
+
+@keyframes searchbar-spin {
+  to { transform: rotate(360deg); }
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: var(--packt-size-14);
+  line-height: var(--packt-line-height-20);
+  color: var(--packt-semantic-colors-light-content-primary);
+  font-family: inherit;
+}
+
+/* Remove the browser-native clear button on search inputs */
+.input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.clearBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--packt-semantic-colors-light-icon-primary);
+  font-size: var(--packt-size-14);
+  border-radius: 50%;
+  transition: color 120ms ease;
+}
+
+.clearBtn:hover {
+  color: var(--packt-semantic-colors-light-content-primary);
+}
+
+.clearBtn:focus-visible {
+  outline: none;
+  box-shadow: var(--packt-focus-ring);
+}

@@ -1,0 +1,103 @@
+/**
+ * RadioButton tokens:
+ *  ring border (unchecked)  : --packt-semantic-colors-light-border-primary
+ *  ring border (checked)    : --packt-semantic-colors-light-background-brand-selected
+ *  dot fill                 : --packt-semantic-colors-light-background-brand-selected
+ *  error border             : --packt-semantic-colors-light-border-error
+ *  disabled                 : --packt-semantic-colors-light-background-disabled / border-disabled
+ *  radius                   : --packt-radius-circle
+ *  size                     : --packt-size-16
+ *  gap                      : --packt-space-s
+ *  focus                    : --packt-focus-ring
+ */
+.wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--packt-space-xs);
+  font-family: var(--packt-font-family-outfit);
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--packt-space-s);
+  cursor: pointer;
+  user-select: none;
+}
+
+.control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--packt-size-16);
+  height: var(--packt-size-16);
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: inherit;
+}
+
+.ring {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: var(--packt-width-xs) solid var(--packt-semantic-colors-light-border-primary);
+  border-radius: var(--packt-radius-circle);
+  background: var(--packt-semantic-colors-light-background-primary);
+  transition: border-color 120ms ease;
+  pointer-events: none;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background-color 120ms ease;
+}
+
+.input:checked + .ring {
+  border-color: var(--packt-semantic-colors-light-background-brand-selected);
+}
+
+.input:checked + .ring .dot {
+  background: var(--packt-semantic-colors-light-background-brand-selected);
+}
+
+.input:focus-visible + .ring {
+  box-shadow: var(--packt-focus-ring);
+}
+
+.hasError .ring {
+  border-color: var(--packt-semantic-colors-light-border-error);
+}
+
+.disabled .label {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.disabled .ring {
+  background: var(--packt-semantic-colors-light-background-disabled);
+  border-color: var(--packt-semantic-colors-light-border-disabled);
+}
+
+.labelText {
+  font-size: var(--packt-size-14);
+  line-height: var(--packt-line-height-20);
+  color: var(--packt-semantic-colors-light-content-primary);
+}
+
+.errorText {
+  font-size: var(--packt-size-12);
+  line-height: var(--packt-line-height-16);
+  color: var(--packt-semantic-colors-light-content-error-default);
+}

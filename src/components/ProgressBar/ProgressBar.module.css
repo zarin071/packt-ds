@@ -1,0 +1,43 @@
+/**
+ * ProgressBar tokens:
+ *  fill bg  : --packt-semantic-colors-light-background-brand-selected
+ *  track bg : --packt-semantic-colors-light-background-secondary
+ *  radius   : --packt-radius-pill
+ *  label    : --packt-semantic-colors-light-content-secondary, --packt-size-12
+ *  gap      : --packt-space-s
+ */
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--packt-space-s);
+  font-family: var(--packt-font-family-outfit);
+}
+
+.track {
+  flex: 1;
+  background: var(--packt-semantic-colors-light-background-secondary);
+  border-radius: var(--packt-radius-pill);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: var(--packt-semantic-colors-light-background-brand-selected);
+  border-radius: var(--packt-radius-pill);
+  transition: width 300ms ease;
+}
+
+/* ---- Sizes ---- */
+.small { height: 4px; }
+.medium { height: 8px; }
+.large { height: 12px; }
+
+.label {
+  flex-shrink: 0;
+  font-size: var(--packt-size-12);
+  line-height: var(--packt-line-height-16);
+  font-weight: var(--packt-weight-medium);
+  color: var(--packt-semantic-colors-light-content-secondary);
+  min-width: 36px;
+  text-align: right;
+}

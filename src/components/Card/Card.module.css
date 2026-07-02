@@ -1,0 +1,79 @@
+/**
+ * Card tokens:
+ *  bg          : --packt-semantic-colors-light-background-primary
+ *  border      : --packt-semantic-colors-light-border-divide
+ *  hover bg    : --packt-semantic-colors-light-background-hover (interactive)
+ *  radius      : --packt-radius-m (outer), --packt-radius-s (image)
+ *  padding     : --packt-space-l/xl
+ *  title       : --packt-semantic-colors-light-content-primary, --packt-size-16, semibold
+ *  description : --packt-semantic-colors-light-content-secondary, --packt-size-14
+ *  shadow      : component boxShadow.default token (subtle drop shadow)
+ */
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--packt-semantic-colors-light-background-primary);
+  border: var(--packt-width-xs) solid var(--packt-semantic-colors-light-border-divide);
+  border-radius: var(--packt-radius-m);
+  overflow: hidden;
+  font-family: var(--packt-font-family-outfit);
+}
+
+.interactive {
+  cursor: pointer;
+  transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+
+.interactive:hover {
+  background: var(--packt-semantic-colors-light-background-hover);
+}
+
+.interactive:focus-visible {
+  outline: none;
+  box-shadow: var(--packt-focus-ring);
+}
+
+.imageWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--packt-space-xs);
+  padding: var(--packt-space-l);
+  flex: 1;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--packt-size-16);
+  line-height: var(--packt-line-height-24);
+  font-weight: var(--packt-weight-semibold);
+  color: var(--packt-semantic-colors-light-content-primary);
+}
+
+.description {
+  margin: 0;
+  font-size: var(--packt-size-14);
+  line-height: var(--packt-line-height-20);
+  color: var(--packt-semantic-colors-light-content-secondary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--packt-space-s);
+  padding: var(--packt-space-m) var(--packt-space-l);
+  border-top: var(--packt-width-xs) solid var(--packt-semantic-colors-light-border-divide);
+}

@@ -1,0 +1,167 @@
+/**
+ * FileUpload tokens:
+ *  zone border         : --packt-semantic-colors-light-border-divide (dashed)
+ *  zone border drag    : --packt-semantic-colors-light-border-brand-default
+ *  zone bg             : --packt-semantic-colors-light-background-primary
+ *  zone bg drag        : --packt-semantic-colors-light-background-brand-hover
+ *  disabled zone       : --packt-semantic-colors-light-background-disabled
+ *  upload icon         : --packt-semantic-colors-light-icon-brand-default
+ *  primary text        : --packt-semantic-colors-light-content-primary
+ *  secondary text      : --packt-semantic-colors-light-content-tertiary
+ *  accepts text        : --packt-semantic-colors-light-content-tertiary
+ *  file item bg        : --packt-semantic-colors-light-background-primary
+ *  file item border    : --packt-semantic-colors-light-border-divide
+ *  file icon           : --packt-semantic-colors-light-icon-primary
+ *  radius              : --packt-radius-s (zone), --packt-radius-xs (file item)
+ *  padding             : --packt-space-2-xl/3-xl (zone), --packt-space-m/l (file item)
+ */
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--packt-space-s);
+  font-family: var(--packt-font-family-outfit);
+}
+
+.zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--packt-space-m);
+  padding: var(--packt-space-3-xl) var(--packt-space-2-xl);
+  border: var(--packt-width-m) dashed var(--packt-semantic-colors-light-border-divide);
+  border-radius: var(--packt-radius-s);
+  background: var(--packt-semantic-colors-light-background-primary);
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease;
+  text-align: center;
+  user-select: none;
+}
+
+.zone:focus-visible {
+  outline: none;
+  box-shadow: var(--packt-focus-ring);
+}
+
+.zone:hover:not(.disabled) {
+  border-color: var(--packt-semantic-colors-light-border-brand-default);
+  background: var(--packt-semantic-colors-light-background-brand-hover);
+}
+
+.dragging {
+  border-color: var(--packt-semantic-colors-light-border-brand-default);
+  background: var(--packt-semantic-colors-light-background-brand-hover);
+}
+
+.disabled {
+  background: var(--packt-semantic-colors-light-background-disabled);
+  border-color: var(--packt-semantic-colors-light-border-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.uploadIcon {
+  display: flex;
+  font-size: var(--packt-size-32);
+  color: var(--packt-semantic-colors-light-icon-brand-default);
+}
+
+.zoneText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.zonePrimary {
+  font-size: var(--packt-size-14);
+  font-weight: var(--packt-weight-medium);
+  color: var(--packt-semantic-colors-light-content-primary);
+}
+
+.zoneSecondary {
+  font-size: var(--packt-size-12);
+  color: var(--packt-semantic-colors-light-content-tertiary);
+}
+
+.accepts {
+  font-size: var(--packt-size-10);
+  color: var(--packt-semantic-colors-light-content-tertiary);
+}
+
+/* ---- File list ---- */
+.fileList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--packt-space-xs);
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: var(--packt-space-s);
+  padding: var(--packt-space-m) var(--packt-space-l);
+  background: var(--packt-semantic-colors-light-background-primary);
+  border: var(--packt-width-xs) solid var(--packt-semantic-colors-light-border-divide);
+  border-radius: var(--packt-radius-xs);
+}
+
+.fileIcon {
+  flex-shrink: 0;
+  display: flex;
+  color: var(--packt-semantic-colors-light-icon-primary);
+  font-size: var(--packt-size-20);
+}
+
+.fileInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 2px;
+}
+
+.fileName {
+  font-size: var(--packt-size-14);
+  font-weight: var(--packt-weight-medium);
+  color: var(--packt-semantic-colors-light-content-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileSize {
+  font-size: var(--packt-size-12);
+  color: var(--packt-semantic-colors-light-content-tertiary);
+}
+
+.removeBtn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  padding: var(--packt-space-2-xs);
+  cursor: pointer;
+  color: var(--packt-semantic-colors-light-icon-primary);
+  font-size: var(--packt-size-16);
+  border-radius: var(--packt-radius-xs);
+  transition: color 120ms ease, background-color 120ms ease;
+}
+
+.removeBtn:hover {
+  color: var(--packt-semantic-colors-light-content-error-default);
+  background: var(--packt-semantic-colors-light-background-error-default);
+}
+
+.removeBtn:focus-visible {
+  outline: none;
+  box-shadow: var(--packt-focus-ring);
+}

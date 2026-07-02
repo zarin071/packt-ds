@@ -1,0 +1,93 @@
+/**
+ * Tooltip tokens:
+ *  bg     : --packt-semantic-colors-light-background-selected (dark)
+ *  text   : --packt-semantic-colors-light-content-selected (white)
+ *  radius : --packt-radius-xs
+ *  padding: --packt-space-xs/s
+ *  size   : --packt-size-12
+ */
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tip {
+  position: absolute;
+  z-index: 1000;
+  background: var(--packt-semantic-colors-light-background-selected);
+  color: var(--packt-semantic-colors-light-content-selected);
+  font-family: var(--packt-font-family-outfit);
+  font-size: var(--packt-size-12);
+  line-height: var(--packt-line-height-16);
+  padding: var(--packt-space-xs) var(--packt-space-s);
+  border-radius: var(--packt-radius-xs);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  max-width: 200px;
+  white-space: normal;
+  text-align: center;
+}
+
+.visible {
+  opacity: 1;
+}
+
+/* ---- Arrow ---- */
+.arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+}
+
+/* ---- Positions ---- */
+.top {
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.top .arrow {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: var(--packt-semantic-colors-light-background-selected);
+}
+
+.bottom {
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.bottom .arrow {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: var(--packt-semantic-colors-light-background-selected);
+}
+
+.left {
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.left .arrow {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left-color: var(--packt-semantic-colors-light-background-selected);
+}
+
+.right {
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.right .arrow {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-right-color: var(--packt-semantic-colors-light-background-selected);
+}

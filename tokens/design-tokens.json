@@ -2142,7 +2142,7 @@
         "$type": "color",
         "$value": "{Green.500}"
       },
-      "Border-hover": {
+      "hover": {
         "$extensions": {
           "com.figma.scopes": [
             "STROKE_COLOR"
@@ -3059,7 +3059,7 @@
         "$type": "color",
         "$value": "{Green.500}"
       },
-      "Border-hover": {
+      "hover": {
         "$extensions": {
           "com.figma.scopes": [
             "STROKE_COLOR"

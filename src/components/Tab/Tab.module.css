@@ -1,0 +1,92 @@
+/**
+ * Tab tokens:
+ *  active indicator : --packt-semantic-colors-light-border-brand-default (brand variant)
+ *                   / --packt-semantic-colors-light-border-primary (default)
+ *  active text      : --packt-semantic-colors-light-content-brand-default (brand)
+ *                   / --packt-semantic-colors-light-content-primary (default)
+ *  inactive text    : --packt-semantic-colors-light-content-tertiary
+ *  hover bg         : --packt-semantic-colors-light-background-hover
+ *  border bottom    : --packt-semantic-colors-light-border-divide
+ *  width-m          : active indicator height (2px)
+ *  space-m/xl       : padding
+ *  size-14          : font size
+ *  focus            : --packt-focus-ring
+ */
+.root {
+  font-family: var(--packt-font-family-outfit);
+}
+
+.list {
+  display: flex;
+  align-items: flex-end;
+  border-bottom: var(--packt-width-xs) solid var(--packt-semantic-colors-light-border-divide);
+  gap: 0;
+}
+
+.tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--packt-space-xs);
+  padding: var(--packt-space-m) var(--packt-space-xl);
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: var(--packt-size-14);
+  line-height: var(--packt-line-height-20);
+  font-weight: var(--packt-weight-medium);
+  color: var(--packt-semantic-colors-light-content-tertiary);
+  cursor: pointer;
+  transition: color 120ms ease, background-color 120ms ease;
+  border-radius: var(--packt-radius-xs) var(--packt-radius-xs) 0 0;
+  white-space: nowrap;
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: var(--packt-width-m);
+  border-radius: var(--packt-radius-xs) var(--packt-radius-xs) 0 0;
+  background: transparent;
+  transition: background-color 120ms ease;
+}
+
+.tab:hover:not(:disabled) {
+  background: var(--packt-semantic-colors-light-background-hover);
+  color: var(--packt-semantic-colors-light-content-primary);
+}
+
+.tab:focus-visible {
+  outline: none;
+  box-shadow: var(--packt-focus-ring);
+}
+
+.tab:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* Active state */
+.active {
+  color: var(--packt-semantic-colors-light-content-primary);
+  font-weight: var(--packt-weight-semibold);
+}
+.active::after {
+  background: var(--packt-semantic-colors-light-border-primary);
+}
+
+/* Brand variant */
+.brand .active {
+  color: var(--packt-semantic-colors-light-content-brand-default);
+}
+.brand .active::after {
+  background: var(--packt-semantic-colors-light-border-brand-default);
+}
+
+.tabIcon {
+  display: inline-flex;
+  font-size: 1em;
+}

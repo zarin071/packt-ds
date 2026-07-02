@@ -1,17 +1,19 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
+import { CheckIcon, ChevronDownIcon } from '../icons';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
   parameters: { layout: 'centered' },
   argTypes: {
-    variant:  { control: 'select', options: ['primary', 'secondary', 'ghost', 'danger'] },
-    size:     { control: 'select', options: ['sm', 'md', 'lg'] },
-    theme:    { control: 'radio',  options: ['light', 'dark'] },
-    label:    { control: 'text' },
-    disabled: { control: 'boolean' },
+    variant:      { control: 'select', options: ['primary', 'secondary', 'ghost', 'danger'] },
+    size:         { control: 'select', options: ['sm', 'md', 'lg'] },
+    label:        { control: 'text' },
+    disabled:     { control: 'boolean' },
+    loading:      { control: 'boolean' },
+    iconPosition: { control: 'radio', options: ['start', 'end'] },
   },
 };
 
@@ -35,14 +37,29 @@ const rowLabel = (text: string) => (
 );
 
 export const Playground: Story = {
-  args: { variant: 'primary', size: 'md', theme: 'light', label: 'Button', disabled: false },
-  render: ({ theme, ...args }) => (
-    <div style={{
-      background: theme === 'dark' ? '#1e1e1e' : '#ffffff',
-      padding: '32px 40px',
-      borderRadius: 8,
-    }}>
-      <Button theme={theme} {...args} />
+  args: { variant: 'primary', size: 'md', label: 'Button', disabled: false, loading: false },
+};
+
+export const WithIcon: Story = {
+  name: 'With Icon',
+  render: () => (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+      <Button label="Confirm" icon={<CheckIcon />} />
+      <Button label="Confirm" icon={<CheckIcon />} variant="secondary" />
+      <Button label="Confirm" icon={<CheckIcon />} variant="ghost" />
+      <Button label="Options" icon={<ChevronDownIcon />} iconPosition="end" variant="secondary" />
+      <Button label="Options" icon={<ChevronDownIcon />} iconPosition="end" size="sm" variant="ghost" />
+    </div>
+  ),
+};
+
+export const Loading: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+      <Button label="Saving…" loading variant="primary" />
+      <Button label="Saving…" loading variant="secondary" />
+      <Button label="Saving…" loading variant="ghost" />
+      <Button label="Deleting…" loading variant="danger" />
     </div>
   ),
 };
@@ -66,15 +83,19 @@ export const AllStates: Story = {
           </div>
           <div style={{ ...surface('#ffffff'), flex: 1 }}>
             {rowLabel('default')}
-            <Button variant={variant} size="md" theme="light" label="Button" />
+            <Button variant={variant} size="md" label="Button" />
+            {rowLabel('loading')}
+            <Button variant={variant} size="md" label="Saving…" loading />
             {rowLabel('disabled')}
-            <Button variant={variant} size="md" theme="light" label="Button" disabled />
+            <Button variant={variant} size="md" label="Button" disabled />
           </div>
-          <div style={{ ...surface('#1e1e1e'), flex: 1 }}>
+          <div data-theme="dark" style={{ ...surface('#1e1e1e'), flex: 1 }}>
             {rowLabel('default')}
-            <Button variant={variant} size="md" theme="dark" label="Button" />
+            <Button variant={variant} size="md" label="Button" />
+            {rowLabel('loading')}
+            <Button variant={variant} size="md" label="Saving…" loading />
             {rowLabel('disabled')}
-            <Button variant={variant} size="md" theme="dark" label="Button" disabled />
+            <Button variant={variant} size="md" label="Button" disabled />
           </div>
         </div>
       ))}
