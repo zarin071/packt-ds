@@ -69,15 +69,15 @@ import { Button } from 'packt-ds';
 
 ## Rebuilding tokens
 
-After updating `tokens/design-tokens.json`:
+Token updates are automated end-to-end — see `EXPORT_GUIDE.md` for the full flow. When a designer pushes changes from Token Studio to the `design-tokens` branch, a GitHub Action runs Style Dictionary, commits the regenerated CSS, and merges straight into `main`:
+- `src/tokens/tokens.css` — primitives + light semantic tokens
+- `src/tokens/tokens.dark.css` — dark semantic tokens
+
+You only need to run this manually if you're editing `tokens/design-tokens.json` directly (rare) or testing locally before a push:
 
 ```bash
 npm run tokens
 ```
-
-This runs Style Dictionary and outputs:
-- `src/tokens/tokens.css` — primitives + light semantic tokens
-- `src/tokens/tokens.dark.css` — dark semantic tokens
 
 ---
 
