@@ -6,3 +6,6 @@ dist
 debug-storybook.log
 storybook-static
 
+# Ignore macOS system files
+.DS_Store
+**/.DS_Store
