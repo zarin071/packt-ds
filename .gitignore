@@ -1,4 +1,10 @@
 node_modules
+dist
 
-*storybook.log
+# Storybook
+*.storybook.log
+debug-storybook.log
 storybook-static
+
+# macOS
+.DS_Store

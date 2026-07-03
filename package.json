@@ -33,7 +33,13 @@
     "url": "https://github.com/zarin071/packt-ds/issues"
   },
   "homepage": "https://github.com/zarin071/packt-ds#readme",
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
   "devDependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "@chromatic-com/storybook": "^5.2.1",
     "@storybook/addon-a11y": "^10.4.6",
     "@storybook/addon-docs": "^10.4.6",
