@@ -165,6 +165,7 @@ import { Meta, ColorPalette, ColorItem, Unstyled } from '@storybook/addon-docs/b
     title="Content — Feedback"
     subtitle="error / warning / success / info"
     colors={{
+      'error-default':   '#df1c41',
       'error-hover':     '#b81c3a',
       'warning-default': '#eed202',
       'warning-hover':   '#c4ae08',
@@ -201,45 +202,57 @@ import { Meta, ColorPalette, ColorItem, Unstyled } from '@storybook/addon-docs/b
     title="Background — Feedback"
     subtitle="error / warning / success / info"
     colors={{
-      'error-default':   '#f9d2d9',
-      'error-hover':     '#f2a4b3',
-      'error-selected':  '#df1c41',
-      'warning-default': '#fcf6cc',
-      'warning-hover':   '#f8ed9a',
-      'success-default': '#d9fee3',
-      'success-hover':   '#b3fdc6',
-      'info-default':    '#d6e0f5',
-      'info-hover':      '#adc2eb',
+      'error-default':    '#f9d2d9',
+      'error-hover':      '#f2a4b3',
+      'error-selected':   '#df1c41',
+      'warning-default':  '#fcf6cc',
+      'warning-hover':    '#f8ed9a',
+      'warning-selected': '#eed202',
+      'success-default':  '#d9fee3',
+      'success-hover':    '#b3fdc6',
+      'success-selected': '#41f971',
+      'info-default':     '#d6e0f5',
+      'info-hover':       '#adc2eb',
+      'info-selected':    '#3366cc',
     }}
   />
   <ColorItem
     title="Border"
     subtitle="--packt-semantic-colors-light-border-*"
     colors={{
-      primary:        '#000000',
-      secondary:      '#4d4d4d',
-      tertiary:       '#797979',
-      divide:         '#e4e4e4',
-      disabled:       '#a6a6a6',
-      'brand-default':'#f97141',
-      'brand-hover':  '#cd603a',
-      error:          '#df1c41',
-      warning:        '#eed202',
-      success:        '#41f971',
-      info:           '#3366cc',
+      primary:         '#000000',
+      secondary:       '#4d4d4d',
+      tertiary:        '#797979',
+      divide:          '#e4e4e4',
+      disabled:        '#a6a6a6',
+      'brand-default': '#f97141',
+      'brand-selected':'#f97141',
+      'brand-hover':   '#cd603a',
+      error:           '#df1c41',
+      warning:         '#eed202',
+      success:         '#41f971',
+      info:            '#3366cc',
     }}
   />
   <ColorItem
     title="Icon"
     subtitle="--packt-semantic-colors-light-icon-*"
     colors={{
-      primary:        '#000000',
-      hover:          '#000000',
-      focus:          '#000000',
-      selected:       '#ffffff',
-      disabled:       '#a6a6a6',
-      'brand-default':'#f97141',
-      'brand-hover':  '#cd603a',
+      primary:          '#000000',
+      hover:            '#000000',
+      focus:            '#000000',
+      selected:         '#ffffff',
+      disabled:         '#a6a6a6',
+      'brand-default':  '#f97141',
+      'brand-hover':    '#cd603a',
+      'info-default':   '#3366cc',
+      'info-hover':     '#2f58a9',
+      'warning-default':'#eed202',
+      'warning-hover':  '#c4ae08',
+      'error-default':  '#df1c41',
+      'error-hover':    '#b81c3a',
+      'success-default':'#41f971',
+      'success-hover':  '#3acd60',
     }}
   />
   <ColorItem
@@ -253,6 +266,14 @@ import { Meta, ColorPalette, ColorItem, Unstyled } from '@storybook/addon-docs/b
       l4: '#ffffff',
       l5: '#ffffff',
       l6: '#ffffff',
+    }}
+  />
+  <ColorItem
+    title="Overlay"
+    subtitle="--packt-semantic-colors-light-overlay-*"
+    colors={{
+      overlayinverse: '#ffffff80',
+      overlay50:      '#1a1a1a80',
     }}
   />
 </ColorPalette>
@@ -291,6 +312,7 @@ import { Meta, ColorPalette, ColorItem, Unstyled } from '@storybook/addon-docs/b
         title="Content — Feedback"
         subtitle="error / warning / success / info"
         colors={{
+          'error-default':   '#df1c41',
           'error-hover':     '#e54967',
           'warning-default': '#eed202',
           'warning-hover':   '#f1db35',
@@ -327,45 +349,57 @@ import { Meta, ColorPalette, ColorItem, Unstyled } from '@storybook/addon-docs/b
         title="Background — Feedback"
         subtitle="error / warning / success / info"
         colors={{
-          'error-default':   '#921d33',
-          'error-hover':     '#b81c3a',
-          'error-selected':  '#df1c41',
-          'warning-default': '#9b8a0d',
-          'warning-hover':   '#c4ae08',
-          'success-default': '#279544',
-          'success-hover':   '#3acd60',
-          'info-default':    '#2b4986',
-          'info-hover':      '#2f58a9',
+          'error-default':    '#921d33',
+          'error-hover':      '#b81c3a',
+          'error-selected':   '#df1c41',
+          'warning-default':  '#9b8a0d',
+          'warning-hover':    '#c4ae08',
+          'warning-selected': '#eed202',
+          'success-default':  '#279544',
+          'success-hover':    '#3acd60',
+          'success-selected': '#41f971',
+          'info-default':     '#2b4986',
+          'info-hover':       '#2f58a9',
+          'info-selected':    '#3366cc',
         }}
       />
       <ColorItem
         title="Border"
         subtitle="--packt-semantic-colors-dark-border-*"
         colors={{
-          primary:        '#ffffff',
-          secondary:      '#ffffff',
-          tertiary:       '#ffffff',
-          divide:         '#ffffff',
-          disabled:       '#d2d2d2',
-          'brand-default':'#f97141',
-          'brand-hover':  '#a15033',
-          error:          '#df1c41',
-          warning:        '#eed202',
-          success:        '#41f971',
-          info:           '#3366cc',
+          primary:         '#ffffff',
+          secondary:       '#ffffff',
+          tertiary:        '#ffffff',
+          divide:          '#ffffff',
+          disabled:        '#d2d2d2',
+          'brand-default': '#f97141',
+          'brand-selected':'#f97141',
+          'brand-hover':   '#a15033',
+          error:           '#df1c41',
+          warning:         '#eed202',
+          success:         '#41f971',
+          info:            '#3366cc',
         }}
       />
       <ColorItem
         title="Icon"
         subtitle="--packt-semantic-colors-dark-icon-*"
         colors={{
-          primary:        '#ffffff',
-          hover:          '#ffffff',
-          focus:          '#ffffff',
-          selected:       '#000000',
-          disabled:       '#4d4d4d',
-          'brand-default':'#f97141',
-          'brand-hover':  '#cd603a',
+          primary:          '#ffffff',
+          hover:            '#ffffff',
+          focus:            '#ffffff',
+          selected:         '#000000',
+          disabled:         '#4d4d4d',
+          'brand-default':  '#f97141',
+          'brand-hover':    '#cd603a',
+          'info-default':   '#3366cc',
+          'info-hover':     '#2f58a9',
+          'warning-default':'#eed202',
+          'warning-hover':  '#c4ae08',
+          'error-default':  '#df1c41',
+          'error-hover':    '#b81c3a',
+          'success-default':'#41f971',
+          'success-hover':  '#3acd60',
         }}
       />
       <ColorItem
@@ -379,6 +413,14 @@ import { Meta, ColorPalette, ColorItem, Unstyled } from '@storybook/addon-docs/b
           l4: '#4d4d4d',
           l5: '#797979',
           l6: '#a6a6a6',
+        }}
+      />
+      <ColorItem
+        title="Overlay"
+        subtitle="--packt-semantic-colors-dark-overlay-*"
+        colors={{
+          overlayinverse: '#1a1a1a80',
+          overlay50:      '#ffffff80',
         }}
       />
     </ColorPalette>
