@@ -1,0 +1,58 @@
+name: Sync design tokens
+
+on:
+  push:
+    branches: [design-tokens]
+    paths: [tokens/design-tokens.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: design-tokens
+          # Use a PAT so the push can trigger downstream workflows (GITHUB_TOKEN cannot).
+          # Create a fine-grained PAT with "Contents: Read and write" and add it as
+          # a repository secret named GH_PAT. Fall back to GITHUB_TOKEN for forks.
+          token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Rebuild CSS tokens
+        run: npm run tokens
+
+      - name: Commit rebuilt CSS
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/tokens/tokens.css src/tokens/tokens.dark.css
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No CSS changes — skipping commit"
+          else
+            git commit -m "chore: rebuild design tokens"
+            git push origin design-tokens
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Merge design-tokens → main
+        if: steps.commit.outputs.changed == 'true'
+        run: |
+          git fetch origin main
+          git checkout main
+          git merge --no-ff design-tokens -m "chore: sync design tokens from Figma"
+          git push origin main
