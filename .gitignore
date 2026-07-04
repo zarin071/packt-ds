@@ -1,6 +1,9 @@
 node_modules
+dist
 
-*storybook.log
+# Storybook
+*.storybook.log
+debug-storybook.log
 storybook-static
 
 # Ignore macOS system files

@@ -11,6 +11,22 @@ StyleDictionary.registerTransform({
   },
 });
 
+// Figma exports lineHeight and letterSpacing as percentage strings (e.g. "120%").
+// This transform converts any %-suffixed value to px so no percentage units
+// leak into the generated CSS custom properties.
+StyleDictionary.registerTransform({
+  name: 'unit/percentToPx',
+  type: 'value',
+  filter: (token) => {
+    const val = token.$value;
+    return typeof val === 'string' && /^-?\d+(\.\d+)?%$/.test(val);
+  },
+  transform: (token) => {
+    const num = parseFloat(token.$value);
+    return num === 0 ? '0' : `${num}px`;
+  },
+});
+
 const FONT_WEIGHT_MAP = {
   Thin: 100, ExtraLight: 200, Light: 300, Regular: 400,
   Medium: 500, Semibold: 600, SemiBold: 600, Bold: 700,
@@ -29,7 +45,7 @@ StyleDictionary.registerTransform({
 
 StyleDictionary.registerTransformGroup({
   name: 'css/packt',
-  transforms: [...StyleDictionary.hooks.transformGroups.css, 'number/px', 'fontWeight/numeric'],
+  transforms: [...StyleDictionary.hooks.transformGroups.css, 'unit/percentToPx', 'number/px', 'fontWeight/numeric'],
 });
 
 StyleDictionary.registerFormat({

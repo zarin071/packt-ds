@@ -2,14 +2,20 @@ name: Deploy Storybook
 
 on:
   push:
+<<<<<<< HEAD
     branches: [main]
   workflow_dispatch:
+=======
+    branches:
+      - main
+>>>>>>> 76df5ee12f546b6dfda10c92ed39975cb458c013
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+<<<<<<< HEAD
 # Only one deploy runs at a time; cancel any in-progress run on a new push.
 concurrency:
   group: pages
@@ -22,6 +28,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
+=======
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+>>>>>>> 76df5ee12f546b6dfda10c92ed39975cb458c013
     steps:
       - uses: actions/checkout@v4
 
@@ -30,15 +45,33 @@ jobs:
           node-version: 20
           cache: npm
 
+<<<<<<< HEAD
       - name: Install dependencies
         run: npm ci
 
       - name: Build Storybook
         run: npm run build-storybook
+=======
+      - run: npm ci
+
+      - run: npm run build-storybook
+>>>>>>> 76df5ee12f546b6dfda10c92ed39975cb458c013
 
       - uses: actions/upload-pages-artifact@v3
         with:
           path: storybook-static
 
+<<<<<<< HEAD
       - uses: actions/deploy-pages@v4
         id: deployment
+=======
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+>>>>>>> 76df5ee12f546b6dfda10c92ed39975cb458c013

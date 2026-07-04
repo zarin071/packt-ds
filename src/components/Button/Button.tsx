@@ -1,6 +1,9 @@
 import type { ReactNode } from 'react';
 import './Button.css';
 
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
+export type ButtonSize = 'sm' | 'md' | 'lg';
+
 const Spinner = () => (
   <svg className="btn__spinner" viewBox="0 0 16 16" fill="none" aria-hidden="true">
     <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="2" strokeOpacity="0.3" />
@@ -9,8 +12,8 @@ const Spinner = () => (
 );
 
 export interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   label: string;
   disabled?: boolean;
   loading?: boolean;
