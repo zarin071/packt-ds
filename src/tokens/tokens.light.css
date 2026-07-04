@@ -1,0 +1,68 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-theme="light"] {
+  --packt-colors-light-content-primary: #000000;
+  --packt-colors-light-content-disabled: #a6a6a6;
+  --packt-colors-light-content-selected: #ffffff;
+  --packt-colors-light-content-inverse: #ffffff;
+  --packt-colors-light-content-tertiary: #797979;
+  --packt-colors-light-content-secondary: #4d4d4d;
+  --packt-colors-light-background-page: #f6f6f6;
+  --packt-colors-light-background-hovee: #e4e4e4;
+  --packt-colors-light-background-selected: #1a1a1a;
+  --packt-colors-light-background-disabled: #f6f6f6;
+  --packt-colors-light-background-surface: #ffffff;
+  --packt-colors-light-background-elevated: #ffffff;
+  --packt-colors-light-border-default: #e4e4e4;
+  --packt-colors-light-border-strong: #a6a6a6;
+  --packt-colors-light-border-disabled: #d2d2d2;
+  --packt-colors-light-surface-l2: #ffffff;
+  --packt-colors-light-surface-l1: #ffffff;
+  --packt-colors-light-surface-l0: #ffffff;
+  --packt-colors-light-overlay-overlayinverse: rgba(255, 255, 255, 0.5);
+  --packt-colors-light-overlay-overlay50: rgba(26, 26, 26, 0.5);
+  --packt-colors-light-brand-bg-default: #ffe3d8;
+  --packt-colors-light-brand-bg-hover: #fdc6b3;
+  --packt-colors-light-brand-bg-pressed: #fbab8d;
+  --packt-colors-light-brand-bg-selected: #f97141;
+  --packt-colors-light-brand-bg-selected-hover: #cd603a;
+  --packt-colors-light-brand-text-default: #cd603a;
+  --packt-colors-light-brand-text-on-brand: #ffffff;
+  --packt-colors-light-brand-border-default: #f97141;
+  --packt-colors-light-brand-border-hover: #cd603a;
+  --packt-colors-light-brand-icon-default: #f97141;
+  --packt-colors-light-brand-icon-hover: #cd603a;
+  --packt-colors-light-brand-tag-bg: #ffe3d8;
+  --packt-colors-light-brand-tag-text: #cd603a;
+  --packt-colors-light-hub-packt-bg-default: #dbe9fe;
+  --packt-colors-light-hub-packt-bg-hover: #bfdbfe;
+  --packt-colors-light-hub-packt-bg-pressed: #92c5fd;
+  --packt-colors-light-hub-packt-bg-selected: #3c82f6;
+  --packt-colors-light-hub-packt-bg-selected-hover: #2463eb;
+  --packt-colors-light-hub-packt-text-default: #2463eb;
+  --packt-colors-light-hub-packt-text-on-hub: #000000;
+  --packt-colors-light-hub-packt-border-default: #3c82f6;
+  --packt-colors-light-hub-packt-border-hover: #2463eb;
+  --packt-colors-light-hub-packt-icon-default: #3c82f6;
+  --packt-colors-light-hub-packt-icon-hover: #2463eb;
+  --packt-colors-light-hub-packt-tag-bg: #dbe9fe;
+  --packt-colors-light-hub-packt-tag-text: #2463eb;
+  --packt-colors-light-status-bg-error: #fff0f2;
+  --packt-colors-light-status-error-text: #921d33;
+  --packt-colors-light-status-border-error: #df1c41;
+  --packt-colors-light-status-error-icon: #df1c41;
+  --packt-colors-light-status-bg-warning: #fcf6cc;
+  --packt-colors-light-status-text-warning: #9b8a0d;
+  --packt-colors-light-status-border-warning: #eed202;
+  --packt-colors-light-status-bg-success: #d9fee3;
+  --packt-colors-light-status-text-success: #279544;
+  --packt-colors-light-status-border-success: #41f971;
+  --packt-colors-light-status-bg-info: #dbe9fe;
+  --packt-colors-light-status-text-info: #1c4ed8;
+  --packt-colors-light-status-border-info: #3c82f6;
+  --packt-colors-light-status-icon-warning: #eed202;
+  --packt-colors-light-status-icon-success: #41f971;
+  --packt-colors-light-status-icon-info: #3c82f6;
+}
