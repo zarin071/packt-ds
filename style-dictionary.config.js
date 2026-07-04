@@ -67,7 +67,7 @@ const PRIMITIVE_GROUPS = new Set([
 ]);
 
 const sd = new StyleDictionary({
-  source: ['tokens/design-tokens.json'],
+  source: ['tokens/token.json'],
   usesDtcg: true,
   log: { errors: { brokenReferences: 'warn' } },
   platforms: {
