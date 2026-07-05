@@ -10,12 +10,11 @@
   --packt-light-content-tertiary: var(--packt-neutral-500);
   --packt-light-content-secondary: var(--packt-neutral-600);
   --packt-light-background-page: var(--packt-neutral-100);
-  --packt-light-background-hovee: var(--packt-neutral-200);
+  --packt-light-background-hover: var(--packt-neutral-200);
   --packt-light-background-selected: var(--packt-neutral-700);
   --packt-light-background-disabled: var(--packt-neutral-100);
   --packt-light-background-surface: var(--packt-neutral-white);
   --packt-light-background-elevated: var(--packt-neutral-white);
-  --packt-light-background-hover: var(--packt-neutral-200);
   --packt-light-border-default: var(--packt-neutral-200);
   --packt-light-border-strong: var(--packt-neutral-400);
   --packt-light-border-disabled: var(--packt-neutral-300);
@@ -51,9 +50,9 @@
   --packt-light-hub-packt-tag-bg: var(--packt-blue-100);
   --packt-light-hub-packt-tag-text: var(--packt-blue-600);
   --packt-light-status-bg-error: var(--packt-red-100);
-  --packt-light-status-error-text: var(--packt-red-700);
+  --packt-light-status-text-error: var(--packt-red-700);
   --packt-light-status-border-error: var(--packt-red-500);
-  --packt-light-status-error-icon: var(--packt-red-500);
+  --packt-light-status-icon-error: var(--packt-red-500);
   --packt-light-status-bg-warning: var(--packt-yellow-100);
   --packt-light-status-text-warning: var(--packt-yellow-700);
   --packt-light-status-border-warning: var(--packt-yellow-500);
@@ -66,9 +65,6 @@
   --packt-light-status-icon-warning: var(--packt-yellow-500);
   --packt-light-status-icon-success: var(--packt-green-500);
   --packt-light-status-icon-info: var(--packt-blue-500);
-  --packt-light-status-text-error: var(--packt-red-700);
-  --packt-light-status-icon-error: var(--packt-red-500);
-  --packt-light-status-error-icon2: var(--packt-red-500);
   --packt-light-bg-page: var(--packt-neutral-100);
   --packt-light-bg-hover: var(--packt-neutral-200);
   --packt-light-bg-selected: var(--packt-neutral-700);
