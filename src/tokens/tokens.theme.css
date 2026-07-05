@@ -69,6 +69,7 @@
   --packt-status-icon-info: var(--packt-light-status-icon-info);
   --packt-status-text-error: var(--packt-light-status-text-error);
   --packt-status-icon-error: var(--packt-light-status-icon-error);
+  --packt-status-error-icon2: var(--packt-light-status-error-icon2);
   --packt-bg-page: var(--packt-light-bg-page);
   --packt-bg-hover: var(--packt-light-bg-hover);
   --packt-bg-selected: var(--packt-light-bg-selected);
@@ -143,6 +144,7 @@
   --packt-status-icon-info: var(--packt-dark-status-icon-info);
   --packt-status-text-error: var(--packt-dark-status-text-error);
   --packt-status-icon-error: var(--packt-dark-status-icon-error);
+  --packt-status-error-icon2: var(--packt-dark-status-error-icon2);
   --packt-bg-page: var(--packt-dark-bg-page);
   --packt-bg-hover: var(--packt-dark-bg-hover);
   --packt-bg-selected: var(--packt-dark-bg-selected);
