@@ -71,4 +71,10 @@
   --packt-light-bg-disabled: var(--packt-neutral-100);
   --packt-light-bg-surface: var(--packt-neutral-white);
   --packt-light-bg-elevated: var(--packt-neutral-white);
+  --packt-light-bg-page: var(--packt-neutral-100);
+  --packt-light-bg-hover: var(--packt-neutral-200);
+  --packt-light-bg-selected: var(--packt-neutral-700);
+  --packt-light-bg-disabled: var(--packt-neutral-100);
+  --packt-light-bg-surface: var(--packt-neutral-white);
+  --packt-light-bg-elevated: var(--packt-neutral-white);
 }

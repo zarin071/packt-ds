@@ -71,4 +71,10 @@
   --packt-dark-bg-disabled: var(--packt-neutral-800);
   --packt-dark-bg-surface: var(--packt-neutral-800);
   --packt-dark-bg-elevated: var(--packt-neutral-700);
+  --packt-dark-bg-page: var(--packt-neutral-700);
+  --packt-dark-bg-hover: var(--packt-neutral-700);
+  --packt-dark-bg-selected: var(--packt-neutral-200);
+  --packt-dark-bg-disabled: var(--packt-neutral-800);
+  --packt-dark-bg-surface: var(--packt-neutral-800);
+  --packt-dark-bg-elevated: var(--packt-neutral-700);
 }
