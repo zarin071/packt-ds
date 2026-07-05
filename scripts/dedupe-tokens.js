@@ -60,15 +60,37 @@ let totalRemoved = 0;
 
 const SKIP = new Set(['$themes', '$metadata']);
 
-// Walk every object in the token tree and remove leaf-level renames where
-// both `name` and `name-default` exist with the same $value (Figma rename artifact).
+// Walk every object in the token tree and remove stale leaf-level tokens:
+//
+//   1. Rename artifacts — `name` kept alongside `name-default` with the same value
+//      (Figma rename: old name never deleted)
+//
+//   2. Numbered conflict artifacts — `name1`, `name2` etc. alongside `name` with
+//      the same value (Tokens Studio appends a number when it can't overwrite an
+//      existing token on push)
 function dedupeLeaves(obj, path = '') {
-  for (const [k, v] of Object.entries(obj)) {
-    if (!v || typeof v !== 'object' || '$value' in v) continue;
-    // Check if any sibling is `${k}-default` with the same leaf values
+  for (const k of Object.keys(obj)) {
+    const v = obj[k];
+    if (!v || typeof v !== 'object') continue;
+
+    // Leaf token — check for numbered conflict artifact: `foo1` alongside `foo`
+    if ('$value' in v) {
+      const m = k.match(/^(.+?)(\d+)$/);
+      if (m) {
+        const base = m[1];
+        if (base in obj && obj[base]?.['$value'] === v['$value']) {
+          delete obj[k];
+          console.log(`  removed numbered artifact "${path ? path + '/' : ''}${k}"  →  kept "${base}"`);
+          totalRemoved++;
+        }
+      }
+      continue;
+    }
+
+    // Group node — check for rename artifact: `foo` alongside `foo-default`
     const defaultKey = `${k}-default`;
     if (defaultKey in obj) {
-      const base = leafValues(obj[k]);
+      const base = leafValues(v);
       const def  = leafValues(obj[defaultKey]);
       const bk = Object.keys(base).sort();
       const dk = Object.keys(def).sort();
@@ -77,11 +99,12 @@ function dedupeLeaves(obj, path = '') {
                    bk.every(key => base[key] === def[key]);
       if (same) {
         delete obj[k];
-        console.log(`  removed leaf "${path}/${k}"  →  kept "${path}/${defaultKey}"`);
+        console.log(`  removed stale group "${path ? path + '/' : ''}${k}"  →  kept "${defaultKey}"`);
         totalRemoved++;
         continue;
       }
     }
+
     dedupeLeaves(v, path ? `${path}/${k}` : k);
   }
 }
