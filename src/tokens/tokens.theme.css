@@ -16,7 +16,6 @@
   --packt-background-disabled: var(--packt-light-background-disabled);
   --packt-background-surface: var(--packt-light-background-surface);
   --packt-background-elevated: var(--packt-light-background-elevated);
-  --packt-background-hover: var(--packt-light-background-hover);
   --packt-border-default: var(--packt-light-border-default);
   --packt-border-strong: var(--packt-light-border-strong);
   --packt-border-disabled: var(--packt-light-border-disabled);
@@ -82,7 +81,6 @@
   --packt-background-disabled: var(--packt-dark-background-disabled);
   --packt-background-surface: var(--packt-dark-background-surface);
   --packt-background-elevated: var(--packt-dark-background-elevated);
-  --packt-background-hover: var(--packt-dark-background-hover);
   --packt-border-default: var(--packt-dark-border-default);
   --packt-border-strong: var(--packt-dark-border-strong);
   --packt-border-disabled: var(--packt-dark-border-disabled);

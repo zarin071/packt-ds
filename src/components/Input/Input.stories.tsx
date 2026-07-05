@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, userEvent, within } from 'storybook/test';
 import { Input } from './Input';
 import { Label } from '../Label';
 
@@ -27,7 +28,37 @@ type Story = StoryObj<typeof Input>;
 const stack = { display: 'flex', flexDirection: 'column' as const, gap: 20, width: 320 };
 const field = { display: 'flex', flexDirection: 'column' as const, gap: 6 };
 
-export const Playground: Story = {};
+export const Playground: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole('textbox');
+    expect(input).toBeInTheDocument();
+    expect(input).not.toBeDisabled();
+    expect(input).not.toHaveAttribute('aria-invalid');
+    await userEvent.type(input, 'hello@example.com');
+    expect(input).toHaveValue('hello@example.com');
+  },
+};
+
+export const ErrorState: Story = {
+  name: 'Error — border and aria-invalid',
+  args: { error: true, defaultValue: 'bad-email' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole('textbox');
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+  },
+};
+
+export const DisabledState: Story = {
+  name: 'Disabled — not interactive',
+  args: { disabled: true, placeholder: 'Disabled field' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole('textbox');
+    expect(input).toBeDisabled();
+  },
+};
 
 export const Sizes: Story = {
   parameters: { controls: { disable: true } },

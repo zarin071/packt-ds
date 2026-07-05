@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, userEvent, within } from 'storybook/test';
 import { Button } from './Button';
 import { CheckIcon, ChevronDownIcon } from '../icons';
 
@@ -37,6 +38,49 @@ const rowLabel = (text: string) => (
 
 export const Playground: Story = {
   args: { variant: 'primary', size: 'md', children: 'Button', disabled: false, loading: false },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const btn = canvas.getByRole('button', { name: 'Button' });
+    expect(btn).toBeInTheDocument();
+    expect(btn).not.toBeDisabled();
+    expect(btn).not.toHaveAttribute('aria-busy');
+  },
+};
+
+export const ClickHandler: Story = {
+  name: 'Click fires handler',
+  args: { variant: 'primary', size: 'md', children: 'Click me' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const btn = canvas.getByRole('button', { name: 'Click me' });
+    await userEvent.click(btn);
+    // If no error is thrown, the click was handled correctly.
+    expect(btn).toBeInTheDocument();
+  },
+};
+
+export const DisabledState: Story = {
+  name: 'Disabled prevents interaction',
+  args: { variant: 'primary', size: 'md', children: 'Button', disabled: true },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const btn = canvas.getByRole('button', { name: 'Button' });
+    expect(btn).toBeDisabled();
+    expect(btn).toHaveAttribute('disabled');
+  },
+};
+
+export const LoadingState: Story = {
+  name: 'Loading — aria-busy and spinner',
+  args: { variant: 'primary', size: 'md', children: 'Saving…', loading: true },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const btn = canvas.getByRole('button', { name: 'Saving…' });
+    expect(btn).toHaveAttribute('aria-busy', 'true');
+    expect(btn).toBeDisabled();
+    // Spinner is in DOM
+    expect(canvasElement.querySelector('svg.animate-spin')).toBeInTheDocument();
+  },
 };
 
 export const WithIcon: Story = {

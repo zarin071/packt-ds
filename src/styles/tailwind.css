@@ -32,8 +32,17 @@
   --color-bg-surface: var(--packt-background-surface);
   --color-bg-elevated: var(--packt-background-elevated);
   --color-bg-disabled: var(--packt-background-disabled);
-  --color-bg-hover: var(--packt-background-hovee);
+  --color-bg-hover: var(--packt-background-hover);
   --color-bg-selected: var(--packt-background-selected);
+
+  /* Surface layers (card elevation) */
+  --color-surface-l0: var(--packt-surface-l0);
+  --color-surface-l1: var(--packt-surface-l1);
+  --color-surface-l2: var(--packt-surface-l2);
+
+  /* Overlay (scrim / modal backdrop) */
+  --color-overlay: var(--packt-overlay-overlay50);
+  --color-overlay-inverse: var(--packt-overlay-overlayinverse);
 
   /* Border */
   --color-border-default: var(--packt-border-default);
