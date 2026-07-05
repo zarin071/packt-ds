@@ -68,6 +68,7 @@
   --packt-dark-status-icon-info: var(--packt-blue-400);
   --packt-dark-status-text-error: var(--packt-red-300);
   --packt-dark-status-icon-error: var(--packt-red-400);
+  --packt-dark-status-error-icon2: var(--packt-red-400);
   --packt-dark-bg-page: var(--packt-neutral-700);
   --packt-dark-bg-hover: var(--packt-neutral-700);
   --packt-dark-bg-selected: var(--packt-neutral-200);
