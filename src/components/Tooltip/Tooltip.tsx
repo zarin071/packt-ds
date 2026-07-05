@@ -1,27 +1,8 @@
-import { forwardRef, type ElementRef, type ReactNode } from 'react';
+import { forwardRef, type ElementRef } from 'react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-
-export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
-
-export interface TooltipProps {
-  /** The tooltip text content. */
-  content: ReactNode;
-  position?: TooltipPosition;
-  /** The trigger element that receives the tooltip. */
-  children: ReactNode;
-  /** Additional class for the tooltip content bubble. */
-  className?: string;
-  /** Delay (ms) before the tooltip opens on hover/focus. Matches Radix default of 700ms. */
-  delayDuration?: number;
-  /** Controlled open state. */
-  open?: boolean;
-  /** Default open state (uncontrolled). */
-  defaultOpen?: boolean;
-  /** Fired when the open state changes. */
-  onOpenChange?: (open: boolean) => void;
-}
+import type { TooltipProps, TooltipPosition } from './Tooltip.types';
 
 export const tooltipContentVariants = cva(
   [
@@ -81,3 +62,5 @@ export const Tooltip = forwardRef<ElementRef<typeof TooltipPrimitive.Content>, T
 );
 
 Tooltip.displayName = 'Tooltip';
+
+export type { TooltipProps, TooltipPosition } from './Tooltip.types';
