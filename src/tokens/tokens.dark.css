@@ -3,6 +3,7 @@
  */
 
 [data-theme="dark"] {
+<<<<<<< HEAD
   --packt-dark-content-primary: var(--packt-neutral-white);
   --packt-dark-content-disabled: var(--packt-neutral-600);
   --packt-dark-content-selected: var(--packt-neutral-black);
@@ -65,4 +66,69 @@
   --packt-dark-status-icon-warning: var(--packt-yellow-400);
   --packt-dark-status-icon-success: var(--packt-green-400);
   --packt-dark-status-icon-info: var(--packt-blue-400);
+=======
+  --packt-colors-light-content-primary: #ffffff;
+  --packt-colors-light-content-disabled: #4d4d4d;
+  --packt-colors-light-content-selected: #000000;
+  --packt-colors-light-content-inverse: #000000;
+  --packt-colors-light-content-tertiary: #a6a6a6;
+  --packt-colors-light-content-secondary: #d2d2d2;
+  --packt-colors-light-background-page: #1a1a1a;
+  --packt-colors-light-background-hovee: #1a1a1a;
+  --packt-colors-light-background-selected: #e4e4e4;
+  --packt-colors-light-background-disabled: #1f1f1f;
+  --packt-colors-light-background-surface: #1f1f1f;
+  --packt-colors-light-background-elevated: #1a1a1a;
+  --packt-colors-light-background-hover: #1a1a1a;
+  --packt-colors-light-border-default: #1a1a1a;
+  --packt-colors-light-border-strong: #797979;
+  --packt-colors-light-border-disabled: #4d4d4d;
+  --packt-colors-light-surface-l2: #797979;
+  --packt-colors-light-surface-l1: #4d4d4d;
+  --packt-colors-light-surface-l0: #1a1a1a;
+  --packt-colors-light-overlay-overlayinverse: rgba(26, 26, 26, 0.5);
+  --packt-colors-light-overlay-overlay50: rgba(255, 255, 255, 0.5);
+  --packt-colors-light-brand-bg-default: #4a2f25;
+  --packt-colors-light-brand-bg-hover: #763f2c;
+  --packt-colors-light-brand-bg-pressed: #a15033;
+  --packt-colors-light-brand-bg-selected: #f97141;
+  --packt-colors-light-brand-bg-selected-hover: #fa8d67;
+  --packt-colors-light-brand-text-default: #fbab8d;
+  --packt-colors-light-brand-text-on-brand: #000000;
+  --packt-colors-light-brand-border-default: #fa8d67;
+  --packt-colors-light-brand-border-hover: #fbab8d;
+  --packt-colors-light-brand-icon-default: #fa8d67;
+  --packt-colors-light-brand-icon-hover: #fbab8d;
+  --packt-colors-light-brand-tag-bg: #763f2c;
+  --packt-colors-light-brand-tag-text: #000000;
+  --packt-colors-light-hub-packt-bg-default: #1f3a8a;
+  --packt-colors-light-hub-packt-bg-hover: #1d40b0;
+  --packt-colors-light-hub-packt-bg-pressed: #1d40b0;
+  --packt-colors-light-hub-packt-bg-selected: #3c82f6;
+  --packt-colors-light-hub-packt-bg-selected-hover: #60a5fa;
+  --packt-colors-light-hub-packt-text-default: #92c5fd;
+  --packt-colors-light-hub-packt-text-on-hub: #ffffff;
+  --packt-colors-light-hub-packt-border-default: #60a5fa;
+  --packt-colors-light-hub-packt-border-hover: #92c5fd;
+  --packt-colors-light-hub-packt-icon-default: #60a5fa;
+  --packt-colors-light-hub-packt-icon-hover: #92c5fd;
+  --packt-colors-light-hub-packt-tag-bg: #1d40b0;
+  --packt-colors-light-hub-packt-tag-text: #bfdbfe;
+  --packt-colors-light-status-bg-error: #451e25;
+  --packt-colors-light-status-error-text: #ec778d;
+  --packt-colors-light-status-border-error: #e54967;
+  --packt-colors-light-status-error-icon: #e54967;
+  --packt-colors-light-status-bg-warning: #484218;
+  --packt-colors-light-status-text-warning: #f5e467;
+  --packt-colors-light-status-border-warning: #f1db35;
+  --packt-colors-light-status-bg-success: #254a2f;
+  --packt-colors-light-status-text-success: #8dfbaa;
+  --packt-colors-light-status-border-success: #67fa8d;
+  --packt-colors-light-status-bg-info: #1f3a8a;
+  --packt-colors-light-status-text-info: #92c5fd;
+  --packt-colors-light-status-border-info: #60a5fa;
+  --packt-colors-light-status-icon-warning: #f1db35;
+  --packt-colors-light-status-icon-success: #67fa8d;
+  --packt-colors-light-status-icon-info: #60a5fa;
+>>>>>>> da9bdd7fe551cc4a530f0a756026be32b37206d2
 }
