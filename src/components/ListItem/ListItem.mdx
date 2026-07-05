@@ -1,0 +1,37 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as ListItemStories from './ListItem.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={ListItemStories} />
+
+# ListItem
+
+A single row with an optional leading icon, title/description, and a trailing action slot. When `interactive`, it gains hover/focus affordances and reflects `selected` via `aria-selected`.
+
+## Playground
+
+<Canvas of={ListItemStories.Playground} />
+<Controls of={ListItemStories.Playground} />
+
+## With action
+
+<Canvas of={ListItemStories.WithAction} />
+
+## States
+
+<Canvas of={ListItemStories.States} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'background hovee', utility: 'bg-bg-hover', cssVar: '--packt-background-hovee' },
+  { property: 'background selected', utility: 'bg-bg-selected', cssVar: '--packt-background-selected' },
+  { property: 'background surface', utility: 'bg-bg-surface', cssVar: '--packt-background-surface' },
+  { property: 'border default', utility: 'border-border-default', cssVar: '--packt-border-default' },
+  { property: 'brand border default', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'content secondary', utility: 'text-content-secondary', cssVar: '--packt-content-secondary' },
+  { property: 'content selected', utility: 'text-content-selected', cssVar: '--packt-content-selected' },
+]} />

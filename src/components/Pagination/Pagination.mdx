@@ -1,0 +1,37 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as PaginationStories from './Pagination.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={PaginationStories} />
+
+# Pagination
+
+Previous/next arrows plus truncated page buttons. Semantic `<nav aria-label="Pagination">` with `aria-current="page"` on the active button. `onPageChange` fires with the target page number — see the **Actions** panel in the Playground.
+
+## Playground
+
+<Canvas of={PaginationStories.Playground} />
+<Controls of={PaginationStories.Playground} />
+
+## Many pages
+
+<Canvas of={PaginationStories.ManyPages} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'background hovee', utility: 'bg-bg-hover', cssVar: '--packt-background-hovee' },
+  { property: 'background surface', utility: 'bg-bg-surface', cssVar: '--packt-background-surface' },
+  { property: 'brand bg selected', utility: 'bg-brand-bg-selected', cssVar: '--packt-brand-bg-selected' },
+  { property: 'brand bg selected hover', utility: 'bg-brand-bg-selected-hover', cssVar: '--packt-brand-bg-selected-hover' },
+  { property: 'border default', utility: 'border-border-default', cssVar: '--packt-border-default' },
+  { property: 'border disabled', utility: 'border-border-disabled', cssVar: '--packt-border-disabled' },
+  { property: 'brand bg selected', utility: 'border-brand-bg-selected', cssVar: '--packt-brand-bg-selected' },
+  { property: 'brand bg selected hover', utility: 'border-brand-bg-selected-hover', cssVar: '--packt-brand-bg-selected-hover' },
+  { property: 'brand border default', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+  { property: 'brand text on brand', utility: 'text-brand-text-on-brand', cssVar: '--packt-brand-text-on-brand' },
+  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'content tertiary', utility: 'text-content-tertiary', cssVar: '--packt-content-tertiary' },
+]} />

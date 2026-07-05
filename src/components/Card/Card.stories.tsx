@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Card } from './Card';
 
 const meta: Meta<typeof Card> = {
-  title: 'Components/Card',
+  title: 'components/Card',
   component: Card,
   parameters: { layout: 'centered' },
   argTypes: {
@@ -29,7 +29,7 @@ const row: CSSProperties = {
   alignItems: 'flex-start',
 };
 
-export const Default: Story = {
+export const Playground: Story = {
   decorators: [
     (Story) => (
       <div style={{ width: 320, fontFamily: 'Outfit, sans-serif' }}>
@@ -40,6 +40,7 @@ export const Default: Story = {
 };
 
 export const WithImage: Story = {
+  parameters: { controls: { disable: true } },
   args: {
     imageSrc: 'https://placehold.co/600x338/f97141/ffffff?text=Course',
     imageAlt: 'Course thumbnail',
@@ -54,6 +55,7 @@ export const WithImage: Story = {
 };
 
 export const Interactive: Story = {
+  parameters: { controls: { disable: true } },
   args: { interactive: true },
   decorators: [
     (Story) => (
@@ -65,13 +67,10 @@ export const Interactive: Story = {
 };
 
 export const Grid: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={row}>
-      {[
-        'JavaScript Essentials',
-        'Python for Data Science',
-        'AWS Certified Developer',
-      ].map((title) => (
+      {['JavaScript Essentials', 'Python for Data Science', 'AWS Certified Developer'].map((title) => (
         <Card
           key={title}
           title={title}
@@ -83,5 +82,3 @@ export const Grid: Story = {
     </div>
   ),
 };
-
-export const Playground: Story = {};

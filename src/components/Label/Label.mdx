@@ -1,0 +1,31 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as LabelStories from './Label.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={LabelStories} />
+
+# Label
+
+A form label built on Radix Label, so clicking the text focuses the associated control even when it isn't a native form element. The `required` prop renders a visible `*` plus an sr-only "(required)" for screen readers.
+
+## Playground
+
+<Canvas of={LabelStories.Playground} />
+<Controls of={LabelStories.Playground} />
+
+## Required
+
+<Canvas of={LabelStories.Required} />
+
+## With input
+
+<Canvas of={LabelStories.WithInput} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'status error text', utility: 'text-status-text-error', cssVar: '--packt-status-error-text' },
+]} />

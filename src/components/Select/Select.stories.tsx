@@ -10,7 +10,7 @@ const sampleOptions = [
 ];
 
 const meta: Meta<typeof Select> = {
-  title: 'Components/Select',
+  title: 'components/Select',
   component: Select,
   parameters: { layout: 'centered' },
   argTypes: {
@@ -30,11 +30,18 @@ const meta: Meta<typeof Select> = {
 export default meta;
 type Story = StoryObj<typeof Select>;
 
-const col: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 16, fontFamily: 'Outfit, sans-serif', width: 280 };
+const col: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 16,
+  fontFamily: 'Outfit, sans-serif',
+  width: 280,
+};
 
-export const Default: Story = {};
+export const Playground: Story = {};
 
 export const Sizes: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={col}>
       <Select {...args} size="small" label="Small" />
@@ -45,6 +52,7 @@ export const Sizes: Story = {
 };
 
 export const States: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={col}>
       <Select {...args} label="Default" helperText="Helper text goes here" />
@@ -54,5 +62,3 @@ export const States: Story = {
     </div>
   ),
 };
-
-export const Playground: Story = {};

@@ -1,0 +1,35 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as ToggleSwitchStories from './ToggleSwitch.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={ToggleSwitchStories} />
+
+# ToggleSwitch
+
+An on/off switch built on Radix `Switch.Root` + `Switch.Thumb`, in three sizes with an optional label.
+
+## Playground
+
+<Canvas of={ToggleSwitchStories.Playground} />
+<Controls of={ToggleSwitchStories.Playground} />
+
+## Sizes
+
+<Canvas of={ToggleSwitchStories.Sizes} />
+
+## States
+
+<Canvas of={ToggleSwitchStories.States} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'background disabled', utility: 'bg-bg-disabled', cssVar: '--packt-background-disabled' },
+  { property: 'brand bg selected', utility: 'bg-brand-bg-selected', cssVar: '--packt-brand-bg-selected' },
+  { property: 'brand text on brand', utility: 'bg-brand-text-on-brand', cssVar: '--packt-brand-text-on-brand' },
+  { property: 'neutral 300', utility: 'bg-neutral-300', cssVar: '--packt-neutral-300' },
+  { property: 'brand border default', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+]} />

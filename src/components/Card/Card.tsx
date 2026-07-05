@@ -1,59 +1,71 @@
-import type { HTMLAttributes, ReactNode } from 'react';
-import styles from './Card.module.css';
+import { forwardRef } from 'react';
+import { cva } from 'class-variance-authority';
+import { cn } from '../../lib/utils';
+import type { CardProps } from './Card.types';
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  /** Optional image URL shown at the top of the card. */
-  imageSrc?: string;
-  /** Alt text for the image. */
-  imageAlt?: string;
-  /** Card heading. */
-  title?: string;
-  /** Supporting body text. */
-  description?: ReactNode;
-  /** Action area content (e.g. buttons). Rendered at the bottom of the card. */
-  actions?: ReactNode;
-  /** Renders the card as a pressable element with hover/active states. */
-  interactive?: boolean;
-}
+export const cardVariants = cva(
+  [
+    'flex flex-col overflow-hidden rounded-m border border-border-default bg-bg-surface font-sans',
+    'shadow-sm',
+  ].join(' '),
+  {
+    variants: {
+      interactive: {
+        true: [
+          'cursor-pointer transition-colors',
+          'hover:bg-bg-hover',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
+        ].join(' '),
+        false: '',
+      },
+    },
+    defaultVariants: {
+      interactive: false,
+    },
+  }
+);
 
 /**
- * Card molecule.
- *
- * Tokens: `--packt-semantic-colors-light-background-primary` (bg),
- * `--packt-semantic-colors-light-border-divide` (border),
- * `--packt-semantic-colors-light-background-hover` (interactive hover),
- * `--packt-radius-m/l`, `--packt-space-l/xl`, `--packt-size-16/14`,
- * box-shadow from component token `boxShadow.default`.
+ * Card molecule — a bordered content container with an optional image, title,
+ * description, and action row. Plain semantic HTML: the `interactive` variant
+ * only adds visual affordances, so give the root a `tabIndex`/`role`/keyboard
+ * handler yourself if you make it clickable (or wrap it in a real `<button>`/`<a>`).
  */
-export const Card = ({
-  imageSrc,
-  imageAlt = '',
-  title,
-  description,
-  actions,
-  interactive = false,
-  className,
-  children,
-  ...rest
-}: CardProps) => (
-  <div
-    className={[styles.card, interactive ? styles.interactive : '', className ?? '']
-      .filter(Boolean)
-      .join(' ')}
-    {...rest}
-  >
-    {imageSrc && (
-      <div className={styles.imageWrapper}>
-        <img className={styles.image} src={imageSrc} alt={imageAlt} />
+export const Card = forwardRef<HTMLDivElement, CardProps>(
+  (
+    {
+      className,
+      imageSrc,
+      imageAlt = '',
+      title,
+      description,
+      actions,
+      interactive = false,
+      children,
+      ...props
+    },
+    ref
+  ) => (
+    <div ref={ref} className={cn(cardVariants({ interactive }), className)} {...props}>
+      {imageSrc && (
+        <div className="aspect-video w-full shrink-0 overflow-hidden">
+          <img className="block h-full w-full object-cover" src={imageSrc} alt={imageAlt} />
+        </div>
+      )}
+      <div className="flex flex-1 flex-col gap-xs p-l">
+        {title && <h3 className="m-0 text-base font-semibold leading-6 text-content-primary">{title}</h3>}
+        {description && <p className="m-0 text-sm leading-5 text-content-secondary">{description}</p>}
+        {children}
       </div>
-    )}
-    <div className={styles.body}>
-      {title && <h3 className={styles.title}>{title}</h3>}
-      {description && <p className={styles.description}>{description}</p>}
-      {children}
+      {actions && (
+        <div className="flex items-center gap-s border-t border-border-default px-l py-m">
+          {actions}
+        </div>
+      )}
     </div>
-    {actions && <div className={styles.actions}>{actions}</div>}
-  </div>
+  )
 );
 
 Card.displayName = 'Card';
+
+export type { CardProps } from './Card.types';

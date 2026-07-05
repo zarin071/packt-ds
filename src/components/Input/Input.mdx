@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as InputStories from './Input.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={InputStories} />
+
+# Input
+
+A bare, styled text field with `default` and `error` states and three sizes. Compose it with the [Label](?path=/docs/components-label--docs) atom and your own helper/error text at the field level — Input owns only its own visual state.
+
+The `error` prop applies error styling and wires `aria-invalid="true"`.
+
+## Playground
+
+<Canvas of={InputStories.Playground} />
+<Controls of={InputStories.Playground} />
+
+## Sizes
+
+<Canvas of={InputStories.Sizes} />
+
+## States
+
+<Canvas of={InputStories.States} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'background disabled', utility: 'bg-bg-disabled', cssVar: '--packt-background-disabled' },
+  { property: 'background surface', utility: 'bg-bg-surface', cssVar: '--packt-background-surface' },
+  { property: 'border default', utility: 'border-border-default', cssVar: '--packt-border-default' },
+  { property: 'status border error', utility: 'border-status-border-error', cssVar: '--packt-status-border-error' },
+  { property: 'brand border default', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+  { property: 'status border error', utility: 'ring-status-border-error', cssVar: '--packt-status-border-error' },
+  { property: 'content disabled', utility: 'text-content-disabled', cssVar: '--packt-content-disabled' },
+  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'content tertiary', utility: 'text-content-tertiary', cssVar: '--packt-content-tertiary' },
+]} />

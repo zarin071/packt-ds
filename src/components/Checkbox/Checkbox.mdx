@@ -1,0 +1,37 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as CheckboxStories from './Checkbox.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={CheckboxStories} />
+
+# Checkbox
+
+A tri-state (checked / unchecked / indeterminate) checkbox built on Radix `Checkbox.Root` + `Checkbox.Indicator`, with an optional label and error message.
+
+## Playground
+
+<Canvas of={CheckboxStories.Playground} />
+<Controls of={CheckboxStories.Playground} />
+
+## States
+
+<Canvas of={CheckboxStories.States} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'background disabled', utility: 'bg-bg-disabled', cssVar: '--packt-background-disabled' },
+  { property: 'background surface', utility: 'bg-bg-surface', cssVar: '--packt-background-surface' },
+  { property: 'brand bg selected', utility: 'bg-brand-bg-selected', cssVar: '--packt-brand-bg-selected' },
+  { property: 'border default', utility: 'border-border-default', cssVar: '--packt-border-default' },
+  { property: 'border disabled', utility: 'border-border-disabled', cssVar: '--packt-border-disabled' },
+  { property: 'brand bg selected', utility: 'border-brand-bg-selected', cssVar: '--packt-brand-bg-selected' },
+  { property: 'status border error', utility: 'border-status-border-error', cssVar: '--packt-status-border-error' },
+  { property: 'brand border default', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+  { property: 'brand text on brand', utility: 'text-brand-text-on-brand', cssVar: '--packt-brand-text-on-brand' },
+  { property: 'content disabled', utility: 'text-content-disabled', cssVar: '--packt-content-disabled' },
+  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'status error text', utility: 'text-status-text-error', cssVar: '--packt-status-error-text' },
+]} />

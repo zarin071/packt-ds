@@ -1,81 +1,103 @@
-import { useState, type HTMLAttributes, type ReactNode } from 'react';
-import styles from './Tab.module.css';
+import { forwardRef, type ElementRef } from 'react';
+import * as TabsPrimitive from '@radix-ui/react-tabs';
+import { cva } from 'class-variance-authority';
+import { cn } from '../../lib/utils';
+import type { TabProps } from './Tab.types';
 
-export type TabVariant = 'default' | 'brand';
+export const tabListVariants = cva('flex items-end gap-0 border-b border-border-default font-sans', {
+  variants: {
+    variant: {
+      default: '',
+      brand: '',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+});
 
-export interface TabItem {
-  key: string;
-  label: string;
-  /** Optional icon displayed before the label. */
-  icon?: ReactNode;
-  disabled?: boolean;
-}
-
-export interface TabProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  items: TabItem[];
-  variant?: TabVariant;
-  /** Controlled active tab key. */
-  activeKey?: string;
-  /** Default active tab key (uncontrolled). */
-  defaultActiveKey?: string;
-  /** Fired when a tab is selected. */
-  onChange?: (key: string) => void;
-}
+export const tabTriggerVariants = cva(
+  [
+    'relative inline-flex items-center gap-xs whitespace-nowrap rounded-t-xs px-xl py-m text-sm font-medium',
+    'text-content-tertiary transition-colors',
+    'hover:bg-bg-hover hover:text-content-primary',
+    'disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
+    "after:absolute after:inset-x-0 after:-bottom-px after:h-m after:rounded-t-xs after:bg-transparent after:content-['']",
+    'data-[state=active]:font-semibold data-[state=active]:text-content-primary',
+    'data-[state=active]:after:bg-border-strong',
+  ].join(' '),
+  {
+    variants: {
+      variant: {
+        default: '',
+        brand: 'data-[state=active]:text-brand-text-default data-[state=active]:after:bg-brand-border-default',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  }
+);
 
 /**
- * Tab molecule.
+ * Tab molecule — a tab list built on Radix Tabs for real roving-tabindex
+ * keyboard navigation (arrow keys, Home/End). This component renders only
+ * the tablist itself (no content panels); pair each tab's `key` with your
+ * own content elsewhere.
  *
- * Tokens: `--packt-semantic-colors-light-border-brand-default` (active indicator),
- * `--packt-semantic-colors-light-content-brand-default` (active text),
- * `--packt-semantic-colors-light-content-tertiary` (inactive),
- * `--packt-semantic-colors-light-background-hover` (hover),
- * `--packt-width-m`, `--packt-space-m/xl`, `--packt-size-14`, `--packt-focus-ring`.
+ * Tokens: `border-border-default`/`border-strong` (divider + default indicator),
+ * `brand-border-default`/`brand-text-default` (brand indicator + active text),
+ * `content-tertiary`/`content-primary` (inactive/active text), `bg-hover` (hover),
+ * `focus-ring`.
  */
-export const Tab = ({
-  items,
-  variant = 'default',
-  activeKey: controlledKey,
-  defaultActiveKey,
-  onChange,
-  className,
-  ...rest
-}: TabProps) => {
-  const [internalKey, setInternalKey] = useState<string>(
-    defaultActiveKey ?? items[0]?.key ?? ''
-  );
-  const active = controlledKey ?? internalKey;
+export const Tab = forwardRef<ElementRef<typeof TabsPrimitive.Root>, TabProps>(
+  (
+    {
+      items,
+      variant = 'default',
+      activeKey: controlledKey,
+      defaultActiveKey,
+      onChange,
+      className,
+      'aria-label': ariaLabel = 'Tab navigation',
+      ...rest
+    },
+    ref
+  ) => {
+    const isControlled = controlledKey !== undefined;
 
-  const handleSelect = (key: string) => {
-    setInternalKey(key);
-    onChange?.(key);
-  };
-
-  return (
-    <div
-      className={[styles.root, styles[variant], className ?? ''].filter(Boolean).join(' ')}
-      {...rest}
-    >
-      <div role="tablist" className={styles.list} aria-label="Tab navigation">
-        {items.map((item) => {
-          const isActive = item.key === active;
-          return (
-            <button
+    return (
+      <TabsPrimitive.Root
+        ref={ref}
+        value={isControlled ? controlledKey : undefined}
+        defaultValue={!isControlled ? defaultActiveKey ?? items[0]?.key : undefined}
+        onValueChange={onChange}
+        className={cn('font-sans', className)}
+        {...rest}
+      >
+        <TabsPrimitive.List className={tabListVariants({ variant })} aria-label={ariaLabel}>
+          {items.map((item) => (
+            <TabsPrimitive.Trigger
               key={item.key}
-              role="tab"
-              type="button"
-              aria-selected={isActive}
+              value={item.key}
               disabled={item.disabled}
-              className={[styles.tab, isActive ? styles.active : ''].filter(Boolean).join(' ')}
-              onClick={() => !item.disabled && handleSelect(item.key)}
+              className={tabTriggerVariants({ variant })}
             >
-              {item.icon && <span className={styles.tabIcon} aria-hidden="true">{item.icon}</span>}
+              {item.icon && (
+                <span className="inline-flex text-base" aria-hidden="true">
+                  {item.icon}
+                </span>
+              )}
               {item.label}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
+            </TabsPrimitive.Trigger>
+          ))}
+        </TabsPrimitive.List>
+      </TabsPrimitive.Root>
+    );
+  }
+);
 
 Tab.displayName = 'Tab';
+
+export type { TabProps, TabItem, TabVariant } from './Tab.types';

@@ -1,58 +1,82 @@
-import { useId, type InputHTMLAttributes } from 'react';
-import styles from './ToggleSwitch.module.css';
+import { forwardRef, useId } from 'react';
+import * as SwitchPrimitive from '@radix-ui/react-switch';
+import { cva } from 'class-variance-authority';
+import { cn } from '../../lib/utils';
+import type { ToggleSwitchProps, ToggleSwitchRef } from './ToggleSwitch.types';
 
-export type ToggleSize = 'small' | 'medium' | 'large';
+export const toggleSwitchVariants = cva(
+  [
+    'peer inline-flex shrink-0 items-center rounded-pill border border-transparent',
+    'bg-neutral-300 transition-colors',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
+    'disabled:cursor-not-allowed disabled:bg-bg-disabled',
+    'data-[state=checked]:bg-brand-bg-selected disabled:data-[state=checked]:bg-bg-disabled',
+  ].join(' '),
+  {
+    variants: {
+      size: {
+        small: 'h-4 w-7 p-0.5',
+        medium: 'h-5 w-9 p-0.5',
+        large: 'h-6 w-11 p-[3px]',
+      },
+    },
+    defaultVariants: {
+      size: 'medium',
+    },
+  }
+);
 
-export interface ToggleSwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
-  /** Visible label rendered beside the toggle. */
-  label?: string;
-  size?: ToggleSize;
-}
+export const toggleSwitchThumbVariants = cva(
+  [
+    'pointer-events-none block rounded-circle bg-brand-text-on-brand shadow',
+    'transition-transform',
+  ].join(' '),
+  {
+    variants: {
+      size: {
+        small: 'size-3 data-[state=checked]:translate-x-3',
+        medium: 'size-4 data-[state=checked]:translate-x-4',
+        large: 'size-[18px] data-[state=checked]:translate-x-5',
+      },
+    },
+    defaultVariants: {
+      size: 'medium',
+    },
+  }
+);
 
 /**
- * ToggleSwitch molecule.
- *
- * Tokens: `--packt-semantic-colors-light-background-brand-selected` (on track),
- * `--packt-semantic-colors-light-border-primary` (off track border),
- * `--packt-semantic-colors-light-background-disabled` (disabled track),
- * `--packt-base-white` (thumb), `--packt-radius-pill`, `--packt-focus-ring`.
+ * ToggleSwitch atom — built on Radix `Switch.Root` + `Switch.Thumb` for
+ * correct keyboard/ARIA switch semantics. Renders an optional visible label.
  */
-export const ToggleSwitch = ({
-  label,
-  size = 'medium',
-  disabled = false,
-  className,
-  id,
-  ...rest
-}: ToggleSwitchProps) => {
-  const reactId = useId();
-  const inputId = id ?? reactId;
+export const ToggleSwitch = forwardRef<ToggleSwitchRef, ToggleSwitchProps>(
+  ({ className, label, size = 'medium', disabled, id, ...props }, ref) => {
+    const reactId = useId();
+    const inputId = id ?? reactId;
 
-  const wrapperClasses = [
-    styles.wrapper,
-    styles[size],
-    disabled ? styles.disabled : '',
-    className ?? '',
-  ]
-    .filter(Boolean)
-    .join(' ');
-
-  return (
-    <label className={wrapperClasses} htmlFor={inputId}>
-      <span className={styles.track}>
-        <input
+    return (
+      <label
+        htmlFor={inputId}
+        className={cn(
+          'inline-flex items-center gap-s font-sans cursor-pointer select-none',
+          disabled && 'cursor-not-allowed opacity-40'
+        )}
+      >
+        <SwitchPrimitive.Root
+          ref={ref}
           id={inputId}
-          type="checkbox"
-          role="switch"
-          className={styles.input}
           disabled={disabled}
-          {...rest}
-        />
-        <span className={styles.thumb} aria-hidden="true" />
-      </span>
-      {label && <span className={styles.labelText}>{label}</span>}
-    </label>
-  );
-};
+          className={cn(toggleSwitchVariants({ size }), className)}
+          {...props}
+        >
+          <SwitchPrimitive.Thumb className={toggleSwitchThumbVariants({ size })} />
+        </SwitchPrimitive.Root>
+        {label && <span className="text-sm leading-5 text-content-primary">{label}</span>}
+      </label>
+    );
+  }
+);
 
 ToggleSwitch.displayName = 'ToggleSwitch';
+
+export type { ToggleSwitchProps, ToggleSize } from './ToggleSwitch.types';

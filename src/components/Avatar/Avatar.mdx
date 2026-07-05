@@ -1,12 +1,13 @@
 import { Meta, Canvas, Controls, Unstyled } from '@storybook/addon-docs/blocks';
 import * as AvatarStories from './Avatar.stories';
+import { TokenTable } from '../../lib/TokenTable';
 import { Avatar } from './Avatar';
 
 <Meta of={AvatarStories} />
 
 # Avatar
 
-A circular user representation that displays an image, initials, or a fallback icon — with an optional status indicator dot.
+A circular user representation built on Radix Avatar — shows an image, initials, or a fallback icon, with an optional status indicator dot.
 
 ## Usage
 
@@ -17,12 +18,14 @@ import { Avatar } from 'packt-ds';
 <Avatar src="/profile.jpg" alt="Jane Doe" size="large" status="online" />
 ```
 
+Radix's `Avatar.Fallback` only renders once the image has failed to load, or after `fallbackDelayMs` (default `600`) has elapsed without a successful load — so a fast-loading image never flashes initials/icon first.
+
 ---
 
 ## Playground
 
-<Canvas of={AvatarStories.Default} />
-<Controls of={AvatarStories.Default} />
+<Canvas of={AvatarStories.Playground} />
+<Controls of={AvatarStories.Playground} />
 
 ---
 
@@ -33,9 +36,9 @@ import { Avatar } from 'packt-ds';
 <Unstyled>
   <div style={{ fontFamily: 'Outfit, sans-serif' }}>
     {[
-      { size: 'small',  dim: '24px', font: '10px' },
-      { size: 'medium', dim: '40px', font: '14px' },
-      { size: 'large',  dim: '56px', font: '20px' },
+      { size: 'small',  dim: '24px (size-6)',  font: '12px (text-xs)' },
+      { size: 'medium', dim: '40px (size-10)', font: '14px (text-sm)' },
+      { size: 'large',  dim: '56px (size-14)', font: '20px (text-xl)' },
     ].map(({ size, dim, font }, i, arr) => (
       <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: i < arr.length - 1 ? '1px solid #e4e4e4' : 'none', background: i % 2 === 0 ? '#ffffff' : '#fafafa' }}>
         <code style={{ width: 64, fontSize: 12, color: '#4d4d4d', flexShrink: 0 }}>{size}</code>
@@ -53,7 +56,7 @@ import { Avatar } from 'packt-ds';
 
 ## Content fallbacks
 
-When no `src` is provided the avatar shows initials; when neither `src` nor `initials` is given it falls back to a generic user icon.
+When no `src` is provided (or the image fails to load) the avatar shows initials; when neither `src` nor `initials` is given it falls back to a generic user icon.
 
 <Canvas of={AvatarStories.Fallbacks} />
 
@@ -66,12 +69,12 @@ When no `src` is provided the avatar shows initials; when neither `src` nor `ini
 <Unstyled>
   <div style={{ fontFamily: 'Outfit, sans-serif' }}>
     {[
-      { status: 'online',  color: '#22c55e', desc: 'User is active and reachable' },
-      { status: 'away',    color: '#eab308', desc: 'User is idle or away' },
+      { status: 'online',  color: '#d9fee3', desc: 'User is active and reachable' },
+      { status: 'away',    color: '#fcf6cc', desc: 'User is idle or away' },
       { status: 'offline', color: '#a6a6a6', desc: 'User is not available' },
     ].map(({ status, color, desc }, i, arr) => (
       <div key={status} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: i < arr.length - 1 ? '1px solid #e4e4e4' : 'none', background: i % 2 === 0 ? '#ffffff' : '#fafafa' }}>
-        <div style={{ width: 12, height: 12, borderRadius: '50%', background: color, flexShrink: 0 }} />
+        <div style={{ width: 12, height: 12, borderRadius: '50%', background: color, border: '1px solid #e4e4e4', flexShrink: 0 }} />
         <code style={{ width: 64, fontSize: 12, color: '#4d4d4d', flexShrink: 0 }}>{status}</code>
         <span style={{ fontSize: 13, color: '#797979' }}>{desc}</span>
       </div>
@@ -83,28 +86,15 @@ When no `src` is provided the avatar shows initials; when neither `src` nor `ini
 
 ## Tokens used
 
-<Unstyled>
-  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: 13, border: '1px solid #e4e4e4', borderRadius: 8, overflow: 'hidden' }}>
-    <div style={{ display: 'flex', gap: 8, padding: '10px 16px', background: '#1a1a1a', color: '#ffffff', fontSize: 11, fontWeight: 600 }}>
-      <span style={{ flex: '0 0 160px' }}>Property</span>
-      <span style={{ flex: 1 }}>Token</span>
-    </div>
-    {[
-      { property: 'Initials background', hex: '#fee3d9', token: '--packt-semantic-colors-light-background-brand-hover' },
-      { property: 'Initials text',       hex: '#f97141', token: '--packt-semantic-colors-light-content-brand-default' },
-      { property: 'Fallback icon',       hex: '#000000', token: '--packt-semantic-colors-light-icon-primary' },
-      { property: 'Border',              hex: '#e4e4e4', token: '--packt-semantic-colors-light-border-divide' },
-      { property: 'Status · online',     hex: '#22c55e', token: '--packt-green-500' },
-      { property: 'Status · away',       hex: '#eab308', token: '--packt-yellow-500' },
-      { property: 'Status · offline',    hex: '#a6a6a6', token: '--packt-neutral-400' },
-    ].map(({ property, hex, token }, i, arr) => (
-      <div key={token} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 16px', borderBottom: i < arr.length - 1 ? '1px solid #e4e4e4' : 'none', background: i % 2 === 0 ? '#ffffff' : '#fafafa' }}>
-        <span style={{ flex: '0 0 160px', fontSize: 12, color: '#4d4d4d', fontWeight: 500 }}>{property}</span>
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 18, height: 18, borderRadius: 4, background: hex, border: '1px solid #e4e4e4', flexShrink: 0 }} />
-          <code style={{ fontSize: 11, color: '#797979' }}>{token}</code>
-        </div>
-      </div>
-    ))}
-  </div>
-</Unstyled>
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'brand bg hover', utility: 'bg-brand-bg-hover', cssVar: '--packt-brand-bg-hover' },
+  { property: 'neutral 400', utility: 'bg-neutral-400', cssVar: '--packt-neutral-400' },
+  { property: 'status bg success', utility: 'bg-status-bg-success', cssVar: '--packt-status-bg-success' },
+  { property: 'status bg warning', utility: 'bg-status-bg-warning', cssVar: '--packt-status-bg-warning' },
+  { property: 'background surface', utility: 'border-bg-surface', cssVar: '--packt-background-surface' },
+  { property: 'border default', utility: 'border-border-default', cssVar: '--packt-border-default' },
+  { property: 'brand text default', utility: 'text-brand-text-default', cssVar: '--packt-brand-text-default' },
+  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+]} />

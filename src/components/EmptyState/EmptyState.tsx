@@ -1,45 +1,37 @@
-import type { HTMLAttributes, ReactNode } from 'react';
+import { forwardRef } from 'react';
+import { cn } from '../../lib/utils';
 import { InboxIcon } from '../icons';
-import styles from './EmptyState.module.css';
-
-export interface EmptyStateProps extends HTMLAttributes<HTMLDivElement> {
-  /** Custom illustration or icon node. Defaults to InboxIcon. */
-  icon?: ReactNode;
-  /** Heading text. */
-  title: string;
-  /** Supporting description. */
-  description?: string;
-  /** Action area (e.g. a Button). */
-  action?: ReactNode;
-}
+import type { EmptyStateProps } from './EmptyState.types';
 
 /**
- * EmptyState molecule.
- *
- * Tokens: `--packt-semantic-colors-light-content-primary` (title),
- * `--packt-semantic-colors-light-content-secondary` (description),
- * `--packt-semantic-colors-light-icon-primary` (icon color),
- * `--packt-space-xl/2-xl`, `--packt-size-24/16/14`.
+ * EmptyState molecule — a centered icon + title + optional description and action,
+ * for empty lists, no-results, and first-run states. Plain semantic markup.
  */
-export const EmptyState = ({
-  icon,
-  title,
-  description,
-  action,
-  className,
-  ...rest
-}: EmptyStateProps) => (
-  <div
-    className={[styles.wrapper, className ?? ''].filter(Boolean).join(' ')}
-    {...rest}
-  >
-    <span className={styles.icon} aria-hidden="true">
-      {icon ?? <InboxIcon />}
-    </span>
-    <h3 className={styles.title}>{title}</h3>
-    {description && <p className={styles.description}>{description}</p>}
-    {action && <div className={styles.action}>{action}</div>}
-  </div>
+export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(
+  ({ icon, title, description, action, className, ...rest }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        'flex flex-col items-center justify-center gap-m px-8 py-10 text-center font-sans',
+        className
+      )}
+      {...rest}
+    >
+      <span
+        className="flex items-center justify-center text-content-tertiary opacity-60 [&>svg]:size-12"
+        aria-hidden="true"
+      >
+        {icon ?? <InboxIcon />}
+      </span>
+      <h3 className="m-0 text-base font-semibold leading-6 text-content-primary">{title}</h3>
+      {description && (
+        <p className="m-0 max-w-[360px] text-sm leading-5 text-content-secondary">{description}</p>
+      )}
+      {action && <div className="mt-xs">{action}</div>}
+    </div>
+  )
 );
 
 EmptyState.displayName = 'EmptyState';
+
+export type { EmptyStateProps } from './EmptyState.types';

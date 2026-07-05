@@ -1,0 +1,28 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TooltipStories from './Tooltip.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={TooltipStories} />
+
+# Tooltip
+
+A hover/focus label built on Radix Tooltip — handles portalling, positioning, delay, and the ARIA wiring for you. Renders on a high-contrast inverted surface so it stands out over any background.
+
+## Playground
+
+<Canvas of={TooltipStories.Playground} />
+<Controls of={TooltipStories.Playground} />
+
+## Positions
+
+<Canvas of={TooltipStories.Positions} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'background selected', utility: 'bg-bg-selected', cssVar: '--packt-background-selected' },
+  { property: 'background selected', utility: 'fill-bg-selected', cssVar: '--packt-background-selected' },
+  { property: 'content selected', utility: 'text-content-selected', cssVar: '--packt-content-selected' },
+]} />

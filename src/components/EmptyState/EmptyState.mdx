@@ -1,0 +1,32 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as EmptyStateStories from './EmptyState.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={EmptyStateStories} />
+
+# EmptyState
+
+A centered icon, title, optional description and action — for empty lists, no-results, and first-run screens.
+
+## Playground
+
+<Canvas of={EmptyStateStories.Playground} />
+<Controls of={EmptyStateStories.Playground} />
+
+## With action
+
+<Canvas of={EmptyStateStories.WithAction} />
+
+## Search empty
+
+<Canvas of={EmptyStateStories.SearchEmpty} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'content secondary', utility: 'text-content-secondary', cssVar: '--packt-content-secondary' },
+  { property: 'content tertiary', utility: 'text-content-tertiary', cssVar: '--packt-content-tertiary' },
+]} />

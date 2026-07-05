@@ -1,0 +1,71 @@
+import { Meta, Canvas, Controls, Unstyled } from '@storybook/addon-docs/blocks';
+import * as TabStories from './Tab.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={TabStories} />
+
+# Tab
+
+A tab list built on Radix Tabs for real roving-tabindex keyboard navigation (arrow keys, Home/End) — renders only the tablist itself, so pair each item's `key` with content you manage elsewhere.
+
+## Usage
+
+```tsx
+import { Tab } from 'packt-ds';
+
+<Tab
+  items={[
+    { key: 'overview', label: 'Overview' },
+    { key: 'reviews', label: 'Reviews' },
+  ]}
+  onChange={(key) => setActiveKey(key)}
+/>
+```
+
+---
+
+## Playground
+
+<Canvas of={TabStories.Playground} />
+<Controls of={TabStories.Playground} />
+
+---
+
+## Variants
+
+<Canvas of={TabStories.Variants} />
+
+---
+
+## With icons
+
+<Canvas of={TabStories.WithIcons} />
+
+---
+
+## Theming
+
+Wrap the tab list (or an ancestor) in `data-theme="dark"` when rendering on a dark surface — the component reads from the theme-scoped color tokens automatically, no `theme` prop needed.
+
+```tsx
+<div data-theme="dark">
+  <Tab items={items} variant="brand" />
+</div>
+```
+
+---
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'background hovee', utility: 'bg-bg-hover', cssVar: '--packt-background-hovee' },
+  { property: 'border strong', utility: 'bg-border-strong', cssVar: '--packt-border-strong' },
+  { property: 'brand border default', utility: 'bg-brand-border-default', cssVar: '--packt-brand-border-default' },
+  { property: 'border default', utility: 'border-border-default', cssVar: '--packt-border-default' },
+  { property: 'brand border default', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+  { property: 'brand text default', utility: 'text-brand-text-default', cssVar: '--packt-brand-text-default' },
+  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'content tertiary', utility: 'text-content-tertiary', cssVar: '--packt-content-tertiary' },
+]} />

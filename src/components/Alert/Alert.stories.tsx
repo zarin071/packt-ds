@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Alert } from './Alert';
 
 const meta: Meta<typeof Alert> = {
-  title: 'Molecules/Alert',
+  title: 'components/Alert',
   component: Alert,
   parameters: { layout: 'padded' },
   argTypes: {
@@ -15,7 +15,13 @@ const meta: Meta<typeof Alert> = {
     description: 'This is an informational alert with a short description.',
     icon: true,
   },
-  decorators: [(Story) => <div style={{ width: 480 }}><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div style={{ width: 480 }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
@@ -23,9 +29,18 @@ type Story = StoryObj<typeof Alert>;
 
 const stack = { display: 'flex', flexDirection: 'column' as const, gap: 16, width: 480 };
 
-export const Default: Story = {};
+export const Playground: Story = {
+  args: {
+    variant: 'info',
+    title: 'Alert title',
+    description: 'Alert description goes here.',
+    icon: true,
+  },
+  render: (args) => <Alert {...args} onClose={() => {}} />,
+};
 
 export const Variants: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={stack}>
       <Alert variant="info" title="Information" description="A neutral, informational message." />
@@ -37,6 +52,7 @@ export const Variants: Story = {
 };
 
 export const WithClose: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={stack}>
       <Alert variant="success" title="Saved" description="Changes saved successfully." onClose={() => {}} />
@@ -46,6 +62,7 @@ export const WithClose: Story = {
 };
 
 export const WithoutIcon: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={stack}>
       <Alert variant="info" title="No icon" description="This alert has its icon disabled." icon={false} />
@@ -54,19 +71,10 @@ export const WithoutIcon: Story = {
 };
 
 export const TitleOnly: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={stack}>
       <Alert variant="warning" title="Your session will expire in 5 minutes." onClose={() => {}} />
     </div>
   ),
-};
-
-export const Playground: Story = {
-  args: {
-    variant: 'info',
-    title: 'Alert title',
-    description: 'Alert description goes here.',
-    icon: true,
-  },
-  render: (args) => <Alert {...args} onClose={() => {}} />,
 };

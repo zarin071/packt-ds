@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ToggleSwitch } from './ToggleSwitch';
 
 const meta: Meta<typeof ToggleSwitch> = {
-  title: 'Components/ToggleSwitch',
+  title: 'components/ToggleSwitch',
   component: ToggleSwitch,
   parameters: { layout: 'centered' },
   argTypes: {
@@ -20,9 +20,10 @@ type Story = StoryObj<typeof ToggleSwitch>;
 const col: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 16, fontFamily: 'Outfit, sans-serif' };
 const row: CSSProperties = { display: 'flex', alignItems: 'center', gap: 24, fontFamily: 'Outfit, sans-serif' };
 
-export const Default: Story = {};
+export const Playground: Story = {};
 
 export const Sizes: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={col}>
       <ToggleSwitch {...args} size="small" label="Small" />
@@ -33,6 +34,7 @@ export const Sizes: Story = {
 };
 
 export const States: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={col}>
       <ToggleSwitch {...args} label="Off (default)" />
@@ -44,6 +46,7 @@ export const States: Story = {
 };
 
 export const NoLabel: Story = {
+  parameters: { controls: { disable: true } },
   args: { label: undefined },
   render: (args) => (
     <div style={row}>
@@ -53,5 +56,3 @@ export const NoLabel: Story = {
     </div>
   ),
 };
-
-export const Playground: Story = {};

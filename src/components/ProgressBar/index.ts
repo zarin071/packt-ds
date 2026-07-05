@@ -1,2 +1,2 @@
-export { ProgressBar } from './ProgressBar';
-export type { ProgressBarProps, ProgressSize } from './ProgressBar';
+export { ProgressBar, progressBarVariants } from './ProgressBar';
+export type { ProgressBarProps, ProgressSize } from './ProgressBar.types';
