@@ -29,7 +29,6 @@
   --packt-brand-border-hover: var(--packt-light-brand-border-hover);
   --packt-brand-icon-default: var(--packt-light-brand-icon-default);
   --packt-brand-icon-hover: var(--packt-light-brand-icon-hover);
-  --packt-brand-tag-bg: var(--packt-light-brand-tag-bg);
   --packt-brand-tag-text: var(--packt-light-brand-tag-text);
   --packt-brand-tag-bg-default: var(--packt-light-brand-tag-bg-default);
   --packt-brand-tag-text-default: var(--packt-light-brand-tag-text-default);
@@ -44,8 +43,6 @@
   --packt-hub-packt-border-hover: var(--packt-light-hub-packt-border-hover);
   --packt-hub-packt-icon-default: var(--packt-light-hub-packt-icon-default);
   --packt-hub-packt-icon-hover: var(--packt-light-hub-packt-icon-hover);
-  --packt-hub-packt-tag-bg: var(--packt-light-hub-packt-tag-bg);
-  --packt-hub-packt-tag-text: var(--packt-light-hub-packt-tag-text);
   --packt-hub-packt-tag-bg-default: var(--packt-light-hub-packt-tag-bg-default);
   --packt-hub-packt-tag-text-default: var(--packt-light-hub-packt-tag-text-default);
   --packt-status-bg-error: var(--packt-light-status-bg-error);
@@ -98,7 +95,6 @@
   --packt-brand-border-hover: var(--packt-dark-brand-border-hover);
   --packt-brand-icon-default: var(--packt-dark-brand-icon-default);
   --packt-brand-icon-hover: var(--packt-dark-brand-icon-hover);
-  --packt-brand-tag-bg: var(--packt-dark-brand-tag-bg);
   --packt-brand-tag-text: var(--packt-dark-brand-tag-text);
   --packt-brand-tag-bg-default: var(--packt-dark-brand-tag-bg-default);
   --packt-brand-tag-text-default: var(--packt-dark-brand-tag-text-default);
@@ -113,8 +109,6 @@
   --packt-hub-packt-border-hover: var(--packt-dark-hub-packt-border-hover);
   --packt-hub-packt-icon-default: var(--packt-dark-hub-packt-icon-default);
   --packt-hub-packt-icon-hover: var(--packt-dark-hub-packt-icon-hover);
-  --packt-hub-packt-tag-bg: var(--packt-dark-hub-packt-tag-bg);
-  --packt-hub-packt-tag-text: var(--packt-dark-hub-packt-tag-text);
   --packt-hub-packt-tag-bg-default: var(--packt-dark-hub-packt-tag-bg-default);
   --packt-hub-packt-tag-text-default: var(--packt-dark-hub-packt-tag-text-default);
   --packt-status-bg-error: var(--packt-dark-status-bg-error);
