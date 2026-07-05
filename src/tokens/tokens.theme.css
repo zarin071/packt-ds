@@ -4,22 +4,6 @@
 
 :root,
 [data-theme="light"] {
-  --packt-brand-bg-default: var(--packt-light-brand-bg-default);
-  --packt-brand-bg-hover: var(--packt-light-brand-bg-hover);
-  --packt-brand-bg-pressed: var(--packt-light-brand-bg-pressed);
-  --packt-brand-bg-selected: var(--packt-light-brand-bg-selected);
-  --packt-brand-bg-selected-hover: var(--packt-light-brand-bg-selected-hover);
-  --packt-brand-text-default: var(--packt-light-brand-text-default);
-  --packt-brand-text-on-brand: var(--packt-light-brand-text-on-brand);
-  --packt-brand-border-default: var(--packt-light-brand-border-default);
-  --packt-brand-border-hover: var(--packt-light-brand-border-hover);
-  --packt-brand-icon-default: var(--packt-light-brand-icon-default);
-  --packt-brand-icon-hover: var(--packt-light-brand-icon-hover);
-  --packt-brand-tag-text: var(--packt-light-brand-tag-text);
-  --packt-brand-tag-bg-default: var(--packt-light-brand-tag-bg-default);
-  --packt-brand-tag-text-default: var(--packt-light-brand-tag-text-default);
-  --packt-brand-tag-text-default1: var(--packt-light-brand-tag-text-default1);
-  --packt-brand-tag-text-default2: var(--packt-light-brand-tag-text-default2);
   --packt-bg-page: var(--packt-light-bg-page);
   --packt-bg-hover: var(--packt-light-bg-hover);
   --packt-bg-selected: var(--packt-light-bg-selected);
@@ -85,22 +69,6 @@
 }
 
 [data-theme="dark"] {
-  --packt-brand-bg-default: var(--packt-dark-brand-bg-default);
-  --packt-brand-bg-hover: var(--packt-dark-brand-bg-hover);
-  --packt-brand-bg-pressed: var(--packt-dark-brand-bg-pressed);
-  --packt-brand-bg-selected: var(--packt-dark-brand-bg-selected);
-  --packt-brand-bg-selected-hover: var(--packt-dark-brand-bg-selected-hover);
-  --packt-brand-text-default: var(--packt-dark-brand-text-default);
-  --packt-brand-text-on-brand: var(--packt-dark-brand-text-on-brand);
-  --packt-brand-border-default: var(--packt-dark-brand-border-default);
-  --packt-brand-border-hover: var(--packt-dark-brand-border-hover);
-  --packt-brand-icon-default: var(--packt-dark-brand-icon-default);
-  --packt-brand-icon-hover: var(--packt-dark-brand-icon-hover);
-  --packt-brand-tag-text: var(--packt-dark-brand-tag-text);
-  --packt-brand-tag-bg-default: var(--packt-dark-brand-tag-bg-default);
-  --packt-brand-tag-text-default: var(--packt-dark-brand-tag-text-default);
-  --packt-brand-tag-text-default1: var(--packt-dark-brand-tag-text-default1);
-  --packt-brand-tag-text-default2: var(--packt-dark-brand-tag-text-default2);
   --packt-bg-page: var(--packt-dark-bg-page);
   --packt-bg-hover: var(--packt-dark-bg-hover);
   --packt-bg-selected: var(--packt-dark-bg-selected);

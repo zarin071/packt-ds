@@ -3,22 +3,6 @@
  */
 
 [data-theme="dark"] {
-  --packt-dark-brand-bg-default: var(--packt-orange-900);
-  --packt-dark-brand-bg-hover: var(--packt-orange-800);
-  --packt-dark-brand-bg-pressed: var(--packt-orange-700);
-  --packt-dark-brand-bg-selected: var(--packt-orange-500);
-  --packt-dark-brand-bg-selected-hover: var(--packt-orange-400);
-  --packt-dark-brand-text-default: var(--packt-orange-300);
-  --packt-dark-brand-text-on-brand: var(--packt-neutral-black);
-  --packt-dark-brand-border-default: var(--packt-orange-400);
-  --packt-dark-brand-border-hover: var(--packt-orange-300);
-  --packt-dark-brand-icon-default: var(--packt-orange-400);
-  --packt-dark-brand-icon-hover: var(--packt-orange-300);
-  --packt-dark-brand-tag-text: var(--packt-neutral-black);
-  --packt-dark-brand-tag-bg-default: var(--packt-orange-800);
-  --packt-dark-brand-tag-text-default: var(--packt-neutral-black);
-  --packt-dark-brand-tag-text-default1: var(--packt-neutral-black);
-  --packt-dark-brand-tag-text-default2: var(--packt-neutral-black);
   --packt-dark-bg-page: var(--packt-neutral-700);
   --packt-dark-bg-hover: var(--packt-neutral-700);
   --packt-dark-bg-selected: var(--packt-neutral-200);
