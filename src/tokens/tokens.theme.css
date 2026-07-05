@@ -11,7 +11,7 @@
   --packt-content-tertiary: var(--packt-light-content-tertiary);
   --packt-content-secondary: var(--packt-light-content-secondary);
   --packt-background-page: var(--packt-light-background-page);
-  --packt-background-hover: var(--packt-light-background-hover);
+  --packt-background-hovee: var(--packt-light-background-hovee);
   --packt-background-selected: var(--packt-light-background-selected);
   --packt-background-disabled: var(--packt-light-background-disabled);
   --packt-background-surface: var(--packt-light-background-surface);
@@ -67,6 +67,14 @@
   --packt-status-icon-warning: var(--packt-light-status-icon-warning);
   --packt-status-icon-success: var(--packt-light-status-icon-success);
   --packt-status-icon-info: var(--packt-light-status-icon-info);
+  --packt-status-text-error: var(--packt-light-status-text-error);
+  --packt-status-icon-error: var(--packt-light-status-icon-error);
+  --packt-bg-page: var(--packt-light-bg-page);
+  --packt-bg-hover: var(--packt-light-bg-hover);
+  --packt-bg-selected: var(--packt-light-bg-selected);
+  --packt-bg-disabled: var(--packt-light-bg-disabled);
+  --packt-bg-surface: var(--packt-light-bg-surface);
+  --packt-bg-elevated: var(--packt-light-bg-elevated);
 }
 
 [data-theme="dark"] {
@@ -77,7 +85,7 @@
   --packt-content-tertiary: var(--packt-dark-content-tertiary);
   --packt-content-secondary: var(--packt-dark-content-secondary);
   --packt-background-page: var(--packt-dark-background-page);
-  --packt-background-hover: var(--packt-dark-background-hover);
+  --packt-background-hovee: var(--packt-dark-background-hovee);
   --packt-background-selected: var(--packt-dark-background-selected);
   --packt-background-disabled: var(--packt-dark-background-disabled);
   --packt-background-surface: var(--packt-dark-background-surface);
@@ -133,4 +141,12 @@
   --packt-status-icon-warning: var(--packt-dark-status-icon-warning);
   --packt-status-icon-success: var(--packt-dark-status-icon-success);
   --packt-status-icon-info: var(--packt-dark-status-icon-info);
+  --packt-status-text-error: var(--packt-dark-status-text-error);
+  --packt-status-icon-error: var(--packt-dark-status-icon-error);
+  --packt-bg-page: var(--packt-dark-bg-page);
+  --packt-bg-hover: var(--packt-dark-bg-hover);
+  --packt-bg-selected: var(--packt-dark-bg-selected);
+  --packt-bg-disabled: var(--packt-dark-bg-disabled);
+  --packt-bg-surface: var(--packt-dark-bg-surface);
+  --packt-bg-elevated: var(--packt-dark-bg-elevated);
 }
