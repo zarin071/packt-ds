@@ -11,11 +11,12 @@
   --packt-content-tertiary: var(--packt-light-content-tertiary);
   --packt-content-secondary: var(--packt-light-content-secondary);
   --packt-background-page: var(--packt-light-background-page);
-  --packt-background-hovee: var(--packt-light-background-hovee);
+  --packt-background-hover: var(--packt-light-background-hover);
   --packt-background-selected: var(--packt-light-background-selected);
   --packt-background-disabled: var(--packt-light-background-disabled);
   --packt-background-surface: var(--packt-light-background-surface);
   --packt-background-elevated: var(--packt-light-background-elevated);
+  --packt-background-hover: var(--packt-light-background-hover);
   --packt-border-default: var(--packt-light-border-default);
   --packt-border-strong: var(--packt-light-border-strong);
   --packt-border-disabled: var(--packt-light-border-disabled);
@@ -76,11 +77,12 @@
   --packt-content-tertiary: var(--packt-dark-content-tertiary);
   --packt-content-secondary: var(--packt-dark-content-secondary);
   --packt-background-page: var(--packt-dark-background-page);
-  --packt-background-hovee: var(--packt-dark-background-hovee);
+  --packt-background-hover: var(--packt-dark-background-hover);
   --packt-background-selected: var(--packt-dark-background-selected);
   --packt-background-disabled: var(--packt-dark-background-disabled);
   --packt-background-surface: var(--packt-dark-background-surface);
   --packt-background-elevated: var(--packt-dark-background-elevated);
+  --packt-background-hover: var(--packt-dark-background-hover);
   --packt-border-default: var(--packt-dark-border-default);
   --packt-border-strong: var(--packt-dark-border-strong);
   --packt-border-disabled: var(--packt-dark-border-disabled);
