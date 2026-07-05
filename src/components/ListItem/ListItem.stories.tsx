@@ -2,10 +2,10 @@ import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ListItem } from './ListItem';
 import { ChevronRightIcon, FileIcon, InfoIcon } from '../icons';
-import { Badge } from '../Badge/Badge';
+import { Badge } from '../Badge';
 
 const meta: Meta<typeof ListItem> = {
-  title: 'Components/ListItem',
+  title: 'components/ListItem',
   component: ListItem,
   parameters: { layout: 'padded' },
   argTypes: {
@@ -31,7 +31,7 @@ const listStyle: CSSProperties = {
   overflow: 'hidden',
 };
 
-export const Default: Story = {
+export const Playground: Story = {
   render: (args) => (
     <ul style={listStyle}>
       <ListItem {...args} />
@@ -40,6 +40,7 @@ export const Default: Story = {
 };
 
 export const WithIcon: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <ul style={listStyle}>
       <ListItem {...args} icon={<FileIcon />} />
@@ -49,6 +50,7 @@ export const WithIcon: Story = {
 };
 
 export const WithAction: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <ul style={listStyle}>
       <ListItem {...args} action={<ChevronRightIcon />} interactive />
@@ -58,19 +60,12 @@ export const WithAction: Story = {
 };
 
 export const States: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <ul style={listStyle}>
       <ListItem {...args} title="Default item" interactive />
       <ListItem {...args} title="Selected item" selected interactive />
       <ListItem {...args} title="Item with icon" icon={<FileIcon />} interactive />
-    </ul>
-  ),
-};
-
-export const Playground: Story = {
-  render: (args) => (
-    <ul style={listStyle}>
-      <ListItem {...args} />
     </ul>
   ),
 };

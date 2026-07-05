@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ProgressBar } from './ProgressBar';
 
 const meta: Meta<typeof ProgressBar> = {
-  title: 'Components/ProgressBar',
+  title: 'components/ProgressBar',
   component: ProgressBar,
   parameters: { layout: 'padded' },
   argTypes: {
@@ -26,9 +26,10 @@ type Story = StoryObj<typeof ProgressBar>;
 
 const col: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 16, width: 400, fontFamily: 'Outfit, sans-serif' };
 
-export const Default: Story = {};
+export const Playground: Story = {};
 
 export const Sizes: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={col}>
       <ProgressBar {...args} size="small" label="Small" showLabel />
@@ -39,6 +40,7 @@ export const Sizes: Story = {
 };
 
 export const Values: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={col}>
       <ProgressBar {...args} value={0} label="0%" showLabel />
@@ -50,7 +52,6 @@ export const Values: Story = {
 };
 
 export const NoLabel: Story = {
+  parameters: { controls: { disable: true } },
   args: { showLabel: false },
 };
-
-export const Playground: Story = {};

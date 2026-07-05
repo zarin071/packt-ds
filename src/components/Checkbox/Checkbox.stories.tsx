@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Checkbox } from './Checkbox';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Components/Checkbox',
+  title: 'components/Checkbox',
   component: Checkbox,
   parameters: { layout: 'centered' },
   argTypes: {
@@ -21,9 +21,12 @@ type Story = StoryObj<typeof Checkbox>;
 
 const col: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 12, fontFamily: 'Outfit, sans-serif' };
 
-export const Default: Story = {};
+export const Playground: Story = {
+  args: { label: 'Playground checkbox', disabled: false, indeterminate: false },
+};
 
 export const States: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={col}>
       <Checkbox {...args} label="Unchecked" />
@@ -37,9 +40,6 @@ export const States: Story = {
 };
 
 export const NoLabel: Story = {
+  parameters: { controls: { disable: true } },
   args: { label: undefined },
-};
-
-export const Playground: Story = {
-  args: { label: 'Playground checkbox', disabled: false, indeterminate: false },
 };

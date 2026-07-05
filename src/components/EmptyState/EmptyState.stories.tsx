@@ -1,10 +1,11 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { EmptyState } from './EmptyState';
+import { Button } from '../Button';
 import { SearchIcon, FileIcon } from '../icons';
 
 const meta: Meta<typeof EmptyState> = {
-  title: 'Components/EmptyState',
+  title: 'components/EmptyState',
   component: EmptyState,
   parameters: { layout: 'centered' },
   argTypes: {
@@ -27,34 +28,20 @@ const wrapper: CSSProperties = {
   fontFamily: 'Outfit, sans-serif',
 };
 
-export const Default: Story = {
+export const Playground: Story = {
   decorators: [(Story) => <div style={wrapper}><Story /></div>],
 };
 
 export const WithAction: Story = {
+  parameters: { controls: { disable: true } },
   args: {
-    action: (
-      <button
-        style={{
-          background: 'var(--packt-orange-500)',
-          color: '#fff',
-          border: 'none',
-          borderRadius: 8,
-          padding: '8px 20px',
-          cursor: 'pointer',
-          fontFamily: 'Outfit, sans-serif',
-          fontSize: 14,
-          fontWeight: 600,
-        }}
-      >
-        Browse Courses
-      </button>
-    ),
+    action: <Button variant="primary">Browse courses</Button>,
   },
   decorators: [(Story) => <div style={wrapper}><Story /></div>],
 };
 
 export const SearchEmpty: Story = {
+  parameters: { controls: { disable: true } },
   args: {
     icon: <SearchIcon />,
     title: 'No results for "quantum computing"',
@@ -64,14 +51,11 @@ export const SearchEmpty: Story = {
 };
 
 export const NoFiles: Story = {
+  parameters: { controls: { disable: true } },
   args: {
     icon: <FileIcon />,
     title: 'No files uploaded yet',
     description: 'Upload your first file to get started.',
   },
-  decorators: [(Story) => <div style={wrapper}><Story /></div>],
-};
-
-export const Playground: Story = {
   decorators: [(Story) => <div style={wrapper}><Story /></div>],
 };

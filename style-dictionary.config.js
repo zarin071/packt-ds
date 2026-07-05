@@ -1,23 +1,16 @@
 import StyleDictionary from 'style-dictionary';
 import { register } from '@tokens-studio/sd-transforms';
 
-// Register TS color/math/size transforms (does NOT register the preprocessor
-// because we handle collection-prefix resolution ourselves below).
 register(StyleDictionary, { excludeParentKeys: false });
 
 // ---------------------------------------------------------------------------
 // Preprocessor: resolve Tokens Studio short-path references
 //
-// token.json uses multi-set Tokens Studio format. Primitive tokens live under
-// collection keys like "Primitives-colors/default". Semantic tokens reference
-// primitives with short paths e.g. {neutral.black} — but Style Dictionary
-// expects the full path including the collection prefix, so refs go unresolved.
-//
-// This preprocessor:
-//  1. Builds a flat value map from all primitive sets (key = short path without
-//     the collection prefix, value = resolved hex/literal value).
-//  2. Walks every token and replaces {ref} strings with their actual values
-//     so Style Dictionary never has to chase cross-collection references.
+// Builds a flat primitive value map, then walks every semantic token and:
+//  • replaces {ref} with the resolved hex value (so SD has no broken refs)
+//  • stores the original ref key in $extensions['packt.originalRef'] so the
+//    packt/semantic-to-var transform can later emit var(--packt-primitive)
+//    instead of the inline hex in tokens.light.css and tokens.dark.css.
 // ---------------------------------------------------------------------------
 
 const PRIMITIVE_SETS = new Set([
@@ -32,56 +25,57 @@ const PRIMITIVE_SETS = new Set([
 
 function collectPrimitives(obj, prefix, out) {
   if (obj == null || typeof obj !== 'object') return;
-  if ('$value' in obj) {
-    out[prefix] = obj['$value'];
-    return;
-  }
+  if ('$value' in obj) { out[prefix] = obj['$value']; return; }
   for (const [key, val] of Object.entries(obj)) {
     if (key.startsWith('$')) continue;
-    const path = prefix ? `${prefix}.${key}` : key;
-    collectPrimitives(val, path, out);
+    collectPrimitives(val, prefix ? `${prefix}.${key}` : key, out);
   }
 }
 
+// Returns { value, singleRef } — singleRef is set only when the entire value
+// was a single {ref} token (the common case for semantic color aliases).
 function resolveRef(val, map, depth = 0) {
-  if (depth > 10 || typeof val !== 'string') return val;
-  return val.replace(/\{([^}]+)\}/g, (_, ref) => {
-    const resolved = map[ref];
-    if (resolved === undefined) return `{${ref}}`;
-    // Recursively resolve if the resolved value is itself a reference
-    return resolveRef(resolved, map, depth + 1);
+  if (depth > 10 || typeof val !== 'string') return { value: val };
+  const refs = [];
+  const value = val.replace(/\{([^}]+)\}/g, (_, ref) => {
+    refs.push(ref);
+    const r = map[ref];
+    return r !== undefined ? resolveRef(r, map, depth + 1).value : `{${ref}}`;
   });
+  return { value, singleRef: refs.length === 1 ? refs[0] : null };
 }
 
-function walkAndResolve(obj, map) {
+function walkAndResolve(obj, map, isSemanticSet) {
   if (obj == null || typeof obj !== 'object') return;
   if ('$value' in obj) {
-    obj['$value'] = resolveRef(obj['$value'], map);
+    const { value, singleRef } = resolveRef(obj['$value'], map);
+    obj['$value'] = value;
+    // Only track the original ref on semantic tokens so the var() transform
+    // can target them without touching primitives.
+    if (isSemanticSet && singleRef) {
+      if (!obj['$extensions']) obj['$extensions'] = {};
+      obj['$extensions']['packt.originalRef'] = singleRef;
+    }
     return;
   }
-  for (const val of Object.values(obj)) {
-    walkAndResolve(val, map);
-  }
+  for (const v of Object.values(obj)) walkAndResolve(v, map, isSemanticSet);
 }
 
 StyleDictionary.registerPreprocessor({
   name: 'packt/resolve-ts-refs',
   preprocessor: (dictionary) => {
-    // Build primitive value map
     const primitiveMap = {};
     for (const [setName, setTokens] of Object.entries(dictionary)) {
       if (setName.startsWith('$') || !PRIMITIVE_SETS.has(setName)) continue;
       collectPrimitives(setTokens, '', primitiveMap);
     }
-
-    // Remove empty-string key from leading dot in root-level calls
     delete primitiveMap[''];
 
-    // Resolve all references in every token
-    for (const val of Object.values(dictionary)) {
-      walkAndResolve(val, primitiveMap);
+    for (const [setName, setTokens] of Object.entries(dictionary)) {
+      if (setName.startsWith('$')) continue;
+      const isSemantic = setName.includes('Semantic-colors');
+      walkAndResolve(setTokens, primitiveMap, isSemantic);
     }
-
     return dictionary;
   },
 });
@@ -90,7 +84,7 @@ StyleDictionary.registerPreprocessor({
 // Custom transforms
 // ---------------------------------------------------------------------------
 
-// Numeric tokens (e.g. radius, spacing, type sizes) with $type "number" → px.
+// Numeric tokens ($type "number") → px values.
 StyleDictionary.registerTransform({
   name: 'number/px',
   type: 'value',
@@ -98,19 +92,15 @@ StyleDictionary.registerTransform({
   filter: (token) => token.$type === 'number',
   transform: (token) => {
     const val = token.$value;
-    if (val === 0 || val === '0' || val === 0.0) return '0';
-    return `${val}px`;
+    return (val === 0 || val === '0') ? '0' : `${val}px`;
   },
 });
 
-// Percentage strings (e.g. "120%") from Figma → px.
+// Figma percentage strings (e.g. "120%") → px.
 StyleDictionary.registerTransform({
   name: 'unit/percentToPx',
   type: 'value',
-  filter: (token) => {
-    const val = token.$value;
-    return typeof val === 'string' && /^-?\d+(\.\d+)?%$/.test(val);
-  },
+  filter: (token) => typeof token.$value === 'string' && /^-?\d+(\.\d+)?%$/.test(token.$value),
   transform: (token) => {
     const num = parseFloat(token.$value);
     return num === 0 ? '0' : `${num}px`;
@@ -127,15 +117,30 @@ StyleDictionary.registerTransform({
   name: 'fontWeight/numeric',
   type: 'value',
   filter: (token) => {
-    const path = token.path ?? [];
-    return path[0] === 'weight' || path[path.length - 1] === 'weight';
+    const p = token.path ?? [];
+    return p[0] === 'weight' || p[p.length - 1] === 'weight';
   },
   transform: (token) => FONT_WEIGHT_MAP[token.$value] ?? token.$value,
 });
 
-// Primitive collection names — the collection wrapper is stripped from the CSS
-// variable name so e.g. "Primitives-colors/default.Orange.100" becomes
-// "--packt-orange-100" rather than "--packt-primitives-colors-default-orange-100".
+// Converts semantic color token values to var(--packt-primitive) references
+// so tokens.light.css / tokens.dark.css point into tokens.css rather than
+// embedding inline hex. Primitive files keep their hex values unchanged.
+StyleDictionary.registerTransform({
+  name: 'packt/semantic-to-var',
+  type: 'value',
+  transitive: true,
+  filter: (token) =>
+    token.path[0].includes('Semantic-colors') &&
+    Boolean(token.$extensions?.['packt.originalRef']),
+  transform: (token) => {
+    const ref = token.$extensions['packt.originalRef'];
+    // "neutral.black" → "var(--packt-neutral-black)"
+    const varName = `--packt-${ref.toLowerCase().replace(/\./g, '-')}`;
+    return `var(${varName})`;
+  },
+});
+
 const PRIMITIVE_COLLECTIONS = new Set([
   'Primitives-colors/default',
   'Primitive - Type/default',
@@ -145,26 +150,21 @@ const PRIMITIVE_COLLECTIONS = new Set([
   'Unit/base',
 ]);
 
-// Name transform: joins path segments with '-', lowercases, and replaces '/'
-// and space characters from Tokens Studio collection names with '-'.
+// Name transform: kebab-case from path, strips collection wrappers.
 StyleDictionary.registerTransform({
   name: 'name/packt',
   type: 'name',
   transform: (token, options) => {
     const prefix = options?.prefix ?? '';
-    // Strip collection wrapper for primitive sets; keep it for semantic sets.
     const pathParts = PRIMITIVE_COLLECTIONS.has(token.path[0])
       ? token.path.slice(1)
       : token.path;
     const parts = pathParts.map((p, i) => {
       let s = p.toLowerCase()
-        .replace(/\s*\/\s*/g, '-')   // "Semantic-colors/Light" → "semantic-colors-light"
-        .replace(/\s+-\s+/g, '-')    // "Semantic - Type" → "semantic-type"
-        .replace(/\s+/g, '-');       // remaining spaces → dashes
-      // Strip leading "semantic-" from the first path segment so
-      // "semantic-colors-light" → "colors-light"
-      // "semantic-type" → "type"
-      if (i === 0) s = s.replace(/^semantic-/, '');
+        .replace(/\s*\/\s*/g, '-')
+        .replace(/\s+-\s+/g, '-')
+        .replace(/\s+/g, '-');
+      if (i === 0) s = s.replace(/^semantic-/, '').replace(/^colors-/, '');
       return s;
     });
     return [prefix, ...parts].filter(Boolean).join('-');
@@ -190,38 +190,53 @@ StyleDictionary.registerTransformGroup({
     'name/packt',
     'color/css',
     'fontFamily/css',
+    'packt/semantic-to-var', // must run after color transforms
   ],
 });
 
 // ---------------------------------------------------------------------------
-// Dark-mode format: emits [data-theme="dark"] overriding the same CSS variable
-// names as the light tokens so consumers never change var() references.
+// Formats
 // ---------------------------------------------------------------------------
 
-// tokens.light.css format: light semantic colors in [data-theme="light"].
 StyleDictionary.registerFormat({
   name: 'css/light-theme',
   format: ({ dictionary }) => {
     const header = `/**\n * Do not edit directly, this file was auto-generated.\n */\n\n`;
-    const lines = dictionary.allTokens
-      .map(t => `  --${t.name}: ${t.$value};`)
-      .join('\n');
+    const lines = dictionary.allTokens.map(t => `  --${t.name}: ${t.$value};`).join('\n');
     return `${header}[data-theme="light"] {\n${lines}\n}\n`;
   },
 });
 
-// tokens.dark.css format: dark semantic colors in [data-theme="dark"],
-// using the same variable names as the light theme so consumers never
-// need to change var() calls.
 StyleDictionary.registerFormat({
-  name: 'css/dark-override',
+  name: 'css/dark-theme',
   format: ({ dictionary }) => {
     const header = `/**\n * Do not edit directly, this file was auto-generated.\n */\n\n`;
-    const lines = dictionary.allTokens.map(token => {
-      const name = `--${token.name.replace('colors-dark', 'colors-light')}`;
-      return `  ${name}: ${token.$value};`;
-    });
-    return `${header}[data-theme="dark"] {\n${lines.join('\n')}\n}\n`;
+    const lines = dictionary.allTokens.map(t => `  --${t.name}: ${t.$value};`).join('\n');
+    return `${header}[data-theme="dark"] {\n${lines}\n}\n`;
+  },
+});
+
+// Auto-generates tokens.theme.css — the theme-switching bridge.
+// For every --packt-light-X in the light set, emits a theme-agnostic alias
+// --packt-X that resolves to the light or dark variable depending on the
+// active data-theme attribute. Components always reference --packt-X.
+StyleDictionary.registerFormat({
+  name: 'css/theme-bridge',
+  format: ({ dictionary }) => {
+    const header = `/**\n * Do not edit directly, this file was auto-generated.\n */\n\n`;
+    const tokens = dictionary.allTokens;
+
+    const alias    = (t) => `--${t.name.replace(/-light-/, '-')}`;
+    const lightVar = (t) => `var(--${t.name})`;
+    const darkVar  = (t) => `var(--${t.name.replace(/-light-/, '-dark-')})`;
+
+    const lightLines = tokens.map(t => `  ${alias(t)}: ${lightVar(t)};`).join('\n');
+    const darkLines  = tokens.map(t => `  ${alias(t)}: ${darkVar(t)};`).join('\n');
+
+    return (
+      `${header}:root,\n[data-theme="light"] {\n${lightLines}\n}\n\n` +
+      `[data-theme="dark"] {\n${darkLines}\n}\n`
+    );
   },
 });
 
@@ -243,8 +258,7 @@ const sd = new StyleDictionary({
         {
           destination: 'tokens.css',
           format: 'css/variables',
-          // Primitives only: colors + spatial tokens.
-          // Excludes primitive text, semantic colors, and semantic type.
+          // Primitive colors + spatial tokens only (:root).
           filter: (token) => {
             const set = token.path[0];
             if (set.startsWith('$')) return false;
@@ -260,8 +274,14 @@ const sd = new StyleDictionary({
         },
         {
           destination: 'tokens.dark.css',
-          format: 'css/dark-override',
+          format: 'css/dark-theme',
           filter: (token) => token.path[0].includes('Semantic-colors/Dark'),
+        },
+        {
+          destination: 'tokens.theme.css',
+          format: 'css/theme-bridge',
+          // Source from light tokens — dark aliases are derived automatically.
+          filter: (token) => token.path[0].includes('Semantic-colors/Light'),
         },
       ],
     },

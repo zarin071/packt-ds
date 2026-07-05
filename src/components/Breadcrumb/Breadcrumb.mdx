@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as BreadcrumbStories from './Breadcrumb.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={BreadcrumbStories} />
+
+# Breadcrumb
+
+Navigation showing the path to the current page. Semantic `<nav><ol>` with `aria-current="page"` on the final crumb — no JavaScript primitive needed.
+
+## Playground
+
+<Canvas of={BreadcrumbStories.Playground} />
+<Controls of={BreadcrumbStories.Playground} />
+
+## Custom separator
+
+<Canvas of={BreadcrumbStories.CustomSeparator} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'brand border default', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+  { property: 'brand text default', utility: 'text-brand-text-default', cssVar: '--packt-brand-text-default' },
+  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'content tertiary', utility: 'text-content-tertiary', cssVar: '--packt-content-tertiary' },
+]} />

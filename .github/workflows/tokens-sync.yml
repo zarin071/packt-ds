@@ -39,7 +39,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/tokens/tokens.css src/tokens/tokens.dark.css
+          git add src/tokens/tokens.css src/tokens/tokens.light.css src/tokens/tokens.dark.css src/tokens/tokens.theme.css
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No CSS changes — skipping commit"

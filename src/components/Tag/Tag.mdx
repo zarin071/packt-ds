@@ -1,0 +1,51 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TagStories from './Tag.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={TagStories} />
+
+# Tag
+
+A chip for labels, categories, and filters. Shares its semantic variant set (`brand`, `hub`, `neutral`, `error`, `warning`, `success`, `info`) and token mapping with [Badge](?path=/docs/components-badge--docs); unlike Badge, it can render a removable (×) button via `onRemove`.
+
+## Playground
+
+<Canvas of={TagStories.Playground} />
+<Controls of={TagStories.Playground} />
+
+## Variants
+
+<Canvas of={TagStories.Variants} />
+
+## Removable
+
+<Canvas of={TagStories.Removable} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'background page', utility: 'bg-bg-page', cssVar: '--packt-background-page' },
+  { property: 'brand tag bg', utility: 'bg-brand-tag-bg', cssVar: '--packt-brand-tag-bg' },
+  { property: 'hub packt tag bg', utility: 'bg-hub-tag-bg', cssVar: '--packt-hub-packt-tag-bg' },
+  { property: 'status bg error', utility: 'bg-status-bg-error', cssVar: '--packt-status-bg-error' },
+  { property: 'status bg info', utility: 'bg-status-bg-info', cssVar: '--packt-status-bg-info' },
+  { property: 'status bg success', utility: 'bg-status-bg-success', cssVar: '--packt-status-bg-success' },
+  { property: 'status bg warning', utility: 'bg-status-bg-warning', cssVar: '--packt-status-bg-warning' },
+  { property: 'border default', utility: 'border-border-default', cssVar: '--packt-border-default' },
+  { property: 'brand border default', utility: 'border-brand-border-default', cssVar: '--packt-brand-border-default' },
+  { property: 'hub packt border default', utility: 'border-hub-border-default', cssVar: '--packt-hub-packt-border-default' },
+  { property: 'status border error', utility: 'border-status-border-error', cssVar: '--packt-status-border-error' },
+  { property: 'status border info', utility: 'border-status-border-info', cssVar: '--packt-status-border-info' },
+  { property: 'status border success', utility: 'border-status-border-success', cssVar: '--packt-status-border-success' },
+  { property: 'status border warning', utility: 'border-status-border-warning', cssVar: '--packt-status-border-warning' },
+  { property: 'brand border default', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+  { property: 'brand tag text', utility: 'text-brand-tag-text', cssVar: '--packt-brand-tag-text' },
+  { property: 'content secondary', utility: 'text-content-secondary', cssVar: '--packt-content-secondary' },
+  { property: 'hub packt tag text', utility: 'text-hub-tag-text', cssVar: '--packt-hub-packt-tag-text' },
+  { property: 'status error text', utility: 'text-status-text-error', cssVar: '--packt-status-error-text' },
+  { property: 'status text info', utility: 'text-status-text-info', cssVar: '--packt-status-text-info' },
+  { property: 'status text success', utility: 'text-status-text-success', cssVar: '--packt-status-text-success' },
+  { property: 'status text warning', utility: 'text-status-text-warning', cssVar: '--packt-status-text-warning' },
+]} />

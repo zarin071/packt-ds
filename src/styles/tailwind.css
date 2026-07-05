@@ -1,0 +1,119 @@
+/**
+ * Tailwind v4 token bridge.
+ *
+ * Maps the theme-aware --packt-* aliases from src/tokens/tokens.theme.css
+ * (which itself bridges the auto-generated tokens.light.css/tokens.dark.css —
+ * do not hand-edit any of those) into Tailwind's @theme namespace, so
+ * components can use real Tailwind utilities (bg-*, text-*, border-*, ring-*,
+ * rounded-*, p-*, gap-*) instead of hardcoded values. Always reference the
+ * tokens.theme.css alias here, never the raw -light-/-dark- variables
+ * directly, or dark mode silently stops working.
+ *
+ * Only tokens consumed by the current atom set (Button, Input, Label,
+ * Badge, Icon) are mapped. Extend this file as more components migrate
+ * to the Tailwind + CVA pattern — see design-system-spec/react-rules/RULES.md.
+ */
+@import 'tailwindcss';
+@import '../tokens/tokens.theme.css';
+
+@theme inline {
+  --font-sans: 'Outfit', sans-serif;
+
+  /* Content (text) */
+  --color-content-primary: var(--packt-content-primary);
+  --color-content-secondary: var(--packt-content-secondary);
+  --color-content-tertiary: var(--packt-content-tertiary);
+  --color-content-disabled: var(--packt-content-disabled);
+  --color-content-inverse: var(--packt-content-inverse);
+  --color-content-selected: var(--packt-content-selected);
+
+  /* Background — right-side vars are the auto-generated tokens.theme.css names */
+  --color-bg-page: var(--packt-background-page);
+  --color-bg-surface: var(--packt-background-surface);
+  --color-bg-elevated: var(--packt-background-elevated);
+  --color-bg-disabled: var(--packt-background-disabled);
+  --color-bg-hover: var(--packt-background-hovee);
+  --color-bg-selected: var(--packt-background-selected);
+
+  /* Border */
+  --color-border-default: var(--packt-border-default);
+  --color-border-strong: var(--packt-border-strong);
+  --color-border-disabled: var(--packt-border-disabled);
+
+  /* Brand */
+  --color-brand-bg-default: var(--packt-brand-bg-default);
+  --color-brand-bg-hover: var(--packt-brand-bg-hover);
+  --color-brand-bg-pressed: var(--packt-brand-bg-pressed);
+  --color-brand-bg-selected: var(--packt-brand-bg-selected);
+  --color-brand-bg-selected-hover: var(--packt-brand-bg-selected-hover);
+  --color-brand-text-default: var(--packt-brand-text-default);
+  --color-brand-text-on-brand: var(--packt-brand-text-on-brand);
+  --color-brand-border-default: var(--packt-brand-border-default);
+  --color-brand-border-hover: var(--packt-brand-border-hover);
+  --color-brand-icon-default: var(--packt-brand-icon-default);
+  --color-brand-icon-hover: var(--packt-brand-icon-hover);
+  --color-brand-tag-bg: var(--packt-brand-tag-bg);
+  --color-brand-tag-text: var(--packt-brand-tag-text);
+
+  /* Hub (Packt hub — source token group is hub-packt-*) */
+  --color-hub-bg-default: var(--packt-hub-packt-bg-default);
+  --color-hub-bg-hover: var(--packt-hub-packt-bg-hover);
+  --color-hub-bg-selected: var(--packt-hub-packt-bg-selected);
+  --color-hub-text-default: var(--packt-hub-packt-text-default);
+  --color-hub-text-on-hub: var(--packt-hub-packt-text-on-hub);
+  --color-hub-border-default: var(--packt-hub-packt-border-default);
+  --color-hub-icon-default: var(--packt-hub-packt-icon-default);
+  --color-hub-tag-bg: var(--packt-hub-packt-tag-bg);
+  --color-hub-tag-text: var(--packt-hub-packt-tag-text);
+
+  /* Status — note the error group uses error-text / error-icon in the source */
+  --color-status-bg-error: var(--packt-status-bg-error);
+  --color-status-text-error: var(--packt-status-error-text);
+  --color-status-border-error: var(--packt-status-border-error);
+  --color-status-icon-error: var(--packt-status-error-icon);
+
+  --color-status-bg-warning: var(--packt-status-bg-warning);
+  --color-status-text-warning: var(--packt-status-text-warning);
+  --color-status-border-warning: var(--packt-status-border-warning);
+  --color-status-icon-warning: var(--packt-status-icon-warning);
+
+  --color-status-bg-success: var(--packt-status-bg-success);
+  --color-status-text-success: var(--packt-status-text-success);
+  --color-status-border-success: var(--packt-status-border-success);
+  --color-status-icon-success: var(--packt-status-icon-success);
+
+  --color-status-bg-info: var(--packt-status-bg-info);
+  --color-status-text-info: var(--packt-status-text-info);
+  --color-status-border-info: var(--packt-status-border-info);
+  --color-status-icon-info: var(--packt-status-icon-info);
+
+  /* Neutral primitives — for the Badge "neutral" variant and generic disabled fills */
+  --color-neutral-100: var(--packt-neutral-100);
+  --color-neutral-200: var(--packt-neutral-200);
+  --color-neutral-300: var(--packt-neutral-300);
+  --color-neutral-400: var(--packt-neutral-400);
+  --color-neutral-500: var(--packt-neutral-500);
+  --color-neutral-600: var(--packt-neutral-600);
+  --color-neutral-700: var(--packt-neutral-700);
+
+  /* Focus ring */
+  --color-focus-ring: var(--packt-brand-border-default);
+
+  /* Radius */
+  --radius-none: var(--packt-radius-none);
+  --radius-xs: var(--packt-radius-xs);
+  --radius-s: var(--packt-radius-s);
+  --radius-m: var(--packt-radius-m);
+  --radius-l: var(--packt-radius-l);
+  --radius-pill: var(--packt-radius-pill);
+  --radius-circle: var(--packt-radius-circle);
+
+  /* Spacing (named aliases alongside Tailwind's default numeric scale) */
+  --spacing-2xs: var(--packt-space-2xs);
+  --spacing-xs: var(--packt-space-xs);
+  --spacing-s: var(--packt-space-s);
+  --spacing-m: var(--packt-space-m);
+  --spacing-l: var(--packt-space-l);
+  --spacing-xl: var(--packt-space-xl);
+  --spacing-2xl: var(--packt-space-2xl);
+}

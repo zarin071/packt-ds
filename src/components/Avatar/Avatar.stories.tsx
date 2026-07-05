@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Avatar } from './Avatar';
 
 const meta: Meta<typeof Avatar> = {
-  title: 'Components/Avatar',
+  title: 'components/Avatar',
   component: Avatar,
   parameters: { layout: 'centered' },
   argTypes: {
@@ -11,6 +11,7 @@ const meta: Meta<typeof Avatar> = {
     status: { control: 'select', options: [undefined, 'online', 'offline', 'away'] },
     initials: { control: 'text' },
     src: { control: 'text' },
+    alt: { control: 'text' },
   },
   args: { size: 'medium', initials: 'JD' },
 };
@@ -20,9 +21,10 @@ type Story = StoryObj<typeof Avatar>;
 
 const row: CSSProperties = { display: 'flex', alignItems: 'center', gap: 16, fontFamily: 'Outfit, sans-serif' };
 
-export const Default: Story = {};
+export const Playground: Story = {};
 
 export const Sizes: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={row}>
       <Avatar {...args} size="small" />
@@ -33,6 +35,7 @@ export const Sizes: Story = {
 };
 
 export const Fallbacks: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={row}>
       <Avatar {...args} initials="AB" size="large" />
@@ -42,6 +45,7 @@ export const Fallbacks: Story = {
 };
 
 export const WithStatus: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={row}>
       <Avatar {...args} status="online" />
@@ -50,5 +54,3 @@ export const WithStatus: Story = {
     </div>
   ),
 };
-
-export const Playground: Story = {};

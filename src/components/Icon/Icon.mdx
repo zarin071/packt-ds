@@ -1,0 +1,21 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as IconStories from './Icon.stories';
+
+<Meta of={IconStories} />
+
+# Icon
+
+A wrapper that sizes an SVG child (`sm` 16px · `md` 20px · `lg` 24px) and applies `aria-hidden="true"`. The accessible name for an icon-only control must come from the control itself (e.g. `aria-label` on the surrounding button).
+
+## Playground
+
+<Canvas of={IconStories.Playground} />
+<Controls of={IconStories.Playground} />
+
+## Sizes
+
+<Canvas of={IconStories.Sizes} />
+
+## Tokens used
+
+Icon applies **no colour of its own** — the SVG inherits `currentColor` from its parent, so it themes automatically with whatever text colour surrounds it. Sizing uses Tailwind's numeric scale (`size-4` / `size-5` / `size-6`), not a colour token, so there is no light/dark variable to list.

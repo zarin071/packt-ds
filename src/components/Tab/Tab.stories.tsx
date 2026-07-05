@@ -11,7 +11,7 @@ const items = [
 ];
 
 const meta: Meta<typeof Tab> = {
-  title: 'Components/Tab',
+  title: 'components/Tab',
   component: Tab,
   parameters: { layout: 'padded' },
   argTypes: {
@@ -25,9 +25,10 @@ type Story = StoryObj<typeof Tab>;
 
 const col: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 32, fontFamily: 'Outfit, sans-serif' };
 
-export const Default: Story = {};
+export const Playground: Story = {};
 
 export const Variants: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={col}>
       <Tab {...args} variant="default" />
@@ -37,6 +38,7 @@ export const Variants: Story = {
 };
 
 export const WithIcons: Story = {
+  parameters: { controls: { disable: true } },
   args: {
     items: [
       { key: 'overview', label: 'Overview', icon: <InfoIcon /> },
@@ -46,5 +48,3 @@ export const WithIcons: Story = {
     variant: 'brand',
   },
 };
-
-export const Playground: Story = {};

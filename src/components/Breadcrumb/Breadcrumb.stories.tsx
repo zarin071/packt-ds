@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Breadcrumb } from './Breadcrumb';
 
@@ -10,7 +9,7 @@ const items = [
 ];
 
 const meta: Meta<typeof Breadcrumb> = {
-  title: 'Components/Breadcrumb',
+  title: 'components/Breadcrumb',
   component: Breadcrumb,
   parameters: { layout: 'centered' },
   args: { items },
@@ -19,16 +18,14 @@ const meta: Meta<typeof Breadcrumb> = {
 export default meta;
 type Story = StoryObj<typeof Breadcrumb>;
 
-const col: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 16, fontFamily: 'Outfit, sans-serif' };
-
-export const Default: Story = {};
+export const Playground: Story = {};
 
 export const Short: Story = {
+  parameters: { controls: { disable: true } },
   args: { items: [{ label: 'Home', href: '/' }, { label: 'Courses', active: true }] },
 };
 
 export const CustomSeparator: Story = {
+  parameters: { controls: { disable: true } },
   args: { items, separator: '/' },
 };
-
-export const Playground: Story = {};

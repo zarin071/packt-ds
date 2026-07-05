@@ -1,37 +1,37 @@
-import type { HTMLAttributes, ReactNode } from 'react';
-import styles from './Badge.module.css';
+import { forwardRef } from 'react';
+import { cva } from 'class-variance-authority';
+import { cn } from '../../lib/utils';
+import type { BadgeProps } from './Badge.types';
 
-export type BadgeVariant = 'default' | 'brand' | 'info' | 'success' | 'warning' | 'error';
+export const badgeVariants = cva(
+  'inline-flex items-center gap-2xs rounded-xs border px-xs py-2xs text-xs font-medium leading-none',
+  {
+    variants: {
+      variant: {
+        brand: 'border-brand-border-default bg-brand-tag-bg text-brand-tag-text',
+        hub: 'border-hub-border-default bg-hub-tag-bg text-hub-tag-text',
+        neutral: 'border-border-default bg-bg-page text-content-secondary',
+        error: 'border-status-border-error bg-status-bg-error text-status-text-error',
+        warning: 'border-status-border-warning bg-status-bg-warning text-status-text-warning',
+        success: 'border-status-border-success bg-status-bg-success text-status-text-success',
+        info: 'border-status-border-info bg-status-bg-info text-status-text-info',
+      },
+    },
+    defaultVariants: {
+      variant: 'neutral',
+    },
+  }
+);
 
-export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
-  variant?: BadgeVariant;
-  /** Optional leading icon. */
-  icon?: ReactNode;
-  children: ReactNode;
-}
-
-/**
- * Badge molecule.
- *
- * Tokens: `--packt-semantic-colors-light-background-{variant}-default` (fill),
- * `--packt-semantic-colors-light-content-{variant}-default` (text),
- * `--packt-semantic-colors-light-border-{variant}` (border),
- * `--packt-radius-xs`, `--packt-space-2-xs/xs`, `--packt-size-10/12`.
- */
-export const Badge = ({
-  variant = 'default',
-  icon,
-  children,
-  className,
-  ...rest
-}: BadgeProps) => (
-  <span
-    className={[styles.badge, styles[variant], className ?? ''].filter(Boolean).join(' ')}
-    {...rest}
-  >
-    {icon && <span className={styles.icon} aria-hidden="true">{icon}</span>}
-    <span>{children}</span>
-  </span>
+export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
+  ({ className, variant, icon, children, ...props }, ref) => (
+    <span ref={ref} className={cn(badgeVariants({ variant }), className)} {...props}>
+      {icon && <span aria-hidden="true">{icon}</span>}
+      {children}
+    </span>
+  )
 );
 
 Badge.displayName = 'Badge';
+
+export type { BadgeProps, BadgeVariant } from './Badge.types';

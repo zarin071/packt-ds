@@ -4,16 +4,15 @@ import { Button } from './Button';
 import { CheckIcon, ChevronDownIcon } from '../icons';
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
+  title: 'components/Button',
   component: Button,
   parameters: { layout: 'centered' },
   argTypes: {
-    variant:      { control: 'select', options: ['primary', 'secondary', 'ghost', 'danger'] },
-    size:         { control: 'select', options: ['sm', 'md', 'lg'] },
-    label:        { control: 'text' },
-    disabled:     { control: 'boolean' },
-    loading:      { control: 'boolean' },
-    iconPosition: { control: 'radio', options: ['start', 'end'] },
+    variant: { control: 'select', options: ['primary', 'secondary', 'ghost', 'danger'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    children: { control: 'text' },
+    disabled: { control: 'boolean' },
+    loading: { control: 'boolean' },
   },
 };
 
@@ -37,29 +36,31 @@ const rowLabel = (text: string) => (
 );
 
 export const Playground: Story = {
-  args: { variant: 'primary', size: 'md', label: 'Button', disabled: false, loading: false },
+  args: { variant: 'primary', size: 'md', children: 'Button', disabled: false, loading: false },
 };
 
 export const WithIcon: Story = {
   name: 'With Icon',
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-      <Button label="Confirm" icon={<CheckIcon />} />
-      <Button label="Confirm" icon={<CheckIcon />} variant="secondary" />
-      <Button label="Confirm" icon={<CheckIcon />} variant="ghost" />
-      <Button label="Options" icon={<ChevronDownIcon />} iconPosition="end" variant="secondary" />
-      <Button label="Options" icon={<ChevronDownIcon />} iconPosition="end" size="sm" variant="ghost" />
+      <Button leadingIcon={<CheckIcon />}>Confirm</Button>
+      <Button leadingIcon={<CheckIcon />} variant="secondary">Confirm</Button>
+      <Button leadingIcon={<CheckIcon />} variant="ghost">Confirm</Button>
+      <Button trailingIcon={<ChevronDownIcon />} variant="secondary">Options</Button>
+      <Button trailingIcon={<ChevronDownIcon />} size="sm" variant="ghost">Options</Button>
     </div>
   ),
 };
 
 export const Loading: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-      <Button label="Saving…" loading variant="primary" />
-      <Button label="Saving…" loading variant="secondary" />
-      <Button label="Saving…" loading variant="ghost" />
-      <Button label="Deleting…" loading variant="danger" />
+      <Button loading variant="primary">Saving…</Button>
+      <Button loading variant="secondary">Saving…</Button>
+      <Button loading variant="ghost">Saving…</Button>
+      <Button loading variant="danger">Deleting…</Button>
     </div>
   ),
 };
@@ -68,6 +69,7 @@ const VARIANTS = ['primary', 'secondary', 'ghost', 'danger'] as const;
 
 export const AllStates: Story = {
   name: 'All States',
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 4, fontFamily: 'Outfit, sans-serif' }}>
       <div style={{ display: 'flex', gap: 4, paddingBottom: 4 }}>
@@ -81,21 +83,21 @@ export const AllStates: Story = {
           <div style={{ width: 80, display: 'flex', alignItems: 'center' }}>
             <span style={{ fontSize: 11, color: '#797979', textTransform: 'capitalize' }}>{variant}</span>
           </div>
-          <div style={{ ...surface('#ffffff'), flex: 1 }}>
+          <div data-theme="light" style={{ ...surface('#ffffff'), flex: 1 }}>
             {rowLabel('default')}
-            <Button variant={variant} size="md" label="Button" />
+            <Button variant={variant} size="md">Button</Button>
             {rowLabel('loading')}
-            <Button variant={variant} size="md" label="Saving…" loading />
+            <Button variant={variant} size="md" loading>Saving…</Button>
             {rowLabel('disabled')}
-            <Button variant={variant} size="md" label="Button" disabled />
+            <Button variant={variant} size="md" disabled>Button</Button>
           </div>
           <div data-theme="dark" style={{ ...surface('#1e1e1e'), flex: 1 }}>
             {rowLabel('default')}
-            <Button variant={variant} size="md" label="Button" />
+            <Button variant={variant} size="md">Button</Button>
             {rowLabel('loading')}
-            <Button variant={variant} size="md" label="Saving…" loading />
+            <Button variant={variant} size="md" loading>Saving…</Button>
             {rowLabel('disabled')}
-            <Button variant={variant} size="md" label="Button" disabled />
+            <Button variant={variant} size="md" disabled>Button</Button>
           </div>
         </div>
       ))}

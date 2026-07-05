@@ -5,14 +5,17 @@ import { Tag } from './Tag';
 import { InfoIcon } from '../icons';
 
 const meta: Meta<typeof Tag> = {
-  title: 'Components/Tag',
+  title: 'components/Tag',
   component: Tag,
   parameters: { layout: 'centered' },
   argTypes: {
-    variant: { control: 'select', options: ['default', 'brand', 'info', 'success', 'warning', 'error'] },
+    variant: {
+      control: 'select',
+      options: ['brand', 'hub', 'neutral', 'error', 'warning', 'success', 'info'],
+    },
     children: { control: 'text' },
   },
-  args: { children: 'Tag label', variant: 'default' },
+  args: { children: 'Tag label', variant: 'neutral' },
 };
 
 export default meta;
@@ -20,13 +23,15 @@ type Story = StoryObj<typeof Tag>;
 
 const row: CSSProperties = { display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 8, fontFamily: 'Outfit, sans-serif' };
 
-export const Default: Story = {};
+export const Playground: Story = {};
 
 export const Variants: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={row}>
-      <Tag {...args} variant="default">Default</Tag>
       <Tag {...args} variant="brand">Brand</Tag>
+      <Tag {...args} variant="hub">Hub</Tag>
+      <Tag {...args} variant="neutral">Neutral</Tag>
       <Tag {...args} variant="info">Info</Tag>
       <Tag {...args} variant="success">Success</Tag>
       <Tag {...args} variant="warning">Warning</Tag>
@@ -36,6 +41,7 @@ export const Variants: Story = {
 };
 
 export const WithIcon: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={row}>
       <Tag {...args} variant="info" icon={<InfoIcon />}>With icon</Tag>
@@ -45,6 +51,7 @@ export const WithIcon: Story = {
 };
 
 export const Removable: Story = {
+  parameters: { controls: { disable: true } },
   render: (args) => {
     const [tags, setTags] = useState(['React', 'TypeScript', 'Node.js']);
     return (
@@ -63,5 +70,3 @@ export const Removable: Story = {
     );
   },
 };
-
-export const Playground: Story = {};

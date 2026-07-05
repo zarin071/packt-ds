@@ -1,76 +1,92 @@
-import { useId, type InputHTMLAttributes } from 'react';
+import { forwardRef, useId } from 'react';
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import { cva } from 'class-variance-authority';
+import { cn } from '../../lib/utils';
 import { CheckIcon, MinusIcon } from '../icons';
-import styles from './Checkbox.module.css';
+import type { CheckboxProps, CheckboxRef } from './Checkbox.types';
 
-export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
-  /** Visible label rendered beside the checkbox. */
-  label?: string;
-  /** Indeterminate state (dash icon). Overrides `checked` visually. */
-  indeterminate?: boolean;
-  /** Error message switches border to error token. */
-  error?: string;
-}
+export const checkboxVariants = cva(
+  [
+    'peer inline-flex size-4 shrink-0 items-center justify-center',
+    'rounded-xs border bg-bg-surface text-transparent transition-colors',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
+    'disabled:cursor-not-allowed disabled:bg-bg-disabled disabled:border-border-disabled',
+    'data-[state=checked]:bg-brand-bg-selected data-[state=checked]:border-brand-bg-selected data-[state=checked]:text-brand-text-on-brand',
+    'data-[state=indeterminate]:bg-brand-bg-selected data-[state=indeterminate]:border-brand-bg-selected data-[state=indeterminate]:text-brand-text-on-brand',
+    'disabled:data-[state=checked]:bg-bg-disabled disabled:data-[state=checked]:border-border-disabled disabled:data-[state=checked]:text-content-disabled',
+    'disabled:data-[state=indeterminate]:bg-bg-disabled disabled:data-[state=indeterminate]:border-border-disabled disabled:data-[state=indeterminate]:text-content-disabled',
+  ].join(' '),
+  {
+    variants: {
+      error: {
+        true: 'border-status-border-error',
+        false: 'border-border-default',
+      },
+    },
+    defaultVariants: {
+      error: false,
+    },
+  }
+);
 
 /**
- * Checkbox molecule.
- *
- * Tokens: `--packt-semantic-colors-light-background-brand-selected` (checked fill),
- * `--packt-semantic-colors-light-border-primary` (unchecked border),
- * `--packt-semantic-colors-light-border-error` (error border),
- * `--packt-semantic-colors-light-background-disabled` / `border-disabled` (disabled),
- * `--packt-radius-xs`, `--packt-size-16/14`, `--packt-space-s`, `--packt-focus-ring`.
+ * Checkbox atom — built on Radix `Checkbox.Root` + `Checkbox.Indicator` for
+ * correct keyboard/ARIA handling of the tri-state (checked/unchecked/indeterminate)
+ * value. Renders an optional visible label and error message; compose at the
+ * field/molecule level for more complex layouts.
  */
-export const Checkbox = ({
-  label,
-  indeterminate = false,
-  error,
-  disabled = false,
-  checked,
-  className,
-  id,
-  ...rest
-}: CheckboxProps) => {
-  const reactId = useId();
-  const inputId = id ?? reactId;
-  const errorId = `${inputId}-error`;
+export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
+  (
+    {
+      className,
+      label,
+      indeterminate = false,
+      error,
+      disabled,
+      checked,
+      id,
+      ...props
+    },
+    ref
+  ) => {
+    const reactId = useId();
+    const inputId = id ?? reactId;
+    const errorId = `${inputId}-error`;
+    const resolvedChecked = indeterminate ? 'indeterminate' : checked;
 
-  const wrapperClasses = [
-    styles.wrapper,
-    disabled ? styles.disabled : '',
-    error ? styles.hasError : '',
-    className ?? '',
-  ]
-    .filter(Boolean)
-    .join(' ');
-
-  return (
-    <div className={wrapperClasses}>
-      <label className={styles.label} htmlFor={inputId}>
-        <span className={styles.control}>
-          <input
+    return (
+      <div className="inline-flex flex-col gap-xs font-sans">
+        <label htmlFor={inputId} className="inline-flex items-center gap-s cursor-pointer select-none peer-disabled:cursor-not-allowed peer-disabled:opacity-40">
+          <CheckboxPrimitive.Root
+            ref={ref}
             id={inputId}
-            type="checkbox"
-            className={styles.input}
+            className={cn(checkboxVariants({ error: !!error }), className)}
             disabled={disabled}
-            checked={checked}
-            aria-checked={indeterminate ? 'mixed' : checked}
+            checked={resolvedChecked}
             aria-invalid={error ? true : undefined}
             aria-describedby={error ? errorId : undefined}
-            {...rest}
-          />
-          <span className={[styles.box, indeterminate ? styles.indeterminate : ''].filter(Boolean).join(' ')} aria-hidden="true">
-            {indeterminate ? <MinusIcon /> : <CheckIcon />}
+            {...props}
+          >
+            <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
+              {resolvedChecked === 'indeterminate' ? (
+                <MinusIcon aria-hidden="true" className="size-3" />
+              ) : (
+                <CheckIcon aria-hidden="true" className="size-3" />
+              )}
+            </CheckboxPrimitive.Indicator>
+          </CheckboxPrimitive.Root>
+          {label && <span className="text-sm leading-5 text-content-primary">{label}</span>}
+        </label>
+        {error && (
+          <span id={errorId} className="text-xs leading-4 text-status-text-error">
+            {error}
           </span>
-        </span>
-        {label && <span className={styles.labelText}>{label}</span>}
-      </label>
-      {error && (
-        <span id={errorId} className={styles.errorText}>
-          {error}
-        </span>
-      )}
-    </div>
-  );
-};
+        )}
+      </div>
+    );
+  }
+);
 
 Checkbox.displayName = 'Checkbox';
+
+export type { CheckboxProps } from './Checkbox.types';

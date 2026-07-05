@@ -1,62 +1,100 @@
-import type { HTMLAttributes } from 'react';
+import { forwardRef, type ElementRef } from 'react';
+import * as AvatarPrimitive from '@radix-ui/react-avatar';
+import { cva } from 'class-variance-authority';
+import { cn } from '../../lib/utils';
 import { UserIcon } from '../icons';
-import styles from './Avatar.module.css';
+import type { AvatarProps } from './Avatar.types';
 
-export type AvatarSize = 'small' | 'medium' | 'large';
-export type AvatarStatus = 'online' | 'offline' | 'away';
+export const avatarVariants = cva(
+  [
+    'relative inline-flex shrink-0 items-center justify-center overflow-visible',
+    'rounded-circle border border-border-default bg-brand-bg-hover font-sans',
+  ].join(' '),
+  {
+    variants: {
+      size: {
+        small: 'size-6 text-xs',
+        medium: 'size-10 text-sm',
+        large: 'size-14 text-xl',
+      },
+    },
+    defaultVariants: {
+      size: 'medium',
+    },
+  }
+);
 
-export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
-  /** Image URL. Omit to show initials or fallback icon. */
-  src?: string;
-  /** Alt text for the image. */
-  alt?: string;
-  /** Initials shown when no image is provided (max 2 chars). */
-  initials?: string;
-  size?: AvatarSize;
-  /** Status indicator dot. */
-  status?: AvatarStatus;
-}
+const statusDotVariants = cva('absolute bottom-0 right-0 rounded-circle border-2 border-bg-surface', {
+  variants: {
+    size: {
+      small: 'size-2',
+      medium: 'size-2.5',
+      large: 'size-3',
+    },
+    status: {
+      online: 'bg-status-bg-success',
+      away: 'bg-status-bg-warning',
+      offline: 'bg-neutral-400',
+    },
+  },
+  defaultVariants: {
+    size: 'medium',
+    status: 'offline',
+  },
+});
 
 /**
- * Avatar molecule.
- *
- * Tokens: `--packt-semantic-colors-light-background-brand-default` (initials bg),
- * `--packt-semantic-colors-light-content-brand-default` (initials text),
- * `--packt-radius-circle`, sizes via `--packt-size-*`,
- * `--packt-green-500` (online), `--packt-neutral-400` (offline), `--packt-yellow-500` (away).
+ * Avatar molecule, built on Radix Avatar — `Fallback` only renders after the
+ * image fails to load or the load has taken longer than `fallbackDelayMs`,
+ * which avoids a flash of initials/icon while a fast-loading image is
+ * in flight (a plain `<img>` can't do this).
  */
-export const Avatar = ({
-  src,
-  alt = '',
-  initials,
-  size = 'medium',
-  status,
-  className,
-  ...rest
-}: AvatarProps) => (
-  <span
-    className={[styles.avatar, styles[size], className ?? ''].filter(Boolean).join(' ')}
-    aria-label={alt || initials || 'Avatar'}
-    {...rest}
-  >
-    {src ? (
-      <img className={styles.image} src={src} alt={alt} />
-    ) : initials ? (
-      <span className={styles.initials} aria-hidden="true">
-        {initials.slice(0, 2).toUpperCase()}
-      </span>
-    ) : (
-      <span className={styles.fallback} aria-hidden="true">
-        <UserIcon />
-      </span>
-    )}
-    {status && (
-      <span
-        className={[styles.status, styles[status]].join(' ')}
-        aria-label={`Status: ${status}`}
+export const Avatar = forwardRef<ElementRef<typeof AvatarPrimitive.Root>, AvatarProps>(
+  (
+    {
+      className,
+      src,
+      alt = '',
+      initials,
+      size,
+      status,
+      fallbackDelayMs = 600,
+      ...props
+    },
+    ref
+  ) => (
+    <AvatarPrimitive.Root
+      ref={ref}
+      className={cn(avatarVariants({ size }), className)}
+      aria-label={alt || initials || 'Avatar'}
+      {...props}
+    >
+      <AvatarPrimitive.Image
+        className="size-full rounded-[inherit] object-cover"
+        src={src}
+        alt={alt}
       />
-    )}
-  </span>
+      <AvatarPrimitive.Fallback
+        className="flex size-full items-center justify-center rounded-[inherit]"
+        delayMs={fallbackDelayMs}
+      >
+        {initials ? (
+          <span className="font-semibold leading-none text-brand-text-default" aria-hidden="true">
+            {initials.slice(0, 2).toUpperCase()}
+          </span>
+        ) : (
+          <span className="flex size-3/5 items-center justify-center text-content-primary" aria-hidden="true">
+            <UserIcon />
+          </span>
+        )}
+      </AvatarPrimitive.Fallback>
+      {status && (
+        <span className={statusDotVariants({ size, status })} aria-label={`Status: ${status}`} />
+      )}
+    </AvatarPrimitive.Root>
+  )
 );
 
 Avatar.displayName = 'Avatar';
+
+export type { AvatarProps, AvatarSize, AvatarStatus } from './Avatar.types';

@@ -1,0 +1,74 @@
+import { Meta, Canvas, Controls, Unstyled } from '@storybook/addon-docs/blocks';
+import * as SelectStories from './Select.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={SelectStories} />
+
+# Select
+
+A token-based single-select dropdown, built on Radix Select for listbox keyboard navigation, focus management, and portal-based positioning.
+
+## Usage
+
+```tsx
+import { Select } from 'packt-ds';
+
+<Select
+  label="Framework"
+  placeholder="Choose a framework…"
+  options={[{ value: 'react', label: 'React' }]}
+/>
+```
+
+---
+
+## Playground
+
+<Canvas of={SelectStories.Playground} />
+<Controls of={SelectStories.Playground} />
+
+---
+
+## Sizes
+
+<Canvas of={SelectStories.Sizes} />
+
+---
+
+## States
+
+<Canvas of={SelectStories.States} />
+
+---
+
+## Theming
+
+Wrap the select (or an ancestor) in `data-theme="dark"` when rendering on a dark surface — the component reads from the theme-scoped color tokens automatically, no `theme` prop needed.
+
+```tsx
+<div data-theme="dark">
+  <Select label="Framework" options={options} />
+</div>
+```
+
+---
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'background disabled', utility: 'bg-bg-disabled', cssVar: '--packt-background-disabled' },
+  { property: 'background hovee', utility: 'bg-bg-hover', cssVar: '--packt-background-hovee' },
+  { property: 'background surface', utility: 'bg-bg-surface', cssVar: '--packt-background-surface' },
+  { property: 'border default', utility: 'border-border-default', cssVar: '--packt-border-default' },
+  { property: 'status border error', utility: 'border-status-border-error', cssVar: '--packt-status-border-error' },
+  { property: 'brand border default', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+  { property: 'status border error', utility: 'ring-status-border-error', cssVar: '--packt-status-border-error' },
+  { property: 'brand icon default', utility: 'text-brand-icon-default', cssVar: '--packt-brand-icon-default' },
+  { property: 'content disabled', utility: 'text-content-disabled', cssVar: '--packt-content-disabled' },
+  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'content secondary', utility: 'text-content-secondary', cssVar: '--packt-content-secondary' },
+  { property: 'content tertiary', utility: 'text-content-tertiary', cssVar: '--packt-content-tertiary' },
+  { property: 'status error text', utility: 'text-status-text-error', cssVar: '--packt-status-error-text' },
+]} />

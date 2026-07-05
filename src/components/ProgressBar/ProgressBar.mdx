@@ -1,0 +1,72 @@
+import { Meta, Canvas, Controls, Unstyled } from '@storybook/addon-docs/blocks';
+import * as ProgressBarStories from './ProgressBar.stories';
+import { TokenTable } from '../../lib/TokenTable';
+import { ProgressBar } from './ProgressBar';
+
+<Meta of={ProgressBarStories} />
+
+# ProgressBar
+
+A determinate progress indicator built on Radix Progress, with three heights and an optional percentage label.
+
+## Usage
+
+```tsx
+import { ProgressBar } from 'packt-ds';
+
+<ProgressBar value={65} size="medium" showLabel />
+```
+
+The indicator's fill is driven by an inline `transform: translateX(...)` bound to `value` — the same pattern Radix's own docs recommend — while track/fill colors come from Tailwind token utilities.
+
+---
+
+## Playground
+
+<Canvas of={ProgressBarStories.Playground} />
+<Controls of={ProgressBarStories.Playground} />
+
+---
+
+## Sizes
+
+<Canvas of={ProgressBarStories.Sizes} />
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif' }}>
+    {[
+      { size: 'small',  height: '4px (h-1)' },
+      { size: 'medium', height: '8px (h-2)' },
+      { size: 'large',  height: '12px (h-3)' },
+    ].map(({ size, height }, i, arr) => (
+      <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: i < arr.length - 1 ? '1px solid #e4e4e4' : 'none', background: i % 2 === 0 ? '#ffffff' : '#fafafa' }}>
+        <code style={{ width: 64, fontSize: 12, color: '#4d4d4d', flexShrink: 0 }}>{size}</code>
+        <span style={{ fontSize: 13, color: '#797979' }}>Height <strong style={{ color: '#1a1a1a' }}>{height}</strong></span>
+      </div>
+    ))}
+  </div>
+</Unstyled>
+
+---
+
+## Values
+
+<Canvas of={ProgressBarStories.Values} />
+
+---
+
+## Without a label
+
+<Canvas of={ProgressBarStories.NoLabel} />
+
+---
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'brand bg selected', utility: 'bg-brand-bg-selected', cssVar: '--packt-brand-bg-selected' },
+  { property: 'neutral 200', utility: 'bg-neutral-200', cssVar: '--packt-neutral-200' },
+  { property: 'content secondary', utility: 'text-content-secondary', cssVar: '--packt-content-secondary' },
+]} />

@@ -1,5 +1,7 @@
-import { useState, useRef, type ReactNode, type HTMLAttributes } from 'react';
-import styles from './Tooltip.module.css';
+import { forwardRef, type ElementRef, type ReactNode } from 'react';
+import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import { cva } from 'class-variance-authority';
+import { cn } from '../../lib/utils';
 
 export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
 
@@ -9,48 +11,73 @@ export interface TooltipProps {
   position?: TooltipPosition;
   /** The trigger element that receives the tooltip. */
   children: ReactNode;
-  /** Additional class for the wrapper span. */
+  /** Additional class for the tooltip content bubble. */
   className?: string;
+  /** Delay (ms) before the tooltip opens on hover/focus. Matches Radix default of 700ms. */
+  delayDuration?: number;
+  /** Controlled open state. */
+  open?: boolean;
+  /** Default open state (uncontrolled). */
+  defaultOpen?: boolean;
+  /** Fired when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
 }
 
+export const tooltipContentVariants = cva(
+  [
+    'z-50 max-w-[200px] text-balance rounded-xs bg-bg-selected px-s py-xs text-center text-xs',
+    'text-content-selected',
+    'animate-in fade-in-0 zoom-in-95',
+    'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
+  ].join(' '),
+  {
+    variants: {},
+  }
+);
+
 /**
- * Tooltip molecule.
+ * Tooltip atom — built on Radix Tooltip for correct hover/focus timing,
+ * portal-based positioning, and Escape-to-dismiss. Wraps its own
+ * `Tooltip.Provider` so it works standalone without requiring consumers
+ * to add one at the app root (a small perf tradeoff vs. sharing a single
+ * provider across many tooltips).
  *
- * Tokens: `--packt-semantic-colors-light-background-selected` (tip bg = dark),
- * `--packt-semantic-colors-light-content-selected` (tip text = white),
- * `--packt-radius-xs`, `--packt-space-xs/s`, `--packt-size-12`.
+ * Tokens: `bg-bg-selected` (tip surface — dark in light mode, light in dark
+ * mode), `content-selected` (tip text, inverse of surface), `radius-xs`.
  */
-export const Tooltip = ({
-  content,
-  position = 'top',
-  children,
-  className,
-}: TooltipProps) => {
-  const [visible, setVisible] = useState(false);
-  const tipId = useRef(`tip-${Math.random().toString(36).slice(2)}`).current;
-
-  const show = () => setVisible(true);
-  const hide = () => setVisible(false);
-
-  return (
-    <span
-      className={[styles.wrapper, className ?? ''].filter(Boolean).join(' ')}
-      onMouseEnter={show}
-      onMouseLeave={hide}
-      onFocusCapture={show}
-      onBlurCapture={hide}
-    >
-      <span aria-describedby={visible ? tipId : undefined}>{children}</span>
-      <span
-        id={tipId}
-        role="tooltip"
-        className={[styles.tip, styles[position], visible ? styles.visible : ''].filter(Boolean).join(' ')}
-      >
-        {content}
-        <span className={styles.arrow} aria-hidden="true" />
-      </span>
-    </span>
-  );
-};
+export const Tooltip = forwardRef<ElementRef<typeof TooltipPrimitive.Content>, TooltipProps>(
+  (
+    {
+      content,
+      position = 'top',
+      children,
+      className,
+      delayDuration = 200,
+      open,
+      defaultOpen,
+      onOpenChange,
+    },
+    ref
+  ) => {
+    return (
+      <TooltipPrimitive.Provider delayDuration={delayDuration}>
+        <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
+          <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
+          <TooltipPrimitive.Portal>
+            <TooltipPrimitive.Content
+              ref={ref}
+              side={position}
+              sideOffset={8}
+              className={cn(tooltipContentVariants(), className)}
+            >
+              {content}
+              <TooltipPrimitive.Arrow className="fill-bg-selected" width={10} height={5} />
+            </TooltipPrimitive.Content>
+          </TooltipPrimitive.Portal>
+        </TooltipPrimitive.Root>
+      </TooltipPrimitive.Provider>
+    );
+  }
+);
 
 Tooltip.displayName = 'Tooltip';

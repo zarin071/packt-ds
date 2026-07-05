@@ -1,0 +1,35 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as CardStories from './Card.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={CardStories} />
+
+# Card
+
+A surface container for grouping related content, with optional media, body, and footer regions.
+
+## Playground
+
+<Canvas of={CardStories.Playground} />
+<Controls of={CardStories.Playground} />
+
+## Interactive
+
+<Canvas of={CardStories.Interactive} />
+
+## Grid
+
+<Canvas of={CardStories.Grid} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'background hovee', utility: 'bg-bg-hover', cssVar: '--packt-background-hovee' },
+  { property: 'background surface', utility: 'bg-bg-surface', cssVar: '--packt-background-surface' },
+  { property: 'border default', utility: 'border-border-default', cssVar: '--packt-border-default' },
+  { property: 'brand border default', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'content secondary', utility: 'text-content-secondary', cssVar: '--packt-content-secondary' },
+]} />

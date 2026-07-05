@@ -1,105 +1,55 @@
-import { useId, useState } from 'react';
-import type { InputHTMLAttributes, ReactNode } from 'react';
-import { SearchIcon } from '../icons';
-import styles from './Input.module.css';
+import { forwardRef } from 'react';
+import { cva } from 'class-variance-authority';
+import { cn } from '../../lib/utils';
+import type { InputProps } from './Input.types';
 
-export type InputSize = 'small' | 'medium' | 'large';
-export type InputType = 'text' | 'password' | 'search' | 'email';
-
-const sizeClass: Record<InputSize, string> = {
-  small: styles.sm,
-  medium: styles.md,
-  large: styles.lg,
-};
-
-export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
-  /** Field label rendered above the control. */
-  label?: string;
-  /** Helper/description text below the control. Replaced by `error` when set. */
-  helperText?: string;
-  /** Error message; switches border + helper text to the error tokens. */
-  error?: string;
-  size?: InputSize;
-  type?: InputType;
-  /** Marks the field as required (adds a `*` and the `required` attribute). */
-  required?: boolean;
-  /** Custom leading icon. `search` type gets a search icon by default. */
-  startIcon?: ReactNode;
-  /** Custom trailing icon/adornment. */
-  endIcon?: ReactNode;
-}
+export const inputVariants = cva(
+  [
+    'flex w-full rounded-m border bg-bg-surface text-content-primary transition-colors',
+    'placeholder:text-content-tertiary',
+    'focus-visible:outline-none focus-visible:ring-2',
+    'disabled:cursor-not-allowed disabled:bg-bg-disabled disabled:text-content-disabled',
+  ].join(' '),
+  {
+    variants: {
+      size: {
+        sm: 'h-8 px-s text-sm',
+        md: 'h-10 px-m text-sm',
+        lg: 'h-12 px-l text-base',
+      },
+      error: {
+        true: 'border-status-border-error focus-visible:ring-status-border-error',
+        false: 'border-border-default focus-visible:ring-focus-ring',
+      },
+    },
+    defaultVariants: {
+      size: 'md',
+      error: false,
+    },
+  }
+);
 
 /**
- * Input molecule.
- *
- * Tokens: `--packt-semantic-colors-light-border-*` (default/brand focus/error),
- * `--packt-semantic-colors-light-background-primary`/`-disabled`,
- * content colors for label/helper/error text, `--packt-radius-s`, `--packt-size-*`
- * for height/type-scale, Outfit font family. Focus uses `--packt-focus-ring`.
+ * Input atom — a bare, styled `<input>`. Compose with the Label atom and your
+ * own helper/error text at the field/molecule level; this component only
+ * owns its own visual state (default/error) and doesn't render a label.
  */
-export const Input = ({
-  label,
-  helperText,
-  error,
-  size = 'medium',
-  type = 'text',
-  required = false,
-  disabled = false,
-  startIcon,
-  endIcon,
-  id,
-  className,
-  ...rest
-}: InputProps) => {
-  const reactId = useId();
-  const inputId = id ?? reactId;
-  const helperId = `${inputId}-help`;
-  const hasError = Boolean(error);
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, size, error = false, disabled, 'aria-invalid': ariaInvalid, ...props }, ref) => {
+    const isInvalid = error || ariaInvalid === true || ariaInvalid === 'true';
 
-  const leading = startIcon ?? (type === 'search' ? <SearchIcon /> : undefined);
-
-  const fieldClasses = [
-    styles.field,
-    sizeClass[size],
-    hasError ? styles.error : '',
-    disabled ? styles.disabled : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
-
-  return (
-    <div className={[styles.wrapper, className ?? ''].filter(Boolean).join(' ')}>
-      {label && (
-        <label className={styles.label} htmlFor={inputId}>
-          {label}
-          {required && <span className={styles.required} aria-hidden="true">*</span>}
-        </label>
-      )}
-      <div className={fieldClasses}>
-        {leading && <span className={styles.icon}>{leading}</span>}
-        <input
-          id={inputId}
-          type={type}
-          className={styles.input}
-          disabled={disabled}
-          required={required}
-          aria-invalid={hasError || undefined}
-          aria-describedby={helperText || error ? helperId : undefined}
-          {...rest}
-        />
-        {endIcon && <span className={styles.icon}>{endIcon}</span>}
-      </div>
-      {(error || helperText) && (
-        <span
-          id={helperId}
-          className={[styles.helper, hasError ? styles.helperError : ''].filter(Boolean).join(' ')}
-        >
-          {error || helperText}
-        </span>
-      )}
-    </div>
-  );
-};
+    return (
+      <input
+        ref={ref}
+        className={cn(inputVariants({ size, error: isInvalid }), className)}
+        disabled={disabled}
+        aria-invalid={isInvalid || undefined}
+        {...props}
+      />
+    );
+  }
+);
 
 Input.displayName = 'Input';
+
+export type { InputProps, InputSize } from './Input.types';
