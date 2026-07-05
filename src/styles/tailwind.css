@@ -27,13 +27,13 @@
   --color-content-inverse: var(--packt-content-inverse);
   --color-content-selected: var(--packt-content-selected);
 
-  /* Background — right-side vars are the auto-generated tokens.theme.css names */
-  --color-bg-page: var(--packt-background-page);
-  --color-bg-surface: var(--packt-background-surface);
-  --color-bg-elevated: var(--packt-background-elevated);
-  --color-bg-disabled: var(--packt-background-disabled);
-  --color-bg-hover: var(--packt-background-hover);
-  --color-bg-selected: var(--packt-background-selected);
+  /* Background */
+  --color-bg-page: var(--packt-bg-page);
+  --color-bg-surface: var(--packt-bg-surface);
+  --color-bg-elevated: var(--packt-bg-elevated);
+  --color-bg-disabled: var(--packt-bg-disabled);
+  --color-bg-hover: var(--packt-bg-hover);
+  --color-bg-selected: var(--packt-bg-selected);
 
   /* Surface layers (card elevation) */
   --color-surface-l0: var(--packt-surface-l0);
@@ -41,13 +41,15 @@
   --color-surface-l2: var(--packt-surface-l2);
 
   /* Overlay (scrim / modal backdrop) */
-  --color-overlay: var(--packt-overlay-overlay50);
-  --color-overlay-inverse: var(--packt-overlay-overlayinverse);
+  --color-overlay: var(--packt-overlay-overlay-50);
+  --color-overlay-inverse: var(--packt-overlay-overlay-inverse);
 
   /* Border */
   --color-border-default: var(--packt-border-default);
   --color-border-strong: var(--packt-border-strong);
-  --color-border-disabled: var(--packt-border-disabled);
+  --color-border-elevated: var(--packt-border-elevated);
+  /* border-disabled was removed from the token set; using border-default as fallback */
+  --color-border-disabled: var(--packt-border-default);
 
   /* Brand */
   --color-brand-bg-default: var(--packt-brand-bg-default);
@@ -59,27 +61,33 @@
   --color-brand-text-on-brand: var(--packt-brand-text-on-brand);
   --color-brand-border-default: var(--packt-brand-border-default);
   --color-brand-border-hover: var(--packt-brand-border-hover);
-  --color-brand-icon-default: var(--packt-brand-icon-default);
+  /* Note: Figma token has a typo "icoon" — bridge normalises it here */
+  --color-brand-icon-default: var(--packt-brand-icoon-default);
   --color-brand-icon-hover: var(--packt-brand-icon-hover);
-  --color-brand-tag-bg: var(--packt-brand-tag-bg);
-  --color-brand-tag-text: var(--packt-brand-tag-text);
+  --color-brand-tag-bg: var(--packt-brand-tag-bg-default);
+  --color-brand-tag-text: var(--packt-brand-tag-text-default);
 
-  /* Hub (Packt hub — source token group is hub-packt-*) */
-  --color-hub-bg-default: var(--packt-hub-packt-bg-default);
-  --color-hub-bg-hover: var(--packt-hub-packt-bg-hover);
-  --color-hub-bg-selected: var(--packt-hub-packt-bg-selected);
-  --color-hub-text-default: var(--packt-hub-packt-text-default);
-  --color-hub-text-on-hub: var(--packt-hub-packt-text-on-hub);
-  --color-hub-border-default: var(--packt-hub-packt-border-default);
-  --color-hub-icon-default: var(--packt-hub-packt-icon-default);
-  --color-hub-tag-bg: var(--packt-hub-packt-tag-bg);
-  --color-hub-tag-text: var(--packt-hub-packt-tag-text);
+  /* Hub */
+  --color-hub-bg-default: var(--packt-hub-bg-default);
+  --color-hub-bg-hover: var(--packt-hub-bg-hover);
+  --color-hub-bg-pressed: var(--packt-hub-bg-pressed);
+  --color-hub-bg-selected: var(--packt-hub-bg-selected);
+  --color-hub-bg-selected-hover: var(--packt-hub-bg-selected-hover);
+  --color-hub-text-default: var(--packt-hub-text-default);
+  --color-hub-text-on-hub: var(--packt-hub-text-on-brand);
+  --color-hub-border-default: var(--packt-hub-border-default);
+  --color-hub-border-hover: var(--packt-hub-border-hover);
+  /* Note: Figma token has a typo "icoon" — bridge normalises it here */
+  --color-hub-icon-default: var(--packt-hub-icoon-default);
+  --color-hub-icon-hover: var(--packt-hub-icon-hover);
+  --color-hub-tag-bg: var(--packt-hub-tag-bg-default);
+  --color-hub-tag-text: var(--packt-hub-tag-text-default);
 
-  /* Status — note the error group uses error-text / error-icon in the source */
+  /* Status */
   --color-status-bg-error: var(--packt-status-bg-error);
-  --color-status-text-error: var(--packt-status-error-text);
+  --color-status-text-error: var(--packt-status-text-error);
   --color-status-border-error: var(--packt-status-border-error);
-  --color-status-icon-error: var(--packt-status-error-icon);
+  --color-status-icon-error: var(--packt-status-icon-error);
 
   --color-status-bg-warning: var(--packt-status-bg-warning);
   --color-status-text-warning: var(--packt-status-text-warning);
