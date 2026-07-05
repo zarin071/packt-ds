@@ -38,6 +38,7 @@
   --packt-brand-tag-bg: var(--packt-light-brand-tag-bg);
   --packt-brand-tag-text: var(--packt-light-brand-tag-text);
   --packt-brand-tag-bg-default: var(--packt-light-brand-tag-bg-default);
+  --packt-brand-tag-text-default: var(--packt-light-brand-tag-text-default);
   --packt-hub-packt-bg-default: var(--packt-light-hub-packt-bg-default);
   --packt-hub-packt-bg-hover: var(--packt-light-hub-packt-bg-hover);
   --packt-hub-packt-bg-pressed: var(--packt-light-hub-packt-bg-pressed);
@@ -118,6 +119,7 @@
   --packt-brand-tag-bg: var(--packt-dark-brand-tag-bg);
   --packt-brand-tag-text: var(--packt-dark-brand-tag-text);
   --packt-brand-tag-bg-default: var(--packt-dark-brand-tag-bg-default);
+  --packt-brand-tag-text-default: var(--packt-dark-brand-tag-text-default);
   --packt-hub-packt-bg-default: var(--packt-dark-hub-packt-bg-default);
   --packt-hub-packt-bg-hover: var(--packt-dark-hub-packt-bg-hover);
   --packt-hub-packt-bg-pressed: var(--packt-dark-hub-packt-bg-pressed);
