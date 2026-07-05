@@ -14,13 +14,12 @@ register(StyleDictionary, { excludeParentKeys: false });
 // ---------------------------------------------------------------------------
 
 const PRIMITIVE_SETS = new Set([
-  'global',
-  'Primitives-colors/default',
-  'Primitive - Type/default',
-  'Borders/default',
-  'Space/default',
-  'Layout/default',
-  'Unit/base',
+  'primitive-colors/default',
+  'primitive-type/default',
+  'border/default',
+  'space/default',
+  'breakpoints/default',
+  'unit/default',
 ]);
 
 function collectPrimitives(obj, prefix, out) {
@@ -73,7 +72,7 @@ StyleDictionary.registerPreprocessor({
 
     for (const [setName, setTokens] of Object.entries(dictionary)) {
       if (setName.startsWith('$')) continue;
-      const isSemantic = setName.includes('Semantic-colors');
+      const isSemantic = setName.includes('semantic-colors');
       walkAndResolve(setTokens, primitiveMap, isSemantic);
     }
     return dictionary;
@@ -131,7 +130,7 @@ StyleDictionary.registerTransform({
   type: 'value',
   transitive: true,
   filter: (token) =>
-    token.path[0].includes('Semantic-colors') &&
+    token.path[0].includes('semantic-colors') &&
     Boolean(token.$extensions?.['packt.originalRef']),
   transform: (token) => {
     const ref = token.$extensions['packt.originalRef'];
@@ -142,12 +141,12 @@ StyleDictionary.registerTransform({
 });
 
 const PRIMITIVE_COLLECTIONS = new Set([
-  'Primitives-colors/default',
-  'Primitive - Type/default',
-  'Borders/default',
-  'Space/default',
-  'Layout/default',
-  'Unit/base',
+  'primitive-colors/default',
+  'primitive-type/default',
+  'border/default',
+  'space/default',
+  'breakpoints/default',
+  'unit/default',
 ]);
 
 // Name transform: kebab-case from path, strips collection wrappers.
@@ -165,6 +164,9 @@ StyleDictionary.registerTransform({
         .replace(/\s+-\s+/g, '-')
         .replace(/\s+/g, '-');
       if (i === 0) s = s.replace(/^semantic-/, '').replace(/^colors-/, '');
+      // Strip the redundant packt- prefix from group names inside semantic sets
+      // e.g. packt-brand → brand, packt-hub → hub
+      if (i === 1) s = s.replace(/^packt-/, '');
       return s;
     });
     return [prefix, ...parts].filter(Boolean).join('-');
@@ -262,26 +264,26 @@ const sd = new StyleDictionary({
           filter: (token) => {
             const set = token.path[0];
             if (set.startsWith('$')) return false;
-            if (set === 'Primitive - Type/default') return false;
-            if (set.includes('Semantic')) return false;
+            if (set === 'primitive-type/default') return false;
+            if (set.includes('semantic-colors')) return false;
             return true;
           },
         },
         {
           destination: 'tokens.light.css',
           format: 'css/light-theme',
-          filter: (token) => token.path[0].includes('Semantic-colors/Light'),
+          filter: (token) => token.path[0] === 'semantic-colors/light',
         },
         {
           destination: 'tokens.dark.css',
           format: 'css/dark-theme',
-          filter: (token) => token.path[0].includes('Semantic-colors/Dark'),
+          filter: (token) => token.path[0] === 'semantic-colors/dark',
         },
         {
           destination: 'tokens.theme.css',
           format: 'css/theme-bridge',
           // Source from light tokens — dark aliases are derived automatically.
-          filter: (token) => token.path[0].includes('Semantic-colors/Light'),
+          filter: (token) => token.path[0] === 'semantic-colors/light',
         },
       ],
     },
