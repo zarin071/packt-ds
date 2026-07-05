@@ -1,19 +1,10 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import { forwardRef } from 'react';
+import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 import { ChevronRightIcon } from '../icons';
+import type { BreadcrumbProps, BreadcrumbItem } from './Breadcrumb.types';
 
-export interface BreadcrumbItem {
-  label: string;
-  href?: string;
-  /** Marks the current page — renders as `<span>` with `aria-current="page"`. */
-  active?: boolean;
-}
-
-export interface BreadcrumbProps extends HTMLAttributes<HTMLElement> {
-  items: BreadcrumbItem[];
-  /** Custom separator node. Defaults to the ChevronRight icon. Always rendered aria-hidden. */
-  separator?: ReactNode;
-}
+export const breadcrumbVariants = cva('font-sans');
 
 /**
  * Breadcrumb molecule — plain semantic `<nav><ol>`, no Radix primitive needed
@@ -25,7 +16,7 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
     const sep = separator ?? <ChevronRightIcon />;
 
     return (
-      <nav ref={ref} aria-label="Breadcrumb" className={cn('font-sans', className)} {...props}>
+      <nav ref={ref} aria-label="Breadcrumb" className={cn(breadcrumbVariants(), className)} {...props}>
         <ol className="flex flex-wrap items-center gap-2xs text-sm leading-5">
           {items.map((item, i) => {
             const isLast = i === items.length - 1;
@@ -62,3 +53,5 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
 );
 
 Breadcrumb.displayName = 'Breadcrumb';
+
+export type { BreadcrumbProps, BreadcrumbItem } from './Breadcrumb.types';

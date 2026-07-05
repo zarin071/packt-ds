@@ -1,7 +1,12 @@
 import { forwardRef } from 'react';
+import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 import { InboxIcon } from '../icons';
 import type { EmptyStateProps } from './EmptyState.types';
+
+export const emptyStateVariants = cva(
+  'flex flex-col items-center justify-center gap-m px-8 py-10 text-center font-sans'
+);
 
 /**
  * EmptyState molecule — a centered icon + title + optional description and action,
@@ -11,10 +16,7 @@ export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(
   ({ icon, title, description, action, className, ...rest }, ref) => (
     <div
       ref={ref}
-      className={cn(
-        'flex flex-col items-center justify-center gap-m px-8 py-10 text-center font-sans',
-        className
-      )}
+      className={cn(emptyStateVariants(), className)}
       {...rest}
     >
       <span
