@@ -36,6 +36,7 @@
   --packt-dark-brand-icon-hover: var(--packt-orange-300);
   --packt-dark-brand-tag-bg: var(--packt-orange-800);
   --packt-dark-brand-tag-text: var(--packt-neutral-black);
+  --packt-dark-brand-tag-bg-default: var(--packt-orange-800);
   --packt-dark-hub-packt-bg-default: var(--packt-blue-900);
   --packt-dark-hub-packt-bg-hover: var(--packt-blue-800);
   --packt-dark-hub-packt-bg-pressed: var(--packt-blue-800);
@@ -49,6 +50,8 @@
   --packt-dark-hub-packt-icon-hover: var(--packt-blue-300);
   --packt-dark-hub-packt-tag-bg: var(--packt-blue-800);
   --packt-dark-hub-packt-tag-text: var(--packt-blue-200);
+  --packt-dark-hub-packt-tag-bg-default: var(--packt-blue-800);
+  --packt-dark-hub-packt-tag-text-default: var(--packt-blue-200);
   --packt-dark-status-bg-error: var(--packt-red-900);
   --packt-dark-status-text-error: var(--packt-red-300);
   --packt-dark-status-border-error: var(--packt-red-400);
