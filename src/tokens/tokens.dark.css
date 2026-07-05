@@ -31,6 +31,7 @@
   --packt-dark-brand-tag-bg: var(--packt-orange-800);
   --packt-dark-brand-tag-text: var(--packt-neutral-black);
   --packt-dark-brand-tag-bg-default: var(--packt-orange-800);
+  --packt-dark-brand-tag-text-default: var(--packt-neutral-black);
   --packt-dark-hub-packt-bg-default: var(--packt-blue-900);
   --packt-dark-hub-packt-bg-hover: var(--packt-blue-800);
   --packt-dark-hub-packt-bg-pressed: var(--packt-blue-800);
