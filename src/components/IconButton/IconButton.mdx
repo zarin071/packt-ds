@@ -1,0 +1,45 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as IconButtonStories from './IconButton.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={IconButtonStories} />
+
+# IconButton
+
+An icon-only button. Because it has no text, `aria-label` is **required and type-enforced** — TypeScript will not compile an `IconButton` without one. The target is 44×44px, meeting the WCAG 2.2 minimum touch-target size.
+
+```tsx
+// ✅ compiles
+<IconButton aria-label="Close dialog" icon={<CloseIcon />} />
+
+// ❌ TS error: property 'aria-label' is missing
+<IconButton icon={<CloseIcon />} />
+```
+
+## Playground
+
+<Canvas of={IconButtonStories.Playground} />
+<Controls of={IconButtonStories.Playground} />
+
+## Variants
+
+<Canvas of={IconButtonStories.Variants} />
+
+## States
+
+Disabled and loading (loading shows a spinner and sets `aria-busy`).
+
+<Canvas of={IconButtonStories.States} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'Secondary fill', utility: 'bg-brand-bg-default', cssVar: '--packt-brand-bg-default' },
+  { property: 'Secondary text', utility: 'text-brand-text-default', cssVar: '--packt-brand-text-default' },
+  { property: 'Secondary border', utility: 'border-brand-border-default', cssVar: '--packt-brand-border-default' },
+  { property: 'Ghost text', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'Ghost hover', utility: 'hover:bg-bg-hover', cssVar: '--packt-background-hovee' },
+  { property: 'Focus ring', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+]} />

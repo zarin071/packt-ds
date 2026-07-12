@@ -42,15 +42,15 @@ import { Button } from 'packt-ds';
       { variant: 'ghost',     desc: 'Tertiary / subtle — no border' },
       { variant: 'danger',    desc: 'Destructive action — error red' },
     ].map(({ variant, desc }) => (
-      <div key={variant} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: '1px solid #e4e4e4' }}>
-        <code style={{ width: 72, fontSize: 12, color: '#4d4d4d', flexShrink: 0 }}>{variant}</code>
-        <div data-theme="light" style={{ width: 116, flexShrink: 0, background: '#ffffff', border: '1px solid #e4e4e4', borderRadius: 6, padding: '10px', display: 'flex', justifyContent: 'center' }}>
+      <div key={variant} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: '1px solid var(--packt-border-default)' }}>
+        <code style={{ width: 72, fontSize: 12, color: 'var(--packt-content-secondary)', flexShrink: 0 }}>{variant}</code>
+        <div data-theme="light" style={{ width: 116, flexShrink: 0, background: '#ffffff', border: '1px solid var(--packt-border-default)', borderRadius: 6, padding: '10px', display: 'flex', justifyContent: 'center' }}>
           <Button variant={variant} size="md">Label</Button>
         </div>
         <div data-theme="dark" style={{ width: 116, flexShrink: 0, background: '#1e1e1e', borderRadius: 6, padding: '10px', display: 'flex', justifyContent: 'center' }}>
           <Button variant={variant} size="md">Label</Button>
         </div>
-        <span style={{ fontSize: 13, color: '#797979' }}>{desc}</span>
+        <span style={{ fontSize: 13, color: 'var(--packt-content-tertiary)' }}>{desc}</span>
       </div>
     ))}
   </div>
@@ -67,17 +67,17 @@ import { Button } from 'packt-ds';
       { size: 'md', font: '14px', padding: '8px · 16px'  },
       { size: 'lg', font: '16px', padding: '12px · 24px' },
     ].map(({ size, font, padding }) => (
-      <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: '1px solid #e4e4e4' }}>
-        <code style={{ width: 28, fontSize: 12, color: '#4d4d4d', flexShrink: 0 }}>{size}</code>
-        <div data-theme="light" style={{ width: 116, flexShrink: 0, background: '#ffffff', border: '1px solid #e4e4e4', borderRadius: 6, padding: '10px', display: 'flex', justifyContent: 'center' }}>
+      <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: '1px solid var(--packt-border-default)' }}>
+        <code style={{ width: 28, fontSize: 12, color: 'var(--packt-content-secondary)', flexShrink: 0 }}>{size}</code>
+        <div data-theme="light" style={{ width: 116, flexShrink: 0, background: '#ffffff', border: '1px solid var(--packt-border-default)', borderRadius: 6, padding: '10px', display: 'flex', justifyContent: 'center' }}>
           <Button variant="primary" size={size}>{size.toUpperCase()}</Button>
         </div>
         <div data-theme="dark" style={{ width: 116, flexShrink: 0, background: '#1e1e1e', borderRadius: 6, padding: '10px', display: 'flex', justifyContent: 'center' }}>
           <Button variant="primary" size={size}>{size.toUpperCase()}</Button>
         </div>
-        <div style={{ display: 'flex', gap: 24, fontSize: 12, color: '#797979' }}>
-          <span>Font <strong style={{ color: '#1a1a1a' }}>{font}</strong></span>
-          <span>Padding <strong style={{ color: '#1a1a1a' }}>{padding}</strong></span>
+        <div style={{ display: 'flex', gap: 24, fontSize: 12, color: 'var(--packt-content-tertiary)' }}>
+          <span>Font <strong style={{ color: 'var(--packt-content-primary)' }}>{font}</strong></span>
+          <span>Padding <strong style={{ color: 'var(--packt-content-primary)' }}>{padding}</strong></span>
         </div>
       </div>
     ))}

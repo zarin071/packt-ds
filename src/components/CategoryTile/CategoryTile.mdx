@@ -1,0 +1,33 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as CategoryTileStories from './CategoryTile.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={CategoryTileStories} />
+
+# CategoryTile
+
+A category entry point. The **whole tile is a single `<a>`**, so it's one keyboard tab stop and one click target — no nested interactive elements to trap focus or fragment the hit area. Composes the [Icon](?path=/docs/components-icon--docs) atom for the glyph.
+
+## Playground
+
+<Canvas of={CategoryTileStories.Playground} />
+<Controls of={CategoryTileStories.Playground} />
+
+## Hub contexts
+
+A grid of tiles across Packt's content hubs.
+
+<Canvas of={CategoryTileStories.HubContexts} />
+
+## Tokens used
+
+<TokenTable rows={[
+  { property: 'Surface', utility: 'bg-bg-surface', cssVar: '--packt-background-surface' },
+  { property: 'Border', utility: 'border-border-default', cssVar: '--packt-border-default' },
+  { property: 'Hover', utility: 'hover:bg-bg-hover', cssVar: '--packt-background-hovee' },
+  { property: 'Icon chip fill', utility: 'bg-brand-bg-default', cssVar: '--packt-brand-bg-default' },
+  { property: 'Icon', utility: 'text-brand-icon-default', cssVar: '--packt-brand-icon-default' },
+  { property: 'Name', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'Product count', utility: 'text-content-tertiary', cssVar: '--packt-content-tertiary' },
+  { property: 'Focus ring', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+]} />

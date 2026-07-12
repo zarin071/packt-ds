@@ -13,13 +13,13 @@ export const avatarVariants = cva(
   {
     variants: {
       size: {
-        small: 'size-6 text-xs',
-        medium: 'size-10 text-sm',
-        large: 'size-14 text-xl',
+        sm: 'size-8 text-xs',
+        md: 'size-10 text-sm',
+        lg: 'size-14 text-xl',
       },
     },
     defaultVariants: {
-      size: 'medium',
+      size: 'md',
     },
   }
 );
@@ -27,9 +27,9 @@ export const avatarVariants = cva(
 const statusDotVariants = cva('absolute bottom-0 right-0 rounded-circle border-2 border-bg-surface', {
   variants: {
     size: {
-      small: 'size-2',
-      medium: 'size-2.5',
-      large: 'size-3',
+      sm: 'size-2',
+      md: 'size-2.5',
+      lg: 'size-3',
     },
     status: {
       online: 'bg-status-bg-success',
@@ -38,7 +38,7 @@ const statusDotVariants = cva('absolute bottom-0 right-0 rounded-circle border-2
     },
   },
   defaultVariants: {
-    size: 'medium',
+    size: 'md',
     status: 'offline',
   },
 });
@@ -54,7 +54,7 @@ export const Avatar = forwardRef<ElementRef<typeof AvatarPrimitive.Root>, Avatar
     {
       className,
       src,
-      alt = '',
+      alt,
       initials,
       size,
       status,
@@ -66,7 +66,7 @@ export const Avatar = forwardRef<ElementRef<typeof AvatarPrimitive.Root>, Avatar
     <AvatarPrimitive.Root
       ref={ref}
       className={cn(avatarVariants({ size }), className)}
-      aria-label={alt || initials || 'Avatar'}
+      aria-label={alt}
       {...props}
     >
       <AvatarPrimitive.Image
@@ -76,7 +76,9 @@ export const Avatar = forwardRef<ElementRef<typeof AvatarPrimitive.Root>, Avatar
       />
       <AvatarPrimitive.Fallback
         className="flex size-full items-center justify-center rounded-[inherit]"
-        delayMs={fallbackDelayMs}
+        // Only delay the fallback when there's an image that might load — with
+        // no src, show initials/icon immediately.
+        delayMs={src ? fallbackDelayMs : 0}
       >
         {initials ? (
           <span className="font-semibold leading-none text-brand-text-default" aria-hidden="true">
@@ -89,7 +91,11 @@ export const Avatar = forwardRef<ElementRef<typeof AvatarPrimitive.Root>, Avatar
         )}
       </AvatarPrimitive.Fallback>
       {status && (
-        <span className={statusDotVariants({ size, status })} aria-label={`Status: ${status}`} />
+        <span
+          role="img"
+          className={statusDotVariants({ size, status })}
+          aria-label={`Status: ${status}`}
+        />
       )}
     </AvatarPrimitive.Root>
   )

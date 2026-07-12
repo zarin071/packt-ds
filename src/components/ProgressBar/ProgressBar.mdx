@@ -39,9 +39,9 @@ The indicator's fill is driven by an inline `transform: translateX(...)` bound t
       { size: 'medium', height: '8px (h-2)' },
       { size: 'large',  height: '12px (h-3)' },
     ].map(({ size, height }, i, arr) => (
-      <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: i < arr.length - 1 ? '1px solid #e4e4e4' : 'none', background: i % 2 === 0 ? '#ffffff' : '#fafafa' }}>
-        <code style={{ width: 64, fontSize: 12, color: '#4d4d4d', flexShrink: 0 }}>{size}</code>
-        <span style={{ fontSize: 13, color: '#797979' }}>Height <strong style={{ color: '#1a1a1a' }}>{height}</strong></span>
+      <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: i < arr.length - 1 ? '1px solid var(--packt-border-default)' : 'none', background: i % 2 === 0 ? 'var(--packt-bg-surface)' : 'var(--packt-bg-page)' }}>
+        <code style={{ width: 64, fontSize: 12, color: 'var(--packt-content-secondary)', flexShrink: 0 }}>{size}</code>
+        <span style={{ fontSize: 13, color: 'var(--packt-content-tertiary)' }}>Height <strong style={{ color: 'var(--packt-content-primary)' }}>{height}</strong></span>
       </div>
     ))}
   </div>

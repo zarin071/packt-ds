@@ -1,3 +1,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /*
+   * Sets the preview iframe background/text for every page — stories, docs,
+   * and pure-prose MDX (Foundation, Introduction, etc.).
+   * The data-theme attribute is set by the module-level channel listener and
+   * the decorator in preview.tsx; these rules consume it via CSS variables.
+   */
+  html,
+  body,
+  #storybook-root,
+  .sb-show-main,
+  .sb-main-padded {
+    background: var(--packt-bg-page);
+    color: var(--packt-content-primary);
+    transition: background 120ms ease, color 120ms ease;
+    min-height: 100%;
+  }
+</style>

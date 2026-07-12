@@ -1,0 +1,19 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as FormatBadgeStories from './FormatBadge.stories';
+
+<Meta of={FormatBadgeStories} />
+
+# FormatBadge
+
+A [Badge](?path=/docs/components-badge--docs) preset for product formats. Each `format` maps to a fixed icon and label — `ebook`, `paperback`, `video`, `audiobook` — so formats read consistently across the catalogue.
+
+Built entirely on the neutral Badge atom, so it inherits Badge's tokens and theming; see the [Badge](?path=/docs/components-badge--docs) docs for the underlying "Tokens used" table.
+
+## Playground
+
+<Canvas of={FormatBadgeStories.Playground} />
+<Controls of={FormatBadgeStories.Playground} />
+
+## All formats
+
+<Canvas of={FormatBadgeStories.AllFormats} />

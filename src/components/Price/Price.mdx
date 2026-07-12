@@ -1,0 +1,35 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as PriceStories from './Price.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={PriceStories} />
+
+# Price
+
+Formats a monetary amount with `Intl.NumberFormat`, with an optional struck-through original price for sale displays.
+
+The original price uses `<s>` plus an explicit `aria-label` (`"was $49.99"`), so screen readers announce it as a former price rather than a bare number.
+
+## Playground
+
+<Canvas of={PriceStories.Playground} />
+<Controls of={PriceStories.Playground} />
+
+## On sale
+
+<Canvas of={PriceStories.OnSale} />
+
+## Currencies
+
+Formatting (symbol, decimals, grouping) follows the `currency` code and the runtime `locale`.
+
+<Canvas of={PriceStories.Currencies} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'Current price', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'Original price', utility: 'text-content-tertiary', cssVar: '--packt-content-tertiary' },
+]} />

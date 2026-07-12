@@ -14,8 +14,8 @@ A circular user representation built on Radix Avatar — shows an image, initial
 ```tsx
 import { Avatar } from 'packt-ds';
 
-<Avatar initials="JD" size="medium" />
-<Avatar src="/profile.jpg" alt="Jane Doe" size="large" status="online" />
+<Avatar initials="JD" alt="Jane Doe" size="md" />
+<Avatar src="/profile.jpg" alt="Jane Doe" size="lg" status="online" />
 ```
 
 Radix's `Avatar.Fallback` only renders once the image has failed to load, or after `fallbackDelayMs` (default `600`) has elapsed without a successful load — so a fast-loading image never flashes initials/icon first.
@@ -36,16 +36,16 @@ Radix's `Avatar.Fallback` only renders once the image has failed to load, or aft
 <Unstyled>
   <div style={{ fontFamily: 'Outfit, sans-serif' }}>
     {[
-      { size: 'small',  dim: '24px (size-6)',  font: '12px (text-xs)' },
-      { size: 'medium', dim: '40px (size-10)', font: '14px (text-sm)' },
-      { size: 'large',  dim: '56px (size-14)', font: '20px (text-xl)' },
+      { size: 'sm', dim: '32px (size-8)',  font: '12px (text-xs)' },
+      { size: 'md', dim: '40px (size-10)', font: '14px (text-sm)' },
+      { size: 'lg', dim: '56px (size-14)', font: '20px (text-xl)' },
     ].map(({ size, dim, font }, i, arr) => (
-      <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: i < arr.length - 1 ? '1px solid #e4e4e4' : 'none', background: i % 2 === 0 ? '#ffffff' : '#fafafa' }}>
-        <code style={{ width: 64, fontSize: 12, color: '#4d4d4d', flexShrink: 0 }}>{size}</code>
-        <Avatar initials="JD" size={size} />
-        <div style={{ display: 'flex', gap: 24, fontSize: 12, color: '#797979' }}>
-          <span>Size <strong style={{ color: '#1a1a1a' }}>{dim}</strong></span>
-          <span>Font <strong style={{ color: '#1a1a1a' }}>{font}</strong></span>
+      <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: i < arr.length - 1 ? '1px solid var(--packt-border-default)' : 'none', background: i % 2 === 0 ? 'var(--packt-bg-surface)' : 'var(--packt-bg-page)' }}>
+        <code style={{ width: 64, fontSize: 12, color: 'var(--packt-content-secondary)', flexShrink: 0 }}>{size}</code>
+        <Avatar initials="JD" alt="Jane Doe" size={size} />
+        <div style={{ display: 'flex', gap: 24, fontSize: 12, color: 'var(--packt-content-tertiary)' }}>
+          <span>Size <strong style={{ color: 'var(--packt-content-primary)' }}>{dim}</strong></span>
+          <span>Font <strong style={{ color: 'var(--packt-content-primary)' }}>{font}</strong></span>
         </div>
       </div>
     ))}
@@ -73,10 +73,10 @@ When no `src` is provided (or the image fails to load) the avatar shows initials
       { status: 'away',    color: '#fcf6cc', desc: 'User is idle or away' },
       { status: 'offline', color: '#a6a6a6', desc: 'User is not available' },
     ].map(({ status, color, desc }, i, arr) => (
-      <div key={status} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: i < arr.length - 1 ? '1px solid #e4e4e4' : 'none', background: i % 2 === 0 ? '#ffffff' : '#fafafa' }}>
-        <div style={{ width: 12, height: 12, borderRadius: '50%', background: color, border: '1px solid #e4e4e4', flexShrink: 0 }} />
-        <code style={{ width: 64, fontSize: 12, color: '#4d4d4d', flexShrink: 0 }}>{status}</code>
-        <span style={{ fontSize: 13, color: '#797979' }}>{desc}</span>
+      <div key={status} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: i < arr.length - 1 ? '1px solid var(--packt-border-default)' : 'none', background: i % 2 === 0 ? 'var(--packt-bg-surface)' : 'var(--packt-bg-page)' }}>
+        <div style={{ width: 12, height: 12, borderRadius: '50%', background: color, border: '1px solid var(--packt-border-default)', flexShrink: 0 }} />
+        <code style={{ width: 64, fontSize: 12, color: 'var(--packt-content-secondary)', flexShrink: 0 }}>{status}</code>
+        <span style={{ fontSize: 13, color: 'var(--packt-content-tertiary)' }}>{desc}</span>
       </div>
     ))}
   </div>

@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as CountdownTimerStories from './CountdownTimer.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={CountdownTimerStories} />
+
+# CountdownTimer
+
+Counts down to a target `Date`, updating every second and rendering days / hours / minutes / seconds.
+
+## Accessibility
+
+The live region is **`aria-live="off"`** by design. A value that changes every second would flood a screen-reader user with announcements — hostile, not helpful — so updates are silent and the current value is available on demand when the user navigates to the `role="timer"`. `onExpire` fires exactly once when the countdown reaches zero.
+
+## Playground
+
+<Canvas of={CountdownTimerStories.Playground} />
+<Controls of={CountdownTimerStories.Playground} />
+
+## Ending soon
+
+<Canvas of={CountdownTimerStories.EndingSoon} />
+
+## Tokens used
+
+<TokenTable rows={[
+  { property: 'Digits', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'Unit labels', utility: 'text-content-tertiary', cssVar: '--packt-content-tertiary' },
+]} />

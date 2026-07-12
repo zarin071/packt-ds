@@ -42,12 +42,12 @@ import { Badge } from 'packt-ds';
       { variant: 'warning', bg: '#fcf6cc', color: '#9b8a0d', desc: 'Caution or action needed' },
       { variant: 'error',   bg: '#f9d2d9', color: '#921d33', desc: 'Error or critical state' },
     ].map(({ variant, bg, color, desc }, i, arr) => (
-      <div key={variant} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: i < arr.length - 1 ? '1px solid #e4e4e4' : 'none', background: i % 2 === 0 ? '#ffffff' : '#fafafa' }}>
-        <code style={{ width: 64, fontSize: 12, color: '#4d4d4d', flexShrink: 0 }}>{variant}</code>
+      <div key={variant} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderBottom: i < arr.length - 1 ? '1px solid var(--packt-border-default)' : 'none', background: i % 2 === 0 ? 'var(--packt-bg-surface)' : 'var(--packt-bg-page)' }}>
+        <code style={{ width: 64, fontSize: 12, color: 'var(--packt-content-secondary)', flexShrink: 0 }}>{variant}</code>
         <div style={{ width: 80, flexShrink: 0, display: 'flex', justifyContent: 'center' }}>
           <Badge variant={variant}>{variant.charAt(0).toUpperCase() + variant.slice(1)}</Badge>
         </div>
-        <span style={{ fontSize: 13, color: '#797979' }}>{desc}</span>
+        <span style={{ fontSize: 13, color: 'var(--packt-content-tertiary)' }}>{desc}</span>
       </div>
     ))}
   </div>

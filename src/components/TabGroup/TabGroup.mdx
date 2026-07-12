@@ -1,0 +1,38 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TabGroupStories from './TabGroup.stories';
+
+<Meta of={TabGroupStories} />
+
+# TabGroup
+
+A data-driven wrapper over the Radix [Tab](?path=/docs/components-tab--docs) primitives (`Tabs` / `TabList` / `Tab` / `TabPanel`). Pass an `items` array and it wires up the tablist and panels for you.
+
+Radix provides arrow-key / Home / End navigation and the `tablist` / `tab` / `tabpanel` ARIA roles; the active tab uses **Brand tokens**. If you need finer control, compose the primitives directly instead.
+
+```tsx
+import { TabGroup } from 'packt-ds';
+
+<TabGroup
+  label="Content type"
+  items={[
+    { value: 'books', label: 'Books', icon: <BookIcon />, content: <BooksGrid /> },
+    { value: 'videos', label: 'Videos', icon: <PlayIcon />, content: <VideosGrid /> },
+    { value: 'audiobooks', label: 'Audiobooks', icon: <HeadphonesIcon />, content: <AudioGrid /> },
+  ]}
+/>
+```
+
+## Playground
+
+<Canvas of={TabGroupStories.Playground} />
+<Controls of={TabGroupStories.Playground} />
+
+## Tablist only
+
+Omit `content` from the items to render just the tablist (manage panels yourself).
+
+<Canvas of={TabGroupStories.TablistOnly} />
+
+## Tokens used
+
+Inherits the [Tab](?path=/docs/components-tab--docs) atom's tokens — see its "Tokens used" table.
