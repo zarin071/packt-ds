@@ -10,6 +10,9 @@ export type { LabelProps } from './Label';
 export { Icon, iconVariants } from './Icon';
 export type { IconProps, IconSize } from './Icon';
 
+export { IconButton, iconButtonVariants } from './IconButton';
+export type { IconButtonProps, IconButtonVariant } from './IconButton';
+
 export { Alert } from './Alert';
 export type { AlertProps, AlertVariant } from './Alert';
 
@@ -39,8 +42,14 @@ export type { TagProps, TagVariant } from './Tag';
 export { Badge, badgeVariants } from './Badge';
 export type { BadgeProps, BadgeVariant } from './Badge';
 
-export { Avatar } from './Avatar';
+export { Avatar, avatarVariants } from './Avatar';
 export type { AvatarProps, AvatarSize, AvatarStatus } from './Avatar';
+
+export { Rating, ratingVariants } from './Rating';
+export type { RatingProps, RatingSize } from './Rating';
+
+export { Price } from './Price';
+export type { PriceProps } from './Price';
 
 export { Tooltip, tooltipContentVariants } from './Tooltip';
 export type { TooltipProps, TooltipPosition } from './Tooltip';
@@ -49,8 +58,8 @@ export type { TooltipProps, TooltipPosition } from './Tooltip';
 export { Breadcrumb } from './Breadcrumb';
 export type { BreadcrumbProps, BreadcrumbItem } from './Breadcrumb';
 
-export { Tab, tabListVariants, tabTriggerVariants } from './Tab';
-export type { TabProps, TabItem, TabVariant } from './Tab';
+export { Tabs, Tab, TabList, TabPanel, tabListVariants, tabTriggerVariants } from './Tab';
+export type { TabProps } from './Tab';
 
 export { Pagination } from './Pagination';
 export type { PaginationProps } from './Pagination';
@@ -67,3 +76,25 @@ export type { ListItemProps } from './ListItem';
 
 export { EmptyState } from './EmptyState';
 export type { EmptyStateProps } from './EmptyState';
+
+// Molecules
+export { TabGroup } from './TabGroup';
+export type { TabGroupProps, TabGroupItem } from './TabGroup';
+
+export { PriceBlock } from './PriceBlock';
+export type { PriceBlockProps, PriceOption } from './PriceBlock';
+
+export { FormatBadge } from './FormatBadge';
+export type { FormatBadgeProps, FormatType } from './FormatBadge';
+
+export { CountdownTimer } from './CountdownTimer';
+export type { CountdownTimerProps } from './CountdownTimer';
+
+export { PaginationDots } from './PaginationDots';
+export type { PaginationDotsProps } from './PaginationDots';
+
+export { CategoryTile } from './CategoryTile';
+export type { CategoryTileProps } from './CategoryTile';
+
+export { SocialLinks } from './SocialLinks';
+export type { SocialLinksProps, SocialLink, SocialPlatform } from './SocialLinks';

@@ -1,0 +1,34 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as RatingStories from './Rating.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={RatingStories} />
+
+# Rating
+
+Displays a 0–5 star rating with half-star support. Full, half, and empty stars are distinguished by **shape** (filled / half-filled / outline), never colour alone — so the rating stays legible for colour-blind users and in high-contrast modes.
+
+The whole control is a single `role="img"` with a label like `"4.5 out of 5 stars, 25 reviews"`; individual stars are hidden from assistive tech.
+
+## Playground
+
+<Canvas of={RatingStories.Playground} />
+<Controls of={RatingStories.Playground} />
+
+## Values
+
+<Canvas of={RatingStories.Values} />
+
+## Sizes
+
+<Canvas of={RatingStories.Sizes} />
+
+## Tokens used
+
+Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
+
+<TokenTable rows={[
+  { property: 'Filled / half star', utility: 'text-brand-icon-default', cssVar: '--packt-brand-icon-default' },
+  { property: 'Empty star', utility: 'text-content-tertiary', cssVar: '--packt-content-tertiary' },
+  { property: 'Review count', utility: 'text-content-secondary', cssVar: '--packt-content-secondary' },
+]} />

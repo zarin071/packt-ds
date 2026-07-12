@@ -1,24 +1,7 @@
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+import type { Trigger } from '@radix-ui/react-tabs';
 
-export type TabVariant = 'default' | 'brand';
-
-export interface TabItem {
-  key: string;
-  label: string;
-  /** Optional icon displayed before the label. Always aria-hidden. */
+export interface TabProps extends ComponentPropsWithoutRef<typeof Trigger> {
+  /** Optional leading icon. Always aria-hidden — the tab label is the accessible name. */
   icon?: ReactNode;
-  disabled?: boolean;
-}
-
-export interface TabProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'dir' | 'defaultValue'> {
-  items: TabItem[];
-  variant?: TabVariant;
-  /** Controlled active tab key. */
-  activeKey?: string;
-  /** Default active tab key (uncontrolled). */
-  defaultActiveKey?: string;
-  /** Fired when a tab is selected. */
-  onChange?: (key: string) => void;
-  /** Accessible label for the tablist when no visible heading describes it. */
-  'aria-label'?: string;
 }

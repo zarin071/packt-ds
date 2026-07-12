@@ -31,6 +31,19 @@ export default defineConfig({
           },
         },
       },
+      {
+        // jsdom unit tests — the *.test.tsx files colocated with components.
+        // Run with `npm test` (see package.json), independent of the browser
+        // Storybook project above.
+        extends: true,
+        test: {
+          name: 'unit',
+          environment: 'jsdom',
+          globals: true,
+          include: ['src/**/*.test.{ts,tsx}'],
+          setupFiles: [path.join(dirname, 'vitest.setup.ts')],
+        },
+      },
     ],
   },
 });

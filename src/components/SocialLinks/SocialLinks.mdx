@@ -1,0 +1,33 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as SocialLinksStories from './SocialLinks.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={SocialLinksStories} />
+
+# SocialLinks
+
+A row of external social links (`github`, `twitter`, `linkedin`, `youtube`). Each link:
+
+- opens in a new tab with `rel="noopener noreferrer"` (no tab-nabbing, no referrer leak),
+- includes a visually-hidden **"(opens in new tab)"** in its accessible name so screen-reader users are warned the link leaves the page,
+- uses the decorative [Icon](?path=/docs/components-icon--docs) atom for the glyph (aria-hidden).
+
+## Playground
+
+<Canvas of={SocialLinksStories.Playground} />
+<Controls of={SocialLinksStories.Playground} />
+
+## Subset
+
+Pass only the platforms you need.
+
+<Canvas of={SocialLinksStories.Subset} />
+
+## Tokens used
+
+<TokenTable rows={[
+  { property: 'Icon', utility: 'text-content-secondary', cssVar: '--packt-content-secondary' },
+  { property: 'Hover text', utility: 'hover:text-brand-text-default', cssVar: '--packt-brand-text-default' },
+  { property: 'Hover background', utility: 'hover:bg-bg-hover', cssVar: '--packt-background-hovee' },
+  { property: 'Focus ring', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+]} />

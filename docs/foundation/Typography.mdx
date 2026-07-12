@@ -18,10 +18,10 @@ Font family: **Outfit** — `--packt-font-family-outfit`
       { name: 'Semibold', token: '--packt-weight-semibold', weight: 600 },
       { name: 'Bold',     token: '--packt-weight-bold',     weight: 700 },
     ].map(({ name, token, weight }) => (
-      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '12px 16px', borderRadius: 6, marginBottom: 2, background: '#f6f6f6' }}>
+      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '12px 16px', borderRadius: 6, marginBottom: 2, background: 'var(--packt-bg-page)' }}>
         <span style={{ fontWeight: weight, fontSize: 22, flex: 1 }}>Outfit {name}</span>
-        <code style={{ fontSize: 11, color: '#a6a6a6', marginRight: 16 }}>{token}</code>
-        <span style={{ width: 28, fontSize: 12, fontWeight: 600, color: '#4d4d4d', textAlign: 'right', flexShrink: 0 }}>{weight}</span>
+        <code style={{ fontSize: 11, color: 'var(--packt-content-disabled)', marginRight: 16 }}>{token}</code>
+        <span style={{ width: 28, fontSize: 12, fontWeight: 600, color: 'var(--packt-content-secondary)', textAlign: 'right', flexShrink: 0 }}>{weight}</span>
       </div>
     ))}
   </div>
@@ -38,10 +38,10 @@ Font family: **Outfit** — `--packt-font-family-outfit`
       { name: 'neg05', token: '--packt-letter-spacing-neg05', value: -0.5, label: '−0.5px', use: 'Heading L, medium text' },
       { name: 'none',  token: '--packt-letter-spacing-none',  value: 0,    label: '0px',    use: 'Body text, labels' },
     ].map(({ name, token, value, label, use }) => (
-      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderRadius: 6, marginBottom: 2, background: '#f6f6f6' }}>
+      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 16px', borderRadius: 6, marginBottom: 2, background: 'var(--packt-bg-page)' }}>
         <span style={{ letterSpacing: value, fontSize: 20, fontWeight: 600, flex: 1 }}>The quick brown fox</span>
-        <code style={{ fontSize: 11, color: '#a6a6a6', flexShrink: 0, marginRight: 8 }}>{token}</code>
-        <span style={{ width: 48, fontSize: 12, fontWeight: 600, color: '#4d4d4d', flexShrink: 0, textAlign: 'right' }}>{label}</span>
+        <code style={{ fontSize: 11, color: 'var(--packt-content-disabled)', flexShrink: 0, marginRight: 8 }}>{token}</code>
+        <span style={{ width: 48, fontSize: 12, fontWeight: 600, color: 'var(--packt-content-secondary)', flexShrink: 0, textAlign: 'right' }}>{label}</span>
       </div>
     ))}
   </div>
@@ -81,12 +81,12 @@ Font family: **Outfit** — `--packt-font-family-outfit`
       { name: 'Heading M',   size: 28, weight: 600, lh: 32,  ls: -1   },
       { name: 'Heading S',   size: 24, weight: 600, lh: 28,  ls: -1   },
     ].map(({ name, size, weight, lh, ls }) => (
-      <div key={name} style={{ padding: '16px', borderBottom: '1px solid #e4e4e4', overflow: 'hidden' }}>
+      <div key={name} style={{ padding: '16px', borderBottom: '1px solid var(--packt-border-default)', overflow: 'hidden' }}>
         <div style={{ fontSize: size, fontWeight: weight, lineHeight: `${lh}px`, letterSpacing: `${ls}px`, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {name}
         </div>
-        <div style={{ marginTop: 6, display: 'flex', gap: 20, fontSize: 11, color: '#a6a6a6' }}>
-          <code style={{ color: '#4d4d4d' }}>{size}px</code>
+        <div style={{ marginTop: 6, display: 'flex', gap: 20, fontSize: 11, color: 'var(--packt-content-disabled)' }}>
+          <code style={{ color: 'var(--packt-content-secondary)' }}>{size}px</code>
           <span>{lh}px line-height</span>
           <span>{weight === 700 ? 'Bold 700' : 'Semibold 600'}</span>
           <span>{ls}px tracking</span>
@@ -112,12 +112,12 @@ Font family: **Outfit** — `--packt-font-family-outfit`
       { name: 'Heading M',   size: 24, weight: 500, lh: 28, ls: -1   },
       { name: 'Heading S',   size: 20, weight: 500, lh: 24, ls: -1   },
     ].map(({ name, size, weight, lh, ls }) => (
-      <div key={name} style={{ padding: '16px', borderBottom: '1px solid #e4e4e4', overflow: 'hidden' }}>
+      <div key={name} style={{ padding: '16px', borderBottom: '1px solid var(--packt-border-default)', overflow: 'hidden' }}>
         <div style={{ fontSize: size, fontWeight: weight, lineHeight: `${lh}px`, letterSpacing: `${ls}px`, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {name}
         </div>
-        <div style={{ marginTop: 6, display: 'flex', gap: 20, fontSize: 11, color: '#a6a6a6' }}>
-          <code style={{ color: '#4d4d4d' }}>{size}px</code>
+        <div style={{ marginTop: 6, display: 'flex', gap: 20, fontSize: 11, color: 'var(--packt-content-disabled)' }}>
+          <code style={{ color: 'var(--packt-content-secondary)' }}>{size}px</code>
           <span>{lh}px line-height</span>
           <span>{weight === 700 ? 'Bold 700' : weight === 600 ? 'Semibold 600' : 'Medium 500'}</span>
           <span>{ls}px tracking</span>
@@ -145,12 +145,12 @@ Font family: **Outfit** — `--packt-font-family-outfit`
       { name: 'Medium S',   size: 12, weight: 500, lh: 16, ls: 0    },
       { name: 'Medium XS',  size: 10, weight: 500, lh: 14, ls: 0    },
     ].map(({ name, size, weight, lh, ls }) => (
-      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '10px 16px', borderBottom: '1px solid #e4e4e4' }}>
+      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '10px 16px', borderBottom: '1px solid var(--packt-border-default)' }}>
         <span style={{ fontSize: size, fontWeight: weight, lineHeight: `${lh}px`, letterSpacing: `${ls}px`, flex: 1 }}>
           The quick brown fox jumps over the lazy dog
         </span>
-        <div style={{ display: 'flex', gap: 16, fontSize: 11, color: '#a6a6a6', flexShrink: 0, textAlign: 'right' }}>
-          <code style={{ color: '#4d4d4d', width: 56 }}>{name}</code>
+        <div style={{ display: 'flex', gap: 16, fontSize: 11, color: 'var(--packt-content-disabled)', flexShrink: 0, textAlign: 'right' }}>
+          <code style={{ color: 'var(--packt-content-secondary)', width: 56 }}>{name}</code>
           <span style={{ width: 32 }}>{size}px</span>
           <span style={{ width: 28 }}>{weight}</span>
           <span style={{ width: 28 }}>{ls === 0 ? '0' : `${ls}px`}</span>

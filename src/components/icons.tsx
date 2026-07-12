@@ -105,3 +105,93 @@ export const SpinnerIcon = icon(
     clipRule="evenodd"
   />
 );
+
+// ---- Star icons (Rating) ----
+// Shape carries the meaning (filled / half / outline), never colour alone.
+
+const STAR_D =
+  'M8 1.75l1.86 3.767 4.157.604-3.008 2.933.71 4.14L8 11.24l-3.72 1.955.71-4.14L1.983 6.12l4.157-.604L8 1.75Z';
+
+export const StarIcon = icon(<path d={STAR_D} />);
+
+export function StarOutlineIcon(props: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.25"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d={STAR_D} />
+    </svg>
+  );
+}
+
+export function StarHalfIcon(props: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+      {...props}
+    >
+      {/* full outline */}
+      <path
+        d={STAR_D}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.25"
+        strokeLinejoin="round"
+      />
+      {/* left half filled */}
+      <path d={STAR_D} fill="currentColor" clipPath="inset(0 50% 0 0)" style={{ clipPath: 'inset(0 50% 0 0)' }} />
+    </svg>
+  );
+}
+
+// ---- Format icons (FormatBadge / PriceBlock) ----
+export const BookIcon = icon(
+  <path d="M4 2.5A1.5 1.5 0 0 0 2.5 4v8A1.5 1.5 0 0 0 4 13.5h8a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H4Zm7 1v7H4a.5.5 0 0 1-.5-.5V4a.5.5 0 0 1 .5-.5h7Zm0 8.5H4a.5.5 0 0 0 0 1h7v-1Z" />
+);
+
+export const PlayIcon = icon(
+  <path d="M5 3.868v8.264a.5.5 0 0 0 .757.429l6.882-4.132a.5.5 0 0 0 0-.858L5.757 3.44A.5.5 0 0 0 5 3.868Z" />
+);
+
+export const HeadphonesIcon = icon(
+  <path d="M8 2a5.5 5.5 0 0 0-5.5 5.5V11a1.5 1.5 0 0 0 1.5 1.5h.5A1.5 1.5 0 0 0 6 11V9.5A1.5 1.5 0 0 0 4.5 8H4v-.5a4 4 0 1 1 8 0V8h-.5A1.5 1.5 0 0 0 10 9.5V11a1.5 1.5 0 0 0 1.5 1.5h.5A1.5 1.5 0 0 0 13.5 11V7.5A5.5 5.5 0 0 0 8 2Z" />
+);
+
+// ---- Social / external-link icons (SocialLinks) ----
+export const ExternalLinkIcon = icon(
+  <path d="M6.5 3a.75.75 0 0 0 0 1.5h1.94L4.22 8.72a.75.75 0 1 0 1.06 1.06L9.5 5.56V7.5a.75.75 0 0 0 1.5 0v-3.75A.75.75 0 0 0 10.25 3H6.5Zm-3 1A1.5 1.5 0 0 0 2 5.5v6A1.5 1.5 0 0 0 3.5 13h6a1.5 1.5 0 0 0 1.5-1.5v-2a.75.75 0 0 0-1.5 0v2a.5.5 0 0 1-.5.5h-6a.5.5 0 0 1-.5-.5v-6a.5.5 0 0 1 .5-.5h2a.75.75 0 0 0 0-1.5h-2Z" />
+);
+
+export const GitHubIcon = icon(
+  <path
+    fillRule="evenodd"
+    clipRule="evenodd"
+    d="M8 1a7 7 0 0 0-2.213 13.641c.35.064.478-.152.478-.338 0-.166-.006-.607-.009-1.192-1.947.423-2.358-.938-2.358-.938-.319-.81-.778-1.026-.778-1.026-.636-.434.048-.425.048-.425.703.049 1.073.722 1.073.722.625 1.07 1.64.761 2.04.582.063-.453.244-.762.444-.937-1.554-.177-3.189-.777-3.189-3.456 0-.763.273-1.388.72-1.877-.072-.177-.312-.888.069-1.851 0 0 .587-.188 1.925.717A6.7 6.7 0 0 1 8 4.583c.595.003 1.194.08 1.753.236 1.336-.905 1.923-.717 1.923-.717.382.963.142 1.674.07 1.851.448.489.719 1.114.719 1.877 0 2.686-1.638 3.277-3.197 3.45.251.216.475.643.475 1.296 0 .936-.009 1.69-.009 1.92 0 .188.126.406.482.337A7 7 0 0 0 8 1Z"
+  />
+);
+
+export const TwitterIcon = icon(
+  <path d="M12.6 3H14l-3.06 3.5L14.5 13H11.7L9.5 10.11 6.98 13H5.58l3.27-3.74L4.5 3h2.87l1.99 2.63L11.83 3h.77Zm-.49 9.15h.78L6.93 3.8h-.83l6.01 8.35Z" />
+);
+
+export const LinkedInIcon = icon(
+  <path d="M13 1H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM5.34 12.67H3.67V6.33h1.67v6.34ZM4.5 5.6a.97.97 0 1 1 0-1.94.97.97 0 0 1 0 1.94Zm7.83 7.07h-1.66V9.6c0-.74-.01-1.69-1.03-1.69-1.03 0-1.19.8-1.19 1.63v3.13H6.79V6.33h1.6v.87h.02c.22-.42.77-.87 1.58-.87 1.69 0 2 1.11 2 2.56v3.78Z" />
+);
+
+export const YouTubeIcon = icon(
+  <path d="M14.7 5.2a1.75 1.75 0 0 0-1.23-1.24C12.38 3.67 8 3.67 8 3.67s-4.38 0-5.47.29A1.75 1.75 0 0 0 1.3 5.2 18.3 18.3 0 0 0 1 8a18.3 18.3 0 0 0 .3 2.8 1.75 1.75 0 0 0 1.23 1.24c1.09.29 5.47.29 5.47.29s4.38 0 5.47-.29a1.75 1.75 0 0 0 1.23-1.24A18.3 18.3 0 0 0 15 8a18.3 18.3 0 0 0-.3-2.8ZM6.6 10.1V5.9L10.25 8 6.6 10.1Z" />
+);

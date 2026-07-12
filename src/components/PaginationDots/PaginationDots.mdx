@@ -1,0 +1,28 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as PaginationDotsStories from './PaginationDots.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={PaginationDotsStories} />
+
+# PaginationDots
+
+Dot navigation for carousels and sliders. Each dot is a real `<button>` with `aria-label="Go to slide N"`, and the active dot carries `aria-current`.
+
+The active dot is also rendered as a wider pill — not just a colour change — so its state isn't communicated by colour alone.
+
+## Playground
+
+<Canvas of={PaginationDotsStories.Playground} />
+<Controls of={PaginationDotsStories.Playground} />
+
+## Positions
+
+<Canvas of={PaginationDotsStories.Positions} />
+
+## Tokens used
+
+<TokenTable rows={[
+  { property: 'Active dot', utility: 'bg-brand-bg-selected', cssVar: '--packt-brand-bg-selected' },
+  { property: 'Inactive dot', utility: 'bg-content-tertiary', cssVar: '--packt-content-tertiary' },
+  { property: 'Focus ring', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+]} />

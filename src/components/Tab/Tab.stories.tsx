@@ -1,50 +1,60 @@
-import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Tab } from './Tab';
+import { Tabs, Tab, TabList, TabPanel } from './Tab';
 import { InfoIcon, SearchIcon, FileIcon } from '../icons';
-
-const items = [
-  { key: 'overview', label: 'Overview' },
-  { key: 'curriculum', label: 'Curriculum' },
-  { key: 'reviews', label: 'Reviews' },
-  { key: 'disabled', label: 'Disabled', disabled: true },
-];
 
 const meta: Meta<typeof Tab> = {
   title: 'components/Tab',
   component: Tab,
   parameters: { layout: 'padded' },
-  argTypes: {
-    variant: { control: 'select', options: ['default', 'brand'] },
-  },
-  args: { items, variant: 'default' },
 };
 
 export default meta;
 type Story = StoryObj<typeof Tab>;
 
-const col: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 32, fontFamily: 'Outfit, sans-serif' };
-
-export const Playground: Story = {};
-
-export const Variants: Story = {
-  parameters: { controls: { disable: true } },
+export const Playground: Story = {
+  args: { value: 'overview', children: 'Overview' },
+  argTypes: {
+    children: { control: 'text' },
+    disabled: { control: 'boolean' },
+  },
   render: (args) => (
-    <div style={col}>
-      <Tab {...args} variant="default" />
-      <Tab {...args} variant="brand" />
-    </div>
+    <Tabs defaultValue="overview">
+      <TabList aria-label="Example tabs">
+        <Tab {...args} />
+        <Tab value="curriculum">Curriculum</Tab>
+        <Tab value="reviews">Reviews</Tab>
+      </TabList>
+    </Tabs>
   ),
 };
 
-export const WithIcons: Story = {
+export const WithPanels: Story = {
+  name: 'With panels',
   parameters: { controls: { disable: true } },
-  args: {
-    items: [
-      { key: 'overview', label: 'Overview', icon: <InfoIcon /> },
-      { key: 'search', label: 'Search', icon: <SearchIcon /> },
-      { key: 'files', label: 'Files', icon: <FileIcon /> },
-    ],
-    variant: 'brand',
-  },
+  render: () => (
+    <Tabs defaultValue="overview" style={{ width: 480 }}>
+      <TabList aria-label="Course sections">
+        <Tab value="overview" icon={<InfoIcon />}>Overview</Tab>
+        <Tab value="curriculum" icon={<FileIcon />}>Curriculum</Tab>
+        <Tab value="reviews" icon={<SearchIcon />}>Reviews</Tab>
+      </TabList>
+      <TabPanel value="overview">A high-level summary of the course.</TabPanel>
+      <TabPanel value="curriculum">The full lesson-by-lesson breakdown.</TabPanel>
+      <TabPanel value="reviews">What learners are saying.</TabPanel>
+    </Tabs>
+  ),
+};
+
+export const DisabledTab: Story = {
+  name: 'Disabled tab',
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <Tabs defaultValue="overview">
+      <TabList aria-label="Example tabs">
+        <Tab value="overview">Overview</Tab>
+        <Tab value="curriculum">Curriculum</Tab>
+        <Tab value="locked" disabled>Locked</Tab>
+      </TabList>
+    </Tabs>
+  ),
 };

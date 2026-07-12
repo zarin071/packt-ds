@@ -1,4 +1,4 @@
-import { Meta, Canvas, Controls, Unstyled } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
 import * as TabStories from './Tab.stories';
 import { TokenTable } from '../../lib/TokenTable';
 
@@ -6,66 +6,46 @@ import { TokenTable } from '../../lib/TokenTable';
 
 # Tab
 
-A tab list built on Radix Tabs for real roving-tabindex keyboard navigation (arrow keys, Home/End) — renders only the tablist itself, so pair each item's `key` with content you manage elsewhere.
+A single tab — a styled Radix `Tabs.Trigger` for use inside Radix Tabs. Compose it with the `Tabs`, `TabList`, and `TabPanel` primitives (all exported from the same module). Radix handles roving-tabindex keyboard navigation (arrow keys, Home/End) and the ARIA wiring; the **active tab uses Brand tokens**.
 
 ## Usage
 
 ```tsx
-import { Tab } from 'packt-ds';
+import { Tabs, Tab, TabList, TabPanel } from 'packt-ds';
 
-<Tab
-  items={[
-    { key: 'overview', label: 'Overview' },
-    { key: 'reviews', label: 'Reviews' },
-  ]}
-  onChange={(key) => setActiveKey(key)}
-/>
+<Tabs defaultValue="overview">
+  <TabList aria-label="Course sections">
+    <Tab value="overview">Overview</Tab>
+    <Tab value="curriculum" icon={<FileIcon />}>Curriculum</Tab>
+  </TabList>
+  <TabPanel value="overview">…</TabPanel>
+  <TabPanel value="curriculum">…</TabPanel>
+</Tabs>
 ```
-
----
 
 ## Playground
 
 <Canvas of={TabStories.Playground} />
 <Controls of={TabStories.Playground} />
 
----
+## With panels
 
-## Variants
+<Canvas of={TabStories.WithPanels} />
 
-<Canvas of={TabStories.Variants} />
+## Disabled tab
 
----
-
-## With icons
-
-<Canvas of={TabStories.WithIcons} />
-
----
-
-## Theming
-
-Wrap the tab list (or an ancestor) in `data-theme="dark"` when rendering on a dark surface — the component reads from the theme-scoped color tokens automatically, no `theme` prop needed.
-
-```tsx
-<div data-theme="dark">
-  <Tab items={items} variant="brand" />
-</div>
-```
-
----
+<Canvas of={TabStories.DisabledTab} />
 
 ## Tokens used
 
 Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
 
 <TokenTable rows={[
-  { property: 'background hovee', utility: 'bg-bg-hover', cssVar: '--packt-background-hovee' },
-  { property: 'border strong', utility: 'bg-border-strong', cssVar: '--packt-border-strong' },
-  { property: 'brand border default', utility: 'bg-brand-border-default', cssVar: '--packt-brand-border-default' },
-  { property: 'border default', utility: 'border-border-default', cssVar: '--packt-border-default' },
-  { property: 'brand border default', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
-  { property: 'brand text default', utility: 'text-brand-text-default', cssVar: '--packt-brand-text-default' },
-  { property: 'content primary', utility: 'text-content-primary', cssVar: '--packt-content-primary' },
-  { property: 'content tertiary', utility: 'text-content-tertiary', cssVar: '--packt-content-tertiary' },
+  { property: 'Inactive tab text', utility: 'text-content-tertiary', cssVar: '--packt-content-tertiary' },
+  { property: 'Hover text', utility: 'hover:text-content-primary', cssVar: '--packt-content-primary' },
+  { property: 'Hover background', utility: 'hover:bg-bg-hover', cssVar: '--packt-background-hovee' },
+  { property: 'Active text', utility: 'text-brand-text-default', cssVar: '--packt-brand-text-default' },
+  { property: 'Active underline', utility: 'after:bg-brand-border-default', cssVar: '--packt-brand-border-default' },
+  { property: 'List divider', utility: 'border-border-default', cssVar: '--packt-border-default' },
+  { property: 'Focus ring', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
 ]} />

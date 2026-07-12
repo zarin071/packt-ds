@@ -18,7 +18,26 @@ const meta: Meta<typeof Breadcrumb> = {
 export default meta;
 type Story = StoryObj<typeof Breadcrumb>;
 
-export const Playground: Story = {};
+export const Playground: Story = {
+  args: {
+    items: [{
+      "label": "Home",
+      "href": "/"
+    }, {
+      "label": "Courses",
+      "href": "/courses"
+    }, {
+      "label": "Web Development",
+      "href": "/courses/web-dev"
+    }, {
+      "label": "React Fundamentals",
+      "active": true
+    }, {
+      "label": "React Fundamentals",
+      "active": true
+    }]
+  }
+};
 
 export const Short: Story = {
   parameters: { controls: { disable: true } },

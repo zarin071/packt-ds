@@ -1,0 +1,36 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as PriceBlockStories from './PriceBlock.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={PriceBlockStories} />
+
+# PriceBlock
+
+A single-select list of purchasable formats — each row is an icon + label + [Price](?path=/docs/components-price--docs). Built on native radio inputs inside a `fieldset`, so keyboard arrow-key selection and grouping semantics come for free.
+
+The selected row is highlighted with Brand `bg-default` **and** a check icon, so the choice isn't communicated by colour alone.
+
+## Playground
+
+<Canvas of={PriceBlockStories.Playground} />
+<Controls of={PriceBlockStories.Playground} />
+
+## No selection
+
+`selectedFormat` is optional — omit it for an initially unselected group.
+
+<Canvas of={PriceBlockStories.NoSelection} />
+
+## Tokens used
+
+The Price amounts inherit the [Price](?path=/docs/components-price--docs) atom's tokens. The row selection styling uses:
+
+<TokenTable rows={[
+  { property: 'Selected fill', utility: 'bg-brand-bg-default', cssVar: '--packt-brand-bg-default' },
+  { property: 'Selected border / text', utility: 'border-brand-border-default', cssVar: '--packt-brand-border-default' },
+  { property: 'Selected label', utility: 'text-brand-text-default', cssVar: '--packt-brand-text-default' },
+  { property: 'Unselected surface', utility: 'bg-bg-surface', cssVar: '--packt-background-surface' },
+  { property: 'Unselected border', utility: 'border-border-default', cssVar: '--packt-border-default' },
+  { property: 'Hover', utility: 'hover:bg-bg-hover', cssVar: '--packt-background-hovee' },
+  { property: 'Focus ring', utility: 'ring-focus-ring', cssVar: '--packt-brand-border-default' },
+]} />

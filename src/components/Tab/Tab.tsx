@@ -1,20 +1,35 @@
-import { forwardRef, type ElementRef } from 'react';
+import { forwardRef, type ComponentPropsWithoutRef, type ElementRef } from 'react';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 import type { TabProps } from './Tab.types';
 
-export const tabListVariants = cva('flex items-end gap-0 border-b border-border-default font-sans', {
-  variants: {
-    variant: {
-      default: '',
-      brand: '',
-    },
-  },
-  defaultVariants: {
-    variant: 'default',
-  },
-});
+/**
+ * Tabs primitives, built on Radix Tabs for real roving-tabindex keyboard
+ * navigation (arrow keys, Home/End) and correct ARIA wiring. Compose them:
+ *
+ * ```tsx
+ * <Tabs defaultValue="overview">
+ *   <TabList aria-label="Course sections">
+ *     <Tab value="overview">Overview</Tab>
+ *     <Tab value="curriculum" icon={<FileIcon />}>Curriculum</Tab>
+ *   </TabList>
+ *   <TabPanel value="overview">…</TabPanel>
+ *   <TabPanel value="curriculum">…</TabPanel>
+ * </Tabs>
+ * ```
+ */
+export const Tabs = TabsPrimitive.Root;
+
+export const tabListVariants = cva('inline-flex items-end gap-0 border-b border-border-default font-sans');
+
+export const TabList = forwardRef<
+  ElementRef<typeof TabsPrimitive.List>,
+  ComponentPropsWithoutRef<typeof TabsPrimitive.List>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.List ref={ref} className={cn(tabListVariants(), className)} {...props} />
+));
+TabList.displayName = 'TabList';
 
 export const tabTriggerVariants = cva(
   [
@@ -23,81 +38,45 @@ export const tabTriggerVariants = cva(
     'hover:bg-bg-hover hover:text-content-primary',
     'disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
-    "after:absolute after:inset-x-0 after:-bottom-px after:h-m after:rounded-t-xs after:bg-transparent after:content-['']",
-    'data-[state=active]:font-semibold data-[state=active]:text-content-primary',
-    'data-[state=active]:after:bg-border-strong',
-  ].join(' '),
-  {
-    variants: {
-      variant: {
-        default: '',
-        brand: 'data-[state=active]:text-brand-text-default data-[state=active]:after:bg-brand-border-default',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  }
+    "after:absolute after:inset-x-0 after:-bottom-px after:h-[2px] after:rounded-t-xs after:bg-transparent after:content-['']",
+    // Active state uses Brand tokens.
+    'data-[state=active]:font-semibold data-[state=active]:text-brand-text-default',
+    'data-[state=active]:after:bg-brand-border-default',
+  ].join(' ')
 );
 
 /**
- * Tab molecule — a tab list built on Radix Tabs for real roving-tabindex
- * keyboard navigation (arrow keys, Home/End). This component renders only
- * the tablist itself (no content panels); pair each tab's `key` with your
- * own content elsewhere.
- *
- * Tokens: `border-border-default`/`border-strong` (divider + default indicator),
- * `brand-border-default`/`brand-text-default` (brand indicator + active text),
- * `content-tertiary`/`content-primary` (inactive/active text), `bg-hover` (hover),
- * `focus-ring`.
+ * A single tab — a styled Radix `Tabs.Trigger`. Must be rendered inside a
+ * `TabList` within a `Tabs` root. Its `value` links it to a `TabPanel`.
  */
-export const Tab = forwardRef<ElementRef<typeof TabsPrimitive.Root>, TabProps>(
-  (
-    {
-      items,
-      variant = 'default',
-      activeKey: controlledKey,
-      defaultActiveKey,
-      onChange,
-      className,
-      'aria-label': ariaLabel = 'Tab navigation',
-      ...rest
-    },
-    ref
-  ) => {
-    const isControlled = controlledKey !== undefined;
-
-    return (
-      <TabsPrimitive.Root
-        ref={ref}
-        value={isControlled ? controlledKey : undefined}
-        defaultValue={!isControlled ? defaultActiveKey ?? items[0]?.key : undefined}
-        onValueChange={onChange}
-        className={cn('font-sans', className)}
-        {...rest}
-      >
-        <TabsPrimitive.List className={tabListVariants({ variant })} aria-label={ariaLabel}>
-          {items.map((item) => (
-            <TabsPrimitive.Trigger
-              key={item.key}
-              value={item.key}
-              disabled={item.disabled}
-              className={tabTriggerVariants({ variant })}
-            >
-              {item.icon && (
-                <span className="inline-flex text-base" aria-hidden="true">
-                  {item.icon}
-                </span>
-              )}
-              {item.label}
-            </TabsPrimitive.Trigger>
-          ))}
-        </TabsPrimitive.List>
-      </TabsPrimitive.Root>
-    );
-  }
+export const Tab = forwardRef<ElementRef<typeof TabsPrimitive.Trigger>, TabProps>(
+  ({ className, icon, children, ...props }, ref) => (
+    <TabsPrimitive.Trigger ref={ref} className={cn(tabTriggerVariants(), className)} {...props}>
+      {icon && (
+        <span className="inline-flex text-base [&>svg]:size-4" aria-hidden="true">
+          {icon}
+        </span>
+      )}
+      {children}
+    </TabsPrimitive.Trigger>
+  )
 );
-
 Tab.displayName = 'Tab';
 
-export type { TabProps, TabItem, TabVariant } from './Tab.types';
+export const TabPanel = forwardRef<
+  ElementRef<typeof TabsPrimitive.Content>,
+  ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Content
+    ref={ref}
+    className={cn(
+      'pt-l font-sans text-content-primary',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
+      className
+    )}
+    {...props}
+  />
+));
+TabPanel.displayName = 'TabPanel';
+
+export type { TabProps } from './Tab.types';
