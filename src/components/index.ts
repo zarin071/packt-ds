@@ -98,3 +98,40 @@ export type { CategoryTileProps } from './CategoryTile';
 
 export { SocialLinks } from './SocialLinks';
 export type { SocialLinksProps, SocialLink, SocialPlatform } from './SocialLinks';
+
+export { FormField } from './FormField';
+export type { FormFieldProps } from './FormField';
+
+// Organisms
+export { ProductCard } from './ProductCard';
+export type { ProductCardProps } from './ProductCard';
+
+export { ProductCarouselSection } from './ProductCarouselSection';
+export type { ProductCarouselSectionProps } from './ProductCarouselSection';
+
+export { SiteHeader } from './SiteHeader';
+export type { SiteHeaderProps, SiteHeaderLink } from './SiteHeader';
+
+export { CategoryNav } from './CategoryNav';
+export type { CategoryNavProps, CategoryNavItem } from './CategoryNav';
+
+export { HeroCarousel } from './HeroCarousel';
+export type { HeroCarouselProps, HeroSlide } from './HeroCarousel';
+
+export { AuthModal } from './AuthModal';
+export type { AuthModalProps } from './AuthModal';
+
+export { CategoryGrid } from './CategoryGrid';
+export type { CategoryGridProps, CategoryGridItem } from './CategoryGrid';
+
+export { FeatureSpotlight } from './FeatureSpotlight';
+export type { FeatureSpotlightProps } from './FeatureSpotlight';
+
+export { AuthorCard } from './AuthorCard';
+export type { AuthorCardProps } from './AuthorCard';
+
+export { AuthCTA } from './AuthCTA';
+export type { AuthCTAProps } from './AuthCTA';
+
+export { SiteFooter } from './SiteFooter';
+export type { SiteFooterProps, FooterColumn } from './SiteFooter';

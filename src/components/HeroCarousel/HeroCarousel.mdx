@@ -1,0 +1,16 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as HeroCarouselStories from './HeroCarousel.stories';
+
+<Meta of={HeroCarouselStories} />
+
+# HeroCarousel
+
+Full-width promo slides with scroll-snap, arrow [IconButtons](?path=/docs/components-iconbutton--docs), and [PaginationDots](?path=/docs/molecules-paginationdots--docs).
+
+- `aria-roledescription="carousel"` on the region; each slide is a labelled `group` ("N of M").
+- **No autoplay** — slides move only on user action, so no pause control is needed and nothing steals focus.
+
+## Playground
+
+<Canvas of={HeroCarouselStories.Playground} />
+<Controls of={HeroCarouselStories.Playground} />

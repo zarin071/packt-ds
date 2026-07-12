@@ -146,6 +146,13 @@ Never hardcode a colour, hex value, or `rgba()` in a component — not in a clas
 
 If a token you need isn't mapped into the Tailwind theme yet, add it to `src/styles/tailwind.css` (and to `src/tokens/tokens.theme.css` first, if it needs a light/dark alias) rather than reaching for an arbitrary hex value. Non-color dimensions without a named token (e.g. component heights) may use Tailwind's default numeric scale (`h-10`, `gap-2`, etc.) — the "never hardcode" rule is specifically about colour.
 
+### ⚠️ `max-w-*` / `w-*` t-shirt sizes are shadowed by our spacing tokens
+
+The token bridge defines a named **spacing** scale (`--spacing-2xs … --spacing-2xl` in `src/styles/tailwind.css`). In Tailwind v4 the spacing namespace also feeds width utilities, so those custom keys **override** Tailwind's built-in `max-w-xs/sm/md/lg/xl…` container scale. The result is silent and wrong: `max-w-xl` resolves to `var(--spacing-xl)` = **24px**, not 36rem — so a paragraph capped with `max-w-xl` collapses to one word per line.
+
+- **Do not** use the t-shirt container widths (`max-w-xs`, `max-w-sm`, `max-w-md`, `max-w-lg`, `max-w-xl`, `max-w-2xl`, and the same `w-*` suffixes). They no longer mean what the Tailwind docs say.
+- **Do** use an explicit arbitrary value for prose/container widths: `max-w-[36rem]`, `max-w-[320px]`, `w-[480px]`. Numeric width utilities (`w-64`, `w-full`, `max-w-full`, `max-w-none`) are unaffected and fine.
+
 ---
 
 ## Prop defaults

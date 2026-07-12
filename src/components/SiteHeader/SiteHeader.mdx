@@ -1,0 +1,17 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as SiteHeaderStories from './SiteHeader.stories';
+
+<Meta of={SiteHeaderStories} />
+
+# SiteHeader
+
+Logo, primary nav, [SearchBar](?path=/docs/components-searchbar--docs), and account/cart [IconButtons](?path=/docs/components-iconbutton--docs).
+
+On small screens the nav collapses into a **drawer built on Radix Dialog** — focus is trapped inside while open, **Escape closes it**, and focus returns to the menu button on close, per the overlay accessibility rules.
+
+The cart button's accessible name includes the count ("Cart, 3 items"); the visual badge is `aria-hidden`.
+
+## Playground
+
+<Canvas of={SiteHeaderStories.Playground} />
+<Controls of={SiteHeaderStories.Playground} />

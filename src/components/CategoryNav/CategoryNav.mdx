@@ -1,0 +1,13 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as CategoryNavStories from './CategoryNav.stories';
+
+<Meta of={CategoryNavStories} />
+
+# CategoryNav
+
+A horizontally scrollable strip of category links inside a real `<nav>` landmark. The active category carries `aria-current="page"` and is the only filled pill.
+
+## Playground
+
+<Canvas of={CategoryNavStories.Playground} />
+<Controls of={CategoryNavStories.Playground} />

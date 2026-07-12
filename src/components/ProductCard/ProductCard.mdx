@@ -1,0 +1,27 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as ProductCardStories from './ProductCard.stories';
+
+<Meta of={ProductCardStories} />
+
+# ProductCard
+
+A full storefront product card composing [Rating](?path=/docs/components-rating--docs), [FormatBadge](?path=/docs/molecules-formatbadge--docs), [PriceBlock](?path=/docs/molecules-priceblock--docs), and [Button](?path=/docs/components-button--docs).
+
+- **Cover** renders at a fixed 3:4 aspect ratio and lazy-loads (`loading="lazy"`).
+- **Title** is clamped to two lines (`line-clamp-2`) so card heights stay aligned in grids; the full title is available via the `title` attribute.
+- **Add to cart** shows the Button's loading state while an async `onAddToCart` is in flight.
+
+## Playground
+
+<Canvas of={ProductCardStories.Playground} />
+<Controls of={ProductCardStories.Playground} />
+
+## Async add to cart
+
+Click the button — it stays in its loading state until the (simulated 1.5 s) promise resolves.
+
+<Canvas of={ProductCardStories.AsyncAddToCart} />
+
+## Tokens used
+
+Colours all come from the composed atoms — see their docs. The card shell itself uses `bg-bg-surface`, `border-border-default`, and `bg-bg-page` behind the cover while it loads.

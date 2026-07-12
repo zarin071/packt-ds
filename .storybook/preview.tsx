@@ -3,10 +3,10 @@ import '../src/tokens/tokens.light.css';
 import '../src/tokens/tokens.dark.css';
 import '../src/components/tokens.helpers.css';
 import '../src/styles/tailwind.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import type { Preview } from '@storybook/react';
 import { DocsContainer } from '@storybook/addon-docs/blocks';
-import { addons, useGlobals } from 'storybook/preview-api';
+import { addons } from 'storybook/preview-api';
 
 /**
  * Module-level channel listener.
@@ -78,9 +78,8 @@ const SB_DARK = {
 // Storybook-owned elements (prose, code blocks, tables) adapt too.
 // ---------------------------------------------------------------------------
 function ThemedDocsContainer({ children, context, ...rest }: any) {
-  const [globals] = useGlobals();
-  const isDark = globals?.theme === 'dark';
-  const theme  = isDark ? 'dark' : 'light';
+  const theme  = (context?.globals?.theme as string) === 'dark' ? 'dark' : 'light';
+  const isDark = theme === 'dark';
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);

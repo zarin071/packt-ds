@@ -1,0 +1,13 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as AuthorCardStories from './AuthorCard.stories';
+
+<Meta of={AuthorCardStories} />
+
+# AuthorCard
+
+[Avatar](?path=/docs/components-avatar--docs) + name, role, three-line-clamped bio, and [SocialLinks](?path=/docs/molecules-sociallinks--docs). The social list's accessible name includes the author ("Juntao Qiu on social media").
+
+## Playground
+
+<Canvas of={AuthorCardStories.Playground} />
+<Controls of={AuthorCardStories.Playground} />

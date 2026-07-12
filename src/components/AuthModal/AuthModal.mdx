@@ -1,0 +1,17 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as AuthModalStories from './AuthModal.stories';
+
+<Meta of={AuthModalStories} />
+
+# AuthModal
+
+A sign-up dialog built on **Radix Dialog** — focus is trapped while open, **Escape closes it**, focus returns to the trigger on close, and the scrim uses the overlay token.
+
+Composes [FormField](?path=/docs/molecules-formfield--docs) for email and password, plus the password-checklist pattern: every requirement renders an **icon + text** — a filled check when met, a minus when not — with a visually-hidden "Met / Not met" prefix. State is never communicated by colour alone.
+
+The submit button stays disabled until every requirement is met.
+
+## Playground
+
+<Canvas of={AuthModalStories.Playground} />
+<Controls of={AuthModalStories.Playground} />

@@ -1,0 +1,28 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as FeatureSpotlightStories from './FeatureSpotlight.stories';
+import { TokenTable } from '../../lib/TokenTable';
+
+<Meta of={FeatureSpotlightStories} />
+
+# FeatureSpotlight
+
+A promotional band for hub content. The root carries **`data-hub="packt"`**, and every colour uses the `hub-*` utilities, so the section renders in **Hub-Packt blue** instead of brand orange.
+
+## Playground
+
+<Canvas of={FeatureSpotlightStories.Playground} />
+<Controls of={FeatureSpotlightStories.Playground} />
+
+## With media
+
+<Canvas of={FeatureSpotlightStories.WithMedia} />
+
+## Tokens used
+
+<TokenTable rows={[
+  { property: 'Band fill', utility: 'bg-hub-tag-bg', cssVar: '--packt-hub-tag-bg-default' },
+  { property: 'Band border', utility: 'border-hub-border-default', cssVar: '--packt-hub-border-default' },
+  { property: 'Eyebrow', utility: 'text-hub-text-default', cssVar: '--packt-hub-text-default' },
+  { property: 'CTA fill', utility: 'bg-hub-bg-selected', cssVar: '--packt-hub-bg-selected' },
+  { property: 'CTA text', utility: 'text-hub-text-on-hub', cssVar: '--packt-hub-text-on-brand' },
+]} />
