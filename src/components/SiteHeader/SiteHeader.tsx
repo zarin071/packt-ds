@@ -55,7 +55,7 @@ export const SiteHeader = forwardRef<HTMLElement, SiteHeaderProps>(
                         <a
                           href={link.href}
                           className={cn(
-                            'block rounded-m px-m py-s text-sm font-medium text-content-primary no-underline',
+                            'block rounded-md px-m py-s text-sm font-medium text-content-primary no-underline',
                             'hover:bg-bg-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring'
                           )}
                         >
@@ -84,7 +84,7 @@ export const SiteHeader = forwardRef<HTMLElement, SiteHeaderProps>(
                   <a
                     href={link.href}
                     className={cn(
-                      'rounded-m px-m py-s text-sm font-medium text-content-secondary no-underline transition-colors',
+                      'rounded-md px-m py-s text-sm font-medium text-content-secondary no-underline transition-colors',
                       'hover:bg-bg-hover hover:text-content-primary',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring'
                     )}

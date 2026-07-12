@@ -40,7 +40,7 @@ export const HeroCarousel = forwardRef<HTMLElement, HeroCarouselProps>(
         <div
           ref={trackRef}
           onScroll={handleScroll}
-          className="flex snap-x snap-mandatory overflow-x-auto rounded-l"
+          className="flex snap-x snap-mandatory overflow-x-auto rounded-lg"
         >
           {slides.map((slide, index) => (
             <div

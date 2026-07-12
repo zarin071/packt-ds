@@ -7,7 +7,7 @@ import type { SelectProps } from './Select.types';
 
 export const selectTriggerVariants = cva(
   [
-    'flex w-full items-center justify-between gap-xs rounded-s border bg-bg-surface text-content-primary transition-colors',
+    'flex w-full items-center justify-between gap-xs rounded-sm border bg-bg-surface text-content-primary transition-colors',
     'data-[placeholder]:text-content-tertiary',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
     'disabled:cursor-not-allowed disabled:bg-bg-disabled disabled:text-content-disabled',
@@ -103,7 +103,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Sel
           </SelectPrimitive.Trigger>
           <SelectPrimitive.Portal>
             <SelectPrimitive.Content
-              className="z-50 overflow-hidden rounded-s border border-border-default bg-bg-surface text-content-primary"
+              className="z-50 overflow-hidden rounded-sm border border-border-default bg-bg-surface text-content-primary"
               position="popper"
               sideOffset={4}
             >

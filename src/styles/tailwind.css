@@ -118,10 +118,16 @@
 
   /* Radius */
   --radius-none: var(--packt-radius-none);
+  /*
+   * Radius keys use xs/sm/md/lg (NOT single letters). In Tailwind v4
+   * `rounded-l` = left side and `rounded-s` = start side (built-in logical
+   * utilities), so a `--radius-l`/`--radius-s` token collides with them and
+   * produces half-rounded corners. xs/sm/md/lg don't collide with any side.
+   */
   --radius-xs: var(--packt-radius-xs);
-  --radius-s: var(--packt-radius-s);
-  --radius-m: var(--packt-radius-m);
-  --radius-l: var(--packt-radius-l);
+  --radius-sm: var(--packt-radius-s);
+  --radius-md: var(--packt-radius-m);
+  --radius-lg: var(--packt-radius-l);
   --radius-pill: var(--packt-radius-pill);
   --radius-circle: var(--packt-radius-circle);
 
@@ -133,4 +139,8 @@
   --spacing-l: var(--packt-space-l);
   --spacing-xl: var(--packt-space-xl);
   --spacing-2xl: var(--packt-space-2xl);
+  --spacing-3xl: var(--packt-space-3xl);
+  --spacing-4xl: var(--packt-space-4xl);
+  --spacing-5xl: var(--packt-space-5xl);
+  --spacing-6xl: var(--packt-space-6xl);
 }

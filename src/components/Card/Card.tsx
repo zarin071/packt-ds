@@ -5,7 +5,7 @@ import type { CardProps } from './Card.types';
 
 export const cardVariants = cva(
   [
-    'flex flex-col overflow-hidden rounded-m border border-border-default bg-bg-surface font-sans',
+    'flex flex-col overflow-hidden rounded-md border border-border-default bg-bg-surface font-sans',
     'shadow-sm',
   ].join(' '),
   {

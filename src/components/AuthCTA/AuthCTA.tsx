@@ -25,7 +25,7 @@ export const AuthCTA = forwardRef<HTMLElement, AuthCTAProps>(
       ref={ref}
       aria-label={title}
       className={cn(
-        'flex w-full flex-col items-start gap-l rounded-l border border-brand-border-default bg-brand-bg-default p-2xl font-sans md:flex-row md:items-center',
+        'flex w-full flex-col items-start gap-l rounded-lg border border-brand-border-default bg-brand-bg-default p-2xl font-sans md:flex-row md:items-center',
         className
       )}
       {...props}

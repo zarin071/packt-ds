@@ -52,16 +52,18 @@ export const ProductCard = forwardRef<HTMLElement, ProductCardProps>(
       <article
         ref={ref}
         className={cn(
-          'flex w-full flex-col overflow-hidden rounded-l border border-border-default bg-bg-surface font-sans',
+          'flex w-full flex-col overflow-hidden rounded-lg border border-border-default bg-bg-surface font-sans',
           className
         )}
         {...props}
       >
-        <div className="aspect-[3/4] w-full overflow-hidden bg-bg-page">
-          <img src={coverSrc} alt={coverAlt} loading="lazy" className="size-full object-cover" />
+        <div className="p-l pb-0">
+          <div className="aspect-[4/3] w-full overflow-hidden rounded-md bg-bg-page">
+            <img src={coverSrc} alt={coverAlt} loading="lazy" className="size-full object-cover" />
+          </div>
         </div>
 
-        <div className="flex flex-1 flex-col gap-s p-l">
+        <div className="flex flex-1 flex-col gap-s p-l pt-m">
           <h3 className="line-clamp-2 text-base font-semibold leading-6 text-content-primary" title={title}>
             {title}
           </h3>

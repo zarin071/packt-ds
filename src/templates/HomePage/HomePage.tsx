@@ -81,13 +81,13 @@ export function HomePage({ data }: HomePageProps) {
         {/* Countdown strip */}
         <section
           aria-label={data.saleLabel}
-          className="flex flex-col items-center gap-l rounded-l bg-brand-bg-selected px-2xl py-l text-center md:flex-row md:justify-between md:text-left"
+          className="flex flex-col items-center gap-l rounded-lg bg-brand-bg-selected px-2xl py-l text-center md:flex-row md:justify-between md:text-left"
         >
           <div className="flex flex-col gap-2xs">
             <p className="m-0 text-lg font-bold text-brand-text-on-brand">{data.saleLabel}</p>
             <p className="m-0 text-sm text-brand-text-on-brand opacity-90">Ends soon — don't miss out.</p>
           </div>
-          <div className="rounded-m bg-bg-surface px-l py-m">
+          <div className="rounded-md bg-bg-surface px-l py-m">
             <CountdownTimer endsAt={data.saleEndsAt} />
           </div>
           <Button asChild variant="secondary">
@@ -138,7 +138,7 @@ export function HomePage({ data }: HomePageProps) {
         </div>
 
         {/* Partners strip */}
-        <section aria-label={data.partnersLabel} className="flex flex-col items-center gap-l rounded-l border border-border-default bg-bg-surface px-2xl py-xl">
+        <section aria-label={data.partnersLabel} className="flex flex-col items-center gap-l rounded-lg border border-border-default bg-bg-surface px-2xl py-xl">
           <p className="m-0 text-xs font-semibold uppercase tracking-wide text-content-tertiary">{data.partnersLabel}</p>
           <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-2xl p-0">
             {data.partners.map((partner) => (

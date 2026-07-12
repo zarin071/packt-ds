@@ -5,7 +5,7 @@ import type { InputProps } from './Input.types';
 
 export const inputVariants = cva(
   [
-    'flex w-full rounded-m border bg-bg-surface text-content-primary transition-colors',
+    'flex w-full rounded-md border bg-bg-surface text-content-primary transition-colors',
     'placeholder:text-content-tertiary',
     'focus-visible:outline-none focus-visible:ring-2',
     'disabled:cursor-not-allowed disabled:bg-bg-disabled disabled:text-content-disabled',

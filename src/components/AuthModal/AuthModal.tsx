@@ -56,7 +56,7 @@ export function AuthModal({
         <Dialog.Content
           className={cn(
             'fixed left-1/2 top-1/2 w-[min(92vw,420px)] -translate-x-1/2 -translate-y-1/2',
-            'flex flex-col gap-l rounded-l border border-border-default bg-bg-surface p-2xl font-sans shadow-xl',
+            'flex flex-col gap-l rounded-lg border border-border-default bg-bg-surface p-2xl font-sans shadow-xl',
             'focus-visible:outline-none'
           )}
         >

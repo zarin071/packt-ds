@@ -6,7 +6,7 @@ import type { AlertProps, AlertVariant } from './Alert.types';
 
 export const alertVariants = cva(
   [
-    'flex items-start gap-m rounded-m border p-l font-sans text-content-primary',
+    'flex items-start gap-m rounded-md border p-l font-sans text-content-primary',
   ].join(' '),
   {
     variants: {

@@ -16,7 +16,7 @@ export const FeatureSpotlight = forwardRef<HTMLElement, FeatureSpotlightProps>(
       data-hub={hub}
       aria-label={title}
       className={cn(
-        'flex w-full flex-col gap-2xl overflow-hidden rounded-l border border-hub-border-default bg-hub-tag-bg p-2xl font-sans md:flex-row md:items-center',
+        'flex w-full flex-col gap-2xl overflow-hidden rounded-lg border border-hub-border-default bg-hub-tag-bg p-2xl font-sans md:flex-row md:items-center',
         className
       )}
       {...props}

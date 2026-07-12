@@ -12,7 +12,7 @@ export const AuthorCard = forwardRef<HTMLElement, AuthorCardProps>(
     <article
       ref={ref}
       className={cn(
-        'flex w-full flex-col gap-m rounded-l border border-border-default bg-bg-surface p-l font-sans',
+        'flex w-full flex-col gap-m rounded-lg border border-border-default bg-bg-surface p-l font-sans',
         className
       )}
       {...props}

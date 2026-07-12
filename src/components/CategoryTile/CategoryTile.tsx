@@ -17,14 +17,14 @@ export const CategoryTile = forwardRef<HTMLAnchorElement, CategoryTileProps>(
         ref={ref}
         href={href}
         className={cn(
-          'group flex w-full flex-col gap-s rounded-l border border-border-default bg-bg-surface p-l',
+          'group flex w-full flex-col gap-s rounded-lg border border-border-default bg-bg-surface p-l',
           'no-underline transition-colors hover:bg-bg-hover',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
           className
         )}
         {...props}
       >
-        <span className="inline-flex size-10 items-center justify-center rounded-m bg-brand-bg-default text-brand-icon-default">
+        <span className="inline-flex size-10 items-center justify-center rounded-md bg-brand-bg-default text-brand-icon-default">
           <Icon size="md">{icon}</Icon>
         </span>
         <span className="text-base font-semibold text-content-primary">{name}</span>
