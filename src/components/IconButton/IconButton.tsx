@@ -6,7 +6,7 @@ import type { IconButtonProps } from './IconButton.types';
 export const iconButtonVariants = cva(
   [
     // size-11 = 44px, meeting the WCAG 2.2 minimum touch-target size.
-    'inline-flex size-11 shrink-0 items-center justify-center rounded-m border transition-colors',
+    'inline-flex size-11 shrink-0 items-center justify-center rounded-md border transition-colors',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
     'disabled:pointer-events-none disabled:opacity-40',
     '[&_svg]:size-5 [&_svg]:shrink-0',

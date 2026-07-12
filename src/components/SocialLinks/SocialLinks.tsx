@@ -35,7 +35,7 @@ export const SocialLinks = forwardRef<HTMLUListElement, SocialLinksProps>(
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                'inline-flex size-11 items-center justify-center rounded-m text-content-secondary transition-colors',
+                'inline-flex size-11 items-center justify-center rounded-md text-content-secondary transition-colors',
                 'hover:bg-bg-hover hover:text-brand-text-default',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2'
               )}

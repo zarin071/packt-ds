@@ -65,6 +65,7 @@ export const Avatar = forwardRef<ElementRef<typeof AvatarPrimitive.Root>, Avatar
   ) => (
     <AvatarPrimitive.Root
       ref={ref}
+      role="img"
       className={cn(avatarVariants({ size }), className)}
       aria-label={alt}
       {...props}

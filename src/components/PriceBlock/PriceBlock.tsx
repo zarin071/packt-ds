@@ -25,11 +25,13 @@ export const PriceBlock = forwardRef<HTMLFieldSetElement, PriceBlockProps>(
             <label
               key={option.format}
               className={cn(
-                'flex cursor-pointer items-center gap-m rounded-m border p-m transition-colors',
+                'flex cursor-pointer items-center gap-m rounded-md border p-m transition-colors',
                 'focus-within:outline-none focus-within:ring-2 focus-within:ring-focus-ring focus-within:ring-offset-2',
                 checked
                   ? 'border-brand-border-default bg-brand-bg-default'
-                  : 'border-border-default bg-bg-surface hover:bg-bg-hover'
+                  : // border-strong (not border-default) so the row outline stays
+                    // visible on a same-coloured surface in dark mode.
+                    'border-border-strong bg-bg-surface hover:bg-bg-hover'
               )}
             >
               <input

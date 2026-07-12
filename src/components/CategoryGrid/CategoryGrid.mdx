@@ -1,0 +1,13 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as CategoryGridStories from './CategoryGrid.stories';
+
+<Meta of={CategoryGridStories} />
+
+# CategoryGrid
+
+A responsive grid of [CategoryTiles](?path=/docs/molecules-categorytile--docs) — 2 columns on mobile, 3 on tablet, 4 on desktop. Each tile remains a single `<a>`.
+
+## Playground
+
+<Canvas of={CategoryGridStories.Playground} />
+<Controls of={CategoryGridStories.Playground} />

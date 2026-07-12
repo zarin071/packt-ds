@@ -7,7 +7,7 @@ import type { ButtonProps } from './Button.types';
 export const buttonVariants = cva(
   [
     'inline-flex items-center justify-center gap-xs whitespace-nowrap',
-    'rounded-m border font-sans font-semibold transition-colors',
+    'rounded-md border font-sans font-semibold transition-colors',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
     'disabled:pointer-events-none disabled:opacity-40',
     '[&_svg]:shrink-0',

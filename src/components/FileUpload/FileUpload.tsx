@@ -6,7 +6,7 @@ import type { FileUploadProps, UploadedFile } from './FileUpload.types';
 
 export const fileUploadZoneVariants = cva(
   [
-    'flex select-none flex-col items-center justify-center gap-m rounded-s border-2 border-dashed',
+    'flex select-none flex-col items-center justify-center gap-m rounded-sm border-2 border-dashed',
     'bg-bg-surface px-2xl py-2xl text-center transition-colors',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
   ].join(' '),

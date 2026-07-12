@@ -1,0 +1,13 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as AuthCTAStories from './AuthCTA.stories';
+
+<Meta of={AuthCTAStories} />
+
+# AuthCTA
+
+A brand-tinted band prompting account creation, with a secondary sign-in action. Composes two [Buttons](?path=/docs/components-button--docs) (primary + ghost) on a `bg-brand-bg-default` surface.
+
+## Playground
+
+<Canvas of={AuthCTAStories.Playground} />
+<Controls of={AuthCTAStories.Playground} />

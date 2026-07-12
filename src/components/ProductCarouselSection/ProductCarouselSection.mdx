@@ -1,0 +1,17 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './ProductCarouselSection.stories';
+
+<Meta of={Stories} />
+
+# ProductCarouselSection
+
+A heading plus a horizontally scrolling row of slides — typically [ProductCards](?path=/docs/organisms-productcard--docs).
+
+- **Scroll-snap** positions slides; the [IconButton](?path=/docs/components-iconbutton--docs) arrows scroll a page at a time.
+- **Keyboard**: the track is a single tab stop with native horizontal arrow-key scrolling; interactive content inside slides stays reachable with Tab.
+- **ARIA**: the region has `aria-roledescription="carousel"`; each slide is a `group` with `aria-roledescription="slide"` and an "N of M" label.
+
+## Playground
+
+<Canvas of={Stories.Playground} />
+<Controls of={Stories.Playground} />

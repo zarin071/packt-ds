@@ -1,0 +1,555 @@
+import { Meta, Unstyled, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design System Spec / Handoff" />
+
+# Handoff Document — Packt Design System
+
+**Version:** 1.0 &nbsp;·&nbsp; **Date:** July 2026 &nbsp;·&nbsp; **Audience:** Designers & Frontend Engineers
+
+This document is the single source of truth for handing off Packt Design System decisions between design and engineering. It covers token architecture, foundations, component inventory, theming rules, and implementation checklists.
+
+---
+
+## 1. Overview
+
+The Packt Design System is a token-based, React + Tailwind component library built on:
+
+| Layer | Technology |
+|---|---|
+| Token authoring | Tokens Studio (Figma plugin) |
+| Token compilation | Style Dictionary 4 |
+| Components | React 18+, Radix UI primitives |
+| Styling | Tailwind CSS 4 + CSS custom properties |
+| Documentation | Storybook 10 |
+| Package | `packt-ds` (ESM + CJS) |
+
+---
+
+## 2. Token Architecture
+
+Tokens flow in one direction — never skip a layer.
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif', overflowX: 'auto' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 0, marginBottom: 24, minWidth: 480 }}>
+      {[
+        { label: 'Primitive', sub: 'Orange.500 = #f97141', bg: '#fee3d9', color: '#a15033' },
+        { label: '→', sub: '', bg: 'transparent', color: 'var(--packt-content-secondary)', flex: '0 0 auto', padding: '0 8px' },
+        { label: 'Semantic', sub: 'bg-brand-selected = #f97141', bg: '#fdc6b3', color: '#a15033' },
+        { label: '→', sub: '', bg: 'transparent', color: 'var(--packt-content-secondary)', flex: '0 0 auto', padding: '0 8px' },
+        { label: 'Component', sub: 'Button background', bg: '#f97141', color: '#ffffff' },
+      ].map((step, i) =>
+        step.label === '→'
+          ? <span key={i} style={{ color: step.color, fontSize: 20, padding: step.padding }}>{step.label}</span>
+          : <div key={i} style={{ flex: 1, background: step.bg, borderRadius: 8, padding: '14px 16px' }}>
+              <div style={{ fontWeight: 600, fontSize: 13, color: step.color }}>{step.label}</div>
+              <div style={{ fontSize: 11, marginTop: 4, color: step.color, opacity: 0.8 }}>{step.sub}</div>
+            </div>
+      )}
+    </div>
+  </div>
+</Unstyled>
+
+> **Rule:** Components must only reference semantic tokens. Never hard-code a primitive hex value or a raw number.
+
+### Token file locations
+
+| File | Purpose |
+|---|---|
+| `src/tokens/tokens.css` | Primitives + light semantic tokens (always load) |
+| `src/tokens/tokens.light.css` | Light mode overrides |
+| `src/tokens/tokens.dark.css` | Dark semantic tokens (load when `data-theme="dark"`) |
+| `src/tokens/tokens.theme.css` | Theme-scoped shorthand aliases |
+| `src/components/tokens.helpers.css` | Component-level helper aliases |
+
+---
+
+## 3. Theming
+
+### Light / Dark switching
+
+Set `data-theme` on `<html>`:
+
+```ts
+// Enable dark mode
+document.documentElement.setAttribute('data-theme', 'dark');
+
+// Revert to light
+document.documentElement.removeAttribute('data-theme');
+```
+
+All semantic tokens automatically resolve to the correct value for the active theme. No class swaps, no JavaScript colour injection.
+
+### Token naming pattern
+
+```
+--packt-semantic-colors-{theme}-{category}-{role}
+```
+
+| Segment | Examples |
+|---|---|
+| `theme` | `light`, `dark` |
+| `category` | `content`, `background`, `border`, `icon`, `surface`, `overlay` |
+| `role` | `primary`, `secondary`, `brand-default`, `error-default`, … |
+
+Shorthand aliases (e.g. `--packt-content-primary`, `--packt-bg-page`) are available via `tokens.helpers.css` for use in component styles.
+
+---
+
+## 4. Colour
+
+### Brand palette
+
+<ColorPalette>
+  <ColorItem
+    title="Brand / Orange"
+    subtitle="--packt-orange-*"
+    colors={{
+      '100': '#fee3d9',
+      '200': '#fdc6b3',
+      '300': '#fbaa8d',
+      '400': '#fa8d67',
+      '500': '#f97141',
+      '600': '#cd603a',
+      '700': '#a15033',
+      '800': '#763f2c',
+      '900': '#4a2f25',
+    }}
+  />
+</ColorPalette>
+
+### Feedback palette
+
+<ColorPalette>
+  <ColorItem title="Error / Red"    subtitle="--packt-red-*"    colors={{ '100':'#f9d2d9','200':'#f2a4b3','300':'#ec778d','400':'#e54967','500':'#df1c41','600':'#b81c3a','700':'#921d33','800':'#6b1d2c','900':'#451e25' }} />
+  <ColorItem title="Success / Green" subtitle="--packt-green-*" colors={{ '100':'#d9fee3','200':'#b3fdc6','300':'#8dfbaa','400':'#67fa8d','500':'#41f971','600':'#3acd60','700':'#279544','800':'#1a642d','900':'#254a2f' }} />
+  <ColorItem title="Warning / Yellow" subtitle="--packt-yellow-*" colors={{ '100':'#fcf6cc','200':'#f8ed9a','300':'#f5e467','400':'#f1db35','500':'#eed202','600':'#c4ae08','700':'#9b8a0d','800':'#716613','900':'#484218' }} />
+  <ColorItem title="Info / Blue"    subtitle="--packt-blue-*"   colors={{ '100':'#d6e0f5','200':'#adc2eb','300':'#85a3e0','400':'#5c85d6','500':'#3366cc','600':'#2f58a9','700':'#2b4986','800':'#263b64','900':'#222c41' }} />
+</ColorPalette>
+
+### Neutral palette
+
+<ColorPalette>
+  <ColorItem
+    title="Neutral"
+    subtitle="--packt-neutral-*"
+    colors={{
+      '100': '#f6f6f6',
+      '200': '#e4e4e4',
+      '300': '#d2d2d2',
+      '400': '#a6a6a6',
+      '500': '#797979',
+      '600': '#4d4d4d',
+      '700': '#1a1a1a',
+      '800': '#1f1f1f',
+    }}
+  />
+  <ColorItem title="Base" subtitle="--packt-base-*" colors={{ white: '#ffffff', black: '#000000' }} />
+</ColorPalette>
+
+### Semantic quick-reference — Light mode
+
+| Role | Token | Value |
+|---|---|---|
+| Content primary | `--packt-content-primary` | `#000000` |
+| Content secondary | `--packt-content-secondary` | `#4d4d4d` |
+| Content tertiary | `--packt-content-tertiary` | `#797979` |
+| Content disabled | `--packt-content-disabled` | `#a6a6a6` |
+| Brand default | `--packt-brand-content-default` | `#f97141` |
+| Background page | `--packt-bg-page` | `#f6f6f6` |
+| Background surface | `--packt-bg-surface` | `#ffffff` |
+| Border divide | `--packt-border-default` | `#e4e4e4` |
+| Border brand | `--packt-border-brand` | `#f97141` |
+| Error | `--packt-error` | `#df1c41` |
+| Success | `--packt-success` | `#41f971` |
+| Warning | `--packt-warning` | `#eed202` |
+| Info | `--packt-info` | `#3366cc` |
+
+---
+
+## 5. Typography
+
+**Font family:** Outfit — `--packt-font-family-outfit`
+
+Load via Google Fonts:
+```html
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+```
+
+### Font weights
+
+| Name | Token | Value |
+|---|---|---|
+| Regular | `--packt-weight-regular` | 400 |
+| Medium | `--packt-weight-medium` | 500 |
+| Semibold | `--packt-weight-semibold` | 600 |
+| Bold | `--packt-weight-bold` | 700 |
+
+### Heading scale
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+      <div>
+        <p style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, color: 'var(--packt-content-tertiary)', marginBottom: 8 }}>Desktop / Large Desktop (≥ 1024px)</p>
+        {[
+          { name: 'H 5XL', size: 72, weight: 700, lh: 80,  ls: -1   },
+          { name: 'H 4XL', size: 64, weight: 700, lh: 72,  ls: -1   },
+          { name: 'H 3XL', size: 56, weight: 700, lh: 64,  ls: -1   },
+          { name: 'H 2XL', size: 48, weight: 700, lh: 56,  ls: -1   },
+          { name: 'H XL',  size: 40, weight: 700, lh: 48,  ls: -1   },
+          { name: 'H L',   size: 32, weight: 600, lh: 40,  ls: -0.5 },
+          { name: 'H M',   size: 28, weight: 600, lh: 32,  ls: -1   },
+          { name: 'H S',   size: 24, weight: 600, lh: 28,  ls: -1   },
+        ].map(({ name, size, weight, lh, ls }) => (
+          <div key={name} style={{ padding: '10px 0', borderBottom: '1px solid var(--packt-border-default)', display: 'flex', alignItems: 'baseline', gap: 12 }}>
+            <span style={{ fontSize: Math.min(size, 36), fontWeight: weight, lineHeight: `${Math.min(lh, 44)}px`, letterSpacing: ls, flex: 1, overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{name}</span>
+            <span style={{ fontSize: 10, color: 'var(--packt-content-tertiary)', flexShrink: 0 }}>{size}/{lh} · {weight} · {ls}px</span>
+          </div>
+        ))}
+      </div>
+      <div>
+        <p style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, color: 'var(--packt-content-tertiary)', marginBottom: 8 }}>Tablet / Mobile (&lt; 1024px)</p>
+        {[
+          { name: 'H 5XL', size: 64, weight: 600, lh: 72, ls: -1   },
+          { name: 'H 4XL', size: 56, weight: 600, lh: 64, ls: -1   },
+          { name: 'H 3XL', size: 48, weight: 600, lh: 56, ls: -1   },
+          { name: 'H 2XL', size: 40, weight: 600, lh: 48, ls: -1   },
+          { name: 'H XL',  size: 32, weight: 600, lh: 40, ls: -1   },
+          { name: 'H L',   size: 28, weight: 500, lh: 32, ls: -0.5 },
+          { name: 'H M',   size: 24, weight: 500, lh: 28, ls: -1   },
+          { name: 'H S',   size: 20, weight: 500, lh: 24, ls: -1   },
+        ].map(({ name, size, weight, lh, ls }) => (
+          <div key={name} style={{ padding: '10px 0', borderBottom: '1px solid var(--packt-border-default)', display: 'flex', alignItems: 'baseline', gap: 12 }}>
+            <span style={{ fontSize: Math.min(size, 36), fontWeight: weight, lineHeight: `${Math.min(lh, 44)}px`, letterSpacing: ls, flex: 1, overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{name}</span>
+            <span style={{ fontSize: 10, color: 'var(--packt-content-tertiary)', flexShrink: 0 }}>{size}/{lh} · {weight} · {ls}px</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Unstyled>
+
+### Body text scale (all breakpoints)
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif' }}>
+    {[
+      { name: 'Regular XL', size: 20, weight: 400, lh: 28, ls: 0    },
+      { name: 'Regular L',  size: 16, weight: 400, lh: 24, ls: 0    },
+      { name: 'Regular M',  size: 14, weight: 400, lh: 20, ls: 0    },
+      { name: 'Regular S',  size: 12, weight: 400, lh: 16, ls: 0    },
+      { name: 'Regular XS', size: 10, weight: 400, lh: 14, ls: 0    },
+      { name: 'Medium XL',  size: 20, weight: 500, lh: 28, ls: -0.5 },
+      { name: 'Medium L',   size: 16, weight: 500, lh: 24, ls: -0.5 },
+      { name: 'Medium M',   size: 14, weight: 500, lh: 20, ls: -0.5 },
+      { name: 'Medium S',   size: 12, weight: 500, lh: 16, ls: 0    },
+      { name: 'Medium XS',  size: 10, weight: 500, lh: 14, ls: 0    },
+    ].map(({ name, size, weight, lh, ls }) => (
+      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '8px 12px', borderBottom: '1px solid var(--packt-border-default)' }}>
+        <span style={{ fontSize: size, fontWeight: weight, lineHeight: `${lh}px`, letterSpacing: `${ls}px`, flex: 1 }}>
+          The quick brown fox jumps over the lazy dog
+        </span>
+        <div style={{ display: 'flex', gap: 12, fontSize: 10, color: 'var(--packt-content-tertiary)', flexShrink: 0 }}>
+          <code style={{ color: 'var(--packt-content-secondary)', width: 72 }}>{name}</code>
+          <span style={{ width: 32 }}>{size}px</span>
+          <span style={{ width: 28 }}>{weight}</span>
+          <span style={{ width: 32 }}>{ls === 0 ? '0' : `${ls}px`} ls</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</Unstyled>
+
+---
+
+## 6. Spacing
+
+T-shirt scale — unitless tokens, multiply by `1px` in CSS.
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: 13 }}>
+    {[
+      { name: 'none', token: '--packt-space-none',  value: 0   },
+      { name: '2xs',  token: '--packt-space-2-xs',  value: 2   },
+      { name: 'xs',   token: '--packt-space-xs',    value: 4   },
+      { name: 's',    token: '--packt-space-s',     value: 8   },
+      { name: 'm',    token: '--packt-space-m',     value: 12  },
+      { name: 'l',    token: '--packt-space-l',     value: 16  },
+      { name: 'xl',   token: '--packt-space-xl',    value: 24  },
+      { name: '2xl',  token: '--packt-space-2-xl',  value: 32  },
+      { name: '3xl',  token: '--packt-space-3-xl',  value: 40  },
+      { name: '4xl',  token: '--packt-space-4-xl',  value: 48  },
+      { name: '5xl',  token: '--packt-space-5-xl',  value: 56  },
+      { name: '6xl',  token: '--packt-space-6-xl',  value: 64  },
+    ].map(({ name, token, value }) => (
+      <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '6px 12px', borderRadius: 4, marginBottom: 2, background: 'var(--packt-bg-page)' }}>
+        <code style={{ width: 36, fontSize: 12, color: 'var(--packt-content-secondary)', flexShrink: 0 }}>{name}</code>
+        <div style={{ flex: 1 }}>
+          {value > 0
+            ? <div style={{ height: 8, width: value, background: '#f97141', borderRadius: 2 }} />
+            : <span style={{ fontSize: 11, color: 'var(--packt-content-tertiary)' }}>—</span>
+          }
+        </div>
+        <code style={{ width: 170, fontSize: 11, color: 'var(--packt-content-tertiary)', flexShrink: 0, textAlign: 'right' }}>{token}</code>
+        <span style={{ width: 40, fontSize: 12, fontWeight: 600, textAlign: 'right', flexShrink: 0 }}>{value}px</span>
+      </div>
+    ))}
+  </div>
+</Unstyled>
+
+---
+
+## 7. Border
+
+### Border radius
+
+<Unstyled>
+  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: 13, display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+    {[
+      { name: 'none',   token: '--packt-radius-none', radius: '0px',   label: '0' },
+      { name: 'xs',     token: '--packt-radius-xs',   radius: '4px',   label: '4px' },
+      { name: 's',      token: '--packt-radius-s',    radius: '8px',   label: '8px' },
+      { name: 'm',      token: '--packt-radius-m',    radius: '12px',  label: '12px' },
+      { name: 'l',      token: '--packt-radius-l',    radius: '16px',  label: '16px' },
+      { name: 'pill',   token: '--packt-radius-pill', radius: '999px', label: '999px' },
+      { name: 'circle', token: '--packt-radius-circle',radius: '50%',   label: '50%' },
+    ].map(({ name, token, radius, label }) => (
+      <div key={name} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+        <div style={{ width: name === 'pill' ? 72 : 48, height: 48, background: '#f97141', borderRadius: radius }} />
+        <code style={{ fontSize: 11, color: 'var(--packt-content-secondary)' }}>{name}</code>
+        <span style={{ fontSize: 10, color: 'var(--packt-content-tertiary)' }}>{label}</span>
+      </div>
+    ))}
+  </div>
+</Unstyled>
+
+### Border width
+
+| Token | Value | Use |
+|---|---|---|
+| `--packt-width-xs` | 1px | Default borders, dividers |
+| `--packt-width-s` | 1.5px | Subtle emphasis |
+| `--packt-width-m` | 2px | Focus rings, active states |
+| `--packt-width-l` | 4px | Heavy emphasis |
+| `--packt-width-xl` | 8px | Decorative / accent bars |
+
+---
+
+## 8. Breakpoints
+
+| Name | Token | Width | Notes |
+|---|---|---|---|
+| Mobile | `--packt-breakpoint-mobile` | 393px | Small phones |
+| Tablet | `--packt-breakpoint-tablet` | 768px | Tablets, large phones (landscape) |
+| Desktop | `--packt-breakpoint-desktop` | 1024px | Laptops & desktops |
+| Large Desktop | `--packt-breakpoint-large-desktop` | 1440px | Wide monitors |
+
+Heading scale steps down at `< 1024px`. Text styles are constant across all breakpoints.
+
+```css
+/* Mobile-first */
+.component { font-size: 14px; }
+
+@media (min-width: 768px)  { .component { font-size: 16px; } }
+@media (min-width: 1024px) { .component { font-size: 18px; } }
+```
+
+---
+
+## 9. Component Inventory
+
+### Atoms
+
+| Component | Package export | Notes |
+|---|---|---|
+| Alert | `Alert` | error / warning / success / info variants |
+| Avatar | `Avatar` | image + fallback initials, sizes xs–xl |
+| Badge | `Badge` | label + optional icon, semantic colours |
+| Button | `Button` | primary / secondary / ghost / destructive, sizes sm–lg |
+| Checkbox | `Checkbox` | controlled, with indeterminate state |
+| Icon | `Icon` | SVG sprite wrapper |
+| IconButton | `IconButton` | icon-only button with accessible label |
+| Input | `Input` | text field with label, helper text, error state |
+| Label | `Label` | form label, pairs with Input / Checkbox |
+| Price | `Price` | current + optional original price, discount badge |
+| ProgressBar | `ProgressBar` | linear progress, 0–100 |
+| RadioButton | `RadioButton` | single radio, use with RadioGroup |
+| Rating | `Rating` | 0–5 star display (read-only) |
+| Select | `Select` | accessible dropdown via Radix |
+| Tab | `Tab` | single tab item |
+| Tag | `Tag` | chip / pill with optional dismiss |
+| ToggleSwitch | `ToggleSwitch` | binary on/off via Radix Switch |
+| Tooltip | `Tooltip` | hover tooltip via Radix |
+
+### Molecules
+
+| Component | Package export | Notes |
+|---|---|---|
+| Breadcrumb | `Breadcrumb` | nav trail, last item non-clickable |
+| Card | `Card` | container with surface, border, radius |
+| CategoryTile | `CategoryTile` | image + label tile for category nav |
+| EmptyState | `EmptyState` | illustration + CTA for zero-data screens |
+| FileUpload | `FileUpload` | drag-and-drop + file list |
+| FormField | `FormField` | Input + Label + helper text composite |
+| ListItem | `ListItem` | row with icon, label, metadata |
+| Pagination | `Pagination` | page navigation, prev/next + page numbers |
+| PaginationDots | `PaginationDots` | dot indicator for carousels |
+| SearchBar | `SearchBar` | input + search icon |
+| SocialLinks | `SocialLinks` | horizontal social icon row |
+| TabGroup | `TabGroup` | Tab container with Radix Tabs |
+
+### Organisms
+
+| Component | Notes |
+|---|---|
+| AuthCTA | Sign-in / register prompt banner |
+| AuthModal | Modal with auth form |
+| AuthorCard | Author bio card with avatar + links |
+| CategoryGrid | Grid of CategoryTile components |
+| CategoryNav | Horizontal category navigation |
+| CountdownTimer | Countdown to a target date |
+| FeatureSpotlight | Hero-style feature highlight section |
+| HeroCarousel | Full-width carousel with PaginationDots |
+| PriceBlock | Price + CTA composite |
+| ProductCard | Course/book card with rating, price, tag |
+| ProductCarouselSection | Horizontal scrolling product row |
+| SiteFooter | Global footer |
+| SiteHeader | Global header with nav + search |
+| FormatBadge | Media format indicator badge |
+
+---
+
+## 10. Installation & Consumption
+
+```bash
+npm install packt-ds
+```
+
+### Minimal setup
+
+```ts
+// Entry point (e.g. main.ts, _app.tsx, layout.tsx)
+import 'packt-ds/tokens';        // primitives + light semantic tokens
+import 'packt-ds/tokens/dark';   // dark tokens (activated by data-theme="dark")
+```
+
+```tsx
+import { Button } from 'packt-ds';
+
+<Button variant="primary" size="md" label="Get started" />
+```
+
+### Using tokens in custom CSS
+
+```css
+.custom-card {
+  background:    var(--packt-bg-surface);
+  border:        1px solid var(--packt-border-default);
+  border-radius: calc(var(--packt-radius-m) * 1px);
+  padding:       calc(var(--packt-space-l) * 1px);
+  color:         var(--packt-content-primary);
+}
+```
+
+> Dimension tokens (`--packt-space-*`, `--packt-radius-*`, `--packt-width-*`) are unitless — wrap in `calc(...* 1px)`.
+
+---
+
+## 11. Naming Conventions
+
+### Tokens
+
+```
+--packt-{primitive-group}-{scale}
+--packt-semantic-colors-{theme}-{category}-{role}
+--packt-{shorthand-alias}
+```
+
+### Components (props)
+
+| Pattern | Example |
+|---|---|
+| `variant` for visual style | `variant="primary"` |
+| `size` for t-shirt sizing | `size="md"` |
+| `disabled` boolean for disabled state | `disabled` |
+| `label` for primary text content | `label="Submit"` |
+| `onChange` / `onSelect` for controlled state | `onChange={handler}` |
+
+### Files
+
+| Type | Pattern | Example |
+|---|---|---|
+| Component | `PascalCase.tsx` | `Button.tsx` |
+| Story | `PascalCase.stories.tsx` | `Button.stories.tsx` |
+| Docs page | `PascalCase.mdx` | `Button.mdx` |
+| Token file | `tokens.{scope}.css` | `tokens.dark.css` |
+
+---
+
+## 12. Handoff Checklist
+
+### For Designers
+
+- [ ] All new components use semantic tokens — no hard-coded hex or px values
+- [ ] Light and dark frames are provided for every new component
+- [ ] All interactive states are designed: default, hover, focus, active, disabled, error
+- [ ] Spacing uses values from the spacing scale (2px, 4px, 8px, 12px, 16px, 24px, 32px…)
+- [ ] Border radius uses a named token value (xs / s / m / l / pill / circle)
+- [ ] Typography uses a named text style from the type scale
+- [ ] Components are named in Figma to match the component export name in `packt-ds`
+- [ ] Any new tokens are added in Token Studio and pushed to the `design-tokens` branch
+
+### For Engineers
+
+- [ ] Component props match the agreed API in the design spec
+- [ ] Semantic tokens used throughout — no raw hex or magic numbers
+- [ ] Component renders correctly in both light and dark mode
+- [ ] All interactive states implemented (default, hover, focus, active, disabled, error)
+- [ ] Keyboard navigation works (Tab, Enter, Escape, Arrow keys where applicable)
+- [ ] ARIA attributes present for interactive elements
+- [ ] Story written covering: Default, all variants, all sizes, disabled, dark mode
+- [ ] `export` added to `src/index.ts`
+- [ ] No peer-dependency changes without team sign-off
+
+---
+
+## 13. Token Pipeline
+
+Token changes flow automatically when pushed to the `design-tokens` branch:
+
+```
+Token Studio (Figma)
+        ↓  push
+design-tokens branch
+        ↓  GitHub Action
+Style Dictionary compile
+        ↓
+src/tokens/tokens.css (committed)
+        ↓  merge to main
+packt-ds package
+```
+
+Manual regeneration (local only):
+
+```bash
+npm run tokens
+```
+
+See `docs/TOKEN-PIPELINE.md` and `docs/EXPORT_GUIDE.md` for the full workflow.
+
+---
+
+## 14. Accessibility Standards
+
+All components target **WCAG 2.1 AA**:
+
+| Requirement | Implementation |
+|---|---|
+| Colour contrast | Semantic colour pairings verified ≥ 4.5:1 (text) / 3:1 (UI) |
+| Keyboard access | All interactive elements reachable and operable via keyboard |
+| Focus indicators | `focus-visible` outline using `--packt-border-brand` at 2px |
+| Screen reader support | Radix primitives provide ARIA roles; custom components use semantic HTML |
+| Touch targets | Minimum 44 × 44px for all interactive elements |
+
+Run the a11y addon checks in Storybook (the shield icon on the toolbar) to audit any story.
