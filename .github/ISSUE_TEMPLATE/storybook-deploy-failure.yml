@@ -1,0 +1,66 @@
+name: Storybook Deploy Failure
+description: Report a failed GitHub Pages Storybook deployment.
+title: "[deploy] Storybook deployment failed"
+labels:
+  - deployment
+  - storybook
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template when the Storybook GitHub Actions workflow fails.
+        Include links and exact error text so maintainers can triage quickly.
+
+  - type: input
+    id: workflow-run-url
+    attributes:
+      label: Failed workflow run URL
+      description: Paste the full GitHub Actions run link.
+      placeholder: https://github.com/<owner>/<repo>/actions/runs/<id>
+    validations:
+      required: true
+
+  - type: input
+    id: branch
+    attributes:
+      label: Branch / commit
+      description: Branch name and commit SHA that triggered the failed deploy.
+      placeholder: main @ abc1234
+    validations:
+      required: true
+
+  - type: textarea
+    id: failing-step
+    attributes:
+      label: Failing step and error message
+      description: Copy the failing step name and the key error lines.
+      placeholder: |
+        Step: Setup Pages
+        Error: Get Pages site failed. Not Found
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      description: What should have happened.
+      placeholder: Storybook deploys to GitHub Pages successfully.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Quick checks
+      options:
+        - label: Pages source is set to GitHub Actions in repository settings.
+        - label: I re-ran the failed workflow once.
+        - label: I confirmed required permissions are enabled for workflows.
+
+  - type: textarea
+    id: extra-context
+    attributes:
+      label: Extra context
+      description: Any additional details that may help debugging.
+      placeholder: Recent workflow changes, config updates, screenshots, etc.

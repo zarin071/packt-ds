@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Storybook Deployment Workflow
+    url: https://github.com/zarin071/packt-ds/actions/workflows/storybook-deploy.yml
+    about: Check recent deployment runs before opening a new issue.
