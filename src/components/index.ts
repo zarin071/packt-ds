@@ -54,7 +54,7 @@ export type { RatingProps, RatingSize } from './Rating';
 export { Price } from './Price';
 export type { PriceProps } from './Price';
 
-export { Tooltip, tooltipContentVariants } from './Tooltip';
+export { Tooltip, TooltipProvider, tooltipContentVariants } from './Tooltip';
 export type { TooltipProps, TooltipPosition } from './Tooltip';
 
 // Navigation

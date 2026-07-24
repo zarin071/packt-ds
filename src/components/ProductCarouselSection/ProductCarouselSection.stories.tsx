@@ -6,7 +6,7 @@ const meta: Meta<typeof ProductCarouselSection> = {
   title: 'organisms/ProductCarouselSection',
   component: ProductCarouselSection,
   parameters: { layout: 'padded' },
-  argTypes: { children: { control: false } },
+  argTypes: { items: { control: false } },
 };
 
 export default meta;
@@ -24,8 +24,9 @@ const products = [
 export const Playground: Story = {
   args: { title: 'Bestsellers in Web Development' },
   render: (args) => (
-    <ProductCarouselSection {...args}>
-      {products.map((p) => (
+    <ProductCarouselSection
+      {...args}
+      items={products.map((p) => (
         <ProductCard
           key={p.seed}
           coverSrc={`https://picsum.photos/seed/packt-${p.seed}/480/640`}
@@ -37,6 +38,6 @@ export const Playground: Story = {
           selectedFormat="ebook"
         />
       ))}
-    </ProductCarouselSection>
+    />
   ),
 };

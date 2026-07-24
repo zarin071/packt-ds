@@ -21,7 +21,7 @@ export const PaginationDots = forwardRef<HTMLDivElement, PaginationDotsProps>(
         const active = index === activeIndex;
         return (
           <button
-            key={index}
+            key={`dot-${index}`}
             type="button"
             onClick={() => onSelect?.(index)}
             aria-label={`Go to slide ${index + 1}`}

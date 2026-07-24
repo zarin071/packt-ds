@@ -21,7 +21,7 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
           {items.map((item, i) => {
             const isLast = i === items.length - 1;
             return (
-              <li key={i} className="inline-flex items-center gap-2xs">
+              <li key={item.href ?? item.label} className="inline-flex items-center gap-2xs">
                 {item.active || isLast ? (
                   <span className="font-medium text-content-primary" aria-current="page">
                     {item.label}

@@ -6,11 +6,10 @@ import { ProductCarouselSection } from './ProductCarouselSection';
 
 function renderCarousel() {
   return render(
-    <ProductCarouselSection title="Bestsellers">
-      <div>Slide A</div>
-      <div>Slide B</div>
-      <div>Slide C</div>
-    </ProductCarouselSection>
+    <ProductCarouselSection
+      title="Bestsellers"
+      items={[<div key="a">Slide A</div>, <div key="b">Slide B</div>, <div key="c">Slide C</div>]}
+    />
   );
 }
 

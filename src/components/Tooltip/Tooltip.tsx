@@ -63,4 +63,15 @@ export const Tooltip = forwardRef<ElementRef<typeof TooltipPrimitive.Content>, T
 
 Tooltip.displayName = 'Tooltip';
 
+/**
+ * Wrap your app root with TooltipProvider to share a single provider across
+ * all Tooltip instances instead of mounting one per tooltip.
+ *
+ * @example
+ * <TooltipProvider delayDuration={200}>
+ *   <App />
+ * </TooltipProvider>
+ */
+export const TooltipProvider = TooltipPrimitive.Provider;
+
 export type { TooltipProps, TooltipPosition } from './Tooltip.types';

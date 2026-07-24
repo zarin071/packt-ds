@@ -106,19 +106,22 @@ export function HomePage({ data }: HomePageProps) {
 
         {/* Best Sellers / Latest / Trending */}
         {data.productSections.map((section) => (
-          <ProductCarouselSection key={section.id} title={section.title}>
-            {section.products.map((product) => (
+          <ProductCarouselSection
+            key={section.id}
+            title={section.title}
+            items={section.products.map((product) => (
               <HomeProductCard key={product.id} product={product} />
             ))}
-          </ProductCarouselSection>
+          />
         ))}
 
         {/* Expert Reading Lists */}
-        <ProductCarouselSection title={data.readingLists.title}>
-          {data.readingLists.products.map((product) => (
+        <ProductCarouselSection
+          title={data.readingLists.title}
+          items={data.readingLists.products.map((product) => (
             <HomeProductCard key={product.id} product={product} />
           ))}
-        </ProductCarouselSection>
+        />
 
         {/* Category grid */}
         <CategoryGrid heading={data.gridHeading} items={data.gridCategories} />
@@ -150,8 +153,9 @@ export function HomePage({ data }: HomePageProps) {
         </section>
 
         {/* Author carousel */}
-        <ProductCarouselSection title={data.authorsTitle}>
-          {data.authors.map((author) => (
+        <ProductCarouselSection
+          title={data.authorsTitle}
+          items={data.authors.map((author) => (
             <AuthorCard
               key={author.id}
               name={author.name}
@@ -163,7 +167,7 @@ export function HomePage({ data }: HomePageProps) {
               className="h-full"
             />
           ))}
-        </ProductCarouselSection>
+        />
 
         {/* Auth CTA */}
         <AuthCTA />

@@ -1,4 +1,4 @@
-import { Children, forwardRef, useRef } from 'react';
+import { forwardRef, useRef } from 'react';
 import { cn } from '../../lib/utils';
 import { IconButton } from '../IconButton';
 import { ChevronLeftIcon, ChevronRightIcon } from '../../lib/icons';
@@ -17,9 +17,8 @@ import type { ProductCarouselSectionProps } from './ProductCarouselSection.types
  *   `group` with `aria-roledescription="slide"` and an "N of M" label.
  */
 export const ProductCarouselSection = forwardRef<HTMLElement, ProductCarouselSectionProps>(
-  ({ title, children, className, ...props }, ref) => {
+  ({ title, items, className, ...props }, ref) => {
     const trackRef = useRef<HTMLDivElement>(null);
-    const slides = Children.toArray(children);
 
     const scrollByPage = (direction: 1 | -1) => {
       const track = trackRef.current;
@@ -63,15 +62,15 @@ export const ProductCarouselSection = forwardRef<HTMLElement, ProductCarouselSec
             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2'
           )}
         >
-          {slides.map((slide, index) => (
+          {items.map((item, index) => (
             <div
               key={index}
               role="group"
               aria-roledescription="slide"
-              aria-label={`${index + 1} of ${slides.length}`}
+              aria-label={`${index + 1} of ${items.length}`}
               className="w-64 shrink-0 snap-start"
             >
-              {slide}
+              {item}
             </div>
           ))}
         </div>

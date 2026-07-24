@@ -1,4 +1,5 @@
 import { defineConfig } from 'tsup';
+import path from 'node:path';
 
 export default defineConfig({
   entry: ['src/index.ts'],
@@ -7,4 +8,7 @@ export default defineConfig({
   clean: true,
   outDir: 'dist',
   external: ['react', 'react-dom'],
+  esbuildOptions(options) {
+    options.alias = { '@': path.resolve(__dirname, 'src') };
+  },
 });
