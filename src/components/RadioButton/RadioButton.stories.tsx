@@ -27,6 +27,7 @@ export default meta;
 type Story = StoryObj<typeof RadioButton>;
 
 const col: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 12, fontFamily: 'Outfit, sans-serif' };
+const row: CSSProperties = { display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: 24, flexWrap: 'wrap', fontFamily: 'Outfit, sans-serif' };
 
 export const Playground: Story = {
   args: { label: 'Playground radio', disabled: false },
@@ -35,12 +36,12 @@ export const Playground: Story = {
 export const States: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
-    <div style={col}>
-      <RadioGroup.Root defaultValue="checked" name="states-a">
+    <div style={row}>
+      <RadioGroup.Root defaultValue="checked" name="states-a" style={{ display: 'flex', gap: 24 }}>
         <RadioButton value="unchecked" label="Unchecked" />
         <RadioButton value="checked" label="Checked" />
       </RadioGroup.Root>
-      <RadioGroup.Root defaultValue="disabled-checked" name="states-b">
+      <RadioGroup.Root defaultValue="disabled-checked" name="states-b" style={{ display: 'flex', gap: 24 }}>
         <RadioButton value="disabled" label="Disabled" disabled />
         <RadioButton value="disabled-checked" label="Disabled checked" disabled />
       </RadioGroup.Root>
