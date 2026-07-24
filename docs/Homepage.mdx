@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { PacktHomePage } from '../src/components/Homepage/PacktHomePage';
+
+<Meta title="Packt DS / Homepage" />
+
+# Homepage
+
+Full interactive render of the Packt homepage composed entirely from `packt-ds` design-system components.
+
+<div style={{ border: '1px solid var(--packt-border-default, #e2e2e6)', borderRadius: 8, overflow: 'hidden', marginTop: 24 }}>
+  <PacktHomePage />
+</div>
+
+---
+
+## Components used
+
+| Section | Component |
+|---|---|
+| Top nav | `SiteHeader` |
+| Announcement strip | inline `div` with brand tokens |
+| Rotating banner | `HeroCarousel` |
+| Topic pills | `CategoryNav` |
+| Book rows | `ProductCarouselSection` + `ProductCard` |
+| Subscription band | `FeatureSpotlight` |
+| Category tiles | `CategoryGrid` |
+| Free Learning | `CountdownTimer` + `Tag` + `Button` |
+| Sign-up prompt | `AuthCTA` |
+| Bottom nav | `SiteFooter` |
+
+## Design tokens in use
+
+| Token | Value | Used for |
+|---|---|---|
+| `--packt-orange-500` | `#f97141` | Logo dot, CTA buttons, prices |
+| `--packt-brand-bg-selected` | orange-500 | Announcement bar background |
+| `--packt-content-primary` | `#111` | Body text |
+| `--packt-bg-page` | `#fafafa` | Page background |
+| `--packt-border-default` | `#e2e2e6` | Card and section borders |
+| `--packt-space-*` | 4–64 px scale | All spacing and gaps |

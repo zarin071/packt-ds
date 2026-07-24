@@ -92,10 +92,6 @@ get_design_context({
 })
 ```
 
-The response includes node IDs, types, positions, sizes, and variable bindings
-for every layer — making it trivial to diff the Figma design against the React
-implementation, or to regenerate code from an updated Figma frame.
-
 ---
 
 ## Step 4 — Type-check with the IDE MCP
@@ -106,10 +102,6 @@ TypeScript errors inline in the agent context:
 ```
 mcp__ide__getDiagnostics()   // returns [] when clean
 ```
-
-This was used after fixing prop mismatches in `Homepage.stories.tsx`
-(`targetDate` → `endsAt`, `href` → `url`, `facebook` → `github`) to confirm
-the file was error-free without a separate terminal step.
 
 ---
 
