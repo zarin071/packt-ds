@@ -1,7 +1,6 @@
 import { forwardRef } from 'react';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { Icon } from '../Icon';
 import { StarIcon, StarHalfIcon, StarOutlineIcon } from '../icons';
 import type { RatingProps, RatingSize } from './Rating.types';
 
@@ -55,25 +54,14 @@ export const Rating = forwardRef<HTMLSpanElement, RatingProps>(
         <span className="inline-flex items-center gap-0.5" aria-hidden="true">
           {Array.from({ length: MAX }, (_, i) => {
             const position = i + 1;
+            const mdiSize = iconSize[size];
             if (rounded >= position) {
-              return (
-                <Icon key={i} size={iconSize[size]} className="text-brand-icon-default">
-                  <StarIcon />
-                </Icon>
-              );
+              return <StarIcon key={i} size={mdiSize} className="text-brand-icon-default" />;
             }
             if (rounded >= position - 0.5) {
-              return (
-                <Icon key={i} size={iconSize[size]} className="text-brand-icon-default">
-                  <StarHalfIcon />
-                </Icon>
-              );
+              return <StarHalfIcon key={i} size={mdiSize} className="text-brand-icon-default" />;
             }
-            return (
-              <Icon key={i} size={iconSize[size]} className="text-content-tertiary">
-                <StarOutlineIcon />
-              </Icon>
-            );
+            return <StarOutlineIcon key={i} size={mdiSize} className="text-content-tertiary" />;
           })}
         </span>
         {count != null && (

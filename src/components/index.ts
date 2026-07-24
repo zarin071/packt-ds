@@ -10,6 +10,9 @@ export type { LabelProps } from './Label';
 export { Icon, iconVariants } from './Icon';
 export type { IconProps, IconSize } from './Icon';
 
+export { MaterialIcon } from './Icon';
+export type { MaterialIconProps, MaterialIconSize } from './Icon';
+
 export { IconButton, iconButtonVariants } from './IconButton';
 export type { IconButtonProps, IconButtonVariant } from './IconButton';
 

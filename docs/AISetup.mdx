@@ -1,0 +1,182 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Packt DS / AI Setup" />
+
+# AI Setup
+
+Teach your AI assistant the Packt design system so it reaches for the right component and the right token instead of guessing.
+
+---
+
+## Install the MCP server
+
+The Packt DS MCP server gives your AI assistant live lookups — exact props, token values, component guidelines — without you having to describe everything by hand.
+
+### Claude Code
+
+Add the server to your project's `.mcp.json` (keep `--scope project` so the server travels with the repo):
+
+```bash
+claude mcp add packt-ds --scope project -- npx @zarin071/packt-ds-mcp
+```
+
+Or write `.mcp.json` by hand:
+
+```json
+{
+  "mcpServers": {
+    "packt-ds": {
+      "command": "npx",
+      "args": ["@zarin071/packt-ds-mcp"]
+    }
+  }
+}
+```
+
+### Cursor / VS Code / Windsurf
+
+```json
+{
+  "mcpServers": {
+    "packt-ds": {
+      "command": "npx",
+      "args": ["@zarin071/packt-ds-mcp"]
+    }
+  }
+}
+```
+
+---
+
+## Tell the agent to use it
+
+Paste the block below into `CLAUDE.md`, `.cursorrules`, or whichever instructions file your assistant reads. This is the step that makes the agent reach for Packt DS components unprompted.
+
+```markdown
+## Packt Design System (@zarin071/packt-ds)
+
+Before creating or modifying any UI component, query the Packt DS MCP server:
+
+- `search_components`   — find existing components before building custom ones
+- `get_component_api`   — check props, variants, and sub-components before using a component
+- `get_design_tokens`   — look up exact token values instead of guessing hex codes
+- `get_icon`            — find a Material Symbol name before passing it to <MaterialIcon>
+- `get_conventions`     — check token naming and spacing rules before writing styles
+
+Always prefer design-system components and semantic tokens over hand-rolled elements
+and raw colour values. Use `<MaterialIcon name="…" />` for all icons — the full
+library is at fonts.google.com/icons.
+```
+
+---
+
+## What the server exposes
+
+| Tool | What it does |
+|---|---|
+| `search_components` | Find components by name or description. Returns import statement, variants, and sub-components. |
+| `get_component_api` | Full API reference — props, CVA variants, Radix primitive info. |
+| `get_component_examples` | Usage examples, optionally filtered by title. |
+| `get_design_tokens` | List tokens by category: primitives, semantic, spacing, radius. |
+| `get_token_info` | Look up a single token — Tailwind class, CSS var, and hex value. |
+| `get_icon` | Find a Material Symbols icon name. Returns the name to pass to `<MaterialIcon>`. |
+| `get_conventions` | Non-negotiable rules: semantic tokens only, no raw hex, icon usage. |
+
+---
+
+## Font setup
+
+Packt DS uses two fonts. Add both to your app's `<head>`:
+
+```html
+<!-- Product font -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- Material Symbols icon font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@16..48,100..700,0..1,-50..200&display=block" rel="stylesheet" />
+```
+
+Or import the CSS helper from the package (loads from Google CDN):
+
+```ts
+import '@zarin071/packt-ds/material-icons.css';
+```
+
+---
+
+## Prompts that work
+
+**Build a page.** Describe the page's purpose and data, not the components.
+
+```text
+Build a product listing page: a search bar, filter sidebar (category, format, price),
+and a responsive grid of product cards. Use Packt DS components and semantic tokens.
+Check the design-system conventions before writing code.
+```
+
+**Migrate an existing page.**
+
+```text
+Make this page Packt DS-compliant: replace hand-rolled elements with the mapped
+components, replace raw colours and spacing with semantic tokens, and swap any
+custom SVG icons with <MaterialIcon>. Show a findings table before changing anything.
+```
+
+**Add a single component.**
+
+```text
+Add a confirmation dialog with a title, description, and cancel/confirm buttons.
+What variants does the Packt DS Button component support?
+```
+
+**Find an icon.**
+
+```text
+Find me a Material Symbol for "download". What's the correct name to pass to <MaterialIcon>?
+```
+
+---
+
+## Quick reference
+
+### Icon usage
+
+```tsx
+import { MaterialIcon } from '@zarin071/packt-ds';
+
+// Outlined (default)
+<MaterialIcon name="shopping_cart" size="md" />
+
+// Filled variant
+<MaterialIcon name="favorite" size="md" fill />
+
+// Inside a layout wrapper
+<Icon size="lg" className="text-brand-icon-default">
+  <MaterialIcon name="star" fill />
+</Icon>
+```
+
+Icon names: [fonts.google.com/icons](https://fonts.google.com/icons)
+
+### Token-first styling
+
+```tsx
+// ✅ Semantic token
+<p className="text-content-primary bg-bg-page">…</p>
+
+// ❌ Raw value — never do this
+<p style={{ color: '#1a1a1a', background: '#ffffff' }}>…</p>
+```
+
+### Component import
+
+```tsx
+import {
+  Button, Input, Alert, Badge, Tag,
+  MaterialIcon, Icon,
+} from '@zarin071/packt-ds';
+import '@zarin071/packt-ds/tailwind.css';
+import '@zarin071/packt-ds/material-icons.css';
+```

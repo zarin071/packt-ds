@@ -1,0 +1,7 @@
+/*
+ * Load Material Symbols Outlined from Google Fonts with full variable axes.
+ * Import this file in your app to enable all MaterialIcon components:
+ *
+ *   import '@zarin071/packt-ds/material-icons.css';
+ */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@16..48,100..700,0..1,-50..200&display=block');

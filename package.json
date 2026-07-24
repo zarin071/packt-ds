@@ -16,7 +16,8 @@
     "./tokens/light": "./src/tokens/tokens.light.css",
     "./tokens/dark": "./src/tokens/tokens.dark.css",
     "./tokens/theme": "./src/tokens/tokens.theme.css",
-    "./tailwind.css": "./src/styles/tailwind.css"
+    "./tailwind.css": "./src/styles/tailwind.css",
+    "./material-icons.css": "./src/styles/material-icons.css"
   },
   "scripts": {
     "tokens:dedupe": "node scripts/dedupe-tokens.js",
@@ -46,7 +47,8 @@
   "files": [
     "dist",
     "src/tokens",
-    "src/styles/tailwind.css"
+    "src/styles/tailwind.css",
+    "src/styles/material-icons.css"
   ],
   "peerDependencies": {
     "react": ">=18",

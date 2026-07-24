@@ -6,9 +6,10 @@ import type { IconProps } from './Icon.types';
 export const iconVariants = cva('inline-flex shrink-0 items-center justify-center [&>svg]:shrink-0', {
   variants: {
     size: {
-      sm: '[&>svg]:size-4',
-      md: '[&>svg]:size-5',
-      lg: '[&>svg]:size-6',
+      // font-size cascades into MaterialIcon children; [&>svg]:size-N handles SVG children
+      sm: 'text-[16px] [&>svg]:size-4',
+      md: 'text-[20px] [&>svg]:size-5',
+      lg: 'text-[24px] [&>svg]:size-6',
     },
   },
   defaultVariants: {

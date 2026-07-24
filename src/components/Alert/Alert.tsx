@@ -70,7 +70,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         {iconNode && (
           <span
             aria-hidden="true"
-            className={cn('mt-2xs flex shrink-0 [&>svg]:size-5', variantIconColor[variant])}
+            className={cn('mt-2xs flex shrink-0 text-[20px] [&>svg]:size-5', variantIconColor[variant])}
           >
             {iconNode}
           </span>
@@ -92,7 +92,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
               'inline-flex size-6 shrink-0 items-center justify-center rounded-xs text-content-primary',
               'hover:bg-bg-hover',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
-              '[&>svg]:size-4'
+              'text-[16px] [&>svg]:size-4'
             )}
           >
             <CloseIcon />
