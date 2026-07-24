@@ -44,6 +44,8 @@ export const MaterialIcon = forwardRef<HTMLSpanElement, MaterialIconProps>(
           fontSize: px,
           fontWeight: weight,
           fontVariationSettings: `'FILL' ${fill ? 1 : 0}, 'wght' ${weight}, 'GRAD' ${grade}, 'opsz' ${px}`,
+          // 'liga' activates the ligature table that maps "check" → ✓ glyph
+          fontFeatureSettings: "'liga'",
           lineHeight: 1,
           display: 'inline-block',
           userSelect: 'none' as const,
@@ -54,6 +56,7 @@ export const MaterialIcon = forwardRef<HTMLSpanElement, MaterialIconProps>(
           wordWrap: 'normal' as const,
           direction: 'ltr' as const,
           WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
           ...style,
         }}
         {...props}
