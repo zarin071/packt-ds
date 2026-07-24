@@ -4,54 +4,155 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # MCP-First Design Workflow
 
-## MCP-First Design Workflow
+Generate code from Figma designs using the Figma Desktop MCP server — with real `@zarin071/packt-ds` imports when Code Connect is enabled.
 
-Design with `packt-ds` components in Figma using three MCP tools — no manual
-Plugin API code required.
+- Generate code from selected Figma frames
+- Extract variables, components, and layout data into your IDE
+- Get code that uses real Packt DS components and tokens, not generic HTML
+
+---
+
+## Prerequisites
+
+- **Figma Desktop App** — latest version (the MCP server is desktop-only)
+- **Figma paid plan** — Dev Mode is required to enable the MCP server
+- **An AI tool with MCP support** — Claude Code, Cursor, VS Code + Copilot, or Windsurf
+
+---
+
+## Step 1 — Enable the Figma Desktop MCP server
+
+1. Open the Figma desktop app (make sure it's the latest version)
+2. Open a Figma Design file
+3. Switch to **Dev Mode** using the toggle in the toolbar or `Shift + D`
+4. In the Inspect panel, find the **MCP server** section and click **Enable desktop MCP server**
+
+You should see a confirmation that the server is running at `http://127.0.0.1:3845/mcp`.
+
+---
+
+## Step 2 — Configure your AI tool
+
+Add both servers to your MCP config — the Figma server for design extraction and the Packt DS server for component lookups and correct imports.
+
+**Claude Code** — `.mcp.json` at project root:
+
+```json
+{
+  "mcpServers": {
+    "packt-ds": {
+      "command": "npx",
+      "args": ["@zarin071/packt-ds-mcp"]
+    },
+    "figma-desktop": {
+      "type": "http",
+      "url": "http://127.0.0.1:3845/mcp"
+    }
+  }
+}
+```
+
+**Cursor** — `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "packt-ds": {
+      "command": "npx",
+      "args": ["@zarin071/packt-ds-mcp"]
+    },
+    "figma-desktop": {
+      "url": "http://127.0.0.1:3845/mcp"
+    }
+  }
+}
+```
+
+**VS Code** — `.vscode/mcp.json`:
+
+```json
+{
+  "servers": {
+    "packt-ds": {
+      "command": "npx",
+      "args": ["@zarin071/packt-ds-mcp"]
+    },
+    "figma-desktop": {
+      "type": "http",
+      "url": "http://127.0.0.1:3845/mcp"
+    }
+  }
+}
+```
+
+---
+
+## Step 3 — Enable Code Connect
+
+When Code Connect is enabled, selecting a Packt DS component in Figma returns code with the correct import path, variant, size, and icon props — not generic HTML.
+
+To enable it: open the MCP server settings in the Figma Inspect panel and toggle **Enable Code Connect** on.
+
+---
+
+## Step 4 — Prompt with Figma context
+
+### Selection-based
+
+Select a frame or layer in the Figma desktop app, then prompt your AI:
+
+```text
+Generate a React component for the currently selected Figma frame.
+Use @zarin071/packt-ds components and semantic tokens wherever possible.
+Check component conventions before writing code.
+```
+
+### Link-based
+
+Copy the link to a frame in Figma (right-click → Copy link) and paste it into your prompt:
+
+```text
+Generate code for this Figma design: https://www.figma.com/design/abc123/Packt?node-id=45-67&m=dev
+Use Packt DS components and tokens. Check design system conventions first.
+```
+
+The AI extracts the `node-id` from the URL to identify which frame to retrieve.
+
+---
+
+## What each server does
+
+| I want to… | Use |
+|---|---|
+| Look up component props, tokens, or imports | Packt DS MCP |
+| Generate code from a Figma design selection or link | Figma Desktop MCP |
+| Design-accurate code with correct Packt DS APIs | Both servers enabled |
+
+---
+
+## Advanced — design-to-code loop
+
+For a tighter feedback loop, use all three tools together:
 
 | Tool | Role |
 |---|---|
-| `generate_figma_design` | Captures the live Storybook render as a pixel-perfect Figma frame |
-| `use_figma` | Places and configures design-system components inside Figma |
+| `generate_figma_design` | Captures a live Storybook story as a pixel-perfect Figma frame |
+| `use_figma` | Places and configures Packt DS components inside Figma with bound tokens |
 | `get_design_context` | Reads the Figma frame back into code (layer tree, variables, styles) |
 
----
+**Capture a Storybook story into Figma:**
 
-### Step 1 — Start Storybook
-
-```bash
-npm run storybook
-# Storybook is now live at http://localhost:6006
-```
-
----
-
-### Step 2 — Capture with `generate_figma_design`
-
-Point the tool at any Storybook story URL to import it as a Figma frame:
-
-```
+```text
 generate_figma_design({
   fileKey: "<your-figma-file-key>",
   url: "http://localhost:6006/?path=/story/<story-id>"
 })
 ```
 
-This renders the story in a headless browser and places it in your Figma file —
-exact spacing, colours, and layout from the live components.
-
----
-
-### Step 3 — Bind design tokens with `use_figma`
-
-Overlay the raster capture with a real Figma frame that uses design-system
-variables instead of hardcoded values:
+**Bind design tokens inside Figma:**
 
 ```js
-// Import a token from the packt-ds variable collection
 const bgVar = await figma.variables.importVariableByKeyAsync(BRAND_BG_VAR_KEY);
-
-// Bind it to a fill — setBoundVariableForPaint returns a new paint object
 const bgPaint = figma.variables.setBoundVariableForPaint(
   { type: 'SOLID', color: { r: 0, g: 0, b: 0 } },
   'color',
@@ -60,36 +161,44 @@ const bgPaint = figma.variables.setBoundVariableForPaint(
 section.fills = [bgPaint];
 ```
 
-Once the frame is complete, remove the raster reference:
+**Read a finished frame back into code:**
 
-```js
-const ref = await figma.getNodeByIdAsync(CAPTURE_FRAME_ID);
-ref.remove();
-```
-
----
-
-### Step 4 — Read back with `get_design_context`
-
-Pull the finished frame back into code at any time:
-
-```
+```text
 get_design_context({
   fileKey: "<your-figma-file-key>",
   nodeId: "<frame-node-id>"
 })
 ```
 
-Returns the layer tree, bound variables, and a screenshot — use it to verify
-the Figma frame matches the component implementation, or to regenerate code from
-an updated design.
+---
+
+## Figma MCP settings
+
+In the Figma Inspect panel, click the settings button next to the MCP server toggle:
+
+**Image settings**
+- **Local server** (recommended) — serves images via localhost links
+- **Download assets** — writes image files directly into your project
+- **Placeholders** — skips images, adds generic placeholders
+
+**Enable Code Connect** — when on, generated code uses actual Packt DS component imports rather than raw HTML. Recommended for all projects using `@zarin071/packt-ds`.
 
 ---
 
-### Step 5 — Validate types with the IDE MCP
+## Troubleshooting
 
-```
-mcp__ide__getDiagnostics()
-```
+**Server not connecting**
+1. Verify the Figma desktop app is running with Dev Mode enabled
+2. Check that the MCP server shows as "enabled" in the Inspect panel
+3. Restart both Figma and your editor
+4. Confirm the URL is `http://127.0.0.1:3845/mcp`
 
-Surfaces TypeScript errors inline — no separate `tsc` run needed.
+**No tools available**
+1. Restart the Figma desktop app and your editor
+2. Check that your AI tool is active and in agent mode (not just chat/autocomplete)
+3. Verify the MCP config file is in the correct location for your editor
+
+**Node ID not found**
+1. Verify the URL uses dashes: `?node-id=123-456` (not colons)
+2. Ensure you have access to the Figma file
+3. Try selecting the frame directly in Figma instead of using a link
