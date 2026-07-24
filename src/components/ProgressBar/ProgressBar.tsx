@@ -7,13 +7,13 @@ import type { ProgressBarProps } from './ProgressBar.types';
 export const progressBarVariants = cva('relative w-full overflow-hidden rounded-pill bg-neutral-200', {
   variants: {
     size: {
-      small: 'h-1',
-      medium: 'h-2',
-      large: 'h-3',
+      sm: 'h-1',
+      md: 'h-2',
+      lg: 'h-3',
     },
   },
   defaultVariants: {
-    size: 'medium',
+    size: 'md',
   },
 });
 

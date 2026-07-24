@@ -14,7 +14,7 @@ const meta: Meta<typeof Select> = {
   component: Select,
   parameters: { layout: 'centered' },
   argTypes: {
-    size: { control: 'select', options: ['small', 'medium', 'large'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
     disabled: { control: 'boolean' },
     error: { control: 'text' },
     label: { control: 'text' },
@@ -44,9 +44,9 @@ export const Sizes: Story = {
   parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={col}>
-      <Select {...args} size="small" label="Small" />
-      <Select {...args} size="medium" label="Medium" />
-      <Select {...args} size="large" label="Large" />
+      <Select {...args} size="sm" label="Small" />
+      <Select {...args} size="md" label="Medium" />
+      <Select {...args} size="lg" label="Large" />
     </div>
   ),
 };

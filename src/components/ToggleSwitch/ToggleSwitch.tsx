@@ -15,13 +15,13 @@ export const toggleSwitchVariants = cva(
   {
     variants: {
       size: {
-        small: 'h-4 w-7 p-0.5',
-        medium: 'h-5 w-9 p-0.5',
-        large: 'h-6 w-11 p-[3px]',
+        sm: 'h-4 w-7 p-0.5',
+        md: 'h-5 w-9 p-0.5',
+        lg: 'h-6 w-11 p-[3px]',
       },
     },
     defaultVariants: {
-      size: 'medium',
+      size: 'md',
     },
   }
 );
@@ -34,13 +34,13 @@ export const toggleSwitchThumbVariants = cva(
   {
     variants: {
       size: {
-        small: 'size-3 data-[state=checked]:translate-x-3',
-        medium: 'size-4 data-[state=checked]:translate-x-4',
-        large: 'size-[18px] data-[state=checked]:translate-x-5',
+        sm: 'size-3 data-[state=checked]:translate-x-3',
+        md: 'size-4 data-[state=checked]:translate-x-4',
+        lg: 'size-[18px] data-[state=checked]:translate-x-5',
       },
     },
     defaultVariants: {
-      size: 'medium',
+      size: 'md',
     },
   }
 );
@@ -50,7 +50,7 @@ export const toggleSwitchThumbVariants = cva(
  * correct keyboard/ARIA switch semantics. Renders an optional visible label.
  */
 export const ToggleSwitch = forwardRef<ToggleSwitchRef, ToggleSwitchProps>(
-  ({ className, label, size = 'medium', disabled, id, ...props }, ref) => {
+  ({ className, label, size = 'md', disabled, id, ...props }, ref) => {
     const reactId = useId();
     const inputId = id ?? reactId;
 

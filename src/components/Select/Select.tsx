@@ -16,9 +16,9 @@ export const selectTriggerVariants = cva(
   {
     variants: {
       size: {
-        small: 'h-8 px-m text-sm [&_svg]:size-4',
-        medium: 'h-10 px-l text-sm [&_svg]:size-4',
-        large: 'h-12 px-xl text-base [&_svg]:size-5',
+        sm: 'h-8 px-m text-sm [&_svg]:size-4',
+        md: 'h-10 px-l text-sm [&_svg]:size-4',
+        lg: 'h-12 px-xl text-base [&_svg]:size-5',
       },
       error: {
         true: 'border-status-border-error focus-visible:ring-status-border-error',
@@ -26,7 +26,7 @@ export const selectTriggerVariants = cva(
       },
     },
     defaultVariants: {
-      size: 'medium',
+      size: 'md',
       error: false,
     },
   }
@@ -46,7 +46,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Sel
       label,
       helperText,
       error,
-      size = 'medium',
+      size = 'md',
       placeholder,
       options = [],
       disabled = false,

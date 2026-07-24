@@ -8,10 +8,10 @@ const meta: Meta<typeof ToggleSwitch> = {
   parameters: { layout: 'centered' },
   argTypes: {
     label: { control: 'text' },
-    size: { control: 'select', options: ['small', 'medium', 'large'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
     disabled: { control: 'boolean' },
   },
-  args: { label: 'Enable notifications', size: 'medium' },
+  args: { label: 'Enable notifications', size: 'md' },
 };
 
 export default meta;
@@ -26,9 +26,9 @@ export const Sizes: Story = {
   parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={col}>
-      <ToggleSwitch {...args} size="small" label="Small" />
-      <ToggleSwitch {...args} size="medium" label="Medium" />
-      <ToggleSwitch {...args} size="large" label="Large" />
+      <ToggleSwitch {...args} size="sm" label="Small" />
+      <ToggleSwitch {...args} size="md" label="Medium" />
+      <ToggleSwitch {...args} size="lg" label="Large" />
     </div>
   ),
 };
@@ -50,9 +50,9 @@ export const NoLabel: Story = {
   args: { label: undefined },
   render: (args) => (
     <div style={row}>
-      <ToggleSwitch {...args} size="small" />
-      <ToggleSwitch {...args} size="medium" />
-      <ToggleSwitch {...args} size="large" />
+      <ToggleSwitch {...args} size="sm" />
+      <ToggleSwitch {...args} size="md" />
+      <ToggleSwitch {...args} size="lg" />
     </div>
   ),
 };

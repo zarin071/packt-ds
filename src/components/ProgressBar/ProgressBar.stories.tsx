@@ -8,10 +8,10 @@ const meta: Meta<typeof ProgressBar> = {
   parameters: { layout: 'padded' },
   argTypes: {
     value: { control: { type: 'range', min: 0, max: 100, step: 1 } },
-    size: { control: 'select', options: ['small', 'medium', 'large'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
     showLabel: { control: 'boolean' },
   },
-  args: { value: 65, size: 'medium', showLabel: true },
+  args: { value: 65, size: 'md', showLabel: true },
   decorators: [
     (Story) => (
       <div style={{ width: 400, fontFamily: 'Outfit, sans-serif' }}>
@@ -32,9 +32,9 @@ export const Sizes: Story = {
   parameters: { controls: { disable: true } },
   render: (args) => (
     <div style={col}>
-      <ProgressBar {...args} size="small" label="Small" showLabel />
-      <ProgressBar {...args} size="medium" label="Medium" showLabel />
-      <ProgressBar {...args} size="large" label="Large" showLabel />
+      <ProgressBar {...args} size="sm" label="Small" showLabel />
+      <ProgressBar {...args} size="md" label="Medium" showLabel />
+      <ProgressBar {...args} size="lg" label="Large" showLabel />
     </div>
   ),
 };

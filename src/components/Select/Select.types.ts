@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import type * as SelectPrimitive from '@radix-ui/react-select';
 
-export type SelectSize = 'small' | 'medium' | 'large';
+export type SelectSize = 'sm' | 'md' | 'lg';
 
 export interface SelectOption {
   value: string;

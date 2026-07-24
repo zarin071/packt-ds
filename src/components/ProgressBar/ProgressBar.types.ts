@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from 'react';
 import type { Root } from '@radix-ui/react-progress';
 
-export type ProgressSize = 'small' | 'medium' | 'large';
+export type ProgressSize = 'sm' | 'md' | 'lg';
 
 export interface ProgressBarProps extends Omit<ComponentPropsWithoutRef<typeof Root>, 'value' | 'max'> {
   /** Value 0–100. */
