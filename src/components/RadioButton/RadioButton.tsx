@@ -54,7 +54,7 @@ export const RadioButton = forwardRef<RadioButtonRef, RadioButtonProps>(
               <span
                 aria-hidden="true"
                 className={cn(
-                  'size-2 rounded-circle bg-brand-bg-selected',
+                  'size-1.5 rounded-circle bg-brand-bg-selected',
                   disabled && 'bg-content-disabled'
                 )}
               />
