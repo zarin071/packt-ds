@@ -1,6 +1,29 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  (function () {
+    // After a new GitHub Pages deploy, browsers with cached old bundles will
+    // fail to lazy-load story chunks (404 — the old hash no longer exists on
+    // the server). On first failure, reload; the browser then fetches fresh
+    // HTML (10-min cache) which references the correct new chunk hashes.
+    // sessionStorage prevents an infinite loop if the server itself is broken.
+    var KEY = 'sb_chunk_retry';
+    window.addEventListener('unhandledrejection', function (e) {
+      var msg = e.reason && (e.reason.message || String(e.reason));
+      if (msg && msg.includes('dynamically imported module')) {
+        e.preventDefault();
+        if (!sessionStorage.getItem(KEY)) {
+          sessionStorage.setItem(KEY, '1');
+          window.location.reload();
+        }
+      }
+    });
+    window.addEventListener('load', function () {
+      sessionStorage.removeItem(KEY);
+    });
+  })();
+</script>
 <style>
   /*
    * Sets the preview iframe background/text for every page — stories, docs,
