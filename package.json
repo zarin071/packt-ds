@@ -1,5 +1,5 @@
 {
-  "name": "packt-ds",
+  "name": "@zarin071/packt-ds",
   "version": "1.0.1",
   "description": "Packt design system",
   "main": "./dist/index.cjs",
@@ -40,6 +40,9 @@
     "url": "https://github.com/zarin071/packt-ds/issues"
   },
   "homepage": "https://github.com/zarin071/packt-ds#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18"
