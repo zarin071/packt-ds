@@ -1,7 +1,15 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 import remarkGfm from 'remark-gfm';
 
+const isCI = Boolean(process.env.GITHUB_ACTIONS);
+
 const config: StorybookConfig = {
+  viteFinal: async (viteConfig) => {
+    if (isCI) {
+      viteConfig.base = '/packt-ds/';
+    }
+    return viteConfig;
+  },
   stories: [
     '../docs/introduction.mdx',
     '../docs/DeveloperGuide.mdx',
