@@ -26,11 +26,9 @@ describe('EmptyState', () => {
   });
 
   it('renders a default icon when no icon is provided', () => {
-    // InboxIcon is a MaterialIcon that renders the text "inbox" inside aria-hidden
     const { container } = render(<EmptyState title="Empty" />);
-    const iconWrapper = container.querySelector('[aria-hidden="true"]');
-    expect(iconWrapper).not.toBeNull();
-    expect(iconWrapper?.textContent).toBeTruthy();
+    const icon = container.querySelector('svg[aria-hidden="true"]');
+    expect(icon).not.toBeNull();
   });
 
   it('renders an action when provided', () => {
