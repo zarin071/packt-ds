@@ -39,10 +39,12 @@ export const States: Story = {
     <div style={row}>
       <RadioGroup.Root defaultValue="checked" name="states-a" style={{ display: 'flex', gap: 24 }}>
         <RadioButton value="unchecked" label="Unchecked" />
+        <br />
         <RadioButton value="checked" label="Checked" />
       </RadioGroup.Root>
       <RadioGroup.Root defaultValue="disabled-checked" name="states-b" style={{ display: 'flex', gap: 24 }}>
         <RadioButton value="disabled" label="Disabled" disabled />
+        <br/>
         <RadioButton value="disabled-checked" label="Disabled checked" disabled />
       </RadioGroup.Root>
       <RadioGroup.Root name="states-c">
