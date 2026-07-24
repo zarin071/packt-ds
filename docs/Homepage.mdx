@@ -130,6 +130,26 @@ The AI extracts the `node-id` from the URL to identify which frame to retrieve.
 
 ---
 
+## MCP-first vs manual Plugin API
+
+Before MCP tooling existed, every Figma frame was built by hand using raw Plugin API JavaScript — hundreds of lines per section for a single page. The MCP-first approach replaces most of that with three tool calls.
+
+| | Manual Plugin API | MCP-first |
+|---|---|---|
+| **Lines of JS to write** | ~600 per page | ~50 (refinement only) |
+| **Visual accuracy** | Approximate — built from specs | Pixel-perfect (raster capture) |
+| **Design-token bindings** | Manual — coded by hand | Manual — same `use_figma` step |
+| **Component instances** | Yes | Yes |
+| **Requires running app** | No | Yes — `generate_figma_design` needs a live URL |
+| **Code Connect support** | No | Yes — returns real `@zarin071/packt-ds` imports |
+| **Best for** | Offline / no dev server | Any project with `npm run dev` or Storybook |
+
+**When to use each approach:**
+- Use **MCP-first** for any project where Storybook or a local dev server is running — you get pixel-accurate captures and correct component imports automatically.
+- Use **Manual Plugin API** only when you have no running app (e.g. greenfield before any code exists) or need precise programmatic control over every node.
+
+---
+
 ## Advanced — design-to-code loop
 
 For a tighter feedback loop, use all three tools together:
