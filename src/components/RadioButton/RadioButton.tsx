@@ -6,7 +6,7 @@ import type { RadioButtonProps, RadioButtonRef } from './RadioButton.types';
 
 export const radioButtonVariants = cva(
   [
-    'peer inline-flex size-4 shrink-0 items-center justify-center',
+    'peer relative inline-flex size-4 shrink-0 items-center justify-center',
     'rounded-circle border bg-bg-surface transition-colors',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2',
     'disabled:cursor-not-allowed disabled:bg-bg-disabled disabled:border-border-disabled',
@@ -50,7 +50,7 @@ export const RadioButton = forwardRef<RadioButtonRef, RadioButtonProps>(
             aria-describedby={error ? errorId : undefined}
             {...props}
           >
-            <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
+            <RadioGroupPrimitive.Indicator className="absolute inset-0 flex items-center justify-center">
               <span
                 aria-hidden="true"
                 className={cn(
