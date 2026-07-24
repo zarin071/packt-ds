@@ -1,7 +1,23 @@
 /*
- * Load Material Symbols Outlined from Google Fonts with full variable axes.
- * Import this file in your app to enable all MaterialIcon components:
+ * Load Material Symbols Outlined from Google Fonts (CDN approach).
+ * Import this in your app to enable <MaterialIcon> components:
  *
  *   import '@zarin071/packt-ds/material-icons.css';
+ *
+ * Alternatively, bundle the font locally (no CDN required):
+ *
+ *   npm install @fontsource-variable/material-symbols-outlined
+ *   import '@fontsource-variable/material-symbols-outlined/full.css';
  */
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@16..48,100..700,0..1,-50..200&display=block');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@16..48,100..700,0..1,-50..200&display=swap');
+
+/*
+ * Define the font-family alias so the MaterialIcon component resolves it.
+ * Covers the case where only the CDN variant ('Material Symbols Outlined') is
+ * loaded, not the fontsource variant ('Material Symbols Outlined Variable').
+ */
+@font-face {
+  font-family: 'Material Symbols Outlined Variable';
+  src: local('Material Symbols Outlined');
+  font-weight: 100 700;
+}

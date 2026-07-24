@@ -3,15 +3,19 @@ import type { MaterialIconProps } from './MaterialIcon.types';
 
 const SIZE_PX: Record<string, number> = { sm: 16, md: 20, lg: 24 };
 
+// Covers both the fontsource bundle ('…Variable') and the Google Fonts CDN ('…').
+const FONT_FAMILY =
+  "'Material Symbols Outlined Variable', 'Material Symbols Outlined', sans-serif";
+
 /**
  * MaterialIcon — renders a Google Material Symbols Outlined icon.
  *
- * Requires the Material Symbols font to be loaded in the document.
- * Add this link in your app's <head>:
+ * The font is bundled locally when using Storybook (via @fontsource-variable).
+ * In your own app, import the font once near the root:
  *
- *   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@16..48,100..700,0..1,-50..200&display=block" rel="stylesheet" />
+ *   import '@zarin071/packt-ds/material-icons.css';   // Google CDN
  *
- * Or import '@zarin071/packt-ds/material-icons.css' (loads from Google CDN).
+ * Or install and import @fontsource-variable/material-symbols-outlined yourself.
  *
  * Icon names: https://fonts.google.com/icons
  */
@@ -33,16 +37,23 @@ export const MaterialIcon = forwardRef<HTMLSpanElement, MaterialIconProps>(
     return (
       <span
         ref={ref}
-        className={`material-symbols-outlined${className ? ` ${className}` : ''}`}
+        className={className}
         aria-hidden="true"
         style={{
+          fontFamily: FONT_FAMILY,
           fontSize: px,
+          fontWeight: weight,
           fontVariationSettings: `'FILL' ${fill ? 1 : 0}, 'wght' ${weight}, 'GRAD' ${grade}, 'opsz' ${px}`,
           lineHeight: 1,
           display: 'inline-block',
-          userSelect: 'none',
+          userSelect: 'none' as const,
           verticalAlign: 'middle',
           flexShrink: 0,
+          textTransform: 'none' as const,
+          letterSpacing: 'normal',
+          wordWrap: 'normal' as const,
+          direction: 'ltr' as const,
+          WebkitFontSmoothing: 'antialiased',
           ...style,
         }}
         {...props}
