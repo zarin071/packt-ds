@@ -13,7 +13,7 @@
   --packt-brand-text-on-brand: var(--packt-light-brand-text-on-brand);
   --packt-brand-border-default: var(--packt-light-brand-border-default);
   --packt-brand-border-hover: var(--packt-light-brand-border-hover);
-  --packt-brand-icoon-default: var(--packt-light-brand-icoon-default);
+  --packt-brand-icon-default: var(--packt-light-brand-icon-default);
   --packt-brand-icon-hover: var(--packt-light-brand-icon-hover);
   --packt-brand-tag-bg-default: var(--packt-light-brand-tag-bg-default);
   --packt-brand-tag-text-default: var(--packt-light-brand-tag-text-default);
@@ -26,7 +26,7 @@
   --packt-hub-text-on-brand: var(--packt-light-hub-text-on-brand);
   --packt-hub-border-default: var(--packt-light-hub-border-default);
   --packt-hub-border-hover: var(--packt-light-hub-border-hover);
-  --packt-hub-icoon-default: var(--packt-light-hub-icoon-default);
+  --packt-hub-icon-default: var(--packt-light-hub-icon-default);
   --packt-hub-icon-hover: var(--packt-light-hub-icon-hover);
   --packt-hub-tag-bg-default: var(--packt-light-hub-tag-bg-default);
   --packt-hub-tag-text-default: var(--packt-light-hub-tag-text-default);
@@ -78,7 +78,7 @@
   --packt-brand-text-on-brand: var(--packt-dark-brand-text-on-brand);
   --packt-brand-border-default: var(--packt-dark-brand-border-default);
   --packt-brand-border-hover: var(--packt-dark-brand-border-hover);
-  --packt-brand-icoon-default: var(--packt-dark-brand-icoon-default);
+  --packt-brand-icon-default: var(--packt-dark-brand-icon-default);
   --packt-brand-icon-hover: var(--packt-dark-brand-icon-hover);
   --packt-brand-tag-bg-default: var(--packt-dark-brand-tag-bg-default);
   --packt-brand-tag-text-default: var(--packt-dark-brand-tag-text-default);
@@ -91,7 +91,7 @@
   --packt-hub-text-on-brand: var(--packt-dark-hub-text-on-brand);
   --packt-hub-border-default: var(--packt-dark-hub-border-default);
   --packt-hub-border-hover: var(--packt-dark-hub-border-hover);
-  --packt-hub-icoon-default: var(--packt-dark-hub-icoon-default);
+  --packt-hub-icon-default: var(--packt-dark-hub-icon-default);
   --packt-hub-icon-hover: var(--packt-dark-hub-icon-hover);
   --packt-hub-tag-bg-default: var(--packt-dark-hub-tag-bg-default);
   --packt-hub-tag-text-default: var(--packt-dark-hub-tag-text-default);

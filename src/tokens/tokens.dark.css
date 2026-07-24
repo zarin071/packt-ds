@@ -12,7 +12,7 @@
   --packt-dark-brand-text-on-brand: var(--packt-neutral-white);
   --packt-dark-brand-border-default: var(--packt-orange-400);
   --packt-dark-brand-border-hover: var(--packt-orange-300);
-  --packt-dark-brand-icoon-default: var(--packt-orange-400);
+  --packt-dark-brand-icon-default: var(--packt-orange-400);
   --packt-dark-brand-icon-hover: var(--packt-orange-300);
   --packt-dark-brand-tag-bg-default: var(--packt-orange-800);
   --packt-dark-brand-tag-text-default: var(--packt-orange-300);
@@ -25,7 +25,7 @@
   --packt-dark-hub-text-on-brand: var(--packt-neutral-white);
   --packt-dark-hub-border-default: var(--packt-blue-400);
   --packt-dark-hub-border-hover: var(--packt-blue-300);
-  --packt-dark-hub-icoon-default: var(--packt-blue-400);
+  --packt-dark-hub-icon-default: var(--packt-blue-400);
   --packt-dark-hub-icon-hover: var(--packt-blue-300);
   --packt-dark-hub-tag-bg-default: var(--packt-blue-800);
   --packt-dark-hub-tag-text-default: var(--packt-blue-300);

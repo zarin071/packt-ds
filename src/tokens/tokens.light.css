@@ -12,7 +12,7 @@
   --packt-light-brand-text-on-brand: var(--packt-neutral-black);
   --packt-light-brand-border-default: var(--packt-orange-500);
   --packt-light-brand-border-hover: var(--packt-orange-600);
-  --packt-light-brand-icoon-default: var(--packt-orange-500);
+  --packt-light-brand-icon-default: var(--packt-orange-500);
   --packt-light-brand-icon-hover: var(--packt-orange-600);
   --packt-light-brand-tag-bg-default: var(--packt-orange-100);
   --packt-light-brand-tag-text-default: var(--packt-orange-600);
@@ -25,7 +25,7 @@
   --packt-light-hub-text-on-brand: var(--packt-neutral-black);
   --packt-light-hub-border-default: var(--packt-blue-500);
   --packt-light-hub-border-hover: var(--packt-blue-600);
-  --packt-light-hub-icoon-default: var(--packt-blue-500);
+  --packt-light-hub-icon-default: var(--packt-blue-500);
   --packt-light-hub-icon-hover: var(--packt-blue-600);
   --packt-light-hub-tag-bg-default: var(--packt-blue-100);
   --packt-light-hub-tag-text-default: var(--packt-blue-600);

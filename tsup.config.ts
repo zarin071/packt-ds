@@ -2,7 +2,7 @@ import { defineConfig } from 'tsup';
 import path from 'node:path';
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: ['src/index.ts', 'src/atoms.ts', 'src/molecules.ts', 'src/organisms.ts'],
   format: ['esm', 'cjs'],
   dts: true,
   clean: true,

@@ -12,6 +12,21 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./atoms": {
+      "types": "./dist/atoms.d.ts",
+      "import": "./dist/atoms.js",
+      "require": "./dist/atoms.cjs"
+    },
+    "./molecules": {
+      "types": "./dist/molecules.d.ts",
+      "import": "./dist/molecules.js",
+      "require": "./dist/molecules.cjs"
+    },
+    "./organisms": {
+      "types": "./dist/organisms.d.ts",
+      "import": "./dist/organisms.js",
+      "require": "./dist/organisms.cjs"
+    },
     "./tokens": "./src/tokens/tokens.css",
     "./tokens/light": "./src/tokens/tokens.light.css",
     "./tokens/dark": "./src/tokens/tokens.dark.css",
