@@ -15,8 +15,9 @@ const meta: Meta<typeof Button> = {
     children: { control: 'text' },
     disabled: { control: 'boolean' },
     loading: { control: 'boolean' },
-    leadingIcon: iconArgType('md'),
-    trailingIcon: iconArgType('md'),
+    // Mutually exclusive: picking one icon hides the other control
+    leadingIcon: { ...iconArgType('md'), if: { arg: 'trailingIcon', eq: 'none' } },
+    trailingIcon: { ...iconArgType('md'), if: { arg: 'leadingIcon', eq: 'none' } },
     // asChild is for code use only (router Link wrapping) — not a playground control
     asChild: { control: false },
   },
