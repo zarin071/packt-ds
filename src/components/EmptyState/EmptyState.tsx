@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { InboxIcon } from '../icons';
+import { InboxIcon } from '../../lib/icons';
 import type { EmptyStateProps } from './EmptyState.types';
 
 export const emptyStateVariants = cva(

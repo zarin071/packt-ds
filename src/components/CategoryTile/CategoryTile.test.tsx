@@ -3,7 +3,7 @@ import { createRef } from 'react';
 import { axe } from 'vitest-axe';
 import { describe, it, expect } from 'vitest';
 import { CategoryTile } from './CategoryTile';
-import { BookIcon } from '../icons';
+import { BookIcon } from '../../lib/icons';
 
 describe('CategoryTile', () => {
   it('renders as a single link to href, named by the category', () => {

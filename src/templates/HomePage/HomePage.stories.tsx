@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { HomePage } from './HomePage';
 import type { HomeProduct } from './HomePage.types';
-import { BookIcon, FileIcon, SearchIcon, PlayIcon, HeadphonesIcon, InboxIcon, CartIcon, UserIcon } from '../../components/icons';
+import { BookIcon, FileIcon, SearchIcon, PlayIcon, HeadphonesIcon, InboxIcon, CartIcon, UserIcon } from '../../lib/icons';
 
 const cover = (seed: string) => `https://picsum.photos/seed/packt-${seed}/480/640`;
 

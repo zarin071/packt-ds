@@ -3,7 +3,7 @@ import { cn } from '../../lib/utils';
 import { Label } from '../Label';
 import { Input } from '../Input';
 import { Icon } from '../Icon';
-import { ErrorIcon } from '../icons';
+import { ErrorIcon } from '../../lib/icons';
 import type { FormFieldProps } from './FormField.types';
 
 /**

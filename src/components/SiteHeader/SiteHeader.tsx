@@ -3,7 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { cn } from '../../lib/utils';
 import { SearchBar } from '../SearchBar';
 import { IconButton } from '../IconButton';
-import { MenuIcon, CloseIcon, UserIcon, CartIcon } from '../icons';
+import { MenuIcon, CloseIcon, UserIcon, CartIcon } from '../../lib/icons';
 import type { SiteHeaderProps } from './SiteHeader.types';
 
 /**

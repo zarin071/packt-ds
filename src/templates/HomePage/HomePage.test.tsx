@@ -3,7 +3,7 @@ import { axe } from 'vitest-axe';
 import { describe, it, expect } from 'vitest';
 import { HomePage } from './HomePage';
 import type { HomePageData } from './HomePage.types';
-import { BookIcon } from '../../components/icons';
+import { BookIcon } from '../../lib/icons';
 
 const product = (id: string, title: string) => ({
   id,

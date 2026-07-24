@@ -1,11 +1,11 @@
-import { useMemo, useState, type FormEvent } from 'react';
+import { forwardRef, useMemo, useState, type FormEvent } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { cn } from '../../lib/utils';
 import { FormField } from '../FormField';
 import { Button } from '../Button';
 import { IconButton } from '../IconButton';
 import { Icon } from '../Icon';
-import { CloseIcon, SuccessIcon, MinusIcon } from '../icons';
+import { CloseIcon, SuccessIcon, MinusIcon } from '../../lib/icons';
 import type { AuthModalProps } from './AuthModal.types';
 
 interface Requirement {
@@ -27,13 +27,13 @@ const REQUIREMENTS: Requirement[] = [
  * check when met, a minus when not — plus a visually-hidden "Met/Not met"
  * prefix, so state is never communicated by colour alone.
  */
-export function AuthModal({
+export const AuthModal = forwardRef<HTMLDivElement, AuthModalProps>(function AuthModal({
   open,
   onOpenChange,
   onSubmit,
   title = 'Create your account',
   submitLabel = 'Create account',
-}: AuthModalProps) {
+}, ref) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -54,6 +54,7 @@ export function AuthModal({
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-overlay" />
         <Dialog.Content
+          ref={ref}
           className={cn(
             'fixed left-1/2 top-1/2 w-[min(92vw,420px)] -translate-x-1/2 -translate-y-1/2',
             'flex flex-col gap-l rounded-lg border border-border-default bg-bg-surface p-2xl font-sans shadow-xl',
@@ -117,7 +118,7 @@ export function AuthModal({
       </Dialog.Portal>
     </Dialog.Root>
   );
-}
+});
 
 AuthModal.displayName = 'AuthModal';
 

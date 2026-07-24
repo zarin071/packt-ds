@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { ChevronLeftIcon, ChevronRightIcon, EllipsisIcon } from '../icons';
+import { ChevronLeftIcon, ChevronRightIcon, EllipsisIcon } from '../../lib/icons';
 import type { PaginationProps } from './Pagination.types';
 
 export const paginationButtonVariants = cva(

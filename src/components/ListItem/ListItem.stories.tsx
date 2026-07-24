@@ -1,9 +1,9 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ListItem } from './ListItem';
-import { ChevronRightIcon, FileIcon, InfoIcon } from '../icons';
+import { ChevronRightIcon, FileIcon, InfoIcon } from '../../lib/icons';
 import { Badge } from '../Badge';
-import { iconArgType } from '../story-helpers';
+import { iconArgType } from '../../lib/story-helpers';
 
 const meta: Meta<typeof ListItem> = {
   title: 'components/ListItem',

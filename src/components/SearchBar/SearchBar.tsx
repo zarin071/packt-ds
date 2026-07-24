@@ -2,7 +2,7 @@ import { forwardRef, useRef, type KeyboardEvent } from 'react';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 import { Input } from '../Input';
-import { SearchIcon, CloseIcon, SpinnerIcon } from '../icons';
+import { SearchIcon, CloseIcon, SpinnerIcon } from '../../lib/icons';
 import type { SearchBarProps } from './SearchBar.types';
 
 export const searchBarVariants = cva(

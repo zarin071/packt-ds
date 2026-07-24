@@ -2,7 +2,7 @@ import { forwardRef, useId } from 'react';
 import { cn } from '../../lib/utils';
 import { Icon } from '../Icon';
 import { Price } from '../Price';
-import { CheckIcon } from '../icons';
+import { CheckIcon } from '../../lib/icons';
 import type { PriceBlockProps } from './PriceBlock.types';
 
 /**

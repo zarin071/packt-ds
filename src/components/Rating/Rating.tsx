@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { StarIcon, StarHalfIcon, StarOutlineIcon } from '../icons';
+import { StarIcon, StarHalfIcon, StarOutlineIcon } from '../../lib/icons';
 import type { RatingProps, RatingSize } from './Rating.types';
 
 const MAX = 5;

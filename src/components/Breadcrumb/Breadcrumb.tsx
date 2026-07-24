@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { ChevronRightIcon } from '../icons';
+import { ChevronRightIcon } from '../../lib/icons';
 import type { BreadcrumbProps, BreadcrumbItem } from './Breadcrumb.types';
 
 export const breadcrumbVariants = cva('font-sans');

@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { CloseIcon } from '../icons';
+import { CloseIcon } from '../../lib/icons';
 import type { TagProps } from './Tag.types';
 
 export const tagVariants = cva(

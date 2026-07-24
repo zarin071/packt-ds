@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TabGroup } from './TabGroup';
-import { BookIcon, PlayIcon, HeadphonesIcon } from '../icons';
+import { BookIcon, PlayIcon, HeadphonesIcon } from '../../lib/icons';
 
 const meta: Meta<typeof TabGroup> = {
   title: 'molecules/TabGroup',

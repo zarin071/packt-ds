@@ -2,8 +2,8 @@ import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from 'storybook/test';
 import { IconButton } from './IconButton';
-import { CloseIcon, SearchIcon, ChevronLeftIcon } from '../icons';
-import { iconArgType } from '../story-helpers';
+import { CloseIcon, SearchIcon, ChevronLeftIcon } from '../../lib/icons';
+import { iconArgType } from '../../lib/story-helpers';
 
 const meta: Meta<typeof IconButton> = {
   title: 'components/IconButton',

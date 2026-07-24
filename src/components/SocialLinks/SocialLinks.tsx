@@ -1,7 +1,7 @@
 import { forwardRef, type ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 import { Icon } from '../Icon';
-import { GitHubIcon, TwitterIcon, LinkedInIcon, YouTubeIcon } from '../icons';
+import { GitHubIcon, TwitterIcon, LinkedInIcon, YouTubeIcon } from '../../lib/icons';
 import type { SocialLinksProps, SocialPlatform } from './SocialLinks.types';
 
 const PLATFORMS: Record<SocialPlatform, { icon: ReactNode; name: string }> = {

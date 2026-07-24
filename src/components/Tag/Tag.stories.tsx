@@ -2,8 +2,8 @@ import { useState } from 'react';
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Tag } from './Tag';
-import { InfoIcon } from '../icons';
-import { iconArgType } from '../story-helpers';
+import { InfoIcon } from '../../lib/icons';
+import { iconArgType } from '../../lib/story-helpers';
 
 const meta: Meta<typeof Tag> = {
   title: 'components/Tag',

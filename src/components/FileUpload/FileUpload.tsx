@@ -1,7 +1,7 @@
 import { forwardRef, useRef, useState, type ChangeEvent, type DragEvent, type KeyboardEvent } from 'react';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { UploadIcon, FileIcon, CloseIcon } from '../icons';
+import { UploadIcon, FileIcon, CloseIcon } from '../../lib/icons';
 import type { FileUploadProps, UploadedFile } from './FileUpload.types';
 
 export const fileUploadZoneVariants = cva(
@@ -122,7 +122,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
           <ul className="flex list-none flex-col gap-xs p-0" aria-label="Uploaded files">
             {files.map((f, i) => (
               <li
-                key={`${f.name}-${i}`}
+                key={`${f.name}-${f.size}-${f.file.lastModified}`}
                 className="flex items-center gap-s rounded-xs border border-border-default bg-bg-surface px-l py-m"
               >
                 <span className="flex shrink-0 text-content-secondary" aria-hidden="true">

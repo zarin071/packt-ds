@@ -1,7 +1,7 @@
 import { Children, forwardRef, useRef } from 'react';
 import { cn } from '../../lib/utils';
 import { IconButton } from '../IconButton';
-import { ChevronLeftIcon, ChevronRightIcon } from '../icons';
+import { ChevronLeftIcon, ChevronRightIcon } from '../../lib/icons';
 import type { ProductCarouselSectionProps } from './ProductCarouselSection.types';
 
 /**

@@ -2,7 +2,7 @@ import { forwardRef, useId } from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { CheckIcon, MinusIcon } from '../icons';
+import { CheckIcon, MinusIcon } from '../../lib/icons';
 import type { CheckboxProps, CheckboxRef } from './Checkbox.types';
 
 export const checkboxVariants = cva(

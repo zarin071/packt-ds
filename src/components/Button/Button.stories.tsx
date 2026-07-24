@@ -2,8 +2,8 @@ import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from 'storybook/test';
 import { Button } from './Button';
-import { CheckIcon, ChevronDownIcon } from '../icons';
-import { iconArgType } from '../story-helpers';
+import { CheckIcon, ChevronDownIcon } from '../../lib/icons';
+import { iconArgType } from '../../lib/story-helpers';
 
 const meta: Meta<typeof Button> = {
   title: 'components/Button',

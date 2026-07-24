@@ -2,8 +2,8 @@ import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from 'storybook/test';
 import { Badge } from './Badge';
-import { CheckIcon } from '../icons';
-import { iconArgType } from '../story-helpers';
+import { CheckIcon } from '../../lib/icons';
+import { iconArgType } from '../../lib/story-helpers';
 
 const meta: Meta<typeof Badge> = {
   title: 'components/Badge',

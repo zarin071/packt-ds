@@ -8,7 +8,7 @@ import {
   SuccessIcon, MenuIcon, CartIcon, BookIcon, PlayIcon, HeadphonesIcon,
   StarIcon, StarOutlineIcon, StarHalfIcon, UserIcon, FileIcon, UploadIcon,
   GitHubIcon, TwitterIcon, LinkedInIcon, YouTubeIcon, ExternalLinkIcon,
-} from '../icons';
+} from '../../lib/icons';
 
 const meta: Meta<typeof MaterialIcon> = {
   title: 'Foundation/Icons',

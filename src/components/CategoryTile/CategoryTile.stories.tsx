@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { CategoryTile } from './CategoryTile';
-import { BookIcon, PlayIcon, HeadphonesIcon, FileIcon, SearchIcon, InboxIcon } from '../icons';
+import { BookIcon, PlayIcon, HeadphonesIcon, FileIcon, SearchIcon, InboxIcon } from '../../lib/icons';
 
 const meta: Meta<typeof CategoryTile> = {
   title: 'molecules/CategoryTile',

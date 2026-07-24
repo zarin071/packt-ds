@@ -1,8 +1,8 @@
-import { forwardRef, useRef, useState } from 'react';
+import { forwardRef, useCallback, useRef, useState } from 'react';
 import { cn } from '../../lib/utils';
 import { IconButton } from '../IconButton';
 import { PaginationDots } from '../PaginationDots';
-import { ChevronLeftIcon, ChevronRightIcon } from '../icons';
+import { ChevronLeftIcon, ChevronRightIcon } from '../../lib/icons';
 import type { HeroCarouselProps } from './HeroCarousel.types';
 
 /**
@@ -23,11 +23,15 @@ export const HeroCarousel = forwardRef<HTMLElement, HeroCarouselProps>(
       track?.scrollTo?.({ left: clamped * track.clientWidth, behavior: 'smooth' });
     };
 
-    const handleScroll = () => {
-      const track = trackRef.current;
-      if (!track || track.clientWidth === 0) return;
-      setActive(Math.round(track.scrollLeft / track.clientWidth));
-    };
+    const rafRef = useRef<number>(0);
+    const handleScroll = useCallback(() => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        const track = trackRef.current;
+        if (!track || track.clientWidth === 0) return;
+        setActive(Math.round(track.scrollLeft / track.clientWidth));
+      });
+    }, []);
 
     return (
       <section

@@ -1,6 +1,6 @@
 import { forwardRef, type ReactNode } from 'react';
 import { Badge } from '../Badge';
-import { FileIcon, BookIcon, PlayIcon, HeadphonesIcon } from '../icons';
+import { FileIcon, BookIcon, PlayIcon, HeadphonesIcon } from '../../lib/icons';
 import type { FormatBadgeProps, FormatType } from './FormatBadge.types';
 
 const FORMAT_MAP: Record<FormatType, { icon: ReactNode; label: string }> = {

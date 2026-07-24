@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CategoryGrid } from './CategoryGrid';
-import { BookIcon, FileIcon, SearchIcon, PlayIcon, HeadphonesIcon, InboxIcon } from '../icons';
+import { BookIcon, FileIcon, SearchIcon, PlayIcon, HeadphonesIcon, InboxIcon } from '../../lib/icons';
 
 const meta: Meta<typeof CategoryGrid> = {
   title: 'organisms/CategoryGrid',

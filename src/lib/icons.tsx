@@ -1,6 +1,6 @@
 import type { SVGProps } from 'react';
-import { MaterialIcon } from './Icon/MaterialIcon';
-import type { MaterialIconProps } from './Icon/MaterialIcon.types';
+import { MaterialIcon } from '../components/Icon/MaterialIcon';
+import type { MaterialIconProps } from '../components/Icon/MaterialIcon.types';
 
 // ─── Semantic icons (Material Symbols) ────────────────────────────────────────
 // Excludes `name` (fixed per icon) and `fill` (hardcoded where the icon's

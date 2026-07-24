@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { axe } from 'vitest-axe';
 import { describe, it, expect } from 'vitest';
 import { CategoryGrid } from './CategoryGrid';
-import { BookIcon } from '../icons';
+import { BookIcon } from '../../lib/icons';
 
 const items = [
   { icon: <BookIcon />, name: 'Web Development', productCount: 1240, href: '#web' },

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Tabs, Tab, TabList, TabPanel } from './Tab';
-import { InfoIcon, SearchIcon, FileIcon } from '../icons';
-import { iconArgType } from '../story-helpers';
+import { InfoIcon, SearchIcon, FileIcon } from '../../lib/icons';
+import { iconArgType } from '../../lib/story-helpers';
 
 const meta: Meta<typeof Tab> = {
   title: 'components/Tab',

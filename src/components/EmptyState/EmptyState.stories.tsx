@@ -2,8 +2,8 @@ import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { EmptyState } from './EmptyState';
 import { Button } from '../Button';
-import { SearchIcon, FileIcon } from '../icons';
-import { iconArgType } from '../story-helpers';
+import { SearchIcon, FileIcon } from '../../lib/icons';
+import { iconArgType } from '../../lib/story-helpers';
 
 const meta: Meta<typeof EmptyState> = {
   title: 'components/EmptyState',

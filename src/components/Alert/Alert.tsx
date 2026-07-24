@@ -1,7 +1,7 @@
 import { forwardRef, type ReactNode } from 'react';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { InfoIcon, SuccessIcon, WarningIcon, ErrorIcon, CloseIcon } from '../icons';
+import { InfoIcon, SuccessIcon, WarningIcon, ErrorIcon, CloseIcon } from '../../lib/icons';
 import type { AlertProps, AlertVariant } from './Alert.types';
 
 export const alertVariants = cva(

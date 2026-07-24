@@ -2,7 +2,7 @@ import { forwardRef, useId, type ElementRef } from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { ChevronDownIcon, CheckIcon } from '../icons';
+import { ChevronDownIcon, CheckIcon } from '../../lib/icons';
 import type { SelectProps } from './Select.types';
 
 export const selectTriggerVariants = cva(

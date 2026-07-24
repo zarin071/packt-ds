@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from 'storybook/test';
 import { PriceBlock } from './PriceBlock';
-import { FileIcon, BookIcon, PlayIcon, HeadphonesIcon } from '../icons';
+import { FileIcon, BookIcon, PlayIcon, HeadphonesIcon } from '../../lib/icons';
 
 const meta: Meta<typeof PriceBlock> = {
   title: 'molecules/PriceBlock',

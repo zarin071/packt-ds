@@ -2,7 +2,7 @@ import { forwardRef, type ElementRef } from 'react';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { UserIcon } from '../icons';
+import { UserIcon } from '../../lib/icons';
 import type { AvatarProps } from './Avatar.types';
 
 export const avatarVariants = cva(

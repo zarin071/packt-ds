@@ -4,7 +4,7 @@ import { createRef } from 'react';
 import { axe } from 'vitest-axe';
 import { describe, it, expect, vi } from 'vitest';
 import { IconButton } from './IconButton';
-import { CloseIcon } from '../icons';
+import { CloseIcon } from '../../lib/icons';
 
 describe('IconButton', () => {
   it('uses aria-label as the accessible name', () => {
