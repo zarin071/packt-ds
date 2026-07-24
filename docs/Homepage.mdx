@@ -6,124 +6,90 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 ## MCP-First Design Workflow
 
-This homepage was recreated inside the Packt Figma file using an
-**MCP-first approach** — orchestrating three Figma MCP tools instead of writing
-raw Plugin API code by hand.
-
-### Why MCP-first?
-
-When we first built this page, every frame, text node, and section was written
-as manual Figma Plugin API JavaScript (hundreds of lines per section). The
-MCP-first approach replaces most of that with three tool calls:
+Design with `packt-ds` components in Figma using three MCP tools — no manual
+Plugin API code required.
 
 | Tool | Role |
 |---|---|
 | `generate_figma_design` | Captures the live Storybook render as a pixel-perfect Figma frame |
-| `use_figma` | Swaps placeholder rectangles for real auto-layout + design-token nodes |
-| `get_design_context` | Reads the final Figma frame structurally (layer tree, variables, styles) back into code |
+| `use_figma` | Places and configures design-system components inside Figma |
+| `get_design_context` | Reads the Figma frame back into code (layer tree, variables, styles) |
 
 ---
 
-### Step 1 — Capture with `generate_figma_design`
+### Step 1 — Start Storybook
 
-With Storybook running on `http://localhost:6006`, point the tool at the
-Homepage story URL:
+```bash
+npm run storybook
+# Storybook is now live at http://localhost:6006
+```
+
+---
+
+### Step 2 — Capture with `generate_figma_design`
+
+Point the tool at any Storybook story URL to import it as a Figma frame:
 
 ```
 generate_figma_design({
-  fileKey: "xJmhvrYvw93Y3IqkTPqyJ1",
-  url: "http://localhost:6006/?path=/story/pages-homepage--default"
+  fileKey: "<your-figma-file-key>",
+  url: "http://localhost:6006/?path=/story/<story-id>"
 })
 ```
 
-This renders the full story in a headless browser and imports it into the Figma
-file as a raster reference frame — exact spacing, colours, and layout, no
-Plugin API code required.
-
-**Trade-off:** the capture is pixel-perfect but contains no Figma auto-layout,
-no variable bindings, and no component instances. It is a reference only.
+This renders the story in a headless browser and places it in your Figma file —
+exact spacing, colours, and layout from the live components.
 
 ---
 
-### Step 2 — Refine with `use_figma`
+### Step 3 — Bind design tokens with `use_figma`
 
-Build the real Figma frame directly above the raster reference, binding design
-tokens instead of hardcoding values:
+Overlay the raster capture with a real Figma frame that uses design-system
+variables instead of hardcoded values:
 
 ```js
+// Import a token from the packt-ds variable collection
 const bgVar = await figma.variables.importVariableByKeyAsync(BRAND_BG_VAR_KEY);
+
+// Bind it to a fill — setBoundVariableForPaint returns a new paint object
 const bgPaint = figma.variables.setBoundVariableForPaint(
   { type: 'SOLID', color: { r: 0, g: 0, b: 0 } },
   'color',
   bgVar
 );
-heroSection.fills = [bgPaint];
+section.fills = [bgPaint];
 ```
 
-Once the frame matches the capture, delete the raster reference:
+Once the frame is complete, remove the raster reference:
 
 ```js
-const captureNode = await figma.getNodeByIdAsync(CAPTURE_FRAME_ID);
-captureNode.remove();
+const ref = await figma.getNodeByIdAsync(CAPTURE_FRAME_ID);
+ref.remove();
 ```
 
 ---
 
-### Step 3 — Read back with `get_design_context`
+### Step 4 — Read back with `get_design_context`
+
+Pull the finished frame back into code at any time:
 
 ```
 get_design_context({
-  fileKey: "xJmhvrYvw93Y3IqkTPqyJ1",
-  nodeId: "2225:14901"   // "Packt Homepage — Desktop"
+  fileKey: "<your-figma-file-key>",
+  nodeId: "<frame-node-id>"
 })
 ```
 
-Returns the full layer tree, variable bindings, and a screenshot — the same
-data drives design-to-code workflows in the reverse direction.
+Returns the layer tree, bound variables, and a screenshot — use it to verify
+the Figma frame matches the component implementation, or to regenerate code from
+an updated design.
 
 ---
 
-### Step 4 — Type-check with the IDE MCP
+### Step 5 — Validate types with the IDE MCP
 
 ```
-mcp__ide__getDiagnostics()   // returns [] when clean
+mcp__ide__getDiagnostics()
 ```
 
-Surfaces TypeScript errors inline without shelling out to `tsc`.
-
----
-
-### Figma frame index
-
-The final frame (`2225:14901`, "Packt Homepage — Desktop") is 1440 × 5206 px
-on the **Main webiste** page of the `packt` Figma file.
-
-| Layer | Node ID |
-|---|---|
-| Header | `2225:14902` |
-| Announcement Bar | `2225:14924` |
-| Hero Banner | `2226:14901` |
-| Best Sellers | `2227:15007` |
-| Latest Titles | `2228:15007` |
-| Expert Reading List | `2228:15126` |
-| Explore our Catalogue | `2228:15139` |
-| Trending Titles | `2230:14901` |
-| What's new in Packt? | `2230:15020` |
-| Our Partners | `2231:14901` |
-| Popular Authors | `2231:14918` |
-| Become an Author | `2231:14956` |
-| About Packt | `2234:14901` |
-| Footer | `2234:14920` |
-
----
-
-### Approach comparison
-
-| | Manual Plugin API | MCP-first |
-|---|---|---|
-| Lines of JS to write | ~600 | ~50 (refinement only) |
-| Visual accuracy | Approximate | Pixel-perfect (raster capture) |
-| Design-token bindings | Manual | Manual (same `use_figma` step) |
-| Component instances | Yes | Yes |
-| Requires live app | No | Yes (`generate_figma_design`) |
-| Best for | Offline / no running app | Any app with a local dev server |
+Surfaces TypeScript errors inline — no separate `tsc` run needed.
