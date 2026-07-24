@@ -35,22 +35,29 @@ export const Playground: Story = {
 
 export const States: Story = {
   parameters: { controls: { disable: true } },
-  render: () => (
-    <div style={row}>
-      <RadioGroup.Root defaultValue="checked" name="states-a" style={{ display: 'flex', gap: 24 }}>
-        <RadioButton value="unchecked" label="Unchecked" />
-        <br />
-        <RadioButton value="checked" label="Checked" />
-      </RadioGroup.Root>
-      <RadioGroup.Root defaultValue="disabled-checked" name="states-b" style={{ display: 'flex', gap: 24 }}>
-        <RadioButton value="disabled" label="Disabled" disabled />
-        <br/>
-        <RadioButton value="disabled-checked" label="Disabled checked" disabled />
-      </RadioGroup.Root>
-      <RadioGroup.Root name="states-c">
-        <RadioButton value="error" label="Error" error="Please select an option" />
-      </RadioGroup.Root>
-    </div>
+  render: (args) => (
+    // <div style={row}>
+    //   <RadioGroup.Root defaultValue="checked" name="states-a" style={{ display: 'flex', gap: 24 }}>
+    //     <RadioButton value="unchecked" label="Unchecked" />
+    //     <br />
+    //     <RadioButton value="checked" label="Checked" />
+    //   </RadioGroup.Root>
+    //   <RadioGroup.Root defaultValue="disabled-checked" name="states-b" style={{ display: 'flex', gap: 24 }}>
+    //     <RadioButton value="disabled" label="Disabled" disabled />
+    //     <br/>
+    //     <RadioButton value="disabled-checked" label="Disabled checked" disabled />
+    //   </RadioGroup.Root>
+    //   <RadioGroup.Root name="states-c">
+    //     <RadioButton value="error" label="Error" error="Please select an option" />
+    //   </RadioGroup.Root>
+    // </div>
+     <div style={col}>
+          <RadioButton {...args} label="Unchecked" />
+          <RadioButton {...args} label="Checked" defaultChecked />
+          <RadioButton {...args} label="Disabled unchecked" disabled />
+          <RadioButton {...args} label="Disabled checked" disabled defaultChecked />
+          <RadioButton {...args} label="Error state" error="This field is required" />
+        </div>
   ),
 };
 
