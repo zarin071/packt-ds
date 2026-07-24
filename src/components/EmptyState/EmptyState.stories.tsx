@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { EmptyState } from './EmptyState';
 import { Button } from '../Button';
 import { SearchIcon, FileIcon } from '../icons';
+import { iconArgType } from '../story-helpers';
 
 const meta: Meta<typeof EmptyState> = {
   title: 'components/EmptyState',
@@ -11,10 +12,12 @@ const meta: Meta<typeof EmptyState> = {
   argTypes: {
     title: { control: 'text' },
     description: { control: 'text' },
+    icon: iconArgType('lg'),
   },
   args: {
     title: 'No courses found',
     description: "Try adjusting your search or filters to find what you're looking for.",
+    icon: 'none',
   },
 };
 

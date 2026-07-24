@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from 'storybook/test';
 import { IconButton } from './IconButton';
 import { CloseIcon, SearchIcon, ChevronLeftIcon } from '../icons';
+import { iconArgType } from '../story-helpers';
 
 const meta: Meta<typeof IconButton> = {
   title: 'components/IconButton',
@@ -12,8 +13,9 @@ const meta: Meta<typeof IconButton> = {
     variant: { control: 'select', options: ['ghost', 'secondary'] },
     disabled: { control: 'boolean' },
     loading: { control: 'boolean' },
+    icon: iconArgType('md'),
   },
-  args: { 'aria-label': 'Search', icon: <SearchIcon />, variant: 'ghost', onClick: fn() },
+  args: { 'aria-label': 'Search', icon: 'search', variant: 'ghost', onClick: fn() },
 };
 
 export default meta;

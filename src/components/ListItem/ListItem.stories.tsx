@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ListItem } from './ListItem';
 import { ChevronRightIcon, FileIcon, InfoIcon } from '../icons';
 import { Badge } from '../Badge';
+import { iconArgType } from '../story-helpers';
 
 const meta: Meta<typeof ListItem> = {
   title: 'components/ListItem',
@@ -13,8 +14,9 @@ const meta: Meta<typeof ListItem> = {
     description: { control: 'text' },
     selected: { control: 'boolean' },
     interactive: { control: 'boolean' },
+    icon: iconArgType('md'),
   },
-  args: { title: 'Getting started with React', description: 'Section 1 · 12 lessons' },
+  args: { title: 'Getting started with React', description: 'Section 1 · 12 lessons', icon: 'none' },
 };
 
 export default meta;

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Tabs, Tab, TabList, TabPanel } from './Tab';
 import { InfoIcon, SearchIcon, FileIcon } from '../icons';
+import { iconArgType } from '../story-helpers';
 
 const meta: Meta<typeof Tab> = {
   title: 'components/Tab',
@@ -12,10 +13,11 @@ export default meta;
 type Story = StoryObj<typeof Tab>;
 
 export const Playground: Story = {
-  args: { value: 'overview', children: 'Overview' },
+  args: { value: 'overview', children: 'Overview', icon: 'none' },
   argTypes: {
     children: { control: 'text' },
     disabled: { control: 'boolean' },
+    icon: iconArgType('sm'),
   },
   render: (args) => (
     <Tabs defaultValue="overview">

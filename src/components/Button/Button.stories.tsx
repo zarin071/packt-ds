@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from 'storybook/test';
 import { Button } from './Button';
 import { CheckIcon, ChevronDownIcon } from '../icons';
+import { iconArgType } from '../story-helpers';
 
 const meta: Meta<typeof Button> = {
   title: 'components/Button',
@@ -14,8 +15,10 @@ const meta: Meta<typeof Button> = {
     children: { control: 'text' },
     disabled: { control: 'boolean' },
     loading: { control: 'boolean' },
-    leadingIcon: { control: false },
-    trailingIcon: { control: false },
+    leadingIcon: iconArgType('md'),
+    trailingIcon: iconArgType('md'),
+    // asChild is for code use only (router Link wrapping) — not a playground control
+    asChild: { control: false },
   },
 };
 
@@ -39,7 +42,7 @@ const rowLabel = (text: string) => (
 );
 
 export const Playground: Story = {
-  args: { variant: 'primary', size: 'md', children: 'Button', disabled: false, loading: false },
+  args: { variant: 'primary', size: 'md', children: 'Button', disabled: false, loading: false, leadingIcon: 'none', trailingIcon: 'none' },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const btn = canvas.getByRole('button', { name: 'Button' });

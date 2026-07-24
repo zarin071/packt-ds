@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Tag } from './Tag';
 import { InfoIcon } from '../icons';
+import { iconArgType } from '../story-helpers';
 
 const meta: Meta<typeof Tag> = {
   title: 'components/Tag',
@@ -14,8 +15,9 @@ const meta: Meta<typeof Tag> = {
       options: ['brand', 'hub', 'neutral', 'error', 'warning', 'success', 'info'],
     },
     children: { control: 'text' },
+    icon: iconArgType('sm'),
   },
-  args: { children: 'Tag label', variant: 'neutral' },
+  args: { children: 'Tag label', variant: 'neutral', icon: 'none' },
 };
 
 export default meta;

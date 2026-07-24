@@ -6,22 +6,62 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 ---
 
-## Installation
+## Installing the package
+
+Packt DS is published as a scoped npm package. Install it alongside its peer dependency:
 
 ```bash
-npm install packt-ds
+npm install @zarin071/packt-ds
+# peer dependency (if not already in your project)
+npm install react react-dom
+```
+
+---
+
+## Font setup
+
+Packt DS uses two font families — **Outfit** (UI text) and **Material Symbols Outlined** (icons). Both must be loaded in your app.
+
+### Option A — Google Fonts (recommended for most projects)
+
+Add to your `<head>` (HTML) or `_document.tsx` (Next.js):
+
+```html
+<!-- Outfit -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+
+<!-- Material Symbols Outlined (icons) -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@16..48,100..700,0..1,-50..200&display=block" rel="stylesheet" />
+```
+
+### Option B — Local bundle (no CDN dependency)
+
+Install the fontsource packages:
+
+```bash
+npm install @fontsource-variable/outfit
+npm install @fontsource-variable/material-symbols-outlined
+```
+
+Import in your app entry point (`main.tsx`, `_app.tsx`, `layout.tsx`):
+
+```ts
+import '@fontsource-variable/outfit';
+import '@fontsource-variable/material-symbols-outlined/full.css';
 ```
 
 ---
 
 ## Token setup
 
-Import the CSS tokens in your app entry point:
+Import the CSS design tokens in your app entry point **before any component imports**:
 
 ```ts
 // main.ts / _app.tsx / layout.tsx
-import 'packt-ds/tokens';       // primitives + light semantic tokens
-import 'packt-ds/tokens/dark';  // dark semantic tokens (load conditionally)
+import '@zarin071/packt-ds/tokens';       // primitives + light semantic tokens
+import '@zarin071/packt-ds/tokens/dark';  // dark semantic tokens (load conditionally)
 ```
 
 ### Dark mode toggle
@@ -35,12 +75,28 @@ document.documentElement.removeAttribute('data-theme'); // back to light
 
 ---
 
+## Tailwind setup (if using Tailwind CSS)
+
+Packt DS components use Tailwind utility classes internally. Add the package path to your `tailwind.config.js` so those classes are included:
+
+```js
+// tailwind.config.js
+module.exports = {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@zarin071/packt-ds/dist/**/*.{js,cjs}',
+  ],
+};
+```
+
+---
+
 ## Using components
 
 ```tsx
-import { Button } from 'packt-ds';
+import { Button } from '@zarin071/packt-ds';
 
-// Light (default)
+// Default (light)
 <Button variant="primary" size="md" label="Save" />
 
 // Dark surface
@@ -48,6 +104,29 @@ import { Button } from 'packt-ds';
 
 // Disabled
 <Button variant="secondary" label="Cancel" disabled />
+```
+
+---
+
+## Using icons
+
+Packt DS ships `MaterialIcon` for rendering any [Material Symbol](https://m3.material.io/styles/icons/overview):
+
+```tsx
+import { MaterialIcon } from '@zarin071/packt-ds';
+
+<MaterialIcon name="search" />
+<MaterialIcon name="check_circle" fill size="lg" />
+<MaterialIcon name="download" weight={300} />
+```
+
+Named semantic icons are also exported for convenience:
+
+```tsx
+import { CheckIcon, InfoIcon, WarningIcon, StarIcon } from '@zarin071/packt-ds';
+
+<CheckIcon size="md" />
+<InfoIcon size="sm" className="text-brand-icon-default" />
 ```
 
 ---
@@ -64,6 +143,42 @@ import { Button } from 'packt-ds';
 ```
 
 > Dimensional tokens (spacing, radius, width) are unitless numbers — multiply by `1px` with `calc()`.
+
+---
+
+## Complete setup example (Next.js App Router)
+
+**1. Install**
+
+```bash
+npm install @zarin071/packt-ds @fontsource-variable/outfit @fontsource-variable/material-symbols-outlined
+```
+
+**2. `app/layout.tsx`** — import fonts and tokens
+
+```tsx
+import '@zarin071/packt-ds/tokens';
+import '@fontsource-variable/outfit';
+import '@fontsource-variable/material-symbols-outlined/full.css';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+**3. `app/page.tsx`** — use a component
+
+```tsx
+import { Button } from '@zarin071/packt-ds';
+
+export default function Page() {
+  return <Button variant="primary" label="Get started" />;
+}
+```
 
 ---
 
@@ -96,10 +211,12 @@ Runs `tsup` and outputs to `dist/`:
 
 ## Troubleshooting
 
-**Tokens not applying** — ensure `tokens.css` is imported before any component styles.
+**Tokens not applying** — ensure `@zarin071/packt-ds/tokens` is imported before any component styles.
 
 **Dark mode not switching** — check that `data-theme="dark"` is on `<html>`, not a child element.
 
-**Font not loading** — Outfit is loaded via `<link>` in `.storybook/preview-head.html`. For production, add the Google Fonts link to your `<head>`.
+**Icons rendering as text** — the Material Symbols font isn't loaded. Import the fontsource package in your entry point (see Font Setup above).
 
-**TypeScript errors on `Button`** — import the type: `import type { ButtonProps } from 'packt-ds'`.
+**Font not loading** — for production, add the Google Fonts `<link>` tags to your `<head>`, or install and import the fontsource packages.
+
+**TypeScript errors on `Button`** — import the type: `import type { ButtonProps } from '@zarin071/packt-ds'`.
