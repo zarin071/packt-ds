@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
-import type { FormatType } from '../../components/FormatBadge';
-import type { SiteHeaderLink } from '../../components/SiteHeader';
-import type { CategoryNavItem } from '../../components/CategoryNav';
-import type { CategoryGridItem } from '../../components/CategoryGrid';
-import type { SocialLink } from '../../components/SocialLinks';
-import type { FooterColumn } from '../../components/SiteFooter';
+import type { FormatType } from '../../components/molecules/FormatBadge';
+import type { SiteHeaderLink } from '../../components/organisms/SiteHeader';
+import type { CategoryNavItem } from '../../components/organisms/CategoryNav';
+import type { CategoryGridItem } from '../../components/organisms/CategoryGrid';
+import type { SocialLink } from '../../components/molecules/SocialLinks';
+import type { FooterColumn } from '../../components/organisms/SiteFooter';
 
 export interface HomeProduct {
   id: string;

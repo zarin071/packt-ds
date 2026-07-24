@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { SiteHeader } from '../../components/SiteHeader';
-import { CategoryNav } from '../../components/CategoryNav';
-import { CountdownTimer } from '../../components/CountdownTimer';
-import { HeroCarousel } from '../../components/HeroCarousel';
-import { ProductCard } from '../../components/ProductCard';
-import { ProductCarouselSection } from '../../components/ProductCarouselSection';
-import { CategoryGrid } from '../../components/CategoryGrid';
-import { FeatureSpotlight } from '../../components/FeatureSpotlight';
-import { AuthorCard } from '../../components/AuthorCard';
-import { AuthCTA } from '../../components/AuthCTA';
-import { SiteFooter } from '../../components/SiteFooter';
-import { Button } from '../../components/Button';
+import { SiteHeader } from '../../components/organisms/SiteHeader';
+import { CategoryNav } from '../../components/organisms/CategoryNav';
+import { CountdownTimer } from '../../components/molecules/CountdownTimer';
+import { HeroCarousel } from '../../components/organisms/HeroCarousel';
+import { ProductCard } from '../../components/organisms/ProductCard';
+import { ProductCarouselSection } from '../../components/organisms/ProductCarouselSection';
+import { CategoryGrid } from '../../components/organisms/CategoryGrid';
+import { FeatureSpotlight } from '../../components/organisms/FeatureSpotlight';
+import { AuthorCard } from '../../components/organisms/AuthorCard';
+import { AuthCTA } from '../../components/organisms/AuthCTA';
+import { SiteFooter } from '../../components/organisms/SiteFooter';
+import { Button } from '../../components/atoms/Button';
 import type { HomePageProps, HomeProduct } from './HomePage.types';
 
 /** ProductCard with its own format-selection state, for a self-contained demo. */

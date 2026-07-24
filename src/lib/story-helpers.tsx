@@ -2,8 +2,8 @@
  * Shared Storybook helpers — import these in story files only, not in
  * component source (they depend on MaterialIcon and Storybook types).
  */
-import { MaterialIcon } from '../components/Icon/MaterialIcon';
-import type { MaterialIconSize } from '../components/Icon/MaterialIcon.types';
+import { MaterialIcon } from '../components/atoms/Icon/MaterialIcon';
+import type { MaterialIconSize } from '../components/atoms/Icon/MaterialIcon.types';
 
 export const ICON_OPTIONS = [
   'none',
