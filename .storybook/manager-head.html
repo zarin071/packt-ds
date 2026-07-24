@@ -1,0 +1,29 @@
+<script>
+  (function () {
+    var KEY = 'sb_chunk_retry';
+
+    function reload() {
+      if (!sessionStorage.getItem(KEY)) {
+        sessionStorage.setItem(KEY, '1');
+        window.location.reload();
+      }
+    }
+
+    window.addEventListener('vite:preloadError', function (e) {
+      e.preventDefault();
+      reload();
+    });
+
+    window.addEventListener('unhandledrejection', function (e) {
+      var msg = e.reason && (e.reason.message || String(e.reason));
+      if (msg && (msg.includes('dynamically imported module') || msg.includes('Failed to fetch'))) {
+        e.preventDefault();
+        reload();
+      }
+    });
+
+    window.addEventListener('load', function () {
+      sessionStorage.removeItem(KEY);
+    });
+  })();
+</script>

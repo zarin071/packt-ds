@@ -4,22 +4,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@16..48,100..700,0..1,-50..200&display=block" rel="stylesheet" />
 <script>
   (function () {
-    // After a new GitHub Pages deploy, browsers with cached old bundles will
-    // fail to lazy-load story chunks (404 — the old hash no longer exists on
-    // the server). On first failure, reload; the browser then fetches fresh
-    // HTML (10-min cache) which references the correct new chunk hashes.
-    // sessionStorage prevents an infinite loop if the server itself is broken.
     var KEY = 'sb_chunk_retry';
+
+    function reload() {
+      if (!sessionStorage.getItem(KEY)) {
+        sessionStorage.setItem(KEY, '1');
+        window.location.reload();
+      }
+    }
+
+    // Vite emits this event specifically when a dynamic import or preload fails.
+    // This is more reliable than unhandledrejection because Storybook may catch
+    // the promise internally before it becomes "unhandled".
+    window.addEventListener('vite:preloadError', function (e) {
+      e.preventDefault();
+      reload();
+    });
+
+    // Fallback: catch any remaining unhandled chunk-fetch rejections.
     window.addEventListener('unhandledrejection', function (e) {
       var msg = e.reason && (e.reason.message || String(e.reason));
-      if (msg && msg.includes('dynamically imported module')) {
+      if (msg && (msg.includes('dynamically imported module') || msg.includes('Failed to fetch'))) {
         e.preventDefault();
-        if (!sessionStorage.getItem(KEY)) {
-          sessionStorage.setItem(KEY, '1');
-          window.location.reload();
-        }
+        reload();
       }
     });
+
+    // Clear the retry flag once the page has loaded successfully.
     window.addEventListener('load', function () {
       sessionStorage.removeItem(KEY);
     });
