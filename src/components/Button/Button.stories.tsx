@@ -14,6 +14,8 @@ const meta: Meta<typeof Button> = {
     children: { control: 'text' },
     disabled: { control: 'boolean' },
     loading: { control: 'boolean' },
+    leadingIcon: { control: false },
+    trailingIcon: { control: false },
   },
 };
 
