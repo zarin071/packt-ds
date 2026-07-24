@@ -5,8 +5,7 @@ export interface FormFieldProps extends Omit<InputProps, 'id'> {
   label: string;
   /** Explicit id; generated when omitted. */
   id?: string;
-  /** Helper text below the field. Replaced by `errorMessage` when set. */
+  /** Helper text below the field. Replaced by `error` when set. */
   helperText?: string;
-  /** Error message — sets aria-invalid and renders icon + text (not colour alone). */
-  errorMessage?: string;
+  // `error?: string` is inherited from InputProps — it sets aria-invalid and renders icon + text.
 }

@@ -17,7 +17,7 @@ describe('FormField', () => {
   });
 
   it('marks errors with aria-invalid and an alert containing icon + text', () => {
-    render(<FormField label="Email" errorMessage="Enter a valid email." />);
+    render(<FormField label="Email" error="Enter a valid email." />);
     const input = screen.getByLabelText('Email');
     expect(input).toHaveAttribute('aria-invalid', 'true');
     const alert = screen.getByRole('alert');

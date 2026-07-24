@@ -4,6 +4,6 @@ export type InputSize = 'sm' | 'md' | 'lg';
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   size?: InputSize;
-  /** Marks the field invalid — applies error styling and sets aria-invalid="true". */
-  error?: boolean;
+  /** Error message string — applies error styling, sets aria-invalid="true". Boolean is derived internally with Boolean(error). */
+  error?: string;
 }

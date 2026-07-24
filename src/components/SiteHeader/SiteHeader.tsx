@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useCallback, useState, type ChangeEvent } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { cn } from '../../lib/utils';
 import { SearchBar } from '../SearchBar';
@@ -20,6 +20,14 @@ export const SiteHeader = forwardRef<HTMLElement, SiteHeaderProps>(
   ) => {
     const [query, setQuery] = useState('');
     const [drawerOpen, setDrawerOpen] = useState(false);
+
+    const handleQueryChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+      setQuery(e.target.value);
+    }, []);
+
+    const handleQueryClear = useCallback(() => {
+      setQuery('');
+    }, []);
 
     return (
       <header
@@ -99,9 +107,9 @@ export const SiteHeader = forwardRef<HTMLElement, SiteHeaderProps>(
           <div className="ml-auto hidden w-full max-w-[320px] sm:block">
             <SearchBar
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={handleQueryChange}
               onSearch={onSearch}
-              onClear={() => setQuery('')}
+              onClear={handleQueryClear}
               aria-label="Search products"
             />
           </div>

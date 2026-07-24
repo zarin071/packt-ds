@@ -50,6 +50,14 @@ describe('IconButton', () => {
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
 
+  it.each(['ghost', 'secondary', 'primary', 'danger'] as const)(
+    'renders the %s variant without crashing',
+    (variant) => {
+      render(<IconButton aria-label="Action" icon={<CloseIcon />} variant={variant} />);
+      expect(screen.getByRole('button', { name: 'Action' })).toBeInTheDocument();
+    }
+  );
+
   it('has no accessibility violations', async () => {
     const { container } = render(<IconButton aria-label="Close" icon={<CloseIcon />} />);
     expect(await axe(container)).toHaveNoViolations();

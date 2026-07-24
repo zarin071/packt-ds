@@ -19,7 +19,7 @@ export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: 320 }}>
       <FormField label="Email" type="email" helperText="We'll never share your email." />
-      <FormField label="Email" type="email" required defaultValue="not-an-email" errorMessage="Enter a valid email address." />
+      <FormField label="Email" type="email" required defaultValue="not-an-email" error="Enter a valid email address." />
       <FormField label="Company" disabled placeholder="Disabled" />
     </div>
   ),

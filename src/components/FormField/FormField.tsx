@@ -12,12 +12,12 @@ import type { FormFieldProps } from './FormField.types';
  * Errors are shown with an icon **and** text, never colour alone.
  */
 export const FormField = forwardRef<HTMLInputElement, FormFieldProps>(
-  ({ label, id, helperText, errorMessage, required, className, ...inputProps }, ref) => {
+  ({ label, id, helperText, error, required, className, ...inputProps }, ref) => {
     const autoId = useId();
     const fieldId = id ?? autoId;
     const helperId = `${fieldId}-helper`;
     const errorId = `${fieldId}-error`;
-    const hasError = Boolean(errorMessage);
+    const hasError = Boolean(error);
 
     const describedBy =
       [helperText && !hasError ? helperId : null, hasError ? errorId : null]
@@ -33,7 +33,7 @@ export const FormField = forwardRef<HTMLInputElement, FormFieldProps>(
           ref={ref}
           id={fieldId}
           required={required}
-          error={hasError}
+          error={error}
           aria-describedby={describedBy}
           {...inputProps}
         />
@@ -47,7 +47,7 @@ export const FormField = forwardRef<HTMLInputElement, FormFieldProps>(
             <Icon size="sm">
               <ErrorIcon />
             </Icon>
-            {errorMessage}
+            {error}
           </p>
         )}
       </div>

@@ -71,8 +71,8 @@ export interface HomePageData {
   gridHeading: string;
   gridCategories: CategoryGridItem[];
 
-  /** Exactly two spotlights (rendered as a pair). */
-  spotlights: [HomeSpotlight, HomeSpotlight];
+  /** Feature spotlights rendered as a pair (typically two). */
+  spotlights: HomeSpotlight[];
 
   partnersLabel: string;
   partners: HomePartner[];

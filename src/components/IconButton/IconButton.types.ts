@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-export type IconButtonVariant = 'ghost' | 'secondary';
+export type IconButtonVariant = 'ghost' | 'secondary' | 'primary' | 'danger';
 
 export interface IconButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'aria-label' | 'children'> {

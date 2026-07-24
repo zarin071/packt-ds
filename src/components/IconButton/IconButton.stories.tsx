@@ -10,7 +10,7 @@ const meta: Meta<typeof IconButton> = {
   component: IconButton,
   parameters: { layout: 'centered' },
   argTypes: {
-    variant: { control: 'select', options: ['ghost', 'secondary'] },
+    variant: { control: 'select', options: ['ghost', 'secondary', 'primary', 'danger'] },
     disabled: { control: 'boolean' },
     loading: { control: 'boolean' },
     icon: iconArgType('md'),
@@ -31,6 +31,8 @@ export const Variants: Story = {
     <div style={row}>
       <IconButton aria-label="Search" icon={<SearchIcon />} variant="ghost" />
       <IconButton aria-label="Search" icon={<SearchIcon />} variant="secondary" />
+      <IconButton aria-label="Search" icon={<SearchIcon />} variant="primary" />
+      <IconButton aria-label="Delete" icon={<CloseIcon />} variant="danger" />
     </div>
   ),
 };

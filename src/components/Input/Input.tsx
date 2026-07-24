@@ -35,8 +35,8 @@ export const inputVariants = cva(
  * owns its own visual state (default/error) and doesn't render a label.
  */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, size, error = false, disabled, 'aria-invalid': ariaInvalid, ...props }, ref) => {
-    const isInvalid = error || ariaInvalid === true || ariaInvalid === 'true';
+  ({ className, size, error, disabled, 'aria-invalid': ariaInvalid, ...props }, ref) => {
+    const isInvalid = Boolean(error) || ariaInvalid === true || ariaInvalid === 'true';
 
     return (
       <input

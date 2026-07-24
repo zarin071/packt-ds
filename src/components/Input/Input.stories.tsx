@@ -9,7 +9,7 @@ const meta: Meta<typeof Input> = {
   parameters: { layout: 'centered' },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    error: { control: 'boolean' },
+    error: { control: 'text' },
     disabled: { control: 'boolean' },
   },
   args: { placeholder: 'you@example.com', type: 'email' },
@@ -42,7 +42,7 @@ export const Playground: Story = {
 
 export const ErrorState: Story = {
   name: 'Error — border and aria-invalid',
-  args: { error: true, defaultValue: 'bad-email' },
+  args: { error: 'Enter a valid email address.', defaultValue: 'bad-email' },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByRole('textbox');
@@ -83,7 +83,7 @@ export const States: Story = {
         <Label htmlFor="input-error" required>
           Error
         </Label>
-        <Input id="input-error" error defaultValue="not-an-email" />
+        <Input id="input-error" error="Enter a valid email address." defaultValue="not-an-email" />
       </div>
       <div style={field}>
         <Label htmlFor="input-disabled">Disabled</Label>

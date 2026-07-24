@@ -14,10 +14,14 @@ export const iconButtonVariants = cva(
   {
     variants: {
       variant: {
+        primary:
+          'border-transparent bg-brand-bg-selected text-brand-text-on-brand hover:bg-brand-bg-selected-hover active:bg-brand-bg-selected-hover',
         secondary:
           'border-brand-border-default bg-brand-bg-default text-brand-text-default hover:bg-brand-bg-hover active:bg-brand-bg-pressed',
         ghost:
           'border-transparent bg-transparent text-content-primary hover:bg-bg-hover active:bg-bg-hover',
+        danger:
+          'border-transparent bg-status-border-error text-content-inverse hover:brightness-90 active:brightness-75',
       },
       loading: {
         true: 'cursor-wait',

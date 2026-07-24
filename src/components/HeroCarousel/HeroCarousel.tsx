@@ -16,12 +16,12 @@ export const HeroCarousel = forwardRef<HTMLElement, HeroCarouselProps>(
     const trackRef = useRef<HTMLDivElement>(null);
     const [active, setActive] = useState(0);
 
-    const goTo = (index: number) => {
+    const goTo = useCallback((index: number) => {
       const clamped = Math.max(0, Math.min(slides.length - 1, index));
       setActive(clamped);
       const track = trackRef.current;
       track?.scrollTo?.({ left: clamped * track.clientWidth, behavior: 'smooth' });
-    };
+    }, [slides.length]);
 
     const rafRef = useRef<number>(0);
     const handleScroll = useCallback(() => {

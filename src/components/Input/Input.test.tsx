@@ -34,8 +34,8 @@ describe('Input', () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it('sets aria-invalid when error prop is true', () => {
-    render(<Input aria-label="Email" error />);
+  it('sets aria-invalid when error string is provided', () => {
+    render(<Input aria-label="Email" error="Required field" />);
     expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'true');
   });
 
