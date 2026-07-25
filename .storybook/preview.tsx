@@ -1,7 +1,6 @@
 import '../src/tokens/tokens.css';
 import '../src/tokens/tokens.light.css';
 import '../src/tokens/tokens.dark.css';
-import '../src/tokens/tokens.helpers.css';
 import '../src/styles/tailwind.css';
 // Material Symbols bundled locally — no CDN required in Storybook
 import '@fontsource-variable/material-symbols-outlined/full.css';

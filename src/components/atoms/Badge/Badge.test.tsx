@@ -29,6 +29,13 @@ describe('Badge', () => {
     expect(ref.current).toBeInstanceOf(HTMLSpanElement);
   });
 
+  it('renders as a dot with no text when dot is true', () => {
+    const { container } = render(<Badge variant="error" dot />);
+    const span = container.querySelector('span');
+    expect(span).not.toBeNull();
+    expect(span?.textContent).toBe('');
+  });
+
   it('has no accessibility violations', async () => {
     const { container } = render(<Badge variant="success">Active</Badge>);
     expect(await axe(container)).toHaveNoViolations();
