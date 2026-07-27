@@ -127,21 +127,28 @@ export const Dots: Story = {
 
 export const WithInstancePlayground: Story = {
   argTypes: {
-    iconName: { control: 'select', options: Object.keys(INSTANCE_ICONS), description: 'Icon shown in the button' },
-    iconSize: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Icon size' },
-    iconColor: { control: 'color', description: 'Icon color' },
+    variant:  { table: { disable: true } },
+    dot:      { table: { disable: true } },
+    children: { table: { disable: true } },
+    icon:     { table: { disable: true } },
+    iconName:     { control: 'select', options: Object.keys(INSTANCE_ICONS), description: 'Icon shown in the button' },
+    iconSize:     { control: 'select', options: ['sm', 'md', 'lg'], description: 'Icon size' },
+    iconColor:    { control: 'color', description: 'Icon color' },
+    badgeVariant: { control: 'select', options: ['neutral', 'brand', 'hub', 'error', 'warning', 'success', 'info'], description: 'Badge variant' },
+    badgeDot:     { control: 'boolean', description: 'Show as dot badge' },
+    badgeLabel:   { control: 'text', description: 'Badge label (count mode only)' },
   } as any,
-  args: { iconName: 'bell', iconSize: 'lg' } as any,
+  args: { iconName: 'bell', iconSize: 'lg', badgeVariant: 'brand', badgeDot: false, badgeLabel: '1' } as any,
   render: (args: any) => {
-    const { variant = 'brand', dot, children, iconName = 'bell', iconSize = 'lg', iconColor } = args;
+    const { iconName = 'bell', iconSize = 'lg', iconColor, badgeVariant = 'brand', badgeDot = false, badgeLabel = '1' } = args;
     const IconComp = INSTANCE_ICONS[iconName] ?? BellIcon;
     return (
       <div style={{ display: 'inline-flex', alignItems: 'flex-start' }}>
         <div style={{ marginRight: -8, padding: 8 }}>
           <IconComp size={iconSize} style={iconColor ? { color: iconColor } : undefined} />
         </div>
-        <Badge variant={variant} dot={dot}>
-          {!dot ? (children ?? '1') : undefined}
+        <Badge variant={badgeVariant} dot={badgeDot}>
+          {!badgeDot ? badgeLabel : undefined}
         </Badge>
       </div>
     );
