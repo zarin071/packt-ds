@@ -21,17 +21,14 @@ const INSTANCE_ICONS: Record<string, ComponentType<{ size?: IconSize; style?: CS
 };
 
 const ICON_COLOR_VARIANTS: Record<string, string | undefined> = {
-  default:   undefined,
-  primary:   'var(--packt-content-primary)',
-  secondary: 'var(--packt-content-secondary)',
-  tertiary:  'var(--packt-content-tertiary)',
-  brand:     'var(--packt-brand-icon-default)',
-  hub:       'var(--packt-hub-icon-default)',
-  error:     'var(--packt-status-icon-error)',
-  warning:   'var(--packt-status-icon-warning)',
-  success:   'var(--packt-status-icon-success)',
-  info:      'var(--packt-status-icon-info)',
-  inverse:   'var(--packt-content-inverse)',
+  default: undefined,
+  neutral: 'var(--packt-content-primary)',
+  brand:   'var(--packt-brand-icon-default)',
+  hub:     'var(--packt-hub-icon-default)',
+  error:   'var(--packt-status-icon-error)',
+  warning: 'var(--packt-status-icon-warning)',
+  success: 'var(--packt-status-icon-success)',
+  info:    'var(--packt-status-icon-info)',
 };
 
 const meta: Meta<typeof IconButton> = {
