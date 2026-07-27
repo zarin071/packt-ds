@@ -113,8 +113,16 @@ export const Dots: Story = {
 };
 
 export const WithInstancePlayground: Story = {
-  name: 'With instance — playground',
-  render: (args) => <InstanceBell variant={args.variant ?? 'brand'} dot={args.dot} />,
+  render: ({ variant = 'brand', dot, children }) => (
+    <div style={{ display: 'inline-flex', alignItems: 'flex-start' }}>
+      <div style={{ marginRight: -8, padding: 8 }}>
+        <BellIcon size="lg" />
+      </div>
+      <Badge variant={variant} dot={dot}>
+        {!dot ? (children ?? '1') : undefined}
+      </Badge>
+    </div>
+  ),
 };
 
 export const WithInstance: Story = {
