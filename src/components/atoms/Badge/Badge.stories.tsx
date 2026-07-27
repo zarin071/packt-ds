@@ -1,10 +1,23 @@
-import type { CSSProperties } from 'react';
+import type { ComponentType, CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from 'storybook/test';
 import { Badge } from './Badge';
-import { BellIcon } from '../../../lib/icons';
+import {
+  BellIcon, SearchIcon, CloseIcon, MenuIcon, UserIcon,
+  BookIcon, PlayIcon, HeadphonesIcon, StarIcon, ZapIcon,
+  CartIcon, InfoIcon, WarningIcon, InboxIcon,
+} from '../../../lib/icons';
 import { iconArgType } from '../../../lib/story-helpers';
 import type { BadgeVariant } from './Badge.types';
+
+type IconSize = 'sm' | 'md' | 'lg';
+
+const INSTANCE_ICONS: Record<string, ComponentType<{ size?: IconSize; style?: CSSProperties }>> = {
+  bell: BellIcon, search: SearchIcon, close: CloseIcon, menu: MenuIcon,
+  user: UserIcon, book: BookIcon, play: PlayIcon, headphones: HeadphonesIcon,
+  star: StarIcon, zap: ZapIcon, cart: CartIcon, info: InfoIcon,
+  warning: WarningIcon, inbox: InboxIcon,
+};
 
 const meta: Meta<typeof Badge> = {
   title: 'atoms/Badge',
@@ -113,16 +126,26 @@ export const Dots: Story = {
 };
 
 export const WithInstancePlayground: Story = {
-  render: ({ variant = 'brand', dot, children }) => (
-    <div style={{ display: 'inline-flex', alignItems: 'flex-start' }}>
-      <div style={{ marginRight: -8, padding: 8 }}>
-        <BellIcon size="lg" />
+  argTypes: {
+    iconName: { control: 'select', options: Object.keys(INSTANCE_ICONS), description: 'Icon shown in the button' },
+    iconSize: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Icon size' },
+    iconColor: { control: 'color', description: 'Icon color' },
+  } as any,
+  args: { iconName: 'bell', iconSize: 'lg' } as any,
+  render: (args: any) => {
+    const { variant = 'brand', dot, children, iconName = 'bell', iconSize = 'lg', iconColor } = args;
+    const IconComp = INSTANCE_ICONS[iconName] ?? BellIcon;
+    return (
+      <div style={{ display: 'inline-flex', alignItems: 'flex-start' }}>
+        <div style={{ marginRight: -8, padding: 8 }}>
+          <IconComp size={iconSize} style={iconColor ? { color: iconColor } : undefined} />
+        </div>
+        <Badge variant={variant} dot={dot}>
+          {!dot ? (children ?? '1') : undefined}
+        </Badge>
       </div>
-      <Badge variant={variant} dot={dot}>
-        {!dot ? (children ?? '1') : undefined}
-      </Badge>
-    </div>
-  ),
+    );
+  },
 };
 
 export const WithInstance: Story = {
