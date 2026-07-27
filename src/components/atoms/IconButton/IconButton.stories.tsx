@@ -20,6 +20,20 @@ const INSTANCE_ICONS: Record<string, ComponentType<{ size?: IconSize; style?: CS
   warning: WarningIcon, inbox: InboxIcon,
 };
 
+const ICON_COLOR_VARIANTS: Record<string, string | undefined> = {
+  default:   undefined,
+  primary:   'var(--packt-content-primary)',
+  secondary: 'var(--packt-content-secondary)',
+  tertiary:  'var(--packt-content-tertiary)',
+  brand:     'var(--packt-brand-icon-default)',
+  hub:       'var(--packt-hub-icon-default)',
+  error:     'var(--packt-status-icon-error)',
+  warning:   'var(--packt-status-icon-warning)',
+  success:   'var(--packt-status-icon-success)',
+  info:      'var(--packt-status-icon-info)',
+  inverse:   'var(--packt-content-inverse)',
+};
+
 const meta: Meta<typeof IconButton> = {
   title: 'atoms/IconButton',
   component: IconButton,
@@ -68,20 +82,21 @@ export const WithInstancePlayground: Story = {
     icon: { table: { disable: true } },
     iconName: { control: 'select', options: Object.keys(INSTANCE_ICONS), description: 'Icon shown in the button' },
     iconSize: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Icon size' },
-    iconColor: { control: 'color', description: 'Icon color' },
+    iconColor: { control: 'select', options: Object.keys(ICON_COLOR_VARIANTS), description: 'Icon colour variant' },
     badgeVariant: { control: 'select', options: ['neutral', 'brand', 'hub', 'error', 'warning', 'success', 'info'], description: 'Badge variant' },
     badgeDot: { control: 'boolean', description: 'Show as dot badge' },
   } as any,
-  args: { iconName: 'bell', iconSize: 'md', variant: 'ghost', badgeVariant: 'brand', badgeDot: false } as any,
+  args: { iconName: 'bell', iconSize: 'md', iconColor: 'default', variant: 'ghost', badgeVariant: 'brand', badgeDot: false } as any,
   render: (args: any) => {
-    const { variant, loading, disabled, iconName = 'bell', iconSize = 'md', iconColor, badgeVariant = 'brand', badgeDot = false } = args;
+    const { variant, loading, disabled, iconName = 'bell', iconSize = 'md', iconColor = 'default', badgeVariant = 'brand', badgeDot = false } = args;
     const IconComp = INSTANCE_ICONS[iconName] ?? BellIcon;
+    const iconColorValue = ICON_COLOR_VARIANTS[iconColor];
     return (
       <div style={{ display: 'inline-flex', alignItems: 'flex-start' }}>
         <div style={{ marginRight: -8 }}>
           <IconButton
             aria-label="Notifications"
-            icon={<IconComp size={iconSize} style={iconColor ? { color: iconColor } : undefined} />}
+            icon={<IconComp size={iconSize} style={iconColorValue ? { color: iconColorValue } : undefined} />}
             variant={variant}
             loading={loading}
             disabled={disabled}

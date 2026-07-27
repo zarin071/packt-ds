@@ -19,6 +19,20 @@ const INSTANCE_ICONS: Record<string, ComponentType<{ size?: IconSize; style?: CS
   warning: WarningIcon, inbox: InboxIcon,
 };
 
+const ICON_COLOR_VARIANTS: Record<string, string | undefined> = {
+  default:   undefined,
+  primary:   'var(--packt-content-primary)',
+  secondary: 'var(--packt-content-secondary)',
+  tertiary:  'var(--packt-content-tertiary)',
+  brand:     'var(--packt-brand-icon-default)',
+  hub:       'var(--packt-hub-icon-default)',
+  error:     'var(--packt-status-icon-error)',
+  warning:   'var(--packt-status-icon-warning)',
+  success:   'var(--packt-status-icon-success)',
+  info:      'var(--packt-status-icon-info)',
+  inverse:   'var(--packt-content-inverse)',
+};
+
 const meta: Meta<typeof Badge> = {
   title: 'atoms/Badge',
   component: Badge,
@@ -133,19 +147,20 @@ export const WithInstancePlayground: Story = {
     icon:     { table: { disable: true } },
     iconName:     { control: 'select', options: Object.keys(INSTANCE_ICONS), description: 'Icon shown in the button' },
     iconSize:     { control: 'select', options: ['sm', 'md', 'lg'], description: 'Icon size' },
-    iconColor:    { control: 'color', description: 'Icon color' },
+    iconColor:    { control: 'select', options: Object.keys(ICON_COLOR_VARIANTS), description: 'Icon colour variant' },
     badgeVariant: { control: 'select', options: ['neutral', 'brand', 'hub', 'error', 'warning', 'success', 'info'], description: 'Badge variant' },
     badgeDot:     { control: 'boolean', description: 'Show as dot badge' },
     badgeLabel:   { control: 'text', description: 'Badge label (count mode only)' },
   } as any,
-  args: { iconName: 'bell', iconSize: 'lg', badgeVariant: 'brand', badgeDot: false, badgeLabel: '1' } as any,
+  args: { iconName: 'bell', iconSize: 'lg', iconColor: 'default', badgeVariant: 'brand', badgeDot: false, badgeLabel: '1' } as any,
   render: (args: any) => {
-    const { iconName = 'bell', iconSize = 'lg', iconColor, badgeVariant = 'brand', badgeDot = false, badgeLabel = '1' } = args;
+    const { iconName = 'bell', iconSize = 'lg', iconColor = 'default', badgeVariant = 'brand', badgeDot = false, badgeLabel = '1' } = args;
     const IconComp = INSTANCE_ICONS[iconName] ?? BellIcon;
+    const iconColorValue = ICON_COLOR_VARIANTS[iconColor];
     return (
       <div style={{ display: 'inline-flex', alignItems: 'flex-start' }}>
         <div style={{ marginRight: -8, padding: 8 }}>
-          <IconComp size={iconSize} style={iconColor ? { color: iconColor } : undefined} />
+          <IconComp size={iconSize} style={iconColorValue ? { color: iconColorValue } : undefined} />
         </div>
         <Badge variant={badgeVariant} dot={badgeDot}>
           {!badgeDot ? badgeLabel : undefined}
