@@ -112,6 +112,11 @@ export const Dots: Story = {
   ),
 };
 
+export const WithInstancePlayground: Story = {
+  name: 'With instance — playground',
+  render: (args) => <InstanceBell variant={args.variant ?? 'brand'} dot={args.dot} />,
+};
+
 export const WithInstance: Story = {
   name: 'With instance — badge on icon button',
   parameters: { controls: { disable: true } },

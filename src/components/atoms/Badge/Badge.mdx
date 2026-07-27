@@ -63,6 +63,15 @@ Pass any React node to the `icon` prop; it is sized and aligned automatically.
 
 ---
 
+## With instance
+
+Badge overlaid on the top-right corner of an icon button — replicates the Figma "With Instance" layout. Use `dot` to switch between a count badge and a presence indicator.
+
+<Canvas of={BadgeStories.WithInstancePlayground} />
+<Controls of={BadgeStories.WithInstancePlayground} />
+
+---
+
 ## Tokens used
 
 Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
