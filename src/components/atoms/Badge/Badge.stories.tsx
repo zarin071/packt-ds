@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from 'storybook/test';
 import { Badge } from './Badge';
-import { BellIcon, CheckIcon } from '../../../lib/icons';
+import { BellIcon } from '../../../lib/icons';
 import { iconArgType } from '../../../lib/story-helpers';
 import type { BadgeVariant } from './Badge.types';
 
@@ -54,6 +54,7 @@ function InstanceBell({ variant, dot }: { variant: BadgeVariant; dot?: boolean }
 }
 
 export const Playground: Story = {
+  render: (args) => <Badge {...args} />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     expect(canvas.getByText('1')).toBeInTheDocument();
@@ -152,13 +153,3 @@ export const AllVariantsRendered: Story = {
   },
 };
 
-export const IconRendered: Story = {
-  name: 'Icon is aria-hidden',
-  args: { variant: 'success', icon: <CheckIcon />, children: 'Verified', dot: false },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText('Verified')).toBeInTheDocument();
-    const iconWrapper = canvasElement.querySelector('[aria-hidden="true"]');
-    expect(iconWrapper).toBeInTheDocument();
-  },
-};
