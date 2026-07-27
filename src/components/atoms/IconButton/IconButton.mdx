@@ -31,6 +31,19 @@ Disabled and loading (loading shows a spinner and sets `aria-busy`).
 
 <Canvas of={IconButtonStories.States} />
 
+## With instance
+
+Badge overlaid on the top-right corner of an icon button. Use the controls to switch between IconButton variants — the badge remains anchored regardless of button style.
+
+<Canvas of={IconButtonStories.WithInstancePlayground} />
+<Controls of={IconButtonStories.WithInstancePlayground} />
+
+All four variants with count and dot badges:
+
+<Canvas of={IconButtonStories.WithInstance} />
+
+---
+
 ## Tokens used
 
 Every colour is a Tailwind utility wired to tokens in `src/styles/tailwind.css`, which reads the theme-aware aliases in `src/tokens/tokens.theme.css`. Each alias resolves to a different raw variable per `data-theme` — the swatches below show both, resolved live.
