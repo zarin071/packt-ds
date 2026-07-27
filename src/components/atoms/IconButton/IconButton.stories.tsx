@@ -1,11 +1,24 @@
-import type { CSSProperties, ReactNode } from 'react';
+import type { ComponentType, CSSProperties, ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from 'storybook/test';
 import { IconButton } from './IconButton';
 import { Badge } from '../Badge/Badge';
-import { BellIcon, CloseIcon, SearchIcon, ChevronLeftIcon } from '../../../lib/icons';
+import {
+  BellIcon, SearchIcon, CloseIcon, ChevronLeftIcon, MenuIcon, UserIcon,
+  BookIcon, PlayIcon, HeadphonesIcon, StarIcon, ZapIcon,
+  CartIcon, InfoIcon, WarningIcon, InboxIcon,
+} from '../../../lib/icons';
 import { iconArgType } from '../../../lib/story-helpers';
 import type { IconButtonVariant } from './IconButton.types';
+
+type IconSize = 'sm' | 'md' | 'lg';
+
+const INSTANCE_ICONS: Record<string, ComponentType<{ size?: IconSize; style?: CSSProperties }>> = {
+  bell: BellIcon, search: SearchIcon, close: CloseIcon, menu: MenuIcon,
+  user: UserIcon, book: BookIcon, play: PlayIcon, headphones: HeadphonesIcon,
+  star: StarIcon, zap: ZapIcon, cart: CartIcon, info: InfoIcon,
+  warning: WarningIcon, inbox: InboxIcon,
+};
 
 const meta: Meta<typeof IconButton> = {
   title: 'atoms/IconButton',
@@ -51,15 +64,35 @@ export const States: Story = {
 };
 
 export const WithInstancePlayground: Story = {
-  args: { icon: 'bell' as unknown as ReactNode, variant: 'ghost' },
-  render: (args) => (
-    <div style={{ display: 'inline-flex', alignItems: 'flex-start' }}>
-      <div style={{ marginRight: -8 }}>
-        <IconButton {...args} />
+  argTypes: {
+    icon: { table: { disable: true } },
+    iconName: { control: 'select', options: Object.keys(INSTANCE_ICONS), description: 'Icon shown in the button' },
+    iconSize: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Icon size' },
+    iconColor: { control: 'color', description: 'Icon color' },
+    badgeVariant: { control: 'select', options: ['neutral', 'brand', 'hub', 'error', 'warning', 'success', 'info'], description: 'Badge variant' },
+    badgeDot: { control: 'boolean', description: 'Show as dot badge' },
+  } as any,
+  args: { iconName: 'bell', iconSize: 'md', variant: 'ghost', badgeVariant: 'brand', badgeDot: false } as any,
+  render: (args: any) => {
+    const { variant, loading, disabled, iconName = 'bell', iconSize = 'md', iconColor, badgeVariant = 'brand', badgeDot = false } = args;
+    const IconComp = INSTANCE_ICONS[iconName] ?? BellIcon;
+    return (
+      <div style={{ display: 'inline-flex', alignItems: 'flex-start' }}>
+        <div style={{ marginRight: -8 }}>
+          <IconButton
+            aria-label="Notifications"
+            icon={<IconComp size={iconSize} style={iconColor ? { color: iconColor } : undefined} />}
+            variant={variant}
+            loading={loading}
+            disabled={disabled}
+          />
+        </div>
+        <Badge variant={badgeVariant} dot={badgeDot}>
+          {!badgeDot ? '1' : undefined}
+        </Badge>
       </div>
-      <Badge variant="brand">1</Badge>
-    </div>
-  ),
+    );
+  },
 };
 
 const ICON_BUTTON_VARIANTS: IconButtonVariant[] = ['ghost', 'secondary', 'primary', 'danger'];
